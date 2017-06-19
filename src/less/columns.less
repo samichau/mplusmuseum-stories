@@ -1,0 +1,369 @@
+@col: 100%/12;
+@col-1: @col*1;
+@col-2: @col*2;
+@col-3: @col*3;
+@col-4: @col*4;
+@col-5: @col*5;
+@col-6: @col*6;
+@col-7: @col*7;
+@col-8: @col*8;
+@col-9: @col*9;
+@col-10: @col*10;
+@col-11: @col*11;
+@col-12: @col*12;
+
+
+.row {
+	margin-left: -1.5rem;
+	margin-right: -1.5rem;
+	&:before, &:after {
+		display: table;
+		content: " ";
+	}
+	&:after {
+		clear: both;
+	}
+} 
+
+.col {
+	&-xs, &-sm, &-md, &-lg {
+		&-1, &-2, &-3, &-4, &-5, &-6, &-7, &-8, &-9, &-10, &-12 {
+			position: relative;
+			min-height: 1px;
+			padding-right: 1.5rem;
+			padding-left: 1.5rem;
+		} 
+	}
+	&-xs {
+		&-1, &-2, &-3, &-4, &-5, &-6, &-7, &-8, &-9, &-10, &-12 {
+			float: left;
+		}
+		&-12 { width: @col-12 }
+		&-11 { width: @col-11 }
+		&-10 { width: @col-10 }
+		&-9 { width: @col-9 }
+		&-8 { width: @col-8 }
+		&-7 { width: @col-7 }
+		&-6 { width: @col-6 }
+		&-5 { width: @col-5 }
+		&-4 { width: @col-4 }
+		&-3 { width: @col-3 }
+		&-2 { width: @col-2 }
+		&-1 { width: @col-1 }
+		&-pull {
+			&-12 { right: @col-12 }
+			&-11 { right: @col-11 }
+			&-10 { right: @col-10 }
+			&-9 { right: @col-9 }
+			&-8 { right: @col-8 }
+			&-7 { right: @col-7 }
+			&-6 { right: @col-6 }
+			&-5 { right: @col-5 }
+			&-4 { right: @col-4 }
+			&-3 { right: @col-3 }
+			&-2 { right: @col-2 }
+			&-1 { right: @col-1 }
+			&-0 { right: auto; }
+		}
+		&-push {
+			&-12 { left: @col-12 }
+			&-11 { left: @col-11 }
+			&-10 { left: @col-10 }
+			&-9 { left: @col-9 }
+			&-8 { left: @col-8 }
+			&-7 { left: @col-7 }
+			&-6 { left: @col-6 }
+			&-5 { left: @col-5 }
+			&-4 { left: @col-4 }
+			&-3 { left: @col-3 }
+			&-2 { left: @col-2 }
+			&-1 { left: @col-1 }
+			&-0 { left: auto; }
+		}
+		&-offset {
+			&-12 { margin-left: @col-12 }
+			&-11 { margin-left: @col-11 }
+			&-10 { margin-left: @col-10 }
+			&-9 { margin-left: @col-9 }
+			&-8 { margin-left: @col-8 }
+			&-7 { margin-left: @col-7 }
+			&-6 { margin-left: @col-6 }
+			&-5 { margin-left: @col-5 }
+			&-4 { margin-left: @col-4 }
+			&-3 { margin-left: @col-3 }
+			&-2 { margin-left: @col-2 }
+			&-1 { margin-left: @col-1 }
+			&-0 { margin-left: 0; }
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.col {
+		&-sm {
+			&-1, &-2, &-3, &-4, &-5, &-6, &-7, &-8, &-9, &-10, &-12 {
+				float: left;
+			}
+			&-12 { width: @col-12 }
+			&-11 { width: @col-11 }
+			&-10 { width: @col-10 }
+			&-9 { width: @col-9 }
+			&-8 { width: @col-8 }
+			&-7 { width: @col-7 }
+			&-6 { width: @col-6 }
+			&-5 { width: @col-5 }
+			&-4 { width: @col-4 }
+			&-3 { width: @col-3 }
+			&-2 { width: @col-2 }
+			&-1 { width: @col-1 }
+			&-pull {
+				&-12 { right: @col-12 }
+				&-11 { right: @col-11 }
+				&-10 { right: @col-10 }
+				&-9 { right: @col-9 }
+				&-8 { right: @col-8 }
+				&-7 { right: @col-7 }
+				&-6 { right: @col-6 }
+				&-5 { right: @col-5 }
+				&-4 { right: @col-4 }
+				&-3 { right: @col-3 }
+				&-2 { right: @col-2 }
+				&-1 { right: @col-1 }
+				&-0 { right: auto; }
+			}
+			&-push {
+				&-12 { left: @col-12 }
+				&-11 { left: @col-11 }
+				&-10 { left: @col-10 }
+				&-9 { left: @col-9 }
+				&-8 { left: @col-8 }
+				&-7 { left: @col-7 }
+				&-6 { left: @col-6 }
+				&-5 { left: @col-5 }
+				&-4 { left: @col-4 }
+				&-3 { left: @col-3 }
+				&-2 { left: @col-2 }
+				&-1 { left: @col-1 }
+				&-0 { left: auto; }
+			}
+			&-offset {
+				&-12 { margin-left: @col-12 }
+				&-11 { margin-left: @col-11 }
+				&-10 { margin-left: @col-10 }
+				&-9 { margin-left: @col-9 }
+				&-8 { margin-left: @col-8 }
+				&-7 { margin-left: @col-7 }
+				&-6 { margin-left: @col-6 }
+				&-5 { margin-left: @col-5 }
+				&-4 { margin-left: @col-4 }
+				&-3 { margin-left: @col-3 }
+				&-2 { margin-left: @col-2 }
+				&-1 { margin-left: @col-1 }
+				&-0 { margin-left: 0; }
+			}
+		}
+	}
+}
+
+
+@media (min-width: 992px) {
+	.col {
+		&-md {
+			&-1, &-2, &-3, &-4, &-5, &-6, &-7, &-8, &-9, &-10, &-12 {
+				float: left;
+			}
+			&-12 { width: @col-12 }
+			&-11 { width: @col-11 }
+			&-10 { width: @col-10 }
+			&-9 { width: @col-9 }
+			&-8 { width: @col-8 }
+			&-7 { width: @col-7 }
+			&-6 { width: @col-6 }
+			&-5 { width: @col-5 }
+			&-4 { width: @col-4 }
+			&-3 { width: @col-3 }
+			&-2 { width: @col-2 }
+			&-1 { width: @col-1 }
+			&-pull {
+				&-12 { right: @col-12 }
+				&-11 { right: @col-11 }
+				&-10 { right: @col-10 }
+				&-9 { right: @col-9 }
+				&-8 { right: @col-8 }
+				&-7 { right: @col-7 }
+				&-6 { right: @col-6 }
+				&-5 { right: @col-5 }
+				&-4 { right: @col-4 }
+				&-3 { right: @col-3 }
+				&-2 { right: @col-2 }
+				&-1 { right: @col-1 }
+				&-0 { right: auto; }
+			}
+			&-push {
+				&-12 { left: @col-12 }
+				&-11 { left: @col-11 }
+				&-10 { left: @col-10 }
+				&-9 { left: @col-9 }
+				&-8 { left: @col-8 }
+				&-7 { left: @col-7 }
+				&-6 { left: @col-6 }
+				&-5 { left: @col-5 }
+				&-4 { left: @col-4 }
+				&-3 { left: @col-3 }
+				&-2 { left: @col-2 }
+				&-1 { left: @col-1 }
+				&-0 { left: auto; }
+			}
+			&-offset {
+				&-12 { margin-left: @col-12 }
+				&-11 { margin-left: @col-11 }
+				&-10 { margin-left: @col-10 }
+				&-9 { margin-left: @col-9 }
+				&-8 { margin-left: @col-8 }
+				&-7 { margin-left: @col-7 }
+				&-6 { margin-left: @col-6 }
+				&-5 { margin-left: @col-5 }
+				&-4 { margin-left: @col-4 }
+				&-3 { margin-left: @col-3 }
+				&-2 { margin-left: @col-2 }
+				&-1 { margin-left: @col-1 }
+				&-0 { margin-left: 0; }
+			}
+		}
+	}
+}
+
+@media (min-width: 1280px) {
+	.col {
+		&-lg {
+			&-1, &-2, &-3, &-4, &-5, &-6, &-7, &-8, &-9, &-10, &-12 {
+				float: left;
+			}
+			&-12 { width: @col-12 }
+			&-11 { width: @col-11 }
+			&-10 { width: @col-10 }
+			&-9 { width: @col-9 }
+			&-8 { width: @col-8 }
+			&-7 { width: @col-7 }
+			&-6 { width: @col-6 }
+			&-5 { width: @col-5 }
+			&-4 { width: @col-4 }
+			&-3 { width: @col-3 }
+			&-2 { width: @col-2 }
+			&-1 { width: @col-1 }
+			&-pull {
+				&-12 { right: @col-12 }
+				&-11 { right: @col-11 }
+				&-10 { right: @col-10 }
+				&-9 { right: @col-9 }
+				&-8 { right: @col-8 }
+				&-7 { right: @col-7 }
+				&-6 { right: @col-6 }
+				&-5 { right: @col-5 }
+				&-4 { right: @col-4 }
+				&-3 { right: @col-3 }
+				&-2 { right: @col-2 }
+				&-1 { right: @col-1 }
+				&-0 { right: auto; }
+			}
+			&-push {
+				&-12 { left: @col-12 }
+				&-11 { left: @col-11 }
+				&-10 { left: @col-10 }
+				&-9 { left: @col-9 }
+				&-8 { left: @col-8 }
+				&-7 { left: @col-7 }
+				&-6 { left: @col-6 }
+				&-5 { left: @col-5 }
+				&-4 { left: @col-4 }
+				&-3 { left: @col-3 }
+				&-2 { left: @col-2 }
+				&-1 { left: @col-1 }
+				&-0 { left: auto; }
+			}
+			&-offset {
+				&-12 { margin-left: @col-12 }
+				&-11 { margin-left: @col-11 }
+				&-10 { margin-left: @col-10 }
+				&-9 { margin-left: @col-9 }
+				&-8 { margin-left: @col-8 }
+				&-7 { margin-left: @col-7 }
+				&-6 { margin-left: @col-6 }
+				&-5 { margin-left: @col-5 }
+				&-4 { margin-left: @col-4 }
+				&-3 { margin-left: @col-3 }
+				&-2 { margin-left: @col-2 }
+				&-1 { margin-left: @col-1 }
+				&-0 { margin-left: 0; }
+			}
+		}
+	}
+}
+
+
+@media (min-width: 1600px) {
+	.col {
+		&-xl {
+			&-1, &-2, &-3, &-4, &-5, &-6, &-7, &-8, &-9, &-10, &-12 {
+				float: left;
+			}
+			&-12 { width: @col-12 }
+			&-11 { width: @col-11 }
+			&-10 { width: @col-10 }
+			&-9 { width: @col-9 }
+			&-8 { width: @col-8 }
+			&-7 { width: @col-7 }
+			&-6 { width: @col-6 }
+			&-5 { width: @col-5 }
+			&-4 { width: @col-4 }
+			&-3 { width: @col-3 }
+			&-2 { width: @col-2 }
+			&-1 { width: @col-1 }
+			&-pull {
+				&-12 { right: @col-12 }
+				&-11 { right: @col-11 }
+				&-10 { right: @col-10 }
+				&-9 { right: @col-9 }
+				&-8 { right: @col-8 }
+				&-7 { right: @col-7 }
+				&-6 { right: @col-6 }
+				&-5 { right: @col-5 }
+				&-4 { right: @col-4 }
+				&-3 { right: @col-3 }
+				&-2 { right: @col-2 }
+				&-1 { right: @col-1 }
+				&-0 { right: auto; }
+			}
+			&-push {
+				&-12 { left: @col-12 }
+				&-11 { left: @col-11 }
+				&-10 { left: @col-10 }
+				&-9 { left: @col-9 }
+				&-8 { left: @col-8 }
+				&-7 { left: @col-7 }
+				&-6 { left: @col-6 }
+				&-5 { left: @col-5 }
+				&-4 { left: @col-4 }
+				&-3 { left: @col-3 }
+				&-2 { left: @col-2 }
+				&-1 { left: @col-1 }
+				&-0 { left: auto; }
+			}
+			&-offset {
+				&-12 { margin-left: @col-12 }
+				&-11 { margin-left: @col-11 }
+				&-10 { margin-left: @col-10 }
+				&-9 { margin-left: @col-9 }
+				&-8 { margin-left: @col-8 }
+				&-7 { margin-left: @col-7 }
+				&-6 { margin-left: @col-6 }
+				&-5 { margin-left: @col-5 }
+				&-4 { margin-left: @col-4 }
+				&-3 { margin-left: @col-3 }
+				&-2 { margin-left: @col-2 }
+				&-1 { margin-left: @col-1 }
+				&-0 { margin-left: 0; }
+			}
+		}
+	}
+}

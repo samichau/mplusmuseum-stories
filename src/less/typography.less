@@ -1,0 +1,100 @@
+@import './variables.less';
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: 400;
+  margin: 0;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.fs-xs {
+  font-size: 1.2rem;
+}
+
+.fs-s {
+  font-size: 1.6rem;
+}
+
+.fs-b {
+  font-size: 1.6rem;
+  line-height: 1.4;
+  .mq-sm({
+    font-size: 1.8rem;
+  });
+  .mq-md({
+    font-size: 2rem;
+  });
+}
+
+.fs-m {
+  font-size: 2.8rem;
+  line-height: 1.2;
+}
+
+.fs-l {
+  font-size: 2.8rem;
+  line-height: 1.1;
+  .mq-sm({
+    font-size: 3.6rem;
+  });
+  .mq-md({
+    font-size: 4.6rem;
+  });
+}
+
+.fs-xl {
+  font-size: 4rem;
+  .mq-sm({
+    font-size: 5rem;
+  });
+  .mq-md({
+    font-size: 6rem;
+  });
+}
+
+@font-face {
+  font-family: "AgipoWeb";
+  src: url("../assets/fonts/agipo_light.eot");
+  src: url("../assets/fonts/agipo_light.eot?#iefix") format("embedded-opentype"),
+       url("../assets/fonts/agipo_light.woff") format("woff"),
+       url("../assets/fonts/agipo_light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AgipoWeb";
+  src: url("../assets/fonts/agipo_light_italic.eot");
+  src: url("../assets/fonts/agipo_light_italic.eot?#iefix") format("embedded-opentype"),
+       url("../assets/fonts/agipo_light_italic.woff") format("woff"),
+       url("../assets/fonts/agipo_light_italic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "AgipoWeb";
+  src: url("../assets/fonts/agipo_regular.eot");
+  src: url("../assets/fonts/agipo_regular.eot?#iefix") format("embedded-opentype"),
+       url("../assets/fonts/agipo_regular.woff") format("woff"),
+       url("../assets/fonts/agipo_regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AgipoWeb";
+  src: url("../assets/fonts/agipo_regular_italic.eot");
+  src: url("../assets/fonts/agipo_regular_italic.eot?#iefix") format("embedded-opentype"),
+       url("../assets/fonts/agipo_regular_italic.woff") format("woff"),
+       url("../assets/fonts/agipo_regular_italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
