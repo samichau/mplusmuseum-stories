@@ -14,6 +14,7 @@ const plugins = isProd ? [
   new ExtractTextPlugin({
     filename: 'common.[chunkhash].css',
   }),
+  new webpack.optimize.ModuleConcatenationPlugin(),
 ]
 : [
   new FriendlyErrorsPlugin(),
