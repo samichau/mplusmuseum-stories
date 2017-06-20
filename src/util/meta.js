@@ -21,21 +21,29 @@ function getMeta(vm) {
   return metaObj;
 }
 
+export function setTitleClient(vm) {
+  const meta = getMeta(vm);
+  if (meta.title) {
+    document.title = meta.title;
+  }
+}
+
+export function setTitleServer(vm) {
+  const meta = getMeta(vm);
+  if (meta.title) vm.$ssrContext.title = meta.title;
+  // Description only needed on SSR
+  if (meta.description) vm.$ssrContext.description = meta.description;
+}
+
 const serverMetaMixin = {
   created() {
-    const meta = getMeta(this);
-    if (meta.title) this.$ssrContext.title = meta.title;
-    // Description only needed on SSR
-    if (meta.description) this.$ssrContext.description = meta.description;
+    setTitleServer(this);
   },
 };
 
 const clientMetaMixin = {
   mounted() {
-    const meta = getMeta(this);
-    if (meta.title) {
-      document.title = meta.title;
-    }
+    setTitleClient(this);
   },
 };
 
