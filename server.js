@@ -86,7 +86,9 @@ function render(req, res) {
   res.setHeader('Server', serverInfo);
 
   const handleError = (err) => {
-    if (err && err.status === 404) {
+    if (err.url) {
+      res.redirect(err.url);
+    } else if (err.status === 404) {
       res.status(404).end('404 | Page Not Found');
     } else {
       // Render Error Page or Redirect
@@ -116,6 +118,9 @@ function render(req, res) {
   renderer.renderToString(context, (err, html) => {
     if (err) {
       return handleError(err);
+    }
+    if (context.state.route.name === 'not-found' && context.state.site.initialized) {
+      res.status(404);
     }
     res.end(html);
     if (cacheable) {

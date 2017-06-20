@@ -1,4 +1,5 @@
 import { createApp } from './app';
+import locales from './locale';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -26,11 +27,12 @@ export default context => new Promise((resolve, reject) => {
     // A preFetch hook dispatches a store action and returns a Promise,
     // which is resolved when the action is complete and store state has been
     // updated.
-    Promise.all(matchedComponents.map(component => component.asyncData && component.asyncData({
+    Promise.all(matchedComponents.map(({ asyncData }) => asyncData && asyncData({
       store,
       route: router.currentRoute,
       router,
-    }))).then(() => {
+    }))).then((responses) => {
+      const response = responses[0];
       if (isDev) console.log(`data pre-fetch: ${Date.now() - s}ms`);
       // After all preFetch hooks are resolved, our store is now
       // filled with the state needed to render the app.
@@ -39,6 +41,9 @@ export default context => new Promise((resolve, reject) => {
       // store to pick-up the server-side state without having to duplicate
       // the initial data fetching on the client.
       context.state = store.state;
+      if (response.length > 1 && response[0].status === 200 && response[1].status === 404) {
+        router.replace({ name: 'not-found', params: { lang: locales[0] } });
+      }
       resolve(app);
     }).catch((err) => {
       reject(err);

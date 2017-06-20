@@ -48,7 +48,7 @@ export default {
               context.commit('tags/set', siteResponse.data);
             }
             if (viewResponse.resolved) resolve(responses);
-            else reject(siteResponse);
+            else resolve(responses);
           } else {
             reject(siteResponse);
           }

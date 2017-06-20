@@ -122,7 +122,10 @@ export default {
       }
     }
 
-    return fetch(store, 'blog/asyncInit', config).then(() => store.dispatch('blog/init', config.filters));
+    return fetch(store, 'blog/asyncInit', config).then((response) => {
+      store.dispatch('blog/init', config.filters);
+      return response;
+    });
   },
   data() {
     return {
