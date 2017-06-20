@@ -74,6 +74,7 @@ import { mapState } from 'vuex';
 import Byline from './Byline.vue';
 import Clipboard from './Clipboard.vue';
 import ImageBlock from './ImageBlock.vue';
+import Instagram from './Instagram.vue';
 import NewsletterBlock from './NewsletterBlock.vue';
 import ShareBar from './ShareBar.vue';
 import Suggested from './Suggested.vue';
@@ -141,6 +142,7 @@ export default {
     Byline,
     Clipboard,
     ImageBlock,
+    Instagram,
     NewsletterBlock,
     ShareBar,
     Suggested,
