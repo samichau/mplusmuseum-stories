@@ -186,9 +186,12 @@ a {
     vertical-align: top;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    width: 2em;
+    height: 2em;
   }
   img {
-    height: 2em;
+    width: 100%;
+    height: 100%;
     display: block;
   }
 }

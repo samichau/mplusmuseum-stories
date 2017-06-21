@@ -149,6 +149,7 @@ export default {
     flex-direction: column;
     align-items: flex-end;
     &__item {
+      display: block;
       margin-top: 0.5rem;
       padding: 0.3rem 1rem;
       background: @accent;

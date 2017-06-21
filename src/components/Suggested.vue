@@ -55,19 +55,20 @@ export default {
       .mq-sm({
         padding: 1rem;
       });
-      display: flex;
     }
     &__item {
-      margin: 0.5rem;
+      display: inline-block;
+      vertical-align: top;
+      padding: 0.5rem;
       width: 100%/2;
       &:nth-of-type(3) {
         display: none;
       }
       .mq-sm({
-        margin: 1rem;
-        width: 100%/2;
+        padding: 1rem;
+        width: 100%/3;
         &:nth-of-type(3) {
-          display: block;
+          display: inline-block;
         }
       });
       &:hover {
@@ -77,11 +78,13 @@ export default {
       }
     }
     &__image {
+      width: 100%;
       padding-top: 62.5%;
       height: 0;
       position: relative;
       background: @white;
       img {
+        width: 100%;
         position: absolute;
         top: 0;
       }
