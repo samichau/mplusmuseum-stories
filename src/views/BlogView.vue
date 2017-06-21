@@ -76,7 +76,7 @@ export default {
   div {
     margin-right: 0.25em;
   }
-  span {
+  >a {
     font-weight: 400;
     color: @accent;
   }
