@@ -3,7 +3,7 @@
     <router-link class="dropdown__item shadow"
       v-for="(item, i) of items"
       :key="i"
-      :to="{ name: item.name, params: item.params }">
+      :to="{ name: item.name, params: { page: item.params.page } }">
       <span class="lang-primary">{{ $t(item.content) }}</span>&thinsp;<span class="lang-secondary lang-secondary--same">{{ $tt(item.content) }}</span>
     </router-link>
   </nav>
