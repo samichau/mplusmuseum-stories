@@ -51,7 +51,7 @@ We welcome your contributions. If you have an addition or correction, please for
 
 ## Authors
 
-Design and build by [Zak Group](zakgroup.co.uk).
+Design and build by [Zak Group](https://www.zakgroup.co.uk/).
 
 [Rupert Dunk](https://github.com/rdunk), Teo Furtado, [Zak Kyes](https://www.zakgroup.co.uk/office/zak-kyes).
 
