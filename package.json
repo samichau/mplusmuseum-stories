@@ -24,7 +24,7 @@
     "extract-text-webpack-plugin": "^2.1.2",
     "lodash": "^4.17.4",
     "lru-cache": "^4.1.1",
-    "objectFitPolyfill": "^2.0.4",
+    "object-fit-images": "^3.2.3",
     "promise-all-soft-fail": "^2.0.1",
     "serve-favicon": "^2.4.3",
     "vue": "^2.3.4",

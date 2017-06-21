@@ -183,6 +183,7 @@ export default {
       height: 100%;
       display: block;
       object-fit: cover;
+      font-family: 'object-fit: cover;';
     }
   }
   &__more {

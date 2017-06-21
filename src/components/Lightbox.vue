@@ -108,9 +108,10 @@ export default {
       });
       img {
         cursor: zoom-out;
-        object-fit: contain;
         max-width: 100%;
         max-height: 100%;
+        object-fit: contain;
+        font-family: 'object-fit: contain;';
       }
     }
     &__footer {

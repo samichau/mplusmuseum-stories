@@ -3,7 +3,7 @@ import VueAnalytics from 'vue-analytics';
 import Clipboard from 'vue-clipboards';
 import _includes from 'lodash/includes';
 import 'es6-promise/auto';
-import 'objectFitPolyfill';
+import objectFitImages from 'object-fit-images';
 import { createApp } from './app';
 import locales from './locale';
 import { setTitleClient } from './util/meta';
@@ -107,6 +107,9 @@ router.onReady(() => {
 
   // actually mount to DOM
   app.$mount('#app');
+
+  // object fit polyfill
+  objectFitImages();
 });
 
 // service worker
