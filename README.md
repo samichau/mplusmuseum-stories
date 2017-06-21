@@ -51,7 +51,9 @@ We welcome your contributions. If you have an addition or correction, please for
 
 ## Authors
 
-Rupert Dunk, Teo Furtado, Zak Kyes.
+Design and build by [Zak Group](zakgroup.co.uk).
+
+[Rupert Dunk](https://github.com/rdunk), Teo Furtado, [Zak Kyes](https://www.zakgroup.co.uk/office/zak-kyes).
 
 Credit to the official [Vue Hacker News Clone](https://github.com/vuejs/vue-hackernews-2.0/) for providing the original project structure and build processes.
 
