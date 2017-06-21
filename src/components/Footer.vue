@@ -2,7 +2,7 @@
   <footer class="footer fs-s">
     <div class="footer__body footer__section">
       <a :href="`http://www.westkowloon.hk/${$store.state.lang}/`" target="_blank"><img src="../assets/img/wk-logo.svg" alt="West Kowloon Logo"></a>
-      <router-link :to="{ name: 'terms' }">{{ terms }}</router-link>
+      <router-link :to="{ name: 'page', params: { page: 'terms' } }">{{ terms }}</router-link>
     </div>
     <div class="footer__social footer__section social-links">
       <a v-for="platform of $store.getters['site/socialLinkables']"

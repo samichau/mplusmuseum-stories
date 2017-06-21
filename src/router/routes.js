@@ -1,8 +1,7 @@
 import locales from '../locale';
 
 // route-level code splitting
-const BasicView = () => System.import('../views/BasicView.vue');
-const DocumentView = () => System.import('../views/DocumentView.vue');
+const PageView = () => System.import('../views/PageView.vue');
 const BlogListView = () => System.import('../views/BlogListView.vue');
 const BlogPostView = () => System.import('../views/BlogPostView.vue');
 const NotFoundView = () => System.import('../views/NotFoundView.vue');
@@ -35,17 +34,13 @@ export default [
     path: `/${langParam}/blog/:name`,
     component: BlogPostView,
   }, {
-    name: 'about',
-    path: `/${langParam}/about/`,
-    component: BasicView,
-  }, {
-    name: 'terms',
-    path: `/${langParam}/terms/`,
-    component: DocumentView,
-  }, {
     name: 'not-found',
     path: `/${langParam}/404/`,
     component: NotFoundView,
+  }, {
+    name: 'page',
+    path: `/${langParam}/:page`,
+    component: PageView,
   }, {
     name: '404',
     path: '*',

@@ -1,9 +1,9 @@
 <template>
   <nav class="dropdown fs-m" @click="close">
-    <router-link
-      v-for="item of items"
-      :key="item.name"
-      class="dropdown__item shadow" :to="{ name: item.name }">
+    <router-link class="dropdown__item shadow"
+      v-for="(item, i) of items"
+      :key="i"
+      :to="{ name: item.name, params: item.params }">
       <span class="lang-primary">{{ $t(item.content) }}</span>&thinsp;<span class="lang-secondary lang-secondary--same">{{ $tt(item.content) }}</span>
     </router-link>
   </nav>

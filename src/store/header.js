@@ -6,9 +6,13 @@ export default {
     nav: [
       {
         name: 'blog',
+        params: false,
         content: translations.blog,
       }, {
-        name: 'about',
+        name: 'page',
+        params: {
+          page: 'about',
+        },
         content: translations.about,
       },
     ],

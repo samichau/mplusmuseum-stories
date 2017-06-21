@@ -4,44 +4,43 @@ export default {
   namespaced: true,
 
   state: {
-    basic: false,
-    document: false,
+    name: false,
+    template: false,
     loaded: [],
   },
 
   getters: {
-    activeBasic(state) {
-      return state.loaded.find(page => page.name === state.basic);
-    },
-    activeDocument(state) {
-      return state.loaded.find(page => page.name === state.document);
+    activePage(state) {
+      return state.loaded.find(page => page.name === state.name);
     },
   },
 
   actions: {
-    update(context, { type, to }) {
-      const loaded = context.state.loaded.find(page => page.name === to);
+    update(context, to) {
+      const loadedPage = context.state.loaded.find(page => page.name === to);
 
-      if (loaded) {
-        context.commit('activatePage', { type, to });
+      if (loadedPage) {
+        context.commit('activatePage', loadedPage);
         return Promise.resolve(new Response(true));
       }
 
-      return asyncGet(`${to}/`)
+      return asyncGet(`pages/${to}/`)
         .then((response) => {
-          context.commit('newPage', { page: response.data, type });
+          context.commit('newPage', response.data);
           return response;
         });
     },
   },
 
   mutations: {
-    newPage(state, { page, type }) {
+    newPage(state, page) {
       state.loaded.push(page);
-      state[type] = page.name;
+      state.name = page.name;
+      state.template = page.template;
     },
-    activatePage(state, { type, to }) {
-      state[type] = to;
+    activatePage(state, page) {
+      state.name = page.name;
+      state.template = page.template;
     },
   },
 };

@@ -6,19 +6,19 @@
         <div slot="header" class="anchor" id="contents"></div>
         <template slot="content">
           <h1 class="document__title fs-l">
-              <span class="lang-primary" v-html="$t(document.title)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(document.title)"></span>
+              <span class="lang-primary" v-html="$t(page.title)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(page.title)"></span>
           </h1>
           <div class="document-item__header">
             <h2 v-html="$t($store.state.site.translations.site.tableOfContents)"></h2>
           </div>
           <div class="text-block">
             <ul class="document__contents">
-              <li v-for="panel of document.panels" :key="panel.name"><a :href="`#${panel.name}`" v-html="$t(panel.title)"></a></li>
+              <li v-for="panel of page.panels" :key="panel.name"><a :href="`#${panel.name}`" v-html="$t(panel.title)"></a></li>
             </ul>
           </div>
         </template>
       </panel>
-      <panel v-for="panel of document.panels" :key="panel.name" class="document-item">
+      <panel v-for="panel of page.panels" :key="panel.name" class="document-item">
         <div slot="header" class="anchor" :id="panel.name"></div>
         <template slot="content">
           <div class="document-item__header">
@@ -35,23 +35,11 @@
 <script>
 import TextBlock from '../components/TextBlock.vue';
 import Panel from '../components/Panel.vue';
-import metaMixin from '../util/meta';
-import { fetch } from '../util/fetch';
 
 export default {
-  mixins: [metaMixin],
-  meta() {
-    return {
-      title: this.$t(this.document.title),
-      description: this.$t(this.document.desc),
-    };
-  },
-  asyncData({ store, route }) {
-    return fetch(store, 'pages/update', { type: 'document', to: route.name });
-  },
-  computed: {
-    document() {
-      return this.$store.getters['pages/activeDocument'];
+  props: {
+    page: {
+      required: true,
     },
   },
   components: {
