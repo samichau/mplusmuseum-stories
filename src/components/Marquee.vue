@@ -8,12 +8,14 @@
 </template>
 
 <script>
+import _repeat from 'lodash/repeat';
+
 export default {
   computed: {
     computedContent() {
       // @TODO Improve this
       const n = Math.ceil(60 / this.content.length);
-      return `${this.content}&nbsp;`.repeat(n);
+      return _repeat(`${this.content}&nbsp;`, n);
     },
   },
   props: {

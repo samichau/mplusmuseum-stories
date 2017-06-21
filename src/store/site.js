@@ -1,3 +1,4 @@
+import _find from 'lodash/find';
 import promiseAllSoftFail from '../util/promise-all-soft-fail';
 import tags from './tags';
 import { asyncGet, Response } from '../api';
@@ -16,7 +17,7 @@ export default {
   },
   getters: {
     activeAuthor(state) {
-      return state.authors.find(a => a.active) || false;
+      return _find(state.authors, a => a.active) || false;
     },
     socialShareables(state) {
       return state.social.filter(platform => platform.share);

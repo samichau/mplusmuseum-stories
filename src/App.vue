@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import _includes from 'lodash/includes';
 import locales from './locale';
 import SiteHeader from './components/Header.vue';
 import SiteFooter from './components/Footer.vue';
@@ -19,7 +20,7 @@ export default {
   created() {
     let primary = this.$route.params.lang;
     let secondary = locales[1];
-    if (!locales.includes(primary)) primary = locales[0];
+    if (!_includes(locales, primary)) primary = locales[0];
     if (primary === locales[1]) {
       secondary = locales[0];
     } else {

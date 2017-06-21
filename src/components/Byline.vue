@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import _find from 'lodash/find';
 
 export default {
   props: {
@@ -32,10 +33,10 @@ export default {
       return this.$store.state.site.translations;
     },
     category() {
-      return this.$store.state.blog.categories.find(category => category.id === this.categoryId);
+      return _find(this.$store.state.blog.categories, category => category.id === this.categoryId);
     },
     author() {
-      return this.$store.state.site.authors.find(author => author.id === this.authorId);
+      return _find(this.$store.state.site.authors, author => author.id === this.authorId);
     },
   },
 };

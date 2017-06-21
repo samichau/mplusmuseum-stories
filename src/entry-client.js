@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
 import Clipboard from 'vue-clipboards';
+import _includes from 'lodash/includes';
 import 'es6-promise/auto';
 import 'objectFitPolyfill';
 import { createApp } from './app';
@@ -81,7 +82,7 @@ router.onReady(() => {
       diffed || (diffed = (prevMatched[i] !== c)));
     // Update language state if this route has a different recognized locale
     // e.g. example.com/en/page/ => example.com/de/page/
-    if (newLang !== prevLang && locales.includes(newLang)) {
+    if (newLang !== prevLang && _includes(locales, newLang)) {
       store.commit('setLanguage', { primary: newLang, secondary: prevLang });
       setTitleClient(to.matched[0].instances.default);
     }
