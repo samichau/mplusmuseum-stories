@@ -61,3 +61,15 @@
 		@rules();
 	}
 }
+
+.ieOnly(@rules) {
+	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+		@rules();
+	}
+}
+
+.edgeOnly(@rules) {
+	@supports (-ms-ime-align: auto) {
+		@rules();
+	}
+}

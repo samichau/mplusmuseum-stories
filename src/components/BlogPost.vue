@@ -237,6 +237,12 @@ export default {
       left: 0;
       position: sticky;
     });
+    .ieOnly({
+      top: 0 !important;
+    });
+    .edgeOnly({
+      top: 0 !important;
+    });
   }
   &--collapsed {
     .blog-post {
