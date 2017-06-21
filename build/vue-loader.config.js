@@ -6,7 +6,7 @@ module.exports = {
       browsers: ['last 3 versions'],
     }),
   ],
-  buble: {
-    objectAssign: 'Object.assign',
+  loaders: {
+    js: 'babel-loader',
   },
 };

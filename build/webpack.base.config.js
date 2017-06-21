@@ -63,11 +63,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'buble-loader',
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        options: {
-          objectAssign: 'Object.assign',
-        },
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
