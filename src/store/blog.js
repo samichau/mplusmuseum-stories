@@ -41,7 +41,7 @@ export default {
 
   getters: {
     activeCategory(state) {
-      return state.categories.find(c => c.active) || false;
+      return _find(state.categories, c => c.active) || false;
     },
     filtered(state, getters, rootState, rootGetters) {
       const author = rootGetters['site/activeAuthor'];
