@@ -1,7 +1,7 @@
 <template>
   <button class="clipboard fs-s shadow--inner" v-clipboard="url" @success="success">
     <img class="clipboard__icon" v-if="icon" src="../assets/img/link-blue.svg" alt="Clipboard Icon">
-    <input class="clipboard__text" :value="url" ref="input">
+    <input class="clipboard__text" :value="url" ref="input" readonly="true">
     <div class="clipboard__notice fs-b" :class="{ 'clipboard__notice--visible': notice }">
       {{ $t($store.state.site.translations.site.clipboardCopied) }}
     </div>
