@@ -197,7 +197,7 @@ export default {
           this.$bar.finish();
         })
         .catch((error) => {
-          this.$modal.show(`${error.status}: ${error.data.errors[0]}`);
+          this.$modal.error(error);
           this.loadingPosts = false;
           this.$bar.finish();
         });
