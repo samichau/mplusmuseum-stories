@@ -157,26 +157,55 @@ a {
       color: @white;
     }
   }
+  &--flat {
+    background: none;
+    box-shadow: none;
+  }
 }
 
-.inline-input {
+.input-wrap {
   position: relative;
-  input {
+  label, input {
     width: 100%;
-    border-top: none;
-    border-right: none;
-    border-bottom: 1px solid @accent;
-    border-left: none;
-    padding: 0 0 0.25em;
   }
-  button {
+  label {
     position: absolute;
-    right: 0;
-    height: 100%;
-    padding: 0.125em 0;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    opacity: 0.5;
+  }
+  input {
+    position: relative;
+    z-index: 2;
     border: none;
     background: none;
-    color: @accent;
+  }
+  .button-wrap {
+    z-index: 2;
+  }
+  &--inline {
+    input {
+      border-top: none;
+      border-right: none;
+      border-bottom: 1px solid @accent;
+      border-left: none;
+      padding: 0 0 0.25em;
+    }
+    .button-wrap {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    button {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      padding: 0.125em 0;
+      border: none;
+      background: none;
+      color: @accent;
+    }
   }
 }
 

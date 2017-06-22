@@ -54,7 +54,10 @@
             <clipboard class="blog-post__footer-section"
             :url="shareData.location"></clipboard>
 
-            <newsletter-block class="blog-post__footer-section"></newsletter-block>
+            <newsletter-block class="blog-post__footer-section input-wrap--inline"
+            :label="$t($store.state.site.translations.site.newsletterSignUp)"
+            :name="`newsletter__${post.name}`"
+            :button="'&rarr;'"></newsletter-block>
 
           </div>
         </div>

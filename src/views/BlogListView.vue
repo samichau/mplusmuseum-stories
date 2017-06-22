@@ -5,10 +5,11 @@
       <!-- @TODO Fetch data -->
       <h2 slot="header" class="fs-m">{{ $t(t.site.connect) }}</h2>
       <template slot="content">
-        <form class="blog-notice__form" action="">
-          <input type="text" :placeholder="$t(t.site.newsletterSubscribe)" class="shadow--inner">
-          <div class="button-wrap"><button>{{ $t(t.site.subscribe) }}</button></div>
-        </form>
+        <newsletter-block class="blog-notice__form"
+        :label="$t(t.site.newsletterSignUp)"
+        :name="'notice-newsletter'"
+        :button="$t(t.site.subscribe)"
+        :action="newsletterSuccess"></newsletter-block>
         <div class="blog-notice__social social-links fs-s">
           <a v-for="platform of $store.getters['site/socialLinkables']"
             :href="platform.link"
@@ -74,8 +75,9 @@
 <script>
 import { mapState } from 'vuex';
 import BlogView from './BlogView.vue';
-import BlogNotice from '../components/Notice.vue';
+import BlogNotice from '../components/BlogNotice.vue';
 import BlogPost from '../components/BlogPost.vue';
+import NewsletterBlock from '../components/NewsletterBlock.vue';
 import Tag from '../components/Tag.vue';
 import Marq from '../components/Marquee.vue';
 import metaMixin from '../util/meta';
@@ -165,6 +167,9 @@ export default {
     },
   },
   methods: {
+    newsletterSuccess() {
+      this.$modal.show('You are now subscribed to the newsletter!', 'Success');
+    },
     getMoreUnfiltered() {
       return this.getMore(this.posts, 'posts', 'postsRemaining');
     },
@@ -202,6 +207,7 @@ export default {
     BlogView,
     BlogNotice,
     BlogPost,
+    NewsletterBlock,
     Tag,
     Marq,
   },

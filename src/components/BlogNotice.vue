@@ -55,12 +55,27 @@ export default {
     margin-bottom: 1.5rem;
   }
   form {
+    text-align: left;
     width: 100%;
     margin: 1.5rem auto;
     position: relative;
+    background: @white;
     .mq-sm({
       width: 90%;
     });
+    label {
+      padding: 0.5em;
+      color: @black;
+      line-height: 1.5;
+      height: 2.5em;
+    }
+    input {
+      height: 2.5em;
+      padding: 0.5em;
+      line-height: 1.5;
+      color: @black;
+      box-shadow: @shadowStyleInner;
+    }
     .button-wrap {
       right: 0;
       top: 0;
@@ -75,12 +90,6 @@ export default {
       width: 100%;
       padding: 0 0.5em;
     }
-  }
-  input {
-    padding: 1rem;
-    color: @black;
-    border: none;
-    width: 100%;
   }
   .blog-item__inner {
     text-align: center;
