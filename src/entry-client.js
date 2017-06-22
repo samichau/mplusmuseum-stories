@@ -37,9 +37,7 @@ Vue.mixin({
           bar.finish();
           next();
         }).catch((error) => {
-          console.log(error);
-          // @TODO Show Modal
-          // modal.show('Something!');
+          modal.error(error);
           bar.finish();
         });
     }
@@ -98,9 +96,8 @@ router.onReady(() => {
         bar.finish();
         next();
       }).catch((error) => {
-        console.log(error);
         // @TODO Show Modal
-        // modal.show('Something!');
+        modal.error(error);
         bar.finish();
       });
   });

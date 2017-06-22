@@ -131,7 +131,11 @@ export default {
       if (this.busy || !this.post.collapsed) return false;
       this.busy = true;
       return this.$store.dispatch('blog/expandPost', this.post)
-        .then(() => { this.busy = false; });
+        .then(() => { this.busy = false; })
+        .catch((error) => {
+          this.busy = false;
+          this.$modal.error(error);
+        });
     },
     extend() {
       this.$store.commit('blog/extendPost', this.post);

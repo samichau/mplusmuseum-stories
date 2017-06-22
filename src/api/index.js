@@ -20,7 +20,13 @@ export function asyncGet(path) {
         resolve(new Response(true, response));
       })
       .catch((error) => {
-        reject(new Response(false, error.response));
+        const response = error.response ? error.response : {
+          status: false,
+          data: {
+            errors: ['There was a network error. Please check your internet connection.'],
+          },
+        };
+        reject(new Response(false, response));
       });
   });
 }

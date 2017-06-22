@@ -50,9 +50,12 @@ export default {
               context.commit('init', siteResponse.data);
               context.commit('tags/set', siteResponse.data);
               context.commit('header/init', siteResponse.data.menu);
+              resolve(responses);
+            } else if (viewResponse.resolved) {
+              resolve(responses);
+            } else {
+              reject(responses[1]);
             }
-            if (viewResponse.resolved) resolve(responses);
-            else resolve(responses);
           } else {
             reject(siteResponse);
           }
