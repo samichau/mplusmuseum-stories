@@ -8,6 +8,7 @@
       :to="{ name: 'blog-post', params: { name: item.name } }">
         <div class="suggested__image">
           <img v-if="item.image[0]" :src="item.image[0].src" :alt="$t(item.image[0].alt)">
+          <img class="suggested__placeholder" v-else src="../assets/img/logo-stories-stack.svg" alt="M+ Stories Logo">
         </div>
         <div class="suggested__title">
           <span class="lang-primary" v-html="$t(item.title)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(item.title)"></span>
@@ -82,11 +83,17 @@ export default {
       padding-top: 62.5%;
       height: 0;
       position: relative;
-      background: @white;
+      background: darken(@lightgrey, 10%);
       img {
         width: 100%;
         position: absolute;
         top: 0;
+        &.suggested__placeholder {
+          width: 100%/4;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
     }
     &__title {
