@@ -1,21 +1,7 @@
-import { routes as translations } from '../locale/translations';
-
 export default {
   namespaced: true,
   state: {
-    nav: [
-      {
-        name: 'blog',
-        params: false,
-        content: translations.blog,
-      }, {
-        name: 'page',
-        params: {
-          page: 'about',
-        },
-        content: translations.about,
-      },
-    ],
+    menu: [],
     marquee: [
       {
         content: {
@@ -24,5 +10,10 @@ export default {
         },
       },
     ],
+  },
+  mutations: {
+    init(state, items) {
+      state.menu = items;
+    },
   },
 };

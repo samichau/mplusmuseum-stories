@@ -1,11 +1,13 @@
 import _find from 'lodash/find';
 import promiseAllSoftFail from '../util/promise-all-soft-fail';
 import tags from './tags';
+import header from './header';
 import { asyncGet, Response } from '../api';
 
 export default {
   namespaced: true,
   modules: {
+    header,
     tags,
   },
   state: {
@@ -47,6 +49,7 @@ export default {
             if (siteResponse.data) {
               context.commit('init', siteResponse.data);
               context.commit('tags/set', siteResponse.data);
+              context.commit('header/init', siteResponse.data.menu);
             }
             if (viewResponse.resolved) resolve(responses);
             else resolve(responses);

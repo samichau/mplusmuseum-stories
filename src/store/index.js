@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import site from './site';
 import pages from './pages';
 import blog from './blog';
-import header from './header';
 import lightbox from './lightbox';
 
 Vue.use(Vuex);
@@ -26,7 +25,6 @@ export function createStore() {
       site,
       pages,
       blog,
-      header,
       lightbox,
     },
   });

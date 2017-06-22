@@ -27,7 +27,7 @@
       </div>
 
       <dropdown v-if="dropdown"
-        :items="nav"
+        :items="menu"
         :active.sync="dropdown"
         :prevent="dropdownPrevent"></dropdown>
     </div>
@@ -51,12 +51,9 @@ export default {
     ...mapState({
       lang: s => s.lang,
       query: s => s.route.query,
-      nav: s => s.header.nav,
-      marquees: s => s.header.marquee,
+      menu: s => s.site.header.menu,
+      marquees: s => s.site.header.marquee,
     }),
-    navItems() {
-      return this.dropdown ? this.nav : [];
-    },
   },
   methods: {
     toggleDropdown() {
