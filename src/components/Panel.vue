@@ -14,9 +14,15 @@
 
 .panel {
   background: @white;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  .mq-sm({
+    margin-bottom: 3rem;
+  });
   &__inner {
-    padding: 3rem;
+    padding: 2rem;
+    .mq-sm({
+      padding: 3rem;
+    });
   }
 }
 </style>

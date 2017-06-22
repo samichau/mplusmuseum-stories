@@ -34,7 +34,7 @@ export default {
   background: @accent;
   color: @white;
   width: 100%;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -56,7 +56,10 @@ export default {
       flex-direction: row;
     });
     a {
-      margin: 0 1rem;
+      margin: 0 0 1rem;
+      .mq-sm({
+        margin: 0 1rem;
+      });
     }
   }
   &__social {

@@ -31,8 +31,8 @@ export default {
     .page {
       &__content {
         margin: 5rem auto;
-        padding-left: 2rem;
-        padding-right: 2rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
         max-width: 1040px;
         .text-block {
           max-width: 800px;

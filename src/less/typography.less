@@ -19,7 +19,13 @@ p {
 }
 
 .fs-s {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
+  .mq-sm({
+    font-size: 1.4rem;
+  });
+  .mq-md({
+    font-size: 1.6rem;
+  });
 }
 
 .fs-b {
@@ -34,12 +40,18 @@ p {
 }
 
 .fs-m {
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   line-height: 1.2;
+  .mq-sm({
+    font-size: 2.5rem;
+  });
+  .mq-md({
+    font-size: 2.8rem;
+  });
 }
 
 .fs-l {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   line-height: 1.1;
   .mq-sm({
     font-size: 3.6rem;
@@ -50,9 +62,10 @@ p {
 }
 
 .fs-xl {
-  font-size: 4rem;
+  font-size: 3rem;
+  line-height: 1.2;
   .mq-sm({
-    font-size: 5rem;
+    font-size: 4.5rem;
   });
   .mq-md({
     font-size: 6rem;

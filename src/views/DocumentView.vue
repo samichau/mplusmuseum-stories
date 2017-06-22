@@ -57,7 +57,10 @@ export default {
   padding: 4rem 0 1rem;
   background: @lightgrey;
   &__title {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    .mq-sm({
+      margin-bottom: 3rem;
+    });
   }
 }
 

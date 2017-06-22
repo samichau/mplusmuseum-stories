@@ -61,6 +61,7 @@ export default {
       justify-content: center;
       background: rgba(0,0,0,0.5);
       color: @white;
+      padding: 0 1rem;
     }
     &__media {
       z-index: 1;

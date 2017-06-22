@@ -57,6 +57,7 @@ export default {
   &__icon {
     margin: 1rem 0 1rem 1rem;
     height: 3rem;
+    width: 3rem;
   }
   &__text {
     cursor: pointer;
