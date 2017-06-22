@@ -11,8 +11,7 @@
         v-if="post.images.length"
         @click="openLightbox(post.images[0])">
           <img :src="post.images[0].thumb"
-          :alt="$t(post.images[0].alt)"
-          data-object-fit="cover">
+          :alt="$t(post.images[0].alt)">
         </div>
         <h1 class="blog-post__title fs-l">
           <span class="lang-primary" v-html="$t(post.title)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(post.title)"></span>
@@ -261,12 +260,5 @@ export default {
       }
     }
   }
-  // &--truncated {
-  //   .blog-post {
-  //     &__sharebar {
-  //       position: static;
-  //     }
-  //   }
-  // }
 }
 </style>
