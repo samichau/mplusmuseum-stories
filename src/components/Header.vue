@@ -27,7 +27,7 @@
       </div>
 
       <dropdown v-if="dropdown"
-        :items="menu"
+        :items="menuItems"
         :active.sync="dropdown"
         :prevent="dropdownPrevent"></dropdown>
     </div>
@@ -44,14 +44,21 @@ export default {
     return {
       dropdown: false,
       dropdownPrevent: 'dropdown',
+      marquees: [
+        {
+          content: {
+            en: 'M+ Stories is the new M+ online curatorial platform',
+            tc: 'M +故事是新的M +在線策展平台',
+          },
+        },
+      ],
     };
   },
   computed: {
     ...mapState({
       lang: s => s.lang,
       query: s => s.route.query,
-      menu: s => s.site.header.menu,
-      marquees: s => s.site.header.marquee,
+      menuItems: s => s.site.links.menu,
     }),
   },
   methods: {

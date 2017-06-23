@@ -1,13 +1,11 @@
 import _find from 'lodash/find';
 import promiseAllSoftFail from '../util/promise-all-soft-fail';
 import tags from './tags';
-import header from './header';
 import { asyncGet, Response } from '../api';
 
 export default {
   namespaced: true,
   modules: {
-    header,
     tags,
   },
   state: {
@@ -15,6 +13,7 @@ export default {
     authors: [],
     social: [],
     translations: {},
+    links: {},
     initialized: false,
   },
   getters: {
@@ -49,7 +48,6 @@ export default {
             if (siteResponse.data) {
               context.commit('init', siteResponse.data);
               context.commit('tags/set', siteResponse.data);
-              context.commit('header/init', siteResponse.data.menu);
               resolve(responses);
             } else if (viewResponse.resolved) {
               resolve(responses);
@@ -67,6 +65,7 @@ export default {
     init(state, data) {
       data.authors.forEach((author) => { author.active = false; });
       state.url = data.baseURL;
+      state.links = data.links;
       state.authors = data.authors;
       state.social = data.social;
       state.translations = data.translations;
