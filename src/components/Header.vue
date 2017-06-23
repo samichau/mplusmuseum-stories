@@ -44,7 +44,6 @@ export default {
     return {
       dropdown: false,
       dropdownPrevent: 'dropdown',
-      share: false,
     };
   },
   computed: {
