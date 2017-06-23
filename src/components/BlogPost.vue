@@ -36,10 +36,7 @@
         </div>
 
         <div class="blog-post__body fs-b col-md-9">
-          <component v-for="(section, i) of sections"
-          :key="i"
-          :is="section.type"
-          :content="section.content"></component>
+          <content-blocks :items="sections"></content-blocks>
           
           <button class="blog-post__more button button--accent"
           v-if="post.truncated && post.sections.truncateAfter"
@@ -75,15 +72,11 @@
 import { mapState } from 'vuex';
 import Byline from './Byline.vue';
 import Clipboard from './Clipboard.vue';
-import ImageBlock from './ImageBlock.vue';
-import Instagram from './Instagram.vue';
+import ContentBlocks from './ContentBlocks.vue';
 import NewsletterBlock from './NewsletterBlock.vue';
 import ShareBar from './ShareBar.vue';
 import Suggested from './Suggested.vue';
 import TagsInline from './TagsInline.vue';
-import TextBlock from './TextBlock.vue';
-import Tweet from './Tweet.vue';
-import Youtube from './YouTube.vue';
 
 export default {
   data() {
@@ -147,15 +140,11 @@ export default {
   components: {
     Byline,
     Clipboard,
-    ImageBlock,
-    Instagram,
+    ContentBlocks,
     NewsletterBlock,
     ShareBar,
     Suggested,
     TagsInline,
-    TextBlock,
-    Tweet,
-    Youtube,
   },
 };
 </script>

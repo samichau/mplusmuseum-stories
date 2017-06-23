@@ -13,19 +13,20 @@
           </div>
           <div class="text-block">
             <ul class="document__contents">
-              <li v-for="panel of page.panels" :key="panel.name"><a :href="`#${panel.name}`" v-html="$t(panel.title)"></a></li>
+              <li v-for="section of page.sections" :key="section.name"><a :href="`#${section.name}`" v-html="$t(section.title)"></a></li>
             </ul>
           </div>
         </template>
       </panel>
-      <panel v-for="panel of page.panels" :key="panel.name" class="document-item">
-        <div slot="header" class="anchor" :id="panel.name"></div>
+      <panel v-for="section of page.sections" :key="section.name" class="document-item">
+        <div slot="header" class="anchor" :id="section.name"></div>
         <template slot="content">
           <div class="document-item__header">
             <a href="#contents" class="document-item__back"><img src="../assets/img/caret-up.svg" alt="Return to Contents"></a>
-            <h2 v-html="$t(panel.title)"></h2>
+            <h2 v-html="$t(section.title)"></h2>
           </div>
-          <text-block :content="panel.content"></text-block>
+          <content-blocks class="document-item__content"
+          :items="section.list"></content-blocks>
         </template>
       </panel>
     </div>
@@ -33,8 +34,9 @@
 </template>
 
 <script>
-import TextBlock from '../components/TextBlock.vue';
+import ContentBlocks from '../components/ContentBlocks.vue';
 import Panel from '../components/Panel.vue';
+import TextBlock from '../components/TextBlock.vue';
 
 export default {
   props: {
@@ -43,8 +45,9 @@ export default {
     },
   },
   components: {
-    TextBlock,
+    ContentBlocks,
     Panel,
+    TextBlock,
   },
 };
 </script>

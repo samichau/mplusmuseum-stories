@@ -1,16 +1,15 @@
 <template>
   <div class="page--basic">
     <banner :data="page.banner"></banner>
-    <div class="page__content" v-if="page.sections">
-      <component v-for="(section, i) of page.sections.list" :key="i" :is="section.type" :content="section.content"></component>
-    </div>
+    <content-blocks class="page__content"
+    v-if="page.sections"
+    :items="page.sections.list"></content-blocks>
   </div>
 </template>
 
 <script>
 import Banner from '../components/Banner.vue';
-import ImageBlock from '../components/ImageBlock.vue';
-import TextBlock from '../components/TextBlock.vue';
+import ContentBlocks from '../components/ContentBlocks.vue';
 
 export default {
   props: {
@@ -20,8 +19,7 @@ export default {
   },
   components: {
     Banner,
-    ImageBlock,
-    TextBlock,
+    ContentBlocks,
   },
 };
 </script>
