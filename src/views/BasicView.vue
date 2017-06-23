@@ -1,6 +1,7 @@
 <template>
   <div class="page--basic">
-    <banner :data="page.banner"></banner>
+    <banner v-if="page.banner" :data="page.banner"></banner>
+    <div v-else class="header-push"></div>
     <content-blocks class="page__content"
     v-if="page.sections"
     :items="page.sections.list"></content-blocks>
