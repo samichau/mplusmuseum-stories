@@ -81,8 +81,10 @@ body {
 }
 
 .block {
-  margin-top: 2em;
   margin-bottom: 2em;
+  &.text-block {
+    margin-bottom: 1em;
+  }
   &:first-child {
     margin-top: 0;
   }

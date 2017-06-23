@@ -157,6 +157,9 @@ export default {
   img {
     max-width: 100%;
   }
+  .clipboard {
+    margin-top: 2em;
+  }
   &__content {
     .mq-sm({
       display: flex;
@@ -169,7 +172,7 @@ export default {
     cursor: zoom-in;
     overflow: hidden;
     transition: 0.5s ease height;
-    height: 300px;
+    height: 250px;
     .mq-sm({
       height: 600px;
     });
@@ -245,8 +248,11 @@ export default {
         cursor: pointer;
       }
       &__image {
-        height: 300px;
         cursor: pointer;
+        height: 150px;
+        .mq-sm({
+          height: 300px;
+        });
       }
       &__meta {
         padding-bottom: 1.5rem;

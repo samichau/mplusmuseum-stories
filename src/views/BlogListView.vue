@@ -8,7 +8,7 @@
         <newsletter-block class="blog-notice__form"
         :label="$t(t.site.newsletterSignUp)"
         :name="'notice-newsletter'"
-        :button="$t(t.site.subscribe)"
+        :button="$t(t.site.newsletterSubscribe)"
         :action="newsletterSuccess"></newsletter-block>
         <div class="blog-notice__social social-links fs-s">
           <a v-for="platform of $store.getters['site/socialLinkables']"

@@ -68,7 +68,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 1rem;
   &__content {
     text-align: right;
     background: @accent;

@@ -65,6 +65,10 @@ export default {
   @import '../less/variables.less';
 
   .blog-sidebar {
+    text-align: center;
+    .mq-sm({
+      text-align: left;
+    });
     &__section {
       margin-bottom: 1em;
       &:last-child {
