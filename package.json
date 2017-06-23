@@ -31,7 +31,7 @@
     "vue-analytics": "^4.1.2",
     "vue-clickaway": "^2.1.0",
     "vue-clipboards": "^1.0.2",
-    "vue-router": "^2.5.3",
+    "vue-router": "^2.6.0",
     "vue-server-renderer": "^2.3.4",
     "vue-tweet-embed": "^1.1.1",
     "vuex": "^2.3.1",
@@ -64,7 +64,7 @@
     "vue-style-loader": "^3.0.0",
     "vue-template-compiler": "^2.3.4",
     "webpack": "^3.0.0",
-    "webpack-dev-middleware": "^1.10.1",
+    "webpack-dev-middleware": "^1.11.0",
     "webpack-hot-middleware": "^2.17.1",
     "webpack-merge": "^4.0.0",
     "webpack-node-externals": "^1.6.0"
