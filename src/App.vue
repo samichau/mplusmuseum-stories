@@ -103,6 +103,14 @@ a {
   text-decoration: none;
 }
 
+pre {
+  background: @lightgrey;
+  background: lighten(@lightgrey, 3%);
+  padding: 1em;
+  line-height: 1.5;
+  font-size: 80%;
+}
+
 .lang-primary {
   font-weight: 400;
 }
