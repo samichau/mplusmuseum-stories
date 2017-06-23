@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import Endnote from './Endnote.vue';
 import ImageBlock from './ImageBlock.vue';
 import Instagram from './Instagram.vue';
 import NewsletterBlock from './NewsletterBlock.vue';
@@ -23,6 +24,7 @@ export default {
     },
   },
   components: {
+    Endnote,
     ImageBlock,
     Instagram,
     NewsletterBlock,
