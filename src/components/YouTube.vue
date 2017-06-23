@@ -1,7 +1,7 @@
 <template>
   <div class="youtube-block block">
     <iframe type="text/html"
-    :src="`https://www.youtube.com/embed/${$t(content)}?autoplay=0`"
+    :src="`https://www.youtube.com/embed/${$t(content)}?autoplay=0&color=white&hl=${lang}`"
     frameborder="0"></iframe>
   </div>
 </template>
@@ -11,6 +11,11 @@ export default {
   props: {
     content: {
       required: true,
+    },
+  },
+  computed: {
+    lang() {
+      return this.$store.state.lang === 'tc' ? 'zh-hk' : 'en';
     },
   },
 };
