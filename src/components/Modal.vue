@@ -22,23 +22,31 @@ export default {
   },
   methods: {
     show(message, title = 'Message', buttons = ['Close']) {
-      this.visible = true;
       this.title = title;
       this.message = message;
       this.buttons = (!Array.isArray(buttons)) ? [buttons] : buttons;
+      this.open();
     },
     error(error) {
-      this.visible = true;
       this.title = 'Error';
       this.message = error.status
         ? `${error.status}: ${error.data.errors[0]}`
         : error.data.errors[0];
       this.buttons = ['Close'];
+      this.open();
+    },
+    open() {
+      window.addEventListener('keydown', this.keyHandler);
+      this.visible = true;
     },
     close() {
+      window.removeEventListener('keydown', this.keyHandler);
       this.visible = false;
       this.title = 'Message';
       this.message = '';
+    },
+    keyHandler(e) {
+      if (e.keyCode === 27) this.close();
     },
   },
 };
