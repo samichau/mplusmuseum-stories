@@ -26,7 +26,7 @@ export default {
   ul, ol {
     margin-top: 0;
     margin-bottom: 1em;
-    padding: 0 0 0 1em;
+    padding: 0 0 0 1.5em;
     &:last-child {
       margin-bottom: 0;
     }

@@ -12,9 +12,9 @@
             <h2 v-html="$t($store.state.site.translations.site.tableOfContents)"></h2>
           </div>
           <div class="text-block">
-            <ul class="document__contents">
+            <ol class="document__contents">
               <li v-for="section of page.sections" :key="section.name"><a :href="`#${section.name}`" v-html="$t(section.title)"></a></li>
-            </ul>
+            </ol>
           </div>
         </template>
       </panel>
