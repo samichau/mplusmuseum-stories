@@ -1,5 +1,5 @@
 <template>
-  <div class="text-block" v-html="$t(content.html)"></div>
+  <div class="text-block block" v-html="$t(content.html)"></div>
 </template>
 
 <script>

@@ -32,10 +32,16 @@ export default {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
         max-width: 1040px;
-        .text-block {
+        .block {
           max-width: 800px;
           margin-left: auto;
           margin-right: auto;
+          &.image-block, &.youtube-block {
+            max-width: 100%;
+          }
+          &.instagram-block {
+            max-width: 600px;
+          }
         }
       }
     }

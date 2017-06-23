@@ -1,5 +1,5 @@
 <template>
-  <div class="youtube-embed block">
+  <div class="youtube-block block">
     <iframe type="text/html"
     :src="`https://www.youtube.com/embed/${$t(content)}?autoplay=0`"
     frameborder="0"></iframe>
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style lang="less">
-.youtube-embed {
+.youtube-block {
   position: relative;
   padding-bottom: 56.25%;
   height: 0;

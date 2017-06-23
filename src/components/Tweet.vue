@@ -36,7 +36,16 @@ export default {
     });
   },
   render(h) {
-    return h('div', { class: 'tweet-embed block' }, this.isTweetLoaded ? undefined : this.$slots.default);
+    return h('div', { class: 'tweet-block block' }, this.isTweetLoaded ? undefined : this.$slots.default);
   },
 };
 </script>
+
+<style lang="less">
+.tweet-block {
+  .twitter-tweet {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+</style>
