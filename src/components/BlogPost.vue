@@ -165,6 +165,9 @@ export default {
       display: flex;
     });
   }
+  &__aside {
+    transform: translate3d(0, 0, 0); // Fix for Chrome on Retina rendering bug;
+  }
   &__header {
     background: @white;
   }
