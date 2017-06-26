@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import _includes from 'lodash/includes';
+import _find from 'lodash/find';
 import Tag from './Tag.vue';
 
 export default {
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       expanded: false,
-      tags: this.$store.state.site.tags.items.filter(tag => _includes(this.tagIds, tag.id)),
+      tags: this.tagIds.map(id => _find(this.$store.state.site.tags.items, tag => tag.id === id)),
     };
   },
   computed: {
