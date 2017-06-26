@@ -1,32 +1,35 @@
 <template>
   <blog-view v-if="!filtered">
 
-    <blog-notice :hide="false">
-      <!-- @TODO Fetch data -->
-      <h2 slot="header" class="fs-m">{{ $t(t.site.connect) }}</h2>
-      <template slot="content">
-        <newsletter-block class="blog-notice__form"
-        :label="$t(t.site.newsletterSignUp)"
-        :name="'notice-newsletter'"
-        :button="$t(t.site.newsletterSubscribe)"
-        :action="newsletterSuccess"></newsletter-block>
-        <div class="blog-notice__social social-links fs-s">
-          <a v-for="platform of $store.getters['site/socialLinkables']"
+    <sticky :fadeOut="true">
+      <blog-notice :hide="false">
+        <!-- @TODO Fetch data -->
+        <h2 slot="header" class="fs-m">{{ $t(t.site.connect) }}</h2>
+        <template slot="content">
+          <newsletter-block class="blog-notice__form"
+          :label="$t(t.site.newsletterSignUp)"
+          :name="'notice-newsletter'"
+          :button="$t(t.site.newsletterSubscribe)"
+          :action="newsletterSuccess"></newsletter-block>
+          <div class="blog-notice__social social-links fs-s">
+            <a v-for="platform of $store.getters['site/socialLinkables']"
+            :key="platform.name"
             :href="platform.link"
             target="_blank">
-            <img :src="platform.icon" :alt="$t(platform.title)">
-          </a>
-        </div>
-      </template>
-    </blog-notice>
+              <img :src="platform.icon" :alt="$t(platform.title)">
+            </a>
+          </div>
+        </template>
+      </blog-notice>
+    </sticky>
 
     <blog-post class="list-complete-item"
       v-for="(post, i) of posts.slice(0,2)"
       :key="`unfiltered-${post.name}`"
       :post="post"></blog-post>
 
+    <!-- @TODO Make dynamic -->
     <blog-notice>
-       <!-- @TODO Make dynamic -->
       <h2 slot="header" class="fs-l">Enjoying M+ Stories?</h2>
       <p slot="content">Then here is a suggestion...</p>
     </blog-notice>
@@ -80,6 +83,7 @@ import BlogPost from '../components/BlogPost.vue';
 import NewsletterBlock from '../components/NewsletterBlock.vue';
 import Tag from '../components/Tag.vue';
 import Marq from '../components/Marquee.vue';
+import Sticky from '../components/Sticky.vue';
 import metaMixin from '../util/meta';
 import { fetch } from '../util/fetch';
 
@@ -210,6 +214,7 @@ export default {
     NewsletterBlock,
     Tag,
     Marq,
+    Sticky,
   },
 };
 </script>
