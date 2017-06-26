@@ -10,20 +10,7 @@
 </template>
 
 <script>
-
-let addScriptPromise = null;
-
-function addScript(src) {
-  if (!addScriptPromise) {
-    const s = document.createElement('script');
-    s.setAttribute('src', src);
-    document.body.appendChild(s);
-    addScriptPromise = new Promise((resolve) => {
-      s.onload = resolve;
-    });
-  }
-  return addScriptPromise;
-}
+import addScript from '../util/promise-script';
 
 export default {
   data() {
