@@ -52,6 +52,7 @@ export default {
       font-style: italic;
     }
     &__content {
+      text-align: center;
       padding: 0.5rem;
       .mq-sm({
         padding: 1rem;
@@ -59,6 +60,7 @@ export default {
     }
     &__item {
       display: inline-block;
+      text-align: left;
       vertical-align: top;
       padding: 0.5rem;
       width: 100%/2;
