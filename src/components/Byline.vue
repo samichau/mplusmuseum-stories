@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     snippet() {
-      return this.$t(this.$store.state.site.translations.site.byline);
+      return this.$t(this.$store.state.site.translations.blog.byline);
     },
     category() {
       return _find(this.$store.state.blog.categories, category => category.id === this.categoryId);

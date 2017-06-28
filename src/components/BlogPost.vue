@@ -52,7 +52,7 @@
             :url="shareData.location"></clipboard>
 
             <newsletter-block class="blog-post__footer-section input-wrap--inline"
-            :label="$t($store.state.site.translations.site.newsletterSignUp)"
+            :label="$t($store.state.site.translations.newsletter.signUp)"
             :name="`newsletter__${post.name}`"
             :button="'&rarr;'"></newsletter-block>
 

@@ -7,9 +7,9 @@
         <h2 slot="header" class="fs-m">{{ $t(t.site.connect) }}</h2>
         <template slot="content">
           <newsletter-block class="blog-notice__form"
-          :label="$t(t.site.newsletterSignUp)"
+          :label="$t(t.newsletter.signUp)"
           :name="'notice-newsletter'"
-          :button="$t(t.site.newsletterSubscribe)"
+          :button="$t(t.newsletter.subscribe)"
           :action="newsletterSuccess"></newsletter-block>
           <div class="blog-notice__social social-links fs-s">
             <a v-for="platform of $store.getters['site/socialLinkables']"
