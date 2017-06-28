@@ -46,7 +46,10 @@ export default {
       this.message = '';
     },
     keyHandler(e) {
-      if (e.keyCode === 27) this.close();
+      if (e.keyCode === 27 || e.keyCode === 13) {
+        e.preventDefault();
+        this.close();
+      }
     },
   },
 };
@@ -78,7 +81,7 @@ export default {
     max-width: 640px;
   }
   &__title {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   &__title, &__message {
     text-align: left;
