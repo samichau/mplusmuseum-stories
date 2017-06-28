@@ -8,12 +8,14 @@
 </template>
 
 <script>
+import Brightcove from './Brightcove.vue';
 import Endnote from './Endnote.vue';
 import ImageBlock from './ImageBlock.vue';
 import Instagram from './Instagram.vue';
 import NewsletterBlock from './NewsletterBlock.vue';
 import TextBlock from './TextBlock.vue';
 import Tweet from './Tweet.vue';
+import Vimeo from './Vimeo.vue';
 import Youtube from './YouTube.vue';
 
 export default {
@@ -24,12 +26,14 @@ export default {
     },
   },
   components: {
+    Brightcove,
     Endnote,
     ImageBlock,
     Instagram,
     NewsletterBlock,
     TextBlock,
     Tweet,
+    Vimeo,
     Youtube,
   },
 };
