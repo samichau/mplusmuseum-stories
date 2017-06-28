@@ -46,8 +46,10 @@ export default {
     handleScroll() {
       const pos = window.scrollY;
       const opacity = Math.max(1 - (pos / 500), 0);
+      const visibility = opacity === 0 ? 'hidden' : 'visible';
       this.styleObj = {
         opacity,
+        visibility,
       };
     },
   },
