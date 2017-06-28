@@ -53,13 +53,7 @@
 
   <blog-view v-else>
 
-    <div class="blog-header fs-m">
-      <div class="blog-header__descriptor" v-html="header.text"></div>
-      <router-link class="blog-header__link" v-if="header.link" :to="{ name: 'blog' }" v-html="header.link"></router-link>
-      <div class="blog-header__tags" v-if="header.tags">
-        <tag class="fs-m" v-for="tag of header.tags" :key="tag.id" :tag="tag"></tag>
-      </div>
-    </div>
+    <blog-header></blog-header>
 
     <blog-post class="list-complete-item"
       v-for="(post, i) of postsFiltered"
@@ -78,6 +72,7 @@
 <script>
 import { mapState } from 'vuex';
 import BlogView from './BlogView.vue';
+import BlogHeader from '../components/BlogHeader.vue';
 import BlogNotice from '../components/BlogNotice.vue';
 import BlogPost from '../components/BlogPost.vue';
 import NewsletterBlock from '../components/NewsletterBlock.vue';
@@ -148,21 +143,6 @@ export default {
       postsFiltered: s => s.blog.postsFiltered,
       postsFilteredRemaining: s => s.blog.postsFilteredRemaining,
     }),
-    header() {
-      const header = {};
-
-      if (this.$store.getters['blog/activeCategory']) {
-        header.text = ` ${this.$t(this.t.blog.postsUnder)}`;
-        header.link = this.$t(this.$store.getters['blog/activeCategory'].title);
-      } else if (this.$store.getters['site/activeAuthor']) {
-        header.text = ` ${this.$t(this.t.blog.postsBy)}`;
-        header.link = this.$t(this.$store.getters['site/activeAuthor'].title);
-      } else if (this.$store.getters['site/tags/active']) {
-        header.text = ` ${this.$t(this.t.blog.postsTagged)}`;
-        header.tags = this.$store.getters['site/tags/active'];
-      }
-      return header;
-    },
     morePostsText() {
       return this.loadingPosts ? this.$t(this.t.site.loading) : this.$t(this.t.blog.morePosts);
     },
@@ -209,6 +189,7 @@ export default {
   },
   components: {
     BlogView,
+    BlogHeader,
     BlogNotice,
     BlogPost,
     NewsletterBlock,

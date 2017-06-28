@@ -1,21 +1,9 @@
-<template>
-  <div class="byline fs-b">
-    <span>{{ $t(this.date) }}</span>
-    {{ $t(t.site.by) }} 
-    <router-link :to="{ query: { author: author.name } }">{{ $t(author.title) }}</router-link>. 
-    <router-link v-if="category"
-    :to="{ query: { category: category.name } }"
-    tag="span">
-      {{ $t(t.blog.filed) }}
-      <a>{{ $t(category.title) }}</a>.
-    </router-link>
-  </div>
-</template>
-
 <script>
 import _find from 'lodash/find';
+import dynamicMixin from '../util/dynamic-translate';
 
 export default {
+  mixins: [dynamicMixin],
   props: {
     categoryId: {
       default: false,
@@ -29,8 +17,8 @@ export default {
     },
   },
   computed: {
-    t() {
-      return this.$store.state.site.translations;
+    snippet() {
+      return this.$t(this.$store.state.site.translations.site.byline);
     },
     category() {
       return _find(this.$store.state.blog.categories, category => category.id === this.categoryId);
@@ -38,6 +26,41 @@ export default {
     author() {
       return _find(this.$store.state.site.authors, author => author.id === this.authorId);
     },
+  },
+  methods: {
+    renderAuthor(h) {
+      return h(
+        'router-link',
+        {
+          props: {
+            to: { query: { author: this.author.name } },
+          },
+        },
+        this.$t(this.author.title),
+      );
+    },
+    renderCategory(h) {
+      return this.category ? h(
+        'router-link',
+        {
+          props: {
+            to: { query: { category: this.category.name } },
+          },
+        },
+        this.$t(this.category.title),
+      ) : false;
+    },
+    renderDate(h) {
+      return h(
+        'span',
+        {},
+        this.$t(this.date),
+      );
+    },
+  },
+  render(h) {
+    const elems = this.snippet.map(match => this.createElement(match, h));
+    return h('div', { class: 'byline fs-b' }, elems);
   },
 };
 </script>

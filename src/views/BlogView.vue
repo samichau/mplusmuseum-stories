@@ -62,26 +62,6 @@ export default {
   }
 }
 
-.blog-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 1em;
-  &-tags {
-    margin: 0.125em -0.125em;
-  }
-  .tag {
-    margin: 0.125em;
-  }
-  div {
-    margin-right: 0.25em;
-  }
-  >a {
-    font-weight: 400;
-    color: @accent;
-  }
-}
-
 .blog-item {
   position: relative;
   margin-top: 0;
