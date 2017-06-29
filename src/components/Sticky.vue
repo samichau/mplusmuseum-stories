@@ -3,7 +3,7 @@
   :class="{ 'sticky--stuck': stuck }"
   :style="styleObj">
     <div class="sticky__content" ref="content">
-      <slot ref="content"></slot>
+      <slot></slot>
     </div>
     <div class="stick__spacer" ref="spacer"></div>
   </div>
