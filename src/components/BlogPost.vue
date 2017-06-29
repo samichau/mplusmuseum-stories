@@ -62,7 +62,7 @@
     </div>
 
     <suggested class="blog-post__suggested"
-    v-if="showFooterContent"
+    v-if="showFooterContent && post.related"
     :items="post.related.items"></suggested>
 
   </article>
