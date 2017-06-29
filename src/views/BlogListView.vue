@@ -1,74 +1,3 @@
-<template>
-  <blog-view v-if="!filtered">
-
-    <sticky :fadeOut="true">
-      <blog-notice :hide="false">
-        <!-- @TODO Fetch data -->
-        <h2 slot="header" class="fs-m">{{ $t(t.site.connect) }}</h2>
-        <template slot="content">
-          <newsletter-block class="blog-notice__form"
-          :label="$t(t.newsletter.signUp)"
-          :name="'notice-newsletter'"
-          :button="$t(t.newsletter.subscribe)"
-          :action="newsletterSuccess"></newsletter-block>
-          <div class="blog-notice__social social-links fs-s">
-            <a v-for="platform of $store.getters['site/socialLinkables']"
-            :key="platform.name"
-            :href="platform.link"
-            target="_blank">
-              <img :src="platform.icon" :alt="$t(platform.title)">
-            </a>
-          </div>
-        </template>
-      </blog-notice>
-    </sticky>
-
-    <blog-post class="list-complete-item"
-      v-for="(post, i) of posts.slice(0,2)"
-      :key="`unfiltered-${post.name}`"
-      :post="post"></blog-post>
-
-    <!-- @TODO Make dynamic -->
-    <blog-notice>
-      <h2 slot="header" class="fs-l">Enjoying M+ Stories?</h2>
-      <p slot="content">Then here is a suggestion...</p>
-    </blog-notice>
-
-    <blog-post class="list-complete-item"
-      v-for="(post, i) of posts.slice(2)"
-      :key="`unfiltered-${post.name}`"
-      :post="post"></blog-post>
-
-    <button class="blog__button-wide"
-      v-if="postsRemaining"
-      @click="getMoreUnfiltered"
-      v-text="morePostsText"></button>
-
-  </blog-view>
-
-  <blog-view v-else-if="!postsFiltered.length">
-    <marq class="blog-item blog__marquee fs-l"
-      :content="$t(t.blog.noPosts)"></marq>
-  </blog-view>
-
-  <blog-view v-else>
-
-    <blog-header></blog-header>
-
-    <blog-post class="list-complete-item"
-      v-for="(post, i) of postsFiltered"
-      :key="`filtered-${post.name}`"
-      :post="post"></blog-post>
-
-    <button class="blog__button-wide"
-      v-if="postsFilteredRemaining"
-      @click="getMoreFiltered"
-      v-text="morePostsText"></button>
-
-  </blog-view>
-  
-</template>
-
 <script>
 import { mapState } from 'vuex';
 import BlogView from './BlogView.vue';
@@ -196,6 +125,130 @@ export default {
     Tag,
     Marq,
     Sticky,
+  },
+  render(h) {
+    let items = [];
+
+    if (this.filtered) {
+      if (this.postsFiltered.length) {
+        // If we want to show filtered posts and we have some to show ...
+        // Create the more button element if we haven't got all the posts
+        const moreBtn = this.postsFilteredRemaining
+        ? h('button', {
+          class: 'blog__button-wide',
+          on: {
+            click: this.getMoreFiltered,
+          },
+        }, this.morePostsText)
+        : false;
+
+        // Create the posts list, for now we don't put CTA elements here
+        items = [
+          h('blog-header'),
+          this.postsFiltered.map(post =>
+            h('blog-post', {
+              class: 'list-complete-item',
+              key: `unfiltered-${post.name}`,
+              props: {
+                post,
+              },
+            },
+          )),
+          moreBtn,
+        ];
+      } else {
+        // But if we don't have any filtered posts, just show the marquee element
+        items = [
+          h('marq', {
+            class: 'blog-item blog__marquee fs-l',
+            props: {
+              content: this.$t(this.t.blog.noPosts),
+            },
+          }),
+        ];
+      }
+    } else {
+      // If we are showing unfiltered posts
+      // Create the more button element if we haven't got all the posts
+      const moreBtn = this.postsRemaining
+        ? h('button', {
+          class: 'blog__button-wide',
+          on: {
+            click: this.getMoreUnfiltered,
+          },
+        }, this.morePostsText)
+        : false;
+
+      // Create the posts list, loop through the posts list and insert CTA elements
+      items = [this.posts.map((post, i) => {
+        const content = [];
+        if (i === 0) {
+          content.push(h('sticky', {
+            props: {
+              fadeOut: true,
+            },
+          }, [
+            h('blog-notice', {
+            }, [
+              h('div', {
+                class: 'blog-notice__content',
+                domProps: {
+                  innerHTML: this.$t(this.$store.state.blog.cta),
+                },
+              }),
+              h('newsletter-block', {
+                class: 'blog-notice__form',
+                props: {
+                  label: this.$t(this.t.newsletter.signUp),
+                  name: 'notice-newsletter',
+                  button: this.$t(this.t.newsletter.subscribe),
+                },
+              }),
+              h('div', { class: 'blog-notice__social social-links fs-s' },
+                this.$store.getters['site/socialLinkables'].map((platform) => {
+                  const img = h('img', {
+                    domProps: {
+                      src: platform.icon,
+                      alt: this.$t(platform.title),
+                    },
+                  });
+                  return h('a', {
+                    key: platform.name,
+                    domProps: {
+                      href: platform.link,
+                      target: '_blank',
+                    },
+                  }, [img]);
+                }),
+              ),
+            ]),
+          ]));
+        } else if (i % 10 === 0) {
+          const noticeContent = this.$t(this.$store.state.blog.cta);
+          content.push(h('blog-notice', {
+          }, [
+            h('div', {
+              class: 'blog-notice__content',
+              domProps: {
+                innerHTML: noticeContent,
+              },
+            }),
+          ]));
+        }
+
+        content.push(h('blog-post', {
+          class: 'list-complete-item',
+          key: `unfiltered-${post.name}`,
+          props: {
+            post,
+          },
+        }));
+
+        return content;
+      }), moreBtn];
+    }
+
+    return h('blog-view', {}, items);
   },
 };
 </script>

@@ -1,14 +1,9 @@
 <template>
   <aside class="blog-item blog-notice shadow"
-    :class="{ 'blog-notice--hidden': hidden }">
+  :class="{ 'blog-notice--hidden': hidden }">
     <div class="blog-item__overlay" v-if="hidden" @click.once="toggle"></div>
     <div class="blog-item__inner">
-      <div class="blog-notice__header">
-        <slot name="header"></slot>
-      </div>
-      <div class="blog-notice__content">
-        <slot name="content"></slot>
-      </div>
+      <slot></slot>
     </div>
   </aside>
 </template>
@@ -21,6 +16,9 @@ export default {
     };
   },
   props: {
+    header: {
+      default: '',
+    },
     hide: {
       default: false,
     },
@@ -51,8 +49,26 @@ export default {
   &:not(.blog-notice--hidden):not(.fade-enter-active):not(.fade-leave-active) {
     transition: 0.5s cubic-bezier(.5,-0.6,.4,.9) transform, 0.5s cubic-bezier(.5,-0.6,.4,.9) margin-bottom;
   }
-  &__header {
-    margin-bottom: 1.5rem;
+  &__content {
+    h1, h2, h3, h4, h5, h6 {
+      font-size: 2.2rem;
+      line-height: 1.2;
+      .mq-sm({
+        font-size: 2.5rem;
+      });
+      .mq-md({
+        font-size: 2.8rem;
+      });
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+    h1, h2, h3, h4, h5, h6, p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
   form {
     text-align: left;

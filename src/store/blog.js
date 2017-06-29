@@ -24,6 +24,7 @@ export default {
 
   state: {
     meta: false,
+    cta: [],
     single: false,
     posts: [],
     postsRemaining: 0,
@@ -127,6 +128,7 @@ export default {
       state.tags = data.section.tags;
       state.links = data.section.links;
       state.initialized.meta = true;
+      state.cta = data.cta;
     },
     init(state, { items, posts }) {
       state[items] = posts.items.map(post => addPostProperties(post));
