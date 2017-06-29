@@ -80,9 +80,6 @@ export default {
     },
   },
   methods: {
-    newsletterSuccess() {
-      this.$modal.show('You are now subscribed to the newsletter!', 'Success');
-    },
     getMoreUnfiltered() {
       return this.getMore(this.posts, 'posts', 'postsRemaining');
     },

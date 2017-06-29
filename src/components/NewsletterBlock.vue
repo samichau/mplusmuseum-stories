@@ -38,12 +38,6 @@ export default {
     button: {
       default: 'Submit',
     },
-    action: {
-      type: Function,
-      default() {
-        return this.submit();
-      },
-    },
   },
   data() {
     return {
