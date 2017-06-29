@@ -88,6 +88,7 @@ export default {
       background: darken(@lightgrey, 10%);
       img {
         width: 100%;
+        height: 100%;
         position: absolute;
         top: 0;
         &.suggested__placeholder {

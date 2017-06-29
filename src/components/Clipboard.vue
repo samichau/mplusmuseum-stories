@@ -54,6 +54,10 @@ export default {
   display: flex;
   align-items: center;
   position: relative;
+  &__icon, &__text {
+    display: inline-block;
+    vertical-align: middle;
+  }
   &__icon {
     margin: 1rem 0 1rem 1rem;
     height: 3rem;
