@@ -1,9 +1,10 @@
 <template>
-  <button class="clipboard fs-s shadow--inner" v-clipboard="url" @success="success">
+  <button class="clipboard fs-s shadow--inner" v-clipboard="url" @success="success" @error="error">
     <img class="clipboard__icon" v-if="icon" src="../assets/img/link-blue.svg" alt="Clipboard Icon">
     <input class="clipboard__text" :value="url" ref="input" readonly="true">
-    <div class="clipboard__notice fs-b" :class="{ 'clipboard__notice--visible': notice }">
-      {{ $t($store.state.site.translations.site.clipboardCopied) }}
+    <div class="clipboard__notice fs-b"
+    :class="{ 'clipboard__notice--visible': notice }"
+    v-html="active ? message : ''">
     </div>
   </button>
 </template>
@@ -12,7 +13,9 @@
 export default {
   data() {
     return {
+      active: false,
       notice: false,
+      message: '',
     };
   },
   props: {
@@ -24,15 +27,26 @@ export default {
     },
   },
   methods: {
+    showNotice(message) {
+      if (this.active) return false;
+      this.active = true;
+      this.notice = true;
+      this.message = message;
+      setTimeout(() => this.hideNotice(), 1000);
+      return true;
+    },
+    hideNotice() {
+      this.notice = false;
+      setTimeout(() => { this.active = false; }, 500);
+    },
     success() {
       if (!this.notice) {
         this.$refs.input.select();
-        this.notice = true;
-        setTimeout(() => { this.notice = false; }, 1000);
+        this.showNotice(this.$t(this.$store.state.site.translations.site.clipboardCopied));
       }
     },
     error() {
-      console.log('fail!');
+      this.showNotice('Your browser doesn’t support copying!');
     },
   },
 };
