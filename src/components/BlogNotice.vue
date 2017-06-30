@@ -100,6 +100,7 @@ export default {
       position: absolute;
     }
     button {
+      font-weight: 400;
       border: none;
       background: @accent;
       height: 100%;
