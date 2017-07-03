@@ -9,8 +9,8 @@
     </div>
     <div class="footer__social footer__section social-links">
       <a v-for="platform of $store.getters['site/socialLinkables']"
-        :href="platform.link"
-        target="_blank">
+      :href="platform.link"
+      target="_blank">
         <img :src="platform.icon" :alt="$t(platform.title)">
       </a>
     </div>

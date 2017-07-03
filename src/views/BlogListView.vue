@@ -131,13 +131,13 @@ export default {
         // If we want to show filtered posts and we have some to show ...
         // Create the more button element if we haven't got all the posts
         const moreBtn = this.postsFilteredRemaining
-        ? h('button', {
-          class: 'blog__button-wide',
-          on: {
-            click: this.getMoreFiltered,
-          },
-        }, this.morePostsText)
-        : false;
+          ? h('button', {
+            class: 'blog__button-wide',
+            on: {
+              click: this.getMoreFiltered,
+            },
+          }, this.morePostsText)
+          : false;
 
         // Create the posts list, for now we don't put CTA elements here
         items = [
@@ -150,7 +150,7 @@ export default {
                 post,
               },
             },
-          )),
+            )),
           moreBtn,
         ];
       } else {

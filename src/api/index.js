@@ -9,7 +9,6 @@ export class Response {
     this.data = response ? response.data : false;
     return this;
   }
-
 }
 
 export function asyncGet(path) {

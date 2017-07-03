@@ -51,8 +51,7 @@ export default {
     }),
     popularTags() {
       return this.siteTags
-        .filter(siteTag => this.blogTags
-        .some(blogTag => blogTag === siteTag.id));
+        .filter(siteTag => this.blogTags.some(blogTag => blogTag === siteTag.id));
     },
   },
   components: {

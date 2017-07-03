@@ -15,8 +15,8 @@ function addCategoryProperties(category) {
 
 function selectorsToString(selectors) {
   return selectors
-  .map(selector => `${selector.name}=${selector.value}`)
-  .join('&');
+    .map(selector => `${selector.name}=${selector.value}`)
+    .join('&');
 }
 
 export default {
