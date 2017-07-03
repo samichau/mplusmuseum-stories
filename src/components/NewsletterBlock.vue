@@ -1,27 +1,15 @@
 <template>
   <form class="newsletter-block input-wrap" @submit.prevent="submit" enctype="multipart/form-data">
-    <input type="hidden" name="CID" value="274418198">
-    <input type="hidden" name="SID" value="">
-    <input type="hidden" name="f" value="8604">
-    <input type="hidden" name="p" value="2">
-    <input type="hidden" name="a" value="r">
-    <input type="hidden" name="el" value="">
-    <input type="hidden" name="endlink" value="">
-    <input type="hidden" name="llid" value="">
-    <input type="hidden" name="c" value="">
-    <input type="hidden" name="counted" value="">
-    <input type="hidden" name="inp_30577" size="1" value="1">
-    <input type="hidden" name="inp_14051" :value="lang">
-
-    <label v-if="!email.length" for="inp_3" v-html="label"></label>
-    <input v-model="email" name="inp_3" type="text">
+    <input type="hidden" name="lang" :value="lang">
+    <label v-if="!email.length" for="email" v-html="label"></label>
+    <input v-model="email" name="email" type="text">
     <div class="button-wrap"><button v-html="button"></button></div>
-
   </form>
 </template>
 
 <script>
-import axios from 'axios';
+import locales from '../locale';
+import { asyncPost } from '../api';
 import { validateEmail } from '../util/validation';
 
 export default {
@@ -39,6 +27,7 @@ export default {
   data() {
     return {
       email: '',
+      busy: false,
     };
   },
   computed: {
@@ -46,31 +35,34 @@ export default {
       return this.$store.state.site.translations.newsletter;
     },
     lang() {
-      return this.$store.state.lang === 'tc' ? 2 : 1;
+      return this.$store.state.lang === locales[1] ? 2 : 1;
     },
   },
   methods: {
     submit() {
+      if (this.busy) return false;
+      this.busy = true;
+
       if (!validateEmail(this.email)) {
         this.error();
         return false;
       }
-      // @TODO Make sure this works
       /* eslint-disable no-undef */
       const formData = new FormData(this.$el);
-      return axios.post('http://stories.dev/', formData).then(() => {
+      return asyncPost('newsletter/', formData).then(() => {
         this.success();
-        return true;
-      }).catch(() => {
-        this.error('There was a network problem. Please try again later');
-        return false;
+      }).catch(({ data }) => {
+        this.error(data.errors[0] || 'There was a network error. Please try again later');
       });
     },
     error(message) {
       this.$modal.show(message || this.$t(this.t.errorInvalid), this.$t(this.t.errorTitle));
+      this.busy = false;
     },
     success() {
       this.$modal.show(this.$t(this.t.successMessage), this.$t(this.t.successTitle));
+      this.email = '';
+      this.busy = false;
     },
   },
 };
