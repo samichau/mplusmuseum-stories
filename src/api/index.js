@@ -11,21 +11,26 @@ export class Response {
   }
 }
 
+function resolver(response) {
+  return new Response(true, response);
+}
+
+function rejector(error) {
+  const response = error.response ? error.response : {
+    status: false,
+    data: {
+      errors: ['There was a network error. Please check your internet connection.'],
+    },
+  };
+  return Promise.reject(new Response(false, response));
+}
+
 export function asyncGet(path) {
   const endpoint = `${apiUrl}/${path}`;
-  return new Promise((resolve, reject) => {
-    axios.get(endpoint)
-      .then((response) => {
-        resolve(new Response(true, response));
-      })
-      .catch((error) => {
-        const response = error.response ? error.response : {
-          status: false,
-          data: {
-            errors: ['There was a network error. Please check your internet connection.'],
-          },
-        };
-        reject(new Response(false, response));
-      });
-  });
+  return axios.get(endpoint).then(resolver).catch(rejector);
+}
+
+export function asyncPost(path, data) {
+  const endpoint = `${apiUrl}/${path}`;
+  return axios.post(endpoint, data).then(resolver).catch(rejector);
 }
