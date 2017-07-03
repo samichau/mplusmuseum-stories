@@ -75,7 +75,7 @@ export default {
           });
       }
 
-      return Promise.resolve(new Response(true));
+      return new Response(true);
     },
     init(context, { category, author, tags }) {
       context.commit('setCategory', category);

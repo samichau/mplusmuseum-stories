@@ -29,35 +29,31 @@ export default {
   },
   actions: {
     init(context, { action, payload }) {
-      return new Promise((resolve, reject) => {
-        const sitePromise = !context.state.initialized
-          ? asyncGet('site-settings/')
-          : Promise.resolve(new Response(true));
+      const sitePromise = !context.state.initialized
+        ? asyncGet('site-settings/')
+        : Promise.resolve(new Response(true));
 
-        const viewPromise = action
-          ? context.dispatch(action, payload, { root: true })
-          : Promise.resolve(new Response(true));
+      const viewPromise = action
+        ? context.dispatch(action, payload, { root: true })
+        : Promise.resolve(new Response(true));
 
-        // We want to avoid fast fail here. If the view specific request
-        // fails, but the site request succeeds, we can instantiate the app
-        // and redirect to the 404 view
-        promiseAllSoftFail([sitePromise, viewPromise]).then((responses) => {
-          const siteResponse = responses[0];
-          const viewResponse = responses[1];
-          if (siteResponse.resolved) {
-            if (siteResponse.data) {
-              context.commit('init', siteResponse.data);
-              context.commit('tags/set', siteResponse.data);
-              resolve(responses);
-            } else if (viewResponse.resolved) {
-              resolve(responses);
-            } else {
-              reject(responses[1]);
-            }
-          } else {
-            reject(siteResponse);
+      // We want to avoid fast fail here. If the view specific request
+      // fails, but the site request succeeds, we can instantiate the app
+      // and redirect to the 404 view
+      return promiseAllSoftFail([sitePromise, viewPromise]).then((responses) => {
+        const siteResponse = responses[0];
+        const viewResponse = responses[1];
+        if (siteResponse.resolved) {
+          if (siteResponse.data) {
+            context.commit('init', siteResponse.data);
+            context.commit('tags/set', siteResponse.data);
+            return responses;
+          } else if (viewResponse.resolved) {
+            return responses;
           }
-        });
+          return Promise.reject(responses[1]);
+        }
+        return Promise.reject(siteResponse);
       });
     },
   },

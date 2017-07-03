@@ -22,7 +22,7 @@ export default {
 
       if (loadedPage) {
         context.commit('activatePage', loadedPage);
-        return Promise.resolve(new Response(true));
+        return new Response(true);
       }
 
       return asyncGet(`pages/${to}/`)
