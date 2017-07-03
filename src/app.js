@@ -16,8 +16,8 @@ export function createApp() {
   sync(store, router);
 
   // Translation helper functions
-  Vue.prototype.$t = val => val[store.state.lang];
-  Vue.prototype.$tt = val => val[store.state.langSecondary];
+  Vue.prototype.$t = val => ((val && typeof val === 'object') ? val[store.state.lang] : '');
+  Vue.prototype.$tt = val => ((val && typeof val === 'object') ? val[store.state.langSecondary] : '');
 
   // create the app instance.
   // here we inject the router, store and ssr context to all child components,
