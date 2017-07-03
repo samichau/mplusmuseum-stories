@@ -10,7 +10,8 @@
         </div>
         <div class="header__section header__section--middle fs-b">
           <div class="header__marquee">
-            <span v-for="marquee of marquees">{{ $t(marquee.content) }}</span>
+            <span v-for="(marquee, i) of marquees"
+            :key="i">{{ $t(marquee.content) }}</span>
           </div>
         </div>
         <div class="header__section header__section--right header__icons">

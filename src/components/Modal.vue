@@ -4,7 +4,8 @@
       <div class="modal__content shadow">
         <h2 class="modal__title fs-m">{{ title }}</h2>
         <div class="modal__message fs-b">{{ message }}</div>
-        <button v-for="btn of buttons" class="modal__button button button--flat button--accent fs-s">{{ btn }}</button>
+        <button v-for="(btn, i) of buttons" :key="i"
+        class="modal__button button button--flat button--accent fs-s">{{ btn }}</button>
       </div>
     </div>
   </transition>

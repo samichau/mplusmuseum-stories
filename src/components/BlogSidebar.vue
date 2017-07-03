@@ -28,8 +28,8 @@
     <div class="blog-sidebar__section">
       <h3 class="blog-sidebar__header">{{ $t(t.blog.other) }}</h3>
       <ul class="blog-sidebar__list">
-        <li v-for="link of links">
-          <a :href="link.url" target="_blank" v-text="$t(link.title)"></a>
+        <li v-for="(link, i) of links" :key="i">
+          <a :href="link.url" target="_blank" v-html="$t(link.title)"></a>
         </li>
       </ul>
     </div>
