@@ -28,7 +28,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-param-reassign': 0,
     'no-underscore-dangle': 0,
-    'no-console': 0,
+    'no-console': process.env.NODE_ENV === 'production' ? 1 : 0,
     'import/prefer-default-export': "off",
   },
   'globals': {
