@@ -48,9 +48,7 @@ export default {
       this.$nextTick(() => {
         if (this.validated) {
           window.bc(this.$refs.media);
-          this.player = window.videojs(this.$refs.media, {}, () => {
-            console.log(this.player);
-          });
+          this.player = window.videojs(this.$refs.media);
         }
       });
     });
