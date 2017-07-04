@@ -119,16 +119,16 @@ function render(req, res) {
     if (err) {
       return handleError(err);
     }
+
     if (context.state.route.name === 'not-found' && context.state.site.initialized) {
       res.status(404);
+      return res.end(html);
     }
+
     res.end(html);
-    if (cacheable) {
-      microCache.set(req.url, html);
-    }
-    if (!isProd) {
-      console.log(`whole request: ${Date.now() - s}ms`);
-    }
+    if (cacheable) microCache.set(req.url, html);
+    if (!isProd) console.log(`whole request: ${Date.now() - s}ms`);
+    return true;
   });
 }
 

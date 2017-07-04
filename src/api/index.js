@@ -11,8 +11,16 @@ export class Response {
   }
 }
 
+function validateResponse(response) {
+  return !!response.data.generated;
+}
+
 function resolver(response) {
-  return new Response(true, response);
+  // Even if we got a 200 OK response, the response data may not be valid. For
+  // example it may not be valid JSON. All API requests should return a valid
+  // JSON object with a 'generated' property, so check if that exists ...
+  if (validateResponse(response)) return new Response(true, response);
+  return Promise.reject(response);
 }
 
 function rejector(error) {

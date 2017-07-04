@@ -41,7 +41,13 @@ export default context => new Promise((resolve, reject) => {
       // store to pick-up the server-side state without having to duplicate
       // the initial data fetching on the client.
       context.state = store.state;
-      if (response.length > 1 && response[0].status === 200 && response[1].status === 404) {
+
+      // If the site data was retrieved but the view data wasn't, we initialize
+      // the app but show the 404 view as we can't display the requested route
+      if (response.length > 1
+        && response[0].resolved
+        && response[0].status === 200
+        && !response[1].resolved) {
         router.replace({ name: 'not-found', params: { lang: locales[0] } });
       }
       resolve(app);
