@@ -126,6 +126,48 @@ export default {
   render(h) {
     let items = [];
 
+    const createLinks = () => h('div', { class: 'blog-notice__social social-links fs-s' },
+      this.$store.getters['site/socialLinkables'].map((platform) => {
+        const img = h('img', {
+          domProps: {
+            src: platform.icon,
+            alt: this.$t(platform.title),
+          },
+        });
+        return h('a', {
+          key: platform.name,
+          domProps: {
+            href: platform.link,
+            target: '_blank',
+          },
+        }, [img]);
+      }),
+    );
+
+    const createNewsletter = () => h('newsletter-block', {
+      class: 'blog-notice__form',
+      props: {
+        label: this.$t(this.t.newsletter.placeholder),
+        name: 'notice-newsletter',
+        button: this.$t(this.t.newsletter.subscribe),
+      },
+    });
+
+    const createNotice = (index) => {
+      const notice = this.$store.state.blog.notices[index];
+      if (!notice) return false;
+      return h('blog-notice', {}, [
+        h('div', {
+          class: 'blog-notice__content',
+          domProps: {
+            innerHTML: this.$t(notice.content),
+          },
+        }),
+        notice.newsletter ? createNewsletter() : false,
+        notice.social ? createLinks() : false,
+      ]);
+    };
+
     if (this.filtered) {
       if (this.postsFiltered.length) {
         // If we want to show filtered posts and we have some to show ...
@@ -139,13 +181,13 @@ export default {
           }, this.morePostsText)
           : false;
 
-        // Create the posts list, for now we don't put CTA elements here
+        // Create the posts list, for now we don't put notice elements here
         items = [
           h('blog-header'),
           this.postsFiltered.map(post =>
             h('blog-post', {
               class: 'list-complete-item',
-              key: `unfiltered-${post.name}`,
+              key: `filtered-${post.name}`,
               props: {
                 post,
               },
@@ -176,61 +218,24 @@ export default {
         }, this.morePostsText)
         : false;
 
-      // Create the posts list, loop through the posts list and insert CTA elements
+      // Create the posts list by looping through the posts and inserting
+      // notice elements where appropriate
+      const notices = this.$store.state.blog.notices;
       items = [this.posts.map((post, i) => {
         const content = [];
-        if (i === 0) {
-          content.push(h('sticky', {
-            props: {
-              fadeOut: true,
-            },
-          }, [
-            h('blog-notice', {
-            }, [
-              h('div', {
-                class: 'blog-notice__content',
-                domProps: {
-                  innerHTML: this.$t(this.$store.state.blog.cta),
-                },
-              }),
-              h('newsletter-block', {
-                class: 'blog-notice__form',
-                props: {
-                  label: this.$t(this.t.newsletter.placeholder),
-                  name: 'notice-newsletter',
-                  button: this.$t(this.t.newsletter.subscribe),
-                },
-              }),
-              h('div', { class: 'blog-notice__social social-links fs-s' },
-                this.$store.getters['site/socialLinkables'].map((platform) => {
-                  const img = h('img', {
-                    domProps: {
-                      src: platform.icon,
-                      alt: this.$t(platform.title),
-                    },
-                  });
-                  return h('a', {
-                    key: platform.name,
-                    domProps: {
-                      href: platform.link,
-                      target: '_blank',
-                    },
-                  }, [img]);
-                }),
-              ),
-            ]),
-          ]));
-        } else if (i % 10 === 0) {
-          const noticeContent = this.$t(this.$store.state.blog.cta);
-          content.push(h('blog-notice', {
-          }, [
-            h('div', {
-              class: 'blog-notice__content',
-              domProps: {
-                innerHTML: noticeContent,
+        const notice = notices[i];
+        if (notice) {
+          if (i === 0) {
+            content.push(h('sticky', {
+              props: {
+                fadeOut: true,
               },
-            }),
-          ]));
+            }, [
+              createNotice(i),
+            ]));
+          } else {
+            content.push(createNotice(i));
+          }
         }
 
         content.push(h('blog-post', {

@@ -69,6 +69,10 @@ export default {
         margin-bottom: 0;
       }
     }
+    a {
+      color: @white;
+      text-decoration: underline;
+    }
   }
   &__social {
     margin: 1.5rem auto 0;
