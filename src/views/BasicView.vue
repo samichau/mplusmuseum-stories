@@ -62,16 +62,16 @@ export default {
   }
 }
 .page--fix-banner {
-  padding-top: 100%;
+  margin-top: 100%;
   position: relative;
   .mq-sm({
-    padding-top: 80%;
+    margin-top: 80%;
   });
   .mq-md({
-    padding-top: 60%;
+    margin-top: 60%;
   });
   .mq-lg({
-    padding-top: 40%;
+    margin-top: 40%;
   });
   .banner {
     position: fixed;

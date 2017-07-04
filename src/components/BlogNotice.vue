@@ -70,6 +70,9 @@ export default {
       }
     }
   }
+  &__social {
+    margin: 1.5rem auto 0;
+  }
   form {
     text-align: left;
     width: 100%;
