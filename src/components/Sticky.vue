@@ -25,10 +25,13 @@ export default {
   },
   mounted() {
     this.stick();
+    // Add load event listener as fix for iOS incorrectly calculating element height
+    window.addEventListener('load', this.stick, { once: true });
     window.addEventListener('resize', this.stick);
     if (this.fadeOut) window.addEventListener('scroll', this.handleScroll);
   },
   destroyed() {
+    window.removeEventListener('load', this.stick);
     window.removeEventListener('resize', this.stick);
     if (this.fadeOut) window.removeEventListener('scroll', this.handleScroll);
   },
