@@ -18,19 +18,6 @@
   </footer>
 </template>
 
-<script>
-import { routes as translations } from '../locale/translations';
-
-export default {
-  computed: {
-    terms() {
-      return this.$t(translations.terms);
-    },
-  },
-};
-</script>
-
-
 <style lang="less">
 @import "../less/variables.less";
 

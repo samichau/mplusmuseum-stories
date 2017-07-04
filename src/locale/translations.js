@@ -8,18 +8,3 @@ export const site = {
     tc: 'M+ Stories fallback description (Traditional Chinese)',
   },
 };
-
-export const routes = {
-  blog: {
-    en: 'Blog',
-    tc: '訊',
-  },
-  about: {
-    en: 'About',
-    tc: '蓋',
-  },
-  terms: {
-    en: 'Terms & Conditions',
-    tc: '條款和條件',
-  },
-};
