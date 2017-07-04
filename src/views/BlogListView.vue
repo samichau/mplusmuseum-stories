@@ -196,7 +196,7 @@ export default {
               h('newsletter-block', {
                 class: 'blog-notice__form',
                 props: {
-                  label: this.$t(this.t.newsletter.signUp),
+                  label: this.$t(this.t.newsletter.placeholder),
                   name: 'notice-newsletter',
                   button: this.$t(this.t.newsletter.subscribe),
                 },
