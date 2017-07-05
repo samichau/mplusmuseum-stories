@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { youTube } from '../locale';
+
 export default {
   props: {
     content: {
@@ -17,7 +19,7 @@ export default {
   },
   computed: {
     lang() {
-      return this.$store.state.lang === 'tc' ? 'zh-hk' : 'en';
+      return youTube[this.$store.state.lang];
     },
   },
 };
