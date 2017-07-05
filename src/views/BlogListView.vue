@@ -8,11 +8,11 @@ import NewsletterBlock from '../components/NewsletterBlock.vue';
 import Tag from '../components/Tag.vue';
 import Marq from '../components/Marquee.vue';
 import Sticky from '../components/Sticky.vue';
-import metaMixin from '../util/meta';
+import meta from '../util/meta';
 import { fetch } from '../util/fetch';
 
 export default {
-  mixins: [metaMixin],
+  mixins: [meta],
   meta() {
     return {
       title: this.$t(this.$store.state.blog.meta.title),

@@ -6,7 +6,7 @@ import 'es6-promise/auto';
 import objectFitImages from 'object-fit-images';
 import { createApp } from './app';
 import locales from './locale';
-import { setTitleClient } from './util/meta';
+import { setClient } from './util/meta';
 import ProgressBar from './components/ProgressBar.vue';
 import Modal from './components/Modal.vue';
 
@@ -82,7 +82,7 @@ router.onReady(() => {
     // e.g. example.com/en/page/ => example.com/de/page/
     if (newLang !== prevLang && _includes(locales, newLang)) {
       store.commit('setLanguage', { primary: newLang, secondary: prevLang });
-      setTitleClient(to.matched[0].instances.default);
+      setClient(to.matched[0].instances.default);
     }
     const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _);
     // if (!activated.length) {

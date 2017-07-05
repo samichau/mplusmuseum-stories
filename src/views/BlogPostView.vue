@@ -1,7 +1,7 @@
 <template>
   <blog-view>
     <blog-post class="list-complete-item"
-    :post="$store.state.blog.single"></blog-post>
+    :post="post"></blog-post>
     <router-link :to="{ name: 'blog' }" class="blog__button-wide">Return to Blog</router-link>
   </blog-view>
 </template>
@@ -9,20 +9,26 @@
 <script>
 import BlogView from './BlogView.vue';
 import BlogPost from '../components/BlogPost.vue';
-import metaMixin from '../util/meta';
+import meta from '../util/meta';
 // import locales from '../locale';
 import { fetch } from '../util/fetch';
 
 export default {
-  mixins: [metaMixin],
+  mixins: [meta],
   meta() {
     return {
-      title: this.$t(this.$store.state.blog.single.title),
-      description: this.$t(this.$store.state.blog.single.desc),
+      title: this.$t(this.post.title),
+      description: this.$t(this.post.desc),
+      image: this.post.images.length ? this.post.images[0].src : '',
     };
   },
   asyncData({ store, route }) {
     return fetch(store, 'blog/initSingle', route.params.name);
+  },
+  computed: {
+    post() {
+      return this.$store.state.blog.single;
+    },
   },
   components: {
     BlogView,

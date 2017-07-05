@@ -5,15 +5,16 @@
 <script>
 import Basic from './BasicView.vue';
 import Documentation from './DocumentView.vue';
-import metaMixin from '../util/meta';
+import meta from '../util/meta';
 import { fetch } from '../util/fetch';
 
 export default {
-  mixins: [metaMixin],
+  mixins: [meta],
   meta() {
     return {
       title: this.$t(this.page.title),
       description: this.$t(this.page.desc),
+      image: this.page.banner ? this.page.banner.images[0].src : '',
     };
   },
   asyncData({ store, route }) {

@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import metaMixin from '../util/meta';
+import meta from '../util/meta';
 import { fetch } from '../util/fetch';
 
 export default {
-  mixins: [metaMixin],
+  mixins: [meta],
   meta() {
     return {
       title: '404',

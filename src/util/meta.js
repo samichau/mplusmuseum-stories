@@ -1,49 +1,50 @@
 import _unescape from 'lodash/unescape';
 import { site } from '../locale/translations';
+import { openGraph } from '../locale';
 
 function getMeta(vm) {
   const metaObj = {};
-  const siteTitle = site.title[vm.$store.state.lang];
+  const lang = vm.$store.state.lang;
+  const siteTitle = site.title[lang];
   let { meta } = vm.$options;
 
   meta = typeof meta === 'function'
     ? meta.call(vm)
     : meta;
 
-  metaObj.title = meta.title
-    ? `${_unescape(meta.title)} - ${siteTitle}`
-    : siteTitle;
-
-  metaObj.description = meta.description
-    ? `${_unescape(meta.description)}`
-    : site.description[vm.$store.state.lang];
+  metaObj.title = meta.title ? `${_unescape(meta.title)} - ${siteTitle}` : siteTitle;
+  metaObj.description = meta.description ? `${_unescape(meta.description)}` : site.description[lang];
+  metaObj.image = meta.image || '';
+  metaObj.url = vm.$store.state.site.url + vm.$store.state.route.path;
+  metaObj.lang = openGraph[lang];
 
   return metaObj;
 }
 
-export function setTitleClient(vm) {
+export function setClient(vm) {
   const meta = getMeta(vm);
-  if (meta.title) {
-    document.title = meta.title;
-  }
+  document.title = meta.title;
 }
 
-export function setTitleServer(vm) {
+export function setServer(vm) {
   const meta = getMeta(vm);
-  if (meta.title) vm.$ssrContext.title = meta.title;
-  // Description only needed on SSR
-  if (meta.description) vm.$ssrContext.description = meta.description;
+  vm.$ssrContext.title = meta.title;
+  // These properties only need to update when SSR
+  vm.$ssrContext.description = meta.description;
+  vm.$ssrContext.image = meta.image;
+  vm.$ssrContext.url = meta.url;
+  vm.$ssrContext.lang = meta.lang;
 }
 
 const serverMetaMixin = {
   created() {
-    setTitleServer(this);
+    setServer(this);
   },
 };
 
 const clientMetaMixin = {
   mounted() {
-    setTitleClient(this);
+    setClient(this);
   },
 };
 
