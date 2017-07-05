@@ -4,14 +4,14 @@
     <div class="suggested__content">
       <router-link class="suggested__item"
       v-for="item of items"
-      :key="item.name"
-      :to="{ name: 'blog-post', params: { name: item.name } }">
+      :key="item.link.name"
+      :to="{ name: item.link.name, params: item.link.params }">
         <div class="suggested__image">
           <img v-if="item.image[0]" :src="item.image[0].src" :alt="$t(item.image[0].alt)">
           <img class="suggested__placeholder" v-else src="../assets/img/logo-stories-stack.svg" alt="M+ Stories Logo">
         </div>
         <div class="suggested__title">
-          <span class="lang-primary" v-html="$t(item.title)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(item.title)"></span>
+          <span class="lang-primary" v-html="$t(item.link.content)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(item.link.content)"></span>
         </div>
       </router-link>
     </div>
