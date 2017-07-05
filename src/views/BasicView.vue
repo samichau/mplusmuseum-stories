@@ -61,24 +61,4 @@ export default {
     }
   }
 }
-.page--fix-banner {
-  margin-top: 100%;
-  position: relative;
-  .mq-sm({
-    margin-top: 80%;
-  });
-  .mq-md({
-    margin-top: 60%;
-  });
-  .mq-lg({
-    margin-top: 40%;
-  });
-  .banner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-  }
-}
 </style>

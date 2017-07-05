@@ -31,49 +31,71 @@ export default {
 
 
 <style lang="less">
-  @import "../less/variables.less";
+@import "../less/variables.less";
 
-  .banner {
-    padding-top: 100%;
-    position: relative;
-    .mq-sm({
-      padding-top: 80%;
-    });
-    .mq-md({
-      padding-top: 60%;
-    });
-    .mq-lg({
-      padding-top: 40%;
-    });
-    &__text, &__media {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+.banner {
+  padding-top: 95%;
+  position: relative;
+  .mq-sm({
+    padding-top: 70%;
+  });
+  .mq-md({
+    padding-top: 55%;
+  });
+  .mq-lg({
+    padding-top: 40%;
+  });
+  &__text, &__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &__text {
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    color: @white;
+    padding: 0 1rem;
+  }
+  &__media {
+    z-index: 1;
+    background: @black;
+    img {
       height: 100%;
-    }
-    &__text {
-      z-index: 2;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.5);
-      color: @white;
-      padding: 0 1rem;
-    }
-    &__media {
-      z-index: 1;
-      background: @black;
-      img {
-        height: 100%;
-        width: 100%;
-        object-position: 50% 50%;
-        object-fit: cover;
-        font-family: 'object-fit: cover;';
-      }
+      width: 100%;
+      object-position: 50% 50%;
+      object-fit: cover;
+      font-family: 'object-fit: cover;';
     }
   }
+}
+
+.page--fix-banner {
+  margin-top: 95%;
+  position: relative;
+  .mq-sm({
+    margin-top: 70%;
+  });
+  .mq-md({
+    margin-top: 55%;
+  });
+  .mq-lg({
+    margin-top: 40%;
+  });
+  .banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+}
+
 </style>
 
