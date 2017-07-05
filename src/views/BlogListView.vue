@@ -67,6 +67,7 @@ export default {
     ...mapState({
       t: s => s.site.translations,
       query: s => s.route.query,
+      notices: s => s.blog.notices,
       posts: s => s.blog.posts,
       postsRemaining: s => s.blog.postsRemaining,
       postsFiltered: s => s.blog.postsFiltered,
@@ -153,18 +154,17 @@ export default {
       },
     });
 
-    const createNotice = (index) => {
-      const notice = this.$store.state.blog.notices[index];
-      if (!notice) return false;
+    const createNotice = (data) => {
+      if (!data) return false;
       return h('blog-notice', {}, [
         h('div', {
           class: 'blog-notice__content',
           domProps: {
-            innerHTML: this.$t(notice.content),
+            innerHTML: this.$t(data.content),
           },
         }),
-        notice.newsletter ? createNewsletter() : false,
-        notice.social ? createLinks() : false,
+        data.newsletter ? createNewsletter() : false,
+        data.social ? createLinks() : false,
       ]);
     };
 
@@ -220,21 +220,20 @@ export default {
 
       // Create the posts list by looping through the posts and inserting
       // notice elements where appropriate
-      const notices = this.$store.state.blog.notices;
       items = [this.posts.map((post, i) => {
         const content = [];
-        const notice = notices[i];
-        if (notice) {
+        const noticeData = this.notices[i];
+        if (noticeData) {
           if (i === 0) {
             content.push(h('sticky', {
               props: {
                 fadeOut: true,
               },
             }, [
-              createNotice(i),
+              createNotice(noticeData),
             ]));
           } else {
-            content.push(createNotice(i));
+            content.push(createNotice(noticeData));
           }
         }
 
