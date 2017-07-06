@@ -20,41 +20,22 @@ export default {
     };
   },
   asyncData({ store, route }) {
-    const config = {
+    const selectors = {
       meta: false,
-      filters: {
-        category: false,
-        author: false,
-        tags: [],
-      },
-      selectors: [
-        { name: 'expanded', value: 2 },
-        { name: 'collapsed', value: 4 },
-      ],
+      expanded: 2,
+      collapsed: 4,
+      tags: [],
     };
 
-    if (!store.state.blog.initialized.meta) {
-      config.meta = true;
-      config.selectors.push({ name: 'meta', value: true });
-    }
-
+    if (!store.state.blog.initialized.meta) selectors.meta = true;
     if (route.query) {
-      if (route.query.author) {
-        config.filters.author = route.query.author;
-        config.selectors.push({ name: 'author', value: route.query.author });
-      }
-      if (route.query.category) {
-        config.filters.category = route.query.category;
-        config.selectors.push({ name: 'category', value: route.query.category });
-      }
-      if (route.query.tag) {
-        config.filters.tags = route.query.tag;
-        config.selectors.push({ name: 'tags', value: route.query.tag });
-      }
+      if (route.query.author) selectors.author = route.query.author;
+      if (route.query.category) selectors.category = route.query.category;
+      if (route.query.tag) selectors.tags = route.query.tag;
     }
 
-    return fetch(store, 'blog/asyncInit', config).then((response) => {
-      store.dispatch('blog/init', config.filters);
+    return fetch(store, 'blog/asyncInit', selectors).then((response) => {
+      store.dispatch('blog/init', selectors);
       return response;
     });
   },
@@ -90,15 +71,15 @@ export default {
     getMore(currentPosts, items, remaining) {
       if (this.loadingPosts) return false;
       const q = this.query;
-      const selectors = [
-        { name: 'offset', value: currentPosts.length },
-        { name: 'expanded', value: 0 },
-        { name: 'collapsed', value: 6 },
-      ];
+      const selectors = {
+        offset: currentPosts.length,
+        expanded: 0,
+        collapsed: 6,
+      };
       if (q) {
-        if (q.author) selectors.push({ name: 'author', value: q.author });
-        if (q.category) selectors.push({ name: 'category', value: q.category });
-        if (q.tag) selectors.push({ name: 'tags', value: q.tag });
+        if (q.author) selectors.author = q.author;
+        if (q.category) selectors.category = q.category;
+        if (q.tag) selectors.tags = q.tag;
       }
       this.loadingPosts = true;
       this.$bar.start();

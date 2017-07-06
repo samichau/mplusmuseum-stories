@@ -13,12 +13,6 @@ function addCategoryProperties(category) {
   return category;
 }
 
-function selectorsToString(selectors) {
-  return selectors
-    .map(selector => `${selector.name}=${selector.value}`)
-    .join('&');
-}
-
 export default {
   namespaced: true,
 
@@ -54,22 +48,22 @@ export default {
   },
 
   actions: {
-    asyncInit(context, { meta, filters, selectors }) {
+    asyncInit(context, selectors) {
       let doAsync = true;
       let items = 'posts';
 
       // IF filter present THEN get filtered posts via async
       // ELSE IF already unfiltered in store THEN show unfiltered
-      if (filters.author || filters.category || filters.tags.length) {
+      if (selectors.author || selectors.category || selectors.tags.length) {
         items = 'postsFiltered';
       } else if (context.state.initialized.posts) {
         doAsync = false;
       }
 
       if (doAsync) {
-        return asyncGet(`blog/posts?${selectorsToString(selectors)}`)
+        return asyncGet('blog/posts/', selectors)
           .then((response) => {
-            if (meta) context.commit('initMeta', response.data);
+            if (selectors.meta) context.commit('initMeta', response.data);
             context.commit('init', { items, posts: response.data.posts });
             return response;
           });
@@ -87,25 +81,25 @@ export default {
       context.commit('site/tags/setActive', tags, { root: true });
     },
     getPosts(context, { items, remaining, selectors }) {
-      return asyncGet(`blog/posts?${selectorsToString(selectors)}`)
+      return asyncGet('blog/posts/', selectors)
         .then(({ data }) => {
           context.commit('addPosts', { items, remaining, posts: data.posts });
         });
     },
     expandPost(context, post) {
       const postSections = !post.sections
-        ? asyncGet(`blog/posts/${post.name}`)
+        ? asyncGet(`blog/posts/${post.name}/`)
         : Promise.resolve(new Response(true).setData({ sections: false }));
       return postSections
         .then(({ data }) => {
           context.commit('expandPost', { post, sections: data.sections });
         });
     },
-    initSingle(context, slug) {
-      let endpoint = `blog/posts/${slug}`;
+    initSingle(context, name) {
+      let endpoint = `blog/posts/${name}/`;
       if (!context.state.initialized.meta) endpoint += '?meta=true';
 
-      const postData = !(context.state.single && context.state.single.name === slug)
+      const postData = !(context.state.single && context.state.single.name === name)
         ? asyncGet(endpoint)
         : Promise.resolve(new Response(true, { status: false, data: context.state.single }));
 

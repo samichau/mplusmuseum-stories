@@ -33,9 +33,9 @@ function rejector(error) {
   return Promise.reject(new Response(false, response));
 }
 
-export function asyncGet(path) {
+export function asyncGet(path, params = {}) {
   const endpoint = `${apiUrl}/${path}`;
-  return axios.get(endpoint).then(resolver).catch(rejector);
+  return axios.get(endpoint, { params }).then(resolver).catch(rejector);
 }
 
 export function asyncPost(path, data) {
