@@ -14,28 +14,27 @@ You will need node and either yarn or npm installed to run the app. Due to the u
 
 First create a new .env file in the project root directory based on the .env.example file and define your API endpoint.
 
-To install the project dependencies use either of the following commands:
-```
-$ yarn
-# or
-$ npm install
+To install the project dependencies use the following commands:
+``` bash
+yarn # or npm install
 ```
 
 ## Using the Tools
 
+
 Serve the app in development mode at localhost:8080.
-```
-$ yarn run dev
+``` bash
+yarn run dev # or npm run dev 
 ```
 
 Run build processes for production.
-```
-$ yarn run build
+``` bash
+yarn run build # or npm run dev
 ```
 
 Start the production application.
-```
-$ yarn start
+``` bash
+yarn start # or npm start
 ```
 
 In production, the use of [pm2](http://pm2.keymetrics.io/) to run the application is recommended.
