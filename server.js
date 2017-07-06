@@ -4,6 +4,7 @@ const LRU = require('lru-cache');
 const express = require('express');
 const favicon = require('serve-favicon');
 const compression = require('compression');
+const axios = require('axios');
 
 const resolve = file => path.resolve(__dirname, file);
 const { createBundleRenderer } = require('vue-server-renderer');
@@ -79,8 +80,17 @@ const microCache = LRU({
 // headers.
 const isCacheable = req => useMicroCache;
 
+let previewQuery = false;
+
+axios.interceptors.request.use((config) => {
+  if (previewQuery) config.params.p = previewQuery;
+  return config;
+});
+
 function render(req, res) {
   const s = Date.now();
+
+  previewQuery = req.query.p ? req.query.p : false;
 
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Server', serverInfo);
@@ -94,7 +104,7 @@ function render(req, res) {
       // Render Error Page or Redirect
       res.status(500).end('500 | Internal Server Error');
       console.error(`error during render : ${req.url}`);
-      console.error(err.stack);
+      console.error(err);
     }
   };
 
