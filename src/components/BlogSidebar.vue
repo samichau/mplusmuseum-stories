@@ -1,6 +1,6 @@
 <template>
   <aside class="blog-sidebar">
-    <div class="blog-sidebar__section">
+    <div class="blog-sidebar__section" v-if="categories.length">
       <h3 class="blog-sidebar__header">{{ $t(t.site.categories) }}</h3>
       <ul class="blog-categories blog-sidebar__list">
         <li class="blog-category"
@@ -17,7 +17,7 @@
         </li>
       </ul>
     </div>
-    <div class="blog-sidebar__section">
+    <div class="blog-sidebar__section" v-if="popularTags.length">
       <h3 class="blog-sidebar__header">{{ $t(t.blog.popularTags) }}</h3>
       <div class="blog-sidebar__tags">
         <tag v-for="tag of popularTags"
@@ -25,7 +25,7 @@
         :tag="tag"></tag>
       </div>
     </div>
-    <div class="blog-sidebar__section">
+    <div class="blog-sidebar__section" v-if="links.length">
       <h3 class="blog-sidebar__header">{{ $t(t.blog.other) }}</h3>
       <ul class="blog-sidebar__list">
         <li v-for="(link, i) of links" :key="i">
