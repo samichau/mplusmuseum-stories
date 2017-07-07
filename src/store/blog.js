@@ -17,26 +17,22 @@ export default {
   namespaced: true,
 
   state: {
-    meta: false,
-    notices: [],
-    single: false,
-    posts: [],
-    postsRemaining: 0,
-    postsFiltered: [],
-    postsFilteredRemaining: 0,
-    categories: [],
-    tags: [],
-    links: [],
     initialized: {
       meta: false,
       posts: false,
       postsFiltered: false,
     },
+    posts: [],
+    postsRemaining: 0,
+    postsFiltered: [],
+    postsFilteredRemaining: 0,
+    section: {},
+    single: false,
   },
 
   getters: {
     activeCategory(state) {
-      return _find(state.categories, c => c.active) || false;
+      return _find(state.section.categories, c => c.active) || false;
     },
     filtered(state, getters, rootState, rootGetters) {
       const author = rootGetters['site/activeAuthor'];
@@ -63,8 +59,8 @@ export default {
       if (doAsync) {
         return asyncGet('blog/posts/', selectors)
           .then((response) => {
-            if (selectors.meta) context.commit('initMeta', response.data);
-            context.commit('init', { items, posts: response.data.posts });
+            if (selectors.meta) context.commit('initSectionData', response.data);
+            context.commit('initPosts', { items, posts: response.data.posts });
             return response;
           });
       }
@@ -106,25 +102,19 @@ export default {
       return postData
         .then((response) => {
           context.commit('setPost', response.data);
-          if (!context.state.initialized.meta) context.commit('initMeta', response.data);
+          if (!context.state.initialized.meta) context.commit('initSectionData', response.data.sectionData);
           return response;
         });
     },
   },
 
   mutations: {
-    initMeta(state, data) {
-      state.meta = {
-        title: data.title,
-        description: data.desc,
-      };
-      state.categories = data.section.categories.map(category => addCategoryProperties(category));
-      state.tags = data.section.tags;
-      state.links = data.section.links;
+    initSectionData(state, data) {
+      data.categories = data.categories.map(category => addCategoryProperties(category));
+      state.section = data;
       state.initialized.meta = true;
-      state.notices = data.notices;
     },
-    init(state, { items, posts }) {
+    initPosts(state, { items, posts }) {
       state[items] = posts.items.map(post => addPostProperties(post));
       state[`${items}Remaining`] = posts.remaining;
       state.initialized[items] = true;
@@ -146,7 +136,7 @@ export default {
       post.truncated = false;
     },
     setCategory(state, categoryName) {
-      state.categories.forEach((category) => {
+      state.section.categories.forEach((category) => {
         category.active = category.name === categoryName;
       });
     },

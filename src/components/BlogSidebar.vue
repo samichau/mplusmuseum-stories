@@ -44,10 +44,10 @@ export default {
   computed: {
     ...mapState({
       t: s => s.site.translations,
-      links: s => s.blog.links,
-      blogTags: s => s.blog.tags,
+      links: s => s.blog.section.links,
+      blogTags: s => s.blog.section.tags,
       siteTags: s => s.site.tags.items,
-      categories: s => s.blog.categories,
+      categories: s => s.blog.section.categories,
     }),
     popularTags() {
       return this.siteTags

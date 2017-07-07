@@ -15,8 +15,8 @@ export default {
   mixins: [meta],
   meta() {
     return {
-      title: this.$t(this.$store.state.blog.meta.title),
-      description: this.$t(this.$store.state.blog.meta.description),
+      title: this.$t(this.$store.state.blog.section.title),
+      description: this.$t(this.$store.state.blog.section.desc),
     };
   },
   asyncData({ store, route }) {
@@ -48,7 +48,7 @@ export default {
     ...mapState({
       t: s => s.site.translations,
       query: s => s.route.query,
-      notices: s => s.blog.notices,
+      notices: s => s.blog.section.notices,
       posts: s => s.blog.posts,
       postsRemaining: s => s.blog.postsRemaining,
       postsFiltered: s => s.blog.postsFiltered,

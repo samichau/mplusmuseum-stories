@@ -21,7 +21,8 @@ export default {
       return this.$t(this.$store.state.site.translations.blog.byline);
     },
     category() {
-      return _find(this.$store.state.blog.categories, category => category.id === this.categoryId);
+      return _find(this.$store.state.blog.section.categories,
+        category => category.id === this.categoryId);
     },
     author() {
       return _find(this.$store.state.site.authors, author => author.id === this.authorId);
