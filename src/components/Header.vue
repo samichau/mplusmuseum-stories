@@ -5,7 +5,7 @@
         <div class="header__section header__section--left">
           <router-link :to="{ name: 'home' }">
             <span class="sr-only">Go to M+ Homepage</span>
-            <img src="../assets/img/logo-stories-stack.svg" alt="M+ Stories Logo">
+            <img src="../assets/img/logo-stories-stack.svg" alt="M+ Stories Logo" @click="scrollToTop">
           </router-link>
         </div>
         <div class="header__section header__section--middle fs-b">
@@ -63,6 +63,9 @@ export default {
     }),
   },
   methods: {
+    scrollToTop() {
+      if (this.$store.state.route.name === 'blog') window.scrollTo(0, 0);
+    },
     toggleDropdown() {
       this.dropdown = !this.dropdown;
     },
