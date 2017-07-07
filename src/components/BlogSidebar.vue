@@ -1,5 +1,6 @@
 <template>
   <aside class="blog-sidebar">
+    <div class="blog-sidebar__section" v-if="blurb" v-html="$t(blurb)"></div>
     <div class="blog-sidebar__section" v-if="categories.length">
       <h3 class="blog-sidebar__header">{{ $t(t.site.categories) }}</h3>
       <ul class="blog-categories blog-sidebar__list">
@@ -48,6 +49,7 @@ export default {
       blogTags: s => s.blog.section.tags,
       siteTags: s => s.site.tags.items,
       categories: s => s.blog.section.categories,
+      blurb: s => s.blog.section.blurb.html,
     }),
     popularTags() {
       return this.siteTags
@@ -74,7 +76,7 @@ export default {
         margin-bottom: 0;
       }
     }
-    &__header {
+    h1, h2, h3, h4, h5, h6 {
       margin-bottom: 0.25em;
     }
   }

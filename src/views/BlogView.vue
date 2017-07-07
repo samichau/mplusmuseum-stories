@@ -2,10 +2,10 @@
   <main class="blog">
     <div class="header-push"></div>
     <div class="blog__content row">
-      <section class="blog__posts col-sm-9">
+      <section class="blog__posts col-md-9">
         <slot></slot>
       </section>
-      <blog-sidebar class="col-sm-3"></blog-sidebar>
+      <blog-sidebar class="col-md-3"></blog-sidebar>
     </div>
   </main>
 </template>
