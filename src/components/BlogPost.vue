@@ -249,6 +249,9 @@ export default {
     .blog-post {
       &__toggle {
         cursor: pointer;
+        &:hover {
+          color: @accent;
+        }
       }
       &__image {
         cursor: pointer;
