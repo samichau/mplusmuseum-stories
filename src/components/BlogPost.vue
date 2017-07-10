@@ -23,6 +23,11 @@
         :categoryId="post.category"></byline>
         <tags-inline v-if="post.tags.length"
         :tagIds="post.tags"></tags-inline>
+        <div class="blog-post__excerpt fs-b"
+        v-if="post.collapsed && post.excerpt">
+          <div><span v-html="post.excerpt"></span> ...</div>
+          <button class="button--reset" @click.prevent="expand">Read This...</button>
+        </div>
       </div>
     </div>
 
@@ -167,6 +172,12 @@ export default {
   }
   &__aside {
     transform: translate3d(0, 0, 0); // Fix for Chrome on Retina rendering bug;
+  }
+  &__excerpt {
+    margin-top: 0.5em;
+    button {
+      margin-top: 0.5em;
+    }
   }
   &__header {
     background: @white;

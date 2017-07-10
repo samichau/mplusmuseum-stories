@@ -173,6 +173,13 @@ pre {
     background: none;
     box-shadow: none;
   }
+  &--reset {
+    padding: 0;
+    background: none;
+    border: none;
+    color: @accent;
+    font-weight: 400;
+  }
 }
 
 .input-wrap {

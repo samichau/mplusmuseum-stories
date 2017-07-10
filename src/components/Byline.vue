@@ -68,7 +68,7 @@ export default {
 
 <style lang="less">
 .byline {
-  margin: 1rem 0;
+  margin: 0.5em 0;
   a {
     font-weight: 400;
   }
