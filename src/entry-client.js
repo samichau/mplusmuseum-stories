@@ -20,6 +20,11 @@ Vue.prototype.$modal = new Vue(Modal).$mount();
 const modal = Vue.prototype.$modal;
 document.body.appendChild(modal.$el);
 
+function handleError(error) {
+  modal.error(error);
+  bar.finish();
+}
+
 // A global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
   beforeRouteUpdate(to, from, next) {
@@ -36,10 +41,7 @@ Vue.mixin({
         .then(() => {
           bar.finish();
           next();
-        }).catch((error) => {
-          modal.error(error);
-          bar.finish();
-        });
+        }).catch(handleError);
     }
   },
 });
@@ -90,16 +92,11 @@ router.onReady(() => {
       return next();
     }
     bar.start();
-    // Promise.all(activated.map((component) => {
     return Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
       .then(() => {
         bar.finish();
         next();
-      }).catch((error) => {
-        // @TODO Show Modal
-        modal.error(error);
-        bar.finish();
-      });
+      }).catch(handleError);
   });
 
   // actually mount to DOM
