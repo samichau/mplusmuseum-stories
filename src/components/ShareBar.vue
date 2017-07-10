@@ -4,6 +4,10 @@
     <transition-group class="sharebar__items" name="resize" mode="out-in" tag="div">
       <a v-for="(item, i) of items"
         class="sharebar__block"
+        :class="[`sharebar__block--${item.name}`, {
+          'hide--mobile': item.hide.mobile,
+          'hide--desktop': item.hide.desktop,
+        }]"
         @click="share(item.share, $event)"
         :key="item.id"
         :href="item.share | shareLink({

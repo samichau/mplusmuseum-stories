@@ -250,6 +250,14 @@ pre {
   box-shadow: @shadowStyleSmall;
 }
 
+.hide {
+  &--mobile {
+    .mq-sm({
+      display: none !important;
+    });
+  }
+}
+
 /* TRANSITIONS */
 
 .fade-enter-active, .fade-leave-active {
