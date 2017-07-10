@@ -37,5 +37,6 @@ module.exports = {
     'navigator': true,
     'performance': true,
     'alert': true,
+    'location': true,
   }
 }

@@ -15,8 +15,7 @@ const plugins = isProd ? [
     filename: 'common.[chunkhash].css',
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
-]
-: [
+] : [
   new FriendlyErrorsPlugin(),
 ];
 
