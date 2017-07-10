@@ -27,24 +27,35 @@ export default {
     this.stick();
     // Add load event listener as fix for iOS incorrectly calculating element height
     window.addEventListener('load', this.stick, { once: true });
-    window.addEventListener('resize', this.stick);
+    window.addEventListener('resize', this.resize);
     if (this.fadeOut) window.addEventListener('scroll', this.handleScroll);
   },
   destroyed() {
     window.removeEventListener('load', this.stick);
-    window.removeEventListener('resize', this.stick);
+    window.removeEventListener('resize', this.resize);
     if (this.fadeOut) window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
-    stick() {
+    setHeight() {
       const content = this.$slots.default[0].elm; // Only allows for single parent element in slot
       const h = content.offsetHeight
-        + parseInt(window.getComputedStyle(content).marginTop, 10)
-        + parseInt(window.getComputedStyle(content).marginBottom, 10);
+      + parseInt(window.getComputedStyle(content).marginTop, 10)
+      + parseInt(window.getComputedStyle(content).marginBottom, 10);
+      this.$refs.spacer.style.height = `${h}px`;
+    },
+    setWidth() {
       const w = this.$el.offsetWidth;
       this.$refs.content.style.width = `${w}px`;
-      this.$refs.spacer.style.height = `${h}px`;
+    },
+    stick() {
+      this.setWidth();
+      this.setHeight();
       this.stuck = true;
+    },
+    resize() {
+      this.stick();
+      // @TODO Implement more reliable strategy for waiting until DOM has updated
+      setTimeout(this.setHeight, 250);
     },
     handleScroll() {
       const pos = window.scrollY || window.pageYOffset;
