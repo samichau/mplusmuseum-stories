@@ -54,7 +54,7 @@
             <newsletter-block class="blog-post__footer-section input-wrap--inline"
             :label="$t($store.state.site.translations.newsletter.placeholder)"
             :name="`newsletter__${post.name}`"
-            :button="'&rarr;'"></newsletter-block>
+            :button="'&rarr;<span class=\'sr-only\'>Subscribe to the M+ Stories Newsletter</span>'"></newsletter-block>
 
           </div>
         </div>

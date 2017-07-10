@@ -1,7 +1,7 @@
 <template>
 <div id="app" class="fs-b">
   <site-header></site-header>
-  <router-view class="view" :key="key"></router-view>
+  <router-view id="content" class="view" :key="key"></router-view>
   <site-footer></site-footer>
   <transition name="fade" mode="out-in">
     <lightbox v-if="$store.state.lightbox.active"></lightbox>

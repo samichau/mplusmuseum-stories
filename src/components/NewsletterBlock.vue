@@ -1,7 +1,7 @@
 <template>
   <form class="newsletter-block input-wrap" @submit.prevent="submit" enctype="multipart/form-data">
     <input type="hidden" name="lang" :value="lang">
-    <label v-if="!email.length" for="email" v-html="label"></label>
+    <label v-show="!email.length" for="email" v-html="label"></label>
     <input v-model="email" name="email" type="text">
     <div class="button-wrap"><button v-html="button"></button></div>
   </form>
