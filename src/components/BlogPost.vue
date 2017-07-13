@@ -7,15 +7,14 @@
     </div>
     <div class="blog-post__header">
       <div class="blog-post__toggle" @click="expand">
+        <div class="blog-post__prevent" v-if="post.collapsed"></div>
         <div class="blog-post__image"
         v-if="post.images.length"
         @click="openLightbox(post.images[0])">
           <img :src="post.images[0].thumb"
           :alt="$t(post.images[0].alt)">
         </div>
-        <h1 class="blog-post__title fs-l">
-          <span class="lang-primary" v-html="$t(post.title)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(post.title)"></span>
-        </h1>
+        <h1 class="blog-post__title fs-l"><dynamic-title :title="post.title"></dynamic-title></h1>
       </div>
       <div class="blog-post__meta">
         <byline :authorId="post.author"
@@ -82,6 +81,7 @@ import NewsletterBlock from './NewsletterBlock.vue';
 import ShareBar from './ShareBar.vue';
 import Suggested from './Suggested.vue';
 import TagsInline from './TagsInline.vue';
+import DynamicTitle from './DynamicTitle.vue';
 
 export default {
   data() {
@@ -150,6 +150,7 @@ export default {
     ShareBar,
     Suggested,
     TagsInline,
+    DynamicTitle,
   },
 };
 </script>
@@ -255,6 +256,17 @@ export default {
     .edgeOnly({
       top: 0 !important;
     });
+  }
+  &__toggle {
+    position: relative;
+  }
+  &__prevent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
   }
   &--collapsed {
     .blog-post {

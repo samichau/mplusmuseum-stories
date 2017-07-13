@@ -120,8 +120,16 @@ pre {
 .lang-secondary {
   font-weight: 300;
   font-size: 70%;
+  opacity: 0.5;
   &--same {
     font-size: 100%;
+  }
+}
+
+a.lang-secondary {
+  color: inherit;
+  &:hover {
+    color: @accent;
   }
 }
 
