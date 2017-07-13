@@ -49,7 +49,7 @@ export default {
       }
       /* eslint-disable no-undef */
       const formData = new FormData(this.$el);
-      return asyncPost('newsletter/', formData).then(() => {
+      return asyncPost('data/newsletter/', formData).then(() => {
         this.success();
       }).catch(({ data }) => {
         this.error(data.errors[0] || 'There was a network error. Please try again later');

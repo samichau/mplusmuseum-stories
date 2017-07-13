@@ -30,7 +30,7 @@ export default {
   actions: {
     init(context, { action, payload }) {
       const sitePromise = !context.state.initialized
-        ? asyncGet('site-settings/')
+        ? asyncGet('data/site/')
         : Promise.resolve(new Response(true));
 
       const viewPromise = action
