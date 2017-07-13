@@ -88,7 +88,25 @@ axios.interceptors.request.use((config) => {
 });
 
 function render(req, res) {
-  const s = Date.now();
+  const s = !isProd ? Date.now() : false;
+
+  // Set language
+  if (req.path === '' || req.path === '/') {
+    const lang = req.acceptsLanguages(
+      'en',
+      'en-US',
+      'en-GB',
+      'en-AU',
+      'en-NZ',
+      'en-CA',
+      'zh',
+      'zh-HK',
+      'zh-CN',
+      'zh-SG',
+      'zh-TW');
+    if (['en', 'en-US', 'en-GB', 'en-AU', 'en-NZ', 'en-CA'].indexOf(lang) >= 0) req.url = '/en/';
+    else if (['zh', 'zh-HK', 'zh-CN', 'zh-SG', 'zh-TW'].indexOf(lang) >= 0) req.url = '/tc/';
+  }
 
   previewQuery = req.query.p ? req.query.p : false;
 
