@@ -38,6 +38,9 @@ yarn start # or npm start
 ```
 
 In production, the use of [pm2](http://pm2.keymetrics.io/) to run the application is recommended.
+``` bash
+pm2 start npm --name "plus" -- start
+```
 
 ## Built With
 
