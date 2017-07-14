@@ -11,7 +11,7 @@
           <img class="suggested__placeholder" v-else src="../assets/img/mplusstories.svg" alt="M+ Stories Logo">
         </div>
         <div class="suggested__title">
-          <span class="lang-primary" v-html="$t(item.link.content)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(item.link.content)"></span>
+          <span class="lang-primary" v-html="$t(item.link.content)"></span>&ensp;<span class="lang-secondary" v-html="$tt(item.link.content)"></span>
         </div>
       </router-link>
     </div>

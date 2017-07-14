@@ -1,6 +1,6 @@
 <template>
   <span class="dynamic-title">
-    <span class="lang-primary" v-html="$t(title)"></span>&thinsp;<router-link :to="{ params: { lang: $store.state.langSecondary } }" class="lang-secondary" v-html="$tt(title)"></router-link>
+    <span class="lang-primary" v-html="$t(title)"></span>&ensp;<router-link :to="{ params: { lang: $store.state.langSecondary } }" class="lang-secondary" v-html="$tt(title)"></router-link>
   </span>
 </template>
 

@@ -6,7 +6,7 @@
         <div slot="header" class="anchor" id="contents"></div>
         <template slot="content">
           <h1 class="document__title fs-l">
-              <span class="lang-primary" v-html="$t(page.title)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(page.title)"></span>
+              <span class="lang-primary" v-html="$t(page.title)"></span>&ensp;<span class="lang-secondary" v-html="$tt(page.title)"></span>
           </h1>
           <div class="document-item__header">
             <h2 v-html="$t($store.state.site.translations.site.tableOfContents)"></h2>
