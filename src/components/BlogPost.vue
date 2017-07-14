@@ -244,7 +244,7 @@ export default {
     padding: 1rem;
   }
   &__sharebar {
-    position: relative;
+    position: static;
     .mq-sm({
       top: 7rem;
       left: 0;

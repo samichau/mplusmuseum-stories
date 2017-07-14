@@ -39,7 +39,7 @@
 <script>
 function prepareURI(url, { location, title }) {
   url = url.replace('{title}', encodeURIComponent(title));
-  url = url.replace('{location}', location);
+  url = url.replace('{location}', encodeURIComponent(location));
   return url;
 }
 
@@ -82,7 +82,7 @@ export default {
           location: this.url,
           title: this.title,
         });
-        window.open(shareURI, 'Share', `scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,top=${top},left=${left}`);
+        window.open(shareURI, 'Share', `scrollbars=yes,resizable=yes,toolbar=no,location=0,width=550,height=420,top=${top},left=${left}`);
       }
     },
   },
@@ -117,6 +117,7 @@ export default {
 .sharebar {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin: 0 0 1.5rem 0;
   .mq-sm({
     margin: 0;
@@ -125,6 +126,7 @@ export default {
   &__items {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     .mq-sm({
       flex-direction: column;
     });
