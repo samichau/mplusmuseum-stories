@@ -9,10 +9,9 @@
           </router-link>
         </div>
         <div class="header__section header__section--middle fs-b">
-          <div class="header__marquee">
-            <span v-for="(marquee, i) of marquees"
-            :key="i">{{ $t(marquee.content) }}</span>
-          </div>
+          <transition name="swoop" mode="out-in">
+            <div v-if="notices.length" :key="noticeIndex" class="header__notices" v-html="$t(notices[noticeIndex].html)"></div>
+          </transition>
         </div>
         <div class="header__section header__section--right header__icons">
           <button class="header__icon" @click="toggleDropdown">
@@ -41,18 +40,18 @@ import locales from '../locale';
 import Dropdown from './Dropdown.vue';
 
 export default {
+  mounted() {
+    this.startNotice();
+  },
+  destroyed() {
+    this.stopNotice();
+  },
   data() {
     return {
       dropdown: false,
       dropdownPrevent: 'dropdown',
-      marquees: [
-        {
-          content: {
-            en: 'M+ Stories is the new M+ online curatorial platform',
-            tc: 'M +故事是新的M +在線策展平台',
-          },
-        },
-      ],
+      notice: false,
+      noticeIndex: 0,
     };
   },
   computed: {
@@ -60,9 +59,22 @@ export default {
       lang: s => s.lang,
       query: s => s.route.query,
       menuItems: s => s.site.links.menu,
+      notices: s => s.site.descriptors,
     }),
   },
   methods: {
+    advanceNotice() {
+      if (this.noticeIndex >= this.notices.length - 1) this.noticeIndex = 0;
+      else this.noticeIndex += 1;
+    },
+    startNotice() {
+      if (this.notices.length > 1) {
+        this.notice = setInterval(this.advanceNotice, 30000);
+      }
+    },
+    stopNotice() {
+      clearInterval(this.notice);
+    },
     scrollToTop() {
       if (this.$store.state.route.name === 'blog') window.scrollTo(0, 0);
     },
@@ -115,6 +127,7 @@ export default {
     padding: 0.5rem;
     &--left {
       flex-grow: 0;
+      flex-shrink: 0;
       img {
         display: block;
         height: 3rem;
@@ -123,13 +136,19 @@ export default {
     &--middle {
       padding: 0.5rem 1.5rem;
       flex-grow: 1;
+      overflow: hidden;
     }
     &--right {
       flex-grow: 0;
+      flex-shrink: 0;
     }
   }
-  &__marquee {
+  &__notices {
     display: none;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
     .mq-sm({
       display: block;
     });

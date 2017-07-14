@@ -11,6 +11,7 @@ export default {
   state: {
     url: '',
     authors: [],
+    descriptors: [],
     social: [],
     translations: {},
     links: {},
@@ -65,6 +66,7 @@ export default {
       state.authors = data.authors;
       state.social = data.social;
       state.translations = data.translations;
+      state.descriptors = data.descriptors;
       state.initialized = true;
     },
     setAuthor(state, authorName) {

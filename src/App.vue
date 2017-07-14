@@ -283,12 +283,22 @@ a.lang-secondary {
   opacity: 0;
 }
 
-.swoop-enter-active, .swoop-leave-active {
-  transition: all .2s ease;
+.swoop-enter-active {
+  transition: transform .4s ease, .2s opacity ease .2s;
 }
 
-.swoop-enter, .swoop-leave-to {
-  transform: translateY(100%);
+.swoop-leave-active {
+  transition: transform .4s ease, .2s opacity ease;
+}
+
+.swoop-enter {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.swoop-leave-to {
+  transform: translateY(33%);
+  opacity: 0;
 }
 
 /* ACCESSIBILITY */
