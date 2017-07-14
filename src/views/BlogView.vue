@@ -29,6 +29,9 @@ export default {
   &__content {
     max-width: 1280px;
     margin: 0 auto;
+    .mq-md({
+      display: flex;
+    });
   }
   &__loading {
     margin: 1em;
