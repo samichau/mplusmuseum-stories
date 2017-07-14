@@ -5,7 +5,7 @@
         <div class="header__section header__section--left">
           <router-link :to="{ name: 'home' }">
             <span class="sr-only">Go to M+ Homepage</span>
-            <img src="../assets/img/logo-stories-stack.svg" alt="M+ Stories Logo" @click="scrollToTop">
+            <img src="../assets/img/mplusstories.svg" alt="M+ Stories Logo" @click="scrollToTop">
           </router-link>
         </div>
         <div class="header__section header__section--middle fs-b">

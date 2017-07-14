@@ -8,7 +8,7 @@
       :to="{ name: item.link.name, params: item.link.params }">
         <div class="suggested__image">
           <img v-if="item.image[0]" :src="item.image[0].src" :alt="$t(item.image[0].alt)">
-          <img class="suggested__placeholder" v-else src="../assets/img/logo-stories-stack.svg" alt="M+ Stories Logo">
+          <img class="suggested__placeholder" v-else src="../assets/img/mplusstories.svg" alt="M+ Stories Logo">
         </div>
         <div class="suggested__title">
           <span class="lang-primary" v-html="$t(item.link.content)"></span>&thinsp;<span class="lang-secondary" v-html="$tt(item.link.content)"></span>
