@@ -115,26 +115,21 @@ export default {
     position: relative;
     z-index: 10;
     background: @accent;
-    padding: 0.5rem;
     width: 100%;
-    height: 5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   &__section {
     position: relative;
-    padding: 0.5rem;
     &--left {
       flex-grow: 0;
       flex-shrink: 0;
       img {
         display: block;
-        height: 3rem;
       }
     }
     &--middle {
-      padding: 0.5rem 1.5rem;
       flex-grow: 1;
       overflow: hidden;
     }
@@ -160,9 +155,7 @@ export default {
     background: none;
     border: none;
     padding: 0;
-    height: 3rem;
     display: block;
-    margin-left: 1rem;
     img {
       height: 100%;
       display: block;
@@ -179,27 +172,49 @@ export default {
       margin-top: 0.5rem;
       padding: 0.3rem 1rem;
       background: @accent;
-      transition: .25s ease opacity, .25s ease transform;
-      // &.router-link-active {
-      //   &:before {
-      //     display: inline-block;
-      //     vertical-align: middle;
-      //     content: ' ';
-      //     width: 0.5em;
-      //     height: 0.5em;
-      //     border-radius: 100%;
-      //     background: @white;
-      //   }
-      // }
+      transition: .125s ease border-color;
+      border-bottom: 3px solid transparent;
+      &.router-link-active, &:hover {
+        border-color: @white;
+      }
     }
   }
 }
 
-.header-push {
-  height: 4rem;
-  .mq-sm({
-    height: 6rem;
-  });
+// Sizing rules
+.header {
+  &__bar {
+    height: 4rem;
+    .mq-sm({ height: 4.5rem; });
+    .mq-lg({ height: 5rem; });
+  }
+  &__bar, &__section {
+    padding: .4rem;
+    .mq-sm({ padding: .45rem; });
+    .mq-lg({ padding: .5rem; });
+  }
+  &__icon, &__section img {
+    height: 2.4rem;
+    .mq-sm({ height: 2.7rem; });
+    .mq-lg({ height: 3rem; });
+  }
+  &__section {
+    &--middle {
+      padding: .4rem 1.2rem;
+      .mq-sm({ padding: .45rem 1.35rem; });
+      .mq-lg({ padding: .5rem 1.5rem; });
+    }
+  }
+  &__icon {
+    margin-left: .8rem;
+    .mq-sm({ margin-left: .9rem; });
+    .mq-lg({ margin-left: 1rem; });
+  }
+  &-push {
+    height: 5rem;
+    .mq-sm({ height: 5.5rem; });
+    .mq-lg({ height: 6rem; });
+  }
 }
 
 .drop-enter-active, .drop-leave-active {

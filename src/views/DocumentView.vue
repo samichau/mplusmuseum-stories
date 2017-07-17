@@ -57,8 +57,10 @@ export default {
 @import "../less/variables.less";
 
 .document {
-  padding: 4rem 0 1rem;
   background: @lightgrey;
+  padding: 2rem 0 1rem;
+  .mq-sm({ padding: 3.5rem 0 1rem; });
+  .mq-lg({ padding: 4rem 0 1rem; });
   &__title {
     margin-bottom: 2rem;
     .mq-sm({

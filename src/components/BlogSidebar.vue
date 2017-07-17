@@ -88,7 +88,8 @@ export default {
     }
     &__stick {
       position: sticky;
-      top: 10rem;
+      top: 9rem;
+      .mq-lg({ top: 10rem; })
     }
   }
   .blog-category {

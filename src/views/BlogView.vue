@@ -25,7 +25,9 @@ export default {
 
 .blog {
   background: @lightgrey;
-  padding: 4rem 0 1rem;
+  padding: 2rem 0 1rem;
+  .mq-sm({ padding: 3.5rem 0 1rem; });
+  .mq-lg({ padding: 4rem 0 1rem; });
   &__content {
     max-width: 1280px;
     margin: 0 auto;
