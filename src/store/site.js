@@ -52,7 +52,7 @@ export default {
           } else if (viewResponse.resolved) {
             return responses;
           }
-          return Promise.reject(responses[1]);
+          return Promise.reject(viewResponse);
         }
         return Promise.reject(siteResponse);
       });

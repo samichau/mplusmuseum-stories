@@ -10,7 +10,6 @@
 import BlogView from './BlogView.vue';
 import BlogPost from '../components/BlogPost.vue';
 import meta from '../util/meta';
-// import locales from '../locale';
 import { fetch } from '../util/fetch';
 
 export default {
