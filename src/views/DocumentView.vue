@@ -6,7 +6,7 @@
         <div slot="header" class="anchor" id="contents"></div>
         <template slot="content">
           <h1 class="document__title fs-l">
-              <span class="lang-primary" v-html="$t(page.title)"></span>&ensp;<span class="lang-secondary" v-html="$tt(page.title)"></span>
+            <dynamic-title :title="page.title"></dynamic-title>
           </h1>
           <div class="document-item__header">
             <h2 v-html="$t($store.state.site.translations.site.tableOfContents)"></h2>
@@ -35,6 +35,7 @@
 
 <script>
 import ContentBlocks from '../components/ContentBlocks.vue';
+import DynamicTitle from '../components/DynamicTitle.vue';
 import Panel from '../components/Panel.vue';
 import TextBlock from '../components/TextBlock.vue';
 
@@ -46,6 +47,7 @@ export default {
   },
   components: {
     ContentBlocks,
+    DynamicTitle,
     Panel,
     TextBlock,
   },
