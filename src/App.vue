@@ -131,9 +131,10 @@ pre {
 }
 
 a.lang-secondary {
-  color: inherit;
+  color: @accent;
+  transition: 0.15s ease opacity;
   &:hover {
-    color: @accent;
+    opacity: 1;
   }
 }
 
