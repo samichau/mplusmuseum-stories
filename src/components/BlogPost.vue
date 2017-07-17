@@ -5,22 +5,8 @@
     v-if="post.pinned && !$store.getters['blog/filtered']">
       <img src="../assets/img/pin.svg" alt="Pin Icon"> {{ $t(t.blog.pinned) }}
     </div>
-    <div class="blog-post__header">
-      <div class="blog-post__image"
-      v-if="post.images.length"
-      @click="openLightbox(post.images[0])">
-        <img :src="post.images[0].thumb"
-        :alt="$t(post.images[0].alt)">
-      </div>
-      <h1 class="blog-post__title fs-l"><dynamic-title :title="post.title"></dynamic-title></h1>
-      <div class="blog-post__meta">
-        <byline :authorId="post.author"
-        :date="post.date"
-        :categoryId="post.category"></byline>
-        <tags-inline v-if="post.tags.length"
-        :tagIds="post.tags"></tags-inline>
-      </div>
-    </div>
+
+    <blog-post-header :post="post"></blog-post-header>
 
     <div class="blog-item__inner">
       <div class="blog-post__content row">
@@ -66,14 +52,12 @@
 
 <script>
 import { mapState } from 'vuex';
-import Byline from './Byline.vue';
+import BlogPostHeader from './BlogPostHeader.vue';
 import Clipboard from './Clipboard.vue';
 import ContentBlocks from './ContentBlocks.vue';
 import NewsletterBlock from './NewsletterBlock.vue';
 import ShareBar from './ShareBar.vue';
 import Suggested from './Suggested.vue';
-import TagsInline from './TagsInline.vue';
-import DynamicTitle from './DynamicTitle.vue';
 
 export default {
   data() {
@@ -112,22 +96,17 @@ export default {
     },
   },
   methods: {
-    openLightbox(image) {
-      this.$store.commit('lightbox/open', { image, share: this.shareData });
-    },
     extend() {
       this.$store.commit('blog/extendPost', this.post);
     },
   },
   components: {
-    Byline,
+    BlogPostHeader,
     Clipboard,
     ContentBlocks,
     NewsletterBlock,
     ShareBar,
     Suggested,
-    TagsInline,
-    DynamicTitle,
   },
 };
 </script>
@@ -160,17 +139,13 @@ export default {
   &__header {
     background: @white;
   }
-  &__image {
-    cursor: zoom-in;
-    overflow: hidden;
-    transition: 0.5s ease height;
-    height: 250px;
-    .mq-sm({
-      height: 600px;
-    });
+  &__hero {
     img {
+      height: 250px;
+      .mq-sm({
+        height: 600px;
+      });
       width: 100%;
-      height: 100%;
       display: block;
       object-fit: cover;
       font-family: 'object-fit: cover;';

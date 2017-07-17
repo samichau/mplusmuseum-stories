@@ -88,6 +88,10 @@ body {
   &:first-child {
     margin-top: 0;
   }
+  &--no-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .blur {

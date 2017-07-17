@@ -19,7 +19,7 @@ export default {
     return {
       title: this.$t(this.post.title),
       description: this.$t(this.post.desc),
-      image: this.post.images.length ? this.post.images[0].src : '',
+      image: this.post.hero && this.post.hero.images.length ? this.post.hero.images[0].src : '',
     };
   },
   asyncData({ store, route }) {
