@@ -1,36 +1,28 @@
 <template>
   <article class="blog-item blog-post shadow"
-  :class="{ 'blog-post--collapsed': post.collapsed, 'blog-post--truncated': post.truncated }">
+  :class="{ 'blog-post--truncated': post.truncated }">
     <div class="blog-post__pinned"
     v-if="post.pinned && !$store.getters['blog/filtered']">
       <img src="../assets/img/pin.svg" alt="Pin Icon"> {{ $t(t.blog.pinned) }}
     </div>
     <div class="blog-post__header">
-      <div class="blog-post__toggle" @click="expand">
-        <div class="blog-post__prevent" v-if="post.collapsed"></div>
-        <div class="blog-post__image"
-        v-if="post.images.length"
-        @click="openLightbox(post.images[0])">
-          <img :src="post.images[0].thumb"
-          :alt="$t(post.images[0].alt)">
-        </div>
-        <h1 class="blog-post__title fs-l"><dynamic-title :title="post.title"></dynamic-title></h1>
+      <div class="blog-post__image"
+      v-if="post.images.length"
+      @click="openLightbox(post.images[0])">
+        <img :src="post.images[0].thumb"
+        :alt="$t(post.images[0].alt)">
       </div>
+      <h1 class="blog-post__title fs-l"><dynamic-title :title="post.title"></dynamic-title></h1>
       <div class="blog-post__meta">
         <byline :authorId="post.author"
         :date="post.date"
         :categoryId="post.category"></byline>
         <tags-inline v-if="post.tags.length"
         :tagIds="post.tags"></tags-inline>
-        <div class="blog-post__excerpt fs-b"
-        v-if="post.collapsed && post.excerpt">
-          <div><span v-html="post.excerpt"></span> ...</div>
-          <button class="button--reset" @click.prevent="expand">Read This...</button>
-        </div>
       </div>
     </div>
 
-    <div class="blog-item__inner" v-if="!post.collapsed">
+    <div class="blog-item__inner">
       <div class="blog-post__content row">
 
         <div class="blog-post__aside col-md-3">
@@ -116,27 +108,12 @@ export default {
       };
     },
     showFooterContent() {
-      return !this.post.truncated && !this.post.collapsed;
+      return !this.post.truncated;
     },
   },
   methods: {
     openLightbox(image) {
-      if (!this.post.collapsed) this.$store.commit('lightbox/open', { image, share: this.shareData });
-    },
-    collapse() {
-      const postTop = this.$el.offsetTop;
-      window.scrollTo(0, postTop);
-      this.$store.commit('blog/collapsePost', this.post);
-    },
-    expand() {
-      if (this.busy || !this.post.collapsed) return false;
-      this.busy = true;
-      return this.$store.dispatch('blog/expandPost', this.post)
-        .then(() => { this.busy = false; })
-        .catch((error) => {
-          this.busy = false;
-          this.$modal.error(error);
-        });
+      this.$store.commit('lightbox/open', { image, share: this.shareData });
     },
     extend() {
       this.$store.commit('blog/extendPost', this.post);
@@ -259,37 +236,6 @@ export default {
   }
   &__toggle {
     position: relative;
-  }
-  &__prevent {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-  }
-  &--collapsed {
-    .blog-post {
-      &__toggle {
-        cursor: pointer;
-        &:hover {
-          color: @accent;
-        }
-      }
-      &__image {
-        cursor: pointer;
-        height: 150px;
-        .mq-sm({
-          height: 300px;
-        });
-      }
-      &__meta {
-        padding-bottom: 1.5rem;
-        .mq-sm({
-          padding-bottom: 3rem;
-        });
-      }
-    }
   }
 }
 </style>

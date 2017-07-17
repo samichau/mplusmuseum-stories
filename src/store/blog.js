@@ -2,7 +2,6 @@ import _find from 'lodash/find';
 import { asyncGet, Response } from '../api';
 
 function addPostProperties(post) {
-  post.collapsed = !post.sections;
   post.truncated = post.sections && post.sections.truncateAfter;
   if (!post.sections) post.sections = false;
   return post;
@@ -82,21 +81,10 @@ export default {
           context.commit('addPosts', { items, remaining, posts: data.posts });
         });
     },
-    expandPost(context, post) {
-      const postSections = !post.sections
-        ? asyncGet(`blog/posts/${post.name}/`)
-        : Promise.resolve(new Response(true).setData({ sections: false }));
-      return postSections
-        .then(({ data }) => {
-          context.commit('expandPost', { post, sections: data.sections });
-        });
-    },
     initSingle(context, name) {
-      let endpoint = `blog/posts/${name}/`;
-      if (!context.state.initialized.meta) endpoint += '?meta=true';
-
+      const selectors = !context.state.initialized.meta ? { meta: true } : {};
       const postData = !(context.state.single && context.state.single.name === name)
-        ? asyncGet(endpoint)
+        ? asyncGet(`blog/posts/${name}/`, selectors)
         : Promise.resolve(new Response(true, { status: false, data: context.state.single }));
 
       return postData
@@ -122,15 +110,6 @@ export default {
     addPosts(state, { items, remaining, posts }) {
       state[items] = state[items].concat(posts.items.map(post => addPostProperties(post)));
       state[remaining] = posts.remaining;
-    },
-    expandPost(state, { post, sections }) {
-      if (sections) post.sections = sections;
-      post.collapsed = false;
-      post.truncated = false;
-    },
-    collapsePost(state, post) {
-      post.collapsed = true;
-      post.truncated = true;
     },
     extendPost(state, post) {
       post.truncated = false;

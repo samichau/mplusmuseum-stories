@@ -22,8 +22,6 @@ export default {
   asyncData({ store, route }) {
     const selectors = {
       meta: false,
-      expanded: 2,
-      collapsed: 4,
       tags: [],
     };
 
@@ -73,8 +71,6 @@ export default {
       const q = this.query;
       const selectors = {
         offset: currentPosts.length,
-        expanded: 0,
-        collapsed: 6,
       };
       if (q) {
         if (q.author) selectors.author = q.author;
