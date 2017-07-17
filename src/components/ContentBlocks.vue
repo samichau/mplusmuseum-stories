@@ -16,6 +16,7 @@ import NewsletterBlock from './NewsletterBlock.vue';
 import TextBlock from './TextBlock.vue';
 import Tweet from './Tweet.vue';
 import Vimeo from './Vimeo.vue';
+import Youku from './Youku.vue';
 import Youtube from './YouTube.vue';
 
 export default {
@@ -34,6 +35,7 @@ export default {
     TextBlock,
     Tweet,
     Vimeo,
+    Youku,
     Youtube,
   },
 };

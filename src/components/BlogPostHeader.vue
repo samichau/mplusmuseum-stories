@@ -23,6 +23,7 @@ import DynamicTitle from './DynamicTitle.vue';
 import ImageBlock from './ImageBlock.vue';
 import TagsInline from './TagsInline.vue';
 import Vimeo from './Vimeo.vue';
+import Youku from './Youku.vue';
 import Youtube from './YouTube.vue';
 
 export default {
@@ -38,6 +39,7 @@ export default {
     ImageBlock,
     TagsInline,
     Vimeo,
+    Youku,
     Youtube,
   },
 };
