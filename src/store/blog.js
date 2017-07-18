@@ -1,14 +1,15 @@
+import Vue from 'vue';
 import _find from 'lodash/find';
 import { asyncGet, Response } from '../api';
 
 function addPostProperties(post) {
-  post.truncated = post.sections && post.sections.truncateAfter;
+  Vue.set(post, 'truncated', post.sections && post.sections.truncateAfter);
   if (!post.sections) post.sections = false;
   return post;
 }
 
 function addCategoryProperties(category) {
-  category.active = false;
+  Vue.set(category, 'active', false);
   return category;
 }
 
