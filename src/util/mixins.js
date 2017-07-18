@@ -1,3 +1,16 @@
+import VideoFrame from '../components/VideoFrame.vue';
+
+export const videoFrameMixin = {
+  props: {
+    content: {
+      required: true,
+    },
+  },
+  components: {
+    VideoFrame,
+  },
+};
+
 export const dynamicTextMixin = {
   methods: {
     createStringElement(el) {
