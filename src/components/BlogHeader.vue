@@ -1,6 +1,6 @@
 <script>
 import Tag from './Tag.vue';
-import dynamicMixin from '../util/dynamic-translate';
+import dynamicMixin from '../util/dynamic-text';
 
 export default {
   mixins: [dynamicMixin],

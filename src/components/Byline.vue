@@ -1,6 +1,6 @@
 <script>
 import _find from 'lodash/find';
-import dynamicMixin from '../util/dynamic-translate';
+import dynamicMixin from '../util/dynamic-text';
 
 export default {
   mixins: [dynamicMixin],

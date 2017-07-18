@@ -26,10 +26,6 @@
 
           <div class="blog-post__footer" v-if="showFooterContent">
 
-            <div class="blog-post__footer-section blog-post__endnote fs-s"
-            v-if="post.endnote"
-            v-html="$t(post.endnote)"></div>
-
             <clipboard class="blog-post__footer-section"
             :url="shareData.location"></clipboard>
 
@@ -190,10 +186,6 @@ export default {
     &:last-child {
       margin-bottom: 0;
     }
-  }
-  &__endnote {
-    border: 1px solid @accent;
-    padding: 1rem;
   }
   &__sharebar {
     position: static;
