@@ -48,17 +48,11 @@ export default {
     text-align: center;
     padding: 0.5em;
     color: @accent;
-    // @TODO Clean this class up if we no longer need to animate
     background-color: transparent;
-    background-image: linear-gradient(90deg, @accent 100%, transparent 0%);
-    background-size: 0% 100%;
-    background-repeat: no-repeat;
-    // transition: 0.25s ease all;
-    &:hover {
-      // background: @accent;
+    &:hover, &:focus {
       color: @white;
       border-color: @accent;
-      background-size: 100% 100%;
+      background-color: @accent;
     }
   }
   &__marquee {

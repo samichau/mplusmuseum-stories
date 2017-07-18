@@ -19,7 +19,6 @@
 
         <div class="blog-post__body fs-b col-md-9">
           <content-blocks :items="sections"></content-blocks>
-          
           <button class="blog-post__more button button--accent"
           v-if="post.truncated && post.sections.truncateAfter"
           @click="extend">{{ $t(t.site.continue) }}</button>
@@ -125,12 +124,6 @@ export default {
   }
   &__aside {
     transform: translate3d(0, 0, 0); // Fix for Chrome on Retina rendering bug;
-  }
-  &__excerpt {
-    margin-top: 0.5em;
-    button {
-      margin-top: 0.5em;
-    }
   }
   &__header {
     background: @white;

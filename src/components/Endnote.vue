@@ -20,7 +20,7 @@ export default {
     renderAuthor() {
       const author = _find(this.$store.state.site.authors,
         a => a.id === this.$parent.$parent.post.author);
-      return `<router-link :to="{ query: { author: '${author.name}' } }">${this.$t(author.title)}</router-link>`;
+      return `<router-link :to="{ name: 'blog', query: { author: '${author.name}' } }">${this.$t(author.title)}</router-link>`;
     },
   },
   computed: {
