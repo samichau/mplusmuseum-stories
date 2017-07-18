@@ -66,14 +66,15 @@ export default {
     advanceNotice() {
       if (this.noticeIndex >= this.notices.length - 1) this.noticeIndex = 0;
       else this.noticeIndex += 1;
+      this.notice = setTimeout(this.advanceNotice, this.notices[this.noticeIndex].duration);
     },
     startNotice() {
       if (this.notices.length > 1) {
-        this.notice = setInterval(this.advanceNotice, 30000);
+        this.notice = setTimeout(this.advanceNotice, this.notices[this.noticeIndex].duration);
       }
     },
     stopNotice() {
-      clearInterval(this.notice);
+      clearTimeout(this.notice);
     },
     scrollToTop() {
       if (this.$store.state.route.name === 'blog') window.scrollTo(0, 0);
