@@ -1,9 +1,9 @@
 <script>
 import _find from 'lodash/find';
-import dynamicMixin from '../util/dynamic-text';
+import { dynamicTextMixin } from '../util/mixins';
 
 export default {
-  mixins: [dynamicMixin],
+  mixins: [dynamicTextMixin],
   props: {
     categoryId: {
       default: false,

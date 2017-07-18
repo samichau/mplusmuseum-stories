@@ -1,9 +1,9 @@
 <script>
 import Tag from './Tag.vue';
-import dynamicMixin from '../util/dynamic-text';
+import { dynamicTextMixin } from '../util/mixins';
 
 export default {
-  mixins: [dynamicMixin],
+  mixins: [dynamicTextMixin],
   components: {
     Tag,
   },

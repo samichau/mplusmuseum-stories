@@ -1,4 +1,4 @@
-const dynamicMixin = {
+export const dynamicTextMixin = {
   methods: {
     createStringElement(el) {
       return el.str;
@@ -19,5 +19,3 @@ const dynamicMixin = {
     },
   },
 };
-
-export default dynamicMixin;

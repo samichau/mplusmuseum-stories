@@ -7,10 +7,10 @@
 
 <script>
 import _find from 'lodash/find';
-import dynamic from '../util/dynamic-text';
+import { dynamicTextMixin } from '../util/mixins';
 
 export default {
-  mixins: [dynamic],
+  mixins: [dynamicTextMixin],
   props: {
     content: {
       required: true,
