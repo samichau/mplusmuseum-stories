@@ -1,7 +1,6 @@
 <template>
-  <aside class="blog-item blog-notice shadow"
-  :class="{ 'blog-notice--hidden': hidden }">
-    <div class="blog-item__overlay" v-if="hidden" @click.once="toggle"></div>
+  <aside class="blog-item blog-notice shadow">
+    <button class="blog-notice__close fs-b" @click="hide"><img src="../assets/img/cross.svg" alt="Close"></button>
     <div class="blog-item__inner">
       <slot></slot>
     </div>
@@ -10,22 +9,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      hidden: this.hide,
-    };
-  },
   props: {
-    header: {
-      default: '',
-    },
-    hide: {
-      default: false,
+    notice: {
+      required: true,
     },
   },
   methods: {
-    toggle() {
-      if (this.hide) this.hidden = !this.hidden;
+    hide() {
+      this.notice.visible = false;
     },
   },
 };
@@ -38,16 +29,26 @@ export default {
   position: relative;
   z-index: 0;
   transform-origin: 50% 0%;
-  &--hidden {
-    margin-bottom: -12rem;
-    transform: scale(0.9);
-    transition: 0.2s ease transform;
-    &:hover {
-      transform: scale(0.9125);
+  &__close {
+    height: 2.25em;
+    width: 2.25em;
+    padding: 0.75em;
+    line-height: 1;
+    opacity: 0.25;
+    border: none;
+    background: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: @white;
+    transition: .15s ease opacity;
+    img {
+      width: 100%;
+      height: 100%;
     }
-  }
-  &:not(.blog-notice--hidden):not(.fade-enter-active):not(.fade-leave-active) {
-    transition: 0.5s cubic-bezier(.5,-0.6,.4,.9) transform, 0.5s cubic-bezier(.5,-0.6,.4,.9) margin-bottom;
+    &:hover, &:focus {
+      opacity: 1;
+    }
   }
   &__content {
     h1, h2, h3, h4, h5, h6 {

@@ -131,9 +131,20 @@ export default {
       },
     });
 
+    const createMoreButton = fn => h('button', {
+      class: 'blog__button-wide',
+      on: {
+        click: fn,
+      },
+    }, this.morePostsText);
+
     const createNotice = (data) => {
       if (!data) return false;
-      return h('blog-notice', {}, [
+      return h('blog-notice', {
+        props: {
+          notice: data,
+        },
+      }, [
         h('div', {
           class: 'blog-notice__content',
           domProps: {
@@ -150,12 +161,7 @@ export default {
         // If we want to show filtered posts and we have some to show ...
         // Create the more button element if we haven't got all the posts
         const moreBtn = this.postsFilteredRemaining
-          ? h('button', {
-            class: 'blog__button-wide',
-            on: {
-              click: this.getMoreFiltered,
-            },
-          }, this.morePostsText)
+          ? createMoreButton(this.getMoreFiltered)
           : false;
 
         // Create the posts list, for now we don't put notice elements here
@@ -187,12 +193,7 @@ export default {
       // If we are showing unfiltered posts
       // Create the more button element if we haven't got all the posts
       const moreBtn = this.postsRemaining
-        ? h('button', {
-          class: 'blog__button-wide',
-          on: {
-            click: this.getMoreUnfiltered,
-          },
-        }, this.morePostsText)
+        ? createMoreButton(this.getMoreUnfiltered)
         : false;
 
       // Create the posts list by looping through the posts and inserting
@@ -200,7 +201,7 @@ export default {
       items = [this.posts.map((post, i) => {
         const content = [];
         const noticeData = this.notices[i];
-        if (noticeData) {
+        if (noticeData && noticeData.visible) {
           if (i === 0) {
             content.push(h('sticky', {
               props: {
