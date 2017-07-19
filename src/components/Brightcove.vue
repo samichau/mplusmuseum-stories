@@ -39,19 +39,19 @@ export default {
       && Object.prototype.hasOwnProperty.call(content, 'player');
   },
   mounted() {
-    const scriptLoaded = !window.videojs || !window.bc
-      ? addScript(`//players.brightcove.net/${this.content.account}/${this.content.player}_default/index.min.js`)
-      : Promise.resolve();
+    if (this.validated) {
+      const scriptLoaded = !window.videojs || !window.bc
+        ? addScript(`//players.brightcove.net/${this.content.account}/${this.content.player}_default/index.min.js`)
+        : Promise.resolve();
 
-    scriptLoaded.then(() => {
-      this.loaded = true;
-      this.$nextTick(() => {
-        if (this.validated) {
+      scriptLoaded.then(() => {
+        this.loaded = true;
+        this.$nextTick(() => {
           window.bc(this.$refs.media);
           this.player = window.videojs(this.$refs.media);
-        }
+        });
       });
-    });
+    }
   },
   destroyed() {
     if (this.player) {
