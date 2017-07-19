@@ -267,7 +267,7 @@ a.lang-secondary {
 
 .hide {
   &--mobile {
-    .mq-sm-over({
+    .mq-sm-under({
       display: none !important;
     });
   }
