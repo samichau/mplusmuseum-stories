@@ -118,7 +118,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 0 0 1.5rem 0;
+  margin: 2em 0;
   .mq-sm({
     margin: 0;
     flex-direction: column;

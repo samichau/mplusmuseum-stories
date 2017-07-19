@@ -272,6 +272,11 @@ a.lang-secondary {
 
 .hide {
   &--mobile {
+    .mq-sm-over({
+      display: none !important;
+    });
+  }
+  &--desktop {
     .mq-sm({
       display: none !important;
     });

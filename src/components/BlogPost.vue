@@ -12,7 +12,7 @@
       <div class="blog-post__content row">
 
         <div class="blog-post__aside col-md-3">
-          <share-bar class="blog-post__sharebar"
+          <share-bar class="blog-post__sharebar hide--mobile"
           :url="shareData.location"
           :title="$t(post.title)"></share-bar>
         </div>
@@ -24,6 +24,10 @@
           @click="extend">{{ $t(t.site.continue) }}</button>
 
           <div class="blog-post__footer" v-if="showFooterContent">
+
+            <share-bar class="blog-post__sharebar hide--desktop"
+            :url="shareData.location"
+            :title="$t(post.title)"></share-bar>
 
             <clipboard class="blog-post__footer-section"
             :url="shareData.location"></clipboard>
