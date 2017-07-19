@@ -41,6 +41,18 @@ export default {
   &--active {
     color: @white;
     background-color: @accent;
+    &:after {
+      content: '\00d7';
+      opacity: 0.66;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 0.25em;
+      height: 0.15em;
+      line-height: 0;
+      font-size: 85%;
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
 }
 </style>
