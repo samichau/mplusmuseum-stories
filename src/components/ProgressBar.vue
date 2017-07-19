@@ -87,9 +87,13 @@ export default {
 </script>
 
 <style lang="less">
+@import "../less/variables.less";
+
 .progress {
   position: fixed;
-  top: 6rem;
+  top: 5rem;
+  .mq-sm({ top: 5.5rem; });
+  .mq-lg({ top: 6rem; });
   margin-top: -3px;
   left: 0;
   right: 0;
