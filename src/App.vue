@@ -124,7 +124,6 @@ pre {
 .lang-secondary {
   font-weight: 300;
   font-size: 70%;
-  opacity: 0.5;
   &--same {
     font-size: 100%;
   }
@@ -132,10 +131,6 @@ pre {
 
 a.lang-secondary {
   color: @accent;
-  transition: 0.15s ease opacity;
-  &:hover {
-    opacity: 1;
-  }
 }
 
 .view {
