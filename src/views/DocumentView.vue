@@ -74,9 +74,6 @@ export default {
 .document-item {
   &__header {
     margin-bottom: 1em;
-    h2 {
-      color: @accent;
-    }
   }
   &__back {
     width: 2.5rem;
