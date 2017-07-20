@@ -1,4 +1,5 @@
 #!/bin/sh
 
-sudo su ubuntu
+export HOME=/home/ubuntu
+
 pm2 restart plus
