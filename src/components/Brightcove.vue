@@ -10,10 +10,10 @@
       data-embed="default"
       data-application-id
       controls></video>
-      <div class="image-block__caption fs-s"
-      v-if="caption"
-      v-html="caption"></div>
     </div>
+    <div v-if="caption"
+    class="image-block__caption fs-s"
+    v-html="caption"></div>
   </div>
 </template>
 

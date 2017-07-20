@@ -7,10 +7,10 @@
       webkitallowfullscreen
       mozallowfullscreen
       allowfullscreen></iframe>
-      <div class="video-block__caption fs-s"
-      v-if="caption"
-      v-html="caption"></div>
     </div>
+    <div v-if="caption"
+    class="video-block__caption fs-s"
+    v-html="caption"></div>
   </div>
 </template>
 
