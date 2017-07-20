@@ -50,7 +50,7 @@ export default {
     height: 1px;
     border: none;
     background-color: @black;
-    margin: 2em 0;
+    margin: 1em 0;
   }
 
   table {
