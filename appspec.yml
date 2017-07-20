@@ -3,3 +3,7 @@ os: linux
 files:
   - source: /
     destination: /usr/local/mplusmuseum/projects/mplusmuseum-stories
+hooks:
+  AfterInstall:
+    - location: /ubuntu/post-deploy.sh
+      timeout: 300
