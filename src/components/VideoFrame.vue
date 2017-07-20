@@ -7,6 +7,9 @@
       webkitallowfullscreen
       mozallowfullscreen
       allowfullscreen></iframe>
+      <div class="video-block__caption fs-s"
+      v-if="caption"
+      v-html="caption"></div>
     </div>
   </div>
 </template>
@@ -17,16 +20,25 @@ export default {
     url: {
       required: true,
     },
+    caption: {
+      default: false,
+    },
   },
 };
 </script>
 
 <style lang="less">
+@import '../less/variables.less';
+
 .video-block {
   &__wrap {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
+  }
+  &__caption {
+    margin: 1rem 0;
+    color: @midgrey;
   }
   iframe {
     position: absolute;

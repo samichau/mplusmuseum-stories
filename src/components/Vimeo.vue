@@ -1,6 +1,7 @@
 <template>
   <video-frame class="vimeo-block"
-  :url="`https://player.vimeo.com/video/${$t(content)}`"></video-frame>
+  :url="`https://player.vimeo.com/video/${$t(content.media)}`"
+  :caption="$t(content.caption)"></video-frame>
 </template>
 
 <script>

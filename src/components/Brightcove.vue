@@ -4,12 +4,15 @@
       <video class="video-js brightcove-video__media"
       v-if="loaded"
       ref="media"
-      :data-video-id="$t(content.id)"
-      :data-account="content.account"
-      :data-player="content.player"
+      :data-video-id="$t(media.id)"
+      :data-account="media.account"
+      :data-player="media.player"
       data-embed="default"
       data-application-id
       controls></video>
+      <div class="image-block__caption fs-s"
+      v-if="caption"
+      v-html="caption"></div>
     </div>
   </div>
 </template>
@@ -21,6 +24,8 @@ import addScript from '../util/promise-script';
 export default {
   data() {
     return {
+      media: false,
+      caption: false,
       loaded: false,
       validated: false,
       player: null,
@@ -33,15 +38,16 @@ export default {
     },
   },
   created() {
-    const content = this.content;
-    this.validated = Object.prototype.hasOwnProperty.call(content, 'id')
-      && Object.prototype.hasOwnProperty.call(content, 'account')
-      && Object.prototype.hasOwnProperty.call(content, 'player');
+    this.media = this.content.media;
+    this.caption = this.$t(this.content.caption);
+    this.validated = Object.prototype.hasOwnProperty.call(this.media, 'id')
+      && Object.prototype.hasOwnProperty.call(this.media, 'account')
+      && Object.prototype.hasOwnProperty.call(this.media, 'player');
   },
   mounted() {
     if (this.validated) {
       const scriptLoaded = !window.videojs || !window.bc
-        ? addScript(`//players.brightcove.net/${this.content.account}/${this.content.player}_default/index.min.js`)
+        ? addScript(`//players.brightcove.net/${this.media.account}/${this.media.player}_default/index.min.js`)
         : Promise.resolve();
 
       scriptLoaded.then(() => {

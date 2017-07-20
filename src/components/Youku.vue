@@ -1,6 +1,7 @@
 <template>
   <video-frame class="youku-block"
-  :url="`http://player.youku.com/embed/${$t(content)}`"></video-frame>
+  :url="`http://player.youku.com/embed/${$t(content.media)}`"
+  :caption="$t(content.caption)"></video-frame>
 </template>
 
 <script>
