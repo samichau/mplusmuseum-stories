@@ -69,7 +69,7 @@ export default {
 
   .blog-sidebar {
     text-align: center;
-    .mq-sm({
+    .mq-md({
       text-align: left;
     });
     &__section {
