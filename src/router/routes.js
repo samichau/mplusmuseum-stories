@@ -1,10 +1,10 @@
 import locales from '../locale';
 
 // route-level code splitting
-const PageView = () => System.import('../views/PageView.vue');
-const BlogListView = () => System.import('../views/BlogListView.vue');
-const BlogPostView = () => System.import('../views/BlogPostView.vue');
-const NotFoundView = () => System.import('../views/NotFoundView.vue');
+const PageView = () => import('../views/PageView.vue');
+const BlogListView = () => import('../views/BlogListView.vue');
+const BlogPostView = () => import('../views/BlogPostView.vue');
+const NotFoundView = () => import('../views/NotFoundView.vue');
 
 const langParam = `:lang(${locales.join('|')})`;
 

@@ -9,4 +9,5 @@ module.exports = {
   loaders: {
     js: 'babel-loader',
   },
+  esModule: false,
 };
