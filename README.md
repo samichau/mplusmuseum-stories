@@ -19,8 +19,11 @@ To install the project dependencies use the following commands:
 npm install
 ```
 
-## Using the Tools
+### Basic Authentication
 
+To enable basic authentication for the front-end app, set the AUTH environment variable to true in your .env file, you will also need to add a .htpasswd file in the project root directory. Use the line format {user:pass} or {user:passHash} in the .htpasswd file.
+
+## Using the Tools
 
 Serve the app in development mode at localhost:8080.
 ``` bash

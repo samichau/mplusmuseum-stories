@@ -5,6 +5,7 @@ const express = require('express');
 const favicon = require('serve-favicon');
 const compression = require('compression');
 const axios = require('axios');
+const auth = require('http-auth');
 
 const resolve = file => path.resolve(__dirname, file);
 const { createBundleRenderer } = require('vue-server-renderer');
@@ -67,6 +68,19 @@ app.use('/public', serve('./public', true));
 app.use('/manifest.json', serve('./manifest.json', true));
 app.use('/service-worker.js', serve('./dist/service-worker.js'));
 
+// Basic authentication
+if (process.env.AUTH === 'true') {
+  const basicAuth = auth.basic({
+    realm: 'Staging Area.',
+    file: resolve('./.htpasswd'),
+  });
+
+  app.use((req, res, next) => {
+    if (req.path === '/status') next();
+    else (auth.connect(basicAuth))(req, res, next);
+  });
+}
+
 // 30-second microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
 const microCache = LRU({
@@ -108,6 +122,7 @@ function render(req, res) {
     else if (['zh', 'zh-HK', 'zh-CN', 'zh-SG', 'zh-TW'].indexOf(lang) >= 0) req.url = '/tc/';
   }
 
+  // Set the preview query for the axios interceptor
   previewQuery = req.query.p ? req.query.p : false;
 
   res.setHeader('Content-Type', 'text/html');
@@ -159,6 +174,11 @@ function render(req, res) {
     return true;
   });
 }
+
+// Status check for load balancer
+app.get('/status', (req, res) => {
+  res.json({ status: 'running' });
+});
 
 app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res));
