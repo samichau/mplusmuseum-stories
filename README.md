@@ -8,7 +8,7 @@ This repository contains the source code for the M+ Stories website. It is large
 
 ### Prerequisites
 
-You will need node and either yarn or npm installed to run the app. Due to the use of server-side rendering, the app will not initialize without being properly configured to make requests from the M+ Stories API.
+You will need node and npm installed to run the app. Due to the use of server-side rendering, the app will not initialize without being properly configured to make requests from the M+ Stories API.
 
 ### Installation
 
@@ -16,7 +16,7 @@ First create a new .env file in the project root directory based on the .env.exa
 
 To install the project dependencies use the following commands:
 ``` bash
-yarn # or npm install
+npm install
 ```
 
 ## Using the Tools
@@ -24,17 +24,17 @@ yarn # or npm install
 
 Serve the app in development mode at localhost:8080.
 ``` bash
-yarn run dev # or npm run dev 
+npm run dev 
 ```
 
 Run build processes for production.
 ``` bash
-yarn run build # or npm run dev
+npm run build
 ```
 
 Start the production application.
 ``` bash
-yarn start # or npm start
+npm start
 ```
 
 In production, the use of [pm2](http://pm2.keymetrics.io/) to run the application is recommended.
