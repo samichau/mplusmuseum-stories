@@ -101,25 +101,25 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
+const locales = require('./src/locale/browser.js');
+
 function render(req, res) {
   const s = !isProd ? Date.now() : false;
 
   // Set language
   if (req.path === '' || req.path === '/') {
-    const lang = req.acceptsLanguages(
-      'en',
-      'en-US',
-      'en-GB',
-      'en-AU',
-      'en-NZ',
-      'en-CA',
-      'zh',
-      'zh-HK',
-      'zh-CN',
-      'zh-SG',
-      'zh-TW');
-    if (['en', 'en-US', 'en-GB', 'en-AU', 'en-NZ', 'en-CA'].indexOf(lang) >= 0) req.url = '/en/';
-    else if (['zh', 'zh-HK', 'zh-CN', 'zh-SG', 'zh-TW'].indexOf(lang) >= 0) req.url = '/tc/';
+    // Create flattened array of all the locales
+    const allLocales = [];
+    locales.groups.forEach(group =>
+      locales.accepts[group].forEach(locale =>
+        allLocales.push(locale)));
+    // Find a match
+    const lang = req.acceptsLanguages(allLocales);
+    if (lang) {
+      const localeMatch = locales.groups.find(group =>
+        locales.accepts[group].indexOf(lang) >= 0);
+      if (localeMatch) req.url = `/${localeMatch}/`;
+    }
   }
 
   // Set the preview query for the axios interceptor
