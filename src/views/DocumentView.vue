@@ -1,5 +1,5 @@
 <template>
-  <main class="document">
+  <main class="document" :class="{ 'document--no-contents' : !page.contents }">
     <div class="header-push"></div>
     <div class="document__items wrap">
       <panel class="document-item document-item__contents">
@@ -8,21 +8,25 @@
           <h1 class="document__title fs-l">
             <dynamic-title :title="page.title"></dynamic-title>
           </h1>
-          <div class="document-item__header">
-            <h2 v-html="$t($store.state.site.translations.site.tableOfContents)"></h2>
-          </div>
-          <div class="text-block">
-            <ol class="document__contents">
-              <li v-for="section of page.sections" :key="section.name"><a :href="`#${section.name}`" v-html="$t(section.title)"></a></li>
-            </ol>
-          </div>
+          <template v-if="page.contents">
+            <div class="document-item__header">
+              <h2 v-html="$t($store.state.site.translations.site.tableOfContents)"></h2>
+            </div>
+            <div class="text-block">
+              <component :is="page.contents" class="document__contents">
+                <li v-for="section of page.sections" :key="section.name"><a :href="`#${section.name}`" v-html="$t(section.title)"></a></li>
+              </component>
+            </div>
+          </template>
         </template>
       </panel>
       <panel v-for="section of page.sections" :key="section.name" class="document-item">
         <div slot="header" class="anchor" :id="section.name"></div>
         <template slot="content">
           <div class="document-item__header">
-            <a href="#contents" class="document-item__back"><img src="../assets/img/caret-up.svg" alt="Return to Contents"></a>
+            <a v-if="page.contents"
+            href="#contents"
+            class="document-item__back"><img src="../assets/img/caret-up.svg" alt="Return to Contents"></a>
             <h2 v-html="$t(section.title)"></h2>
           </div>
           <content-blocks class="document-item__content"
@@ -68,6 +72,11 @@ export default {
     .mq-sm({
       margin-bottom: 3rem;
     });
+  }
+  &--no-contents {
+    .document__title {
+      margin-bottom: 0;
+    }
   }
 }
 
