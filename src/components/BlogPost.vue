@@ -33,7 +33,7 @@
             :url="shareData.location"></clipboard>
 
             <newsletter-block class="blog-post__footer-section input-wrap--inline"
-            :label="$t($store.state.site.translations.newsletter.placeholder)"
+            :label="$t($store.state.site.translations.newsletter.placeholderAlt)"
             :name="`newsletter__${post.name}`"
             :button="'&rarr;<span class=\'sr-only\'>Subscribe to the M+ Stories Newsletter</span>'"></newsletter-block>
 
