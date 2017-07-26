@@ -15,3 +15,12 @@ export default {
 };
 </script>
 
+<style lang="less">
+.dynamic-title {
+  &--same {
+    .lang-secondary {
+      color: inherit;
+    }
+  }
+}
+</style>

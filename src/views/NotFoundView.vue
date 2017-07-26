@@ -3,8 +3,8 @@
   <div class="header-push"></div>
   <div class="not-found__inner">
     <div>
-      <h1 class="fs-l">404: <span class="lang-primary">{{ $t(header) }}</span><span class="lang-secondary lang-secondary--same">&nbsp;{{ $tt(header) }}</span></h1>
-      <p class="fs-m">{{ $t(message) }}</p>
+      <h1 class="fs-l">404: <dynamic-title class="dynamic-title--same" :title="header"></dynamic-title></h1>
+      <p class="fs-m" v-html="$t(message)"></p>
     </div>
   </div>
 </div>
@@ -13,6 +13,7 @@
 <script>
 import meta from '../util/meta';
 import { fetch } from '../util/fetch';
+import DynamicTitle from '../components/DynamicTitle.vue';
 
 export default {
   mixins: [meta],
@@ -32,6 +33,9 @@ export default {
     message() {
       return this.$store.state.site.translations.site.notFoundMessage;
     },
+  },
+  components: {
+    DynamicTitle,
   },
 };
 </script>
