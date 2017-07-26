@@ -22,10 +22,10 @@ export function createStore() {
     },
 
     modules: {
-      site,
-      pages,
-      blog,
-      lightbox,
+      site: site(),
+      pages: pages(),
+      blog: blog(),
+      lightbox: lightbox(),
     },
   });
 }
