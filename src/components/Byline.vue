@@ -67,10 +67,12 @@ export default {
 </script>
 
 <style lang="less">
+@import '../less/variables.less';
+
 .byline {
   margin: 0.5em 0;
   a {
-    font-weight: 400;
+    font-weight: @fontBold;
   }
   &:last-child {
     margin-bottom: 0;

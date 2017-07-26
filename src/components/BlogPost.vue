@@ -151,7 +151,7 @@ export default {
     });
   }
   &__pinned {
-    font-weight: 400;
+    font-weight: @fontBold;
     text-align: center;
     padding: 1rem;
     background: @accent;

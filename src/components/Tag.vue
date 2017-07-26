@@ -28,7 +28,7 @@ export default {
 @import "../less/variables.less";
 
 .tag {
-  font-weight: 400;
+  font-weight: @fontBold;
   display: inline-block;
   padding: 0.4rem 0.6rem;
   line-height: 1;

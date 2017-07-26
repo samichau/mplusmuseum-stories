@@ -64,7 +64,7 @@ export default {
   }
 
   th {
-    font-weight: 400;
+    font-weight: @fontBold;
   }
 
   th, td {

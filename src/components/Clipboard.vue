@@ -97,7 +97,7 @@ export default {
     transition: 0.5s ease top;
     padding: 1rem;
     line-height: 3rem;
-    font-weight: 400;
+    font-weight: @fontBold;
     &--visible {
       top: 0;
     }

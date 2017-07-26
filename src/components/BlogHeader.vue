@@ -96,7 +96,7 @@ export default {
     white-space: pre;
   }
   >a {
-    font-weight: 400;
+    font-weight: @fontBold;
     color: @accent;
   }
 }

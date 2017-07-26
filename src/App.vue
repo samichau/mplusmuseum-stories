@@ -50,7 +50,7 @@ export default {
 
 html {
   font-size: 10px;
-  font-weight: 300;
+  font-weight: @fontNormal;
   color: @black;
   font-family: "PLUS", Helvetica, Arial, "PingFang HK", "蘋方-港", "HanHei TC", "Heiti TC", "STHeiti", "Microsoft JhengHei UI", "Microsoft JhengHei", "微软雅黑", STXihei, "华文细黑", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -101,7 +101,7 @@ body {
 }
 
 strong {
-  font-weight: 400;
+  font-weight: @fontBold;
 }
 
 a {
@@ -118,11 +118,11 @@ pre {
 }
 
 .lang-primary {
-  font-weight: 400;
+  font-weight: @fontBold;
 }
 
 .lang-secondary {
-  font-weight: 300;
+  font-weight: @fontNormal;
   font-size: 70%;
   &--same {
     font-size: 100%;
@@ -152,7 +152,7 @@ a.lang-secondary {
   color: @accent;
   border: none;
   padding: 1rem 1.5rem;
-  font-weight: 400;
+  font-weight: @fontBold;
   .shadow--small;
   &:hover, &:focus {
     background: @lightgrey;
@@ -186,7 +186,7 @@ a.lang-secondary {
     background: none;
     border: none;
     color: @accent;
-    font-weight: 400;
+    font-weight: @fontBold;
   }
 }
 

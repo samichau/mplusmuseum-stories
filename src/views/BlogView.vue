@@ -40,7 +40,7 @@ export default {
     text-align: center;
   }
   &__button-wide {
-    font-weight: 400;
+    font-weight: @fontBold;
     display: block;
     width: 100%;
     margin: 6rem 0;
