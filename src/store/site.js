@@ -1,5 +1,4 @@
 import _find from 'lodash/find';
-import promiseAllSoftFail from '../util/promise-all-soft-fail';
 import tags from './tags';
 import { asyncGet, Response } from '../api';
 
@@ -29,33 +28,15 @@ export default {
     },
   },
   actions: {
-    init(context, { action, payload }) {
-      const sitePromise = !context.state.initialized
-        ? asyncGet('data/site/')
-        : Promise.resolve(new Response(true));
-
-      const viewPromise = action
-        ? context.dispatch(action, payload, { root: true })
-        : Promise.resolve(new Response(true));
-
-      // We want to avoid fast fail here. If the view specific request
-      // fails, but the site request succeeds, we can instantiate the app
-      // and redirect to the 404 view
-      return promiseAllSoftFail([sitePromise, viewPromise]).then((responses) => {
-        const siteResponse = responses[0];
-        const viewResponse = responses[1];
-        if (siteResponse.resolved) {
-          if (siteResponse.data) {
-            context.commit('init', siteResponse.data);
-            context.commit('tags/set', siteResponse.data);
-            return responses;
-          } else if (viewResponse.resolved) {
-            return responses;
-          }
-          return Promise.reject(viewResponse);
-        }
-        return Promise.reject(siteResponse);
-      });
+    init(context) {
+      if (!context.state.initialized) {
+        return asyncGet('data/site/').then((response) => {
+          context.commit('init', response.data);
+          context.commit('tags/set', response.data);
+          return response;
+        });
+      }
+      return Promise.resolve(new Response(true));
     },
   },
   mutations: {

@@ -6,7 +6,6 @@
 import Basic from './BasicView.vue';
 import Documentation from './DocumentView.vue';
 import meta from '../util/meta';
-import { fetch } from '../util/fetch';
 
 export default {
   mixins: [meta],
@@ -18,7 +17,7 @@ export default {
     };
   },
   asyncData({ store, route }) {
-    return fetch(store, 'pages/update', route.params.page);
+    return store.dispatch('pages/update', route.params.page);
   },
   computed: {
     template() {

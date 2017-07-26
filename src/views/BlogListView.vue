@@ -9,7 +9,6 @@ import Tag from '../components/Tag.vue';
 import Marq from '../components/Marquee.vue';
 import Sticky from '../components/Sticky.vue';
 import meta from '../util/meta';
-import { fetch } from '../util/fetch';
 
 export default {
   mixins: [meta],
@@ -32,7 +31,7 @@ export default {
       if (route.query.tag) selectors.tags = route.query.tag;
     }
 
-    return fetch(store, 'blog/asyncInit', selectors).then((response) => {
+    return store.dispatch('blog/asyncInit', selectors).then((response) => {
       store.dispatch('blog/init', selectors);
       return response;
     });

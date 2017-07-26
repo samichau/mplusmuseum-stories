@@ -10,7 +10,6 @@
 import BlogView from './BlogView.vue';
 import BlogPost from '../components/BlogPost.vue';
 import meta from '../util/meta';
-import { fetch } from '../util/fetch';
 
 export default {
   mixins: [meta],
@@ -22,7 +21,7 @@ export default {
     };
   },
   asyncData({ store, route }) {
-    return fetch(store, 'blog/initSingle', route.params.name);
+    return store.dispatch('blog/initSingle', route.params.name);
   },
   computed: {
     post() {

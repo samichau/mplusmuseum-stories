@@ -12,7 +12,6 @@
 
 <script>
 import meta from '../util/meta';
-import { fetch } from '../util/fetch';
 import DynamicTitle from '../components/DynamicTitle.vue';
 
 export default {
@@ -23,8 +22,8 @@ export default {
       description: 'The requested resource could not be found.',
     };
   },
-  asyncData({ store }) {
-    return fetch(store, false, false);
+  asyncData() {
+    return Promise.resolve(true);
   },
   computed: {
     header() {
