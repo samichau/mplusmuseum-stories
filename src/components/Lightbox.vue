@@ -13,7 +13,7 @@
         <img :src="image.src" :alt="$t(image.src)">
       </div>
       <div class="lightbox__footer">
-        <div class="lightbox__caption fs-s">{{ $t(image.caption) }}</div>
+        <div class="lightbox__caption fs-s" v-html="$t(image.caption)"></div>
       </div>
     </div>
   </div>

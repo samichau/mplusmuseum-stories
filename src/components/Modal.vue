@@ -2,8 +2,8 @@
   <transition name="fade" mode="out-in">
     <div class="modal" v-if="visible" @click="close">
       <div class="modal__content shadow">
-        <h2 class="modal__title fs-m">{{ title }}</h2>
-        <div class="modal__message fs-b">{{ message }}</div>
+        <h2 class="modal__title fs-m" v-html="title"></h2>
+        <div class="modal__message fs-b" v-html="message"></div>
         <button v-for="(btn, i) of buttons" :key="i"
         class="modal__button button button--flat button--accent fs-s">{{ btn }}</button>
       </div>

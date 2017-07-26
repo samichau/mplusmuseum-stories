@@ -1,7 +1,9 @@
 <template>
   <div class="image-block block">
     <img :src="content[0].thumb" :alt="$t(content[0].alt)" @click="lightbox">
-    <div v-if="caption" class="image-block__caption fs-s">{{ $t(content[0].caption) }}</div>
+    <div v-if="caption"
+    class="image-block__caption fs-s"
+    v-html="$t(content[0].caption)"></div>
   </div>
 </template>
 
