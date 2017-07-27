@@ -167,15 +167,32 @@ function render(req, res) {
   });
 }
 
-const port = process.env.PORT || 8080;
-http.createServer(app).listen(port, () => {
-  console.log(`HTTP server started at localhost:${port}`);
-});
 console.log(process.env);
 // SSL
 if (process.env.USEHTTPS) {
   console.log('Using HTTPS redirects');
-  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+  // redirect http to https
+  app.enable('trust proxy');
+  app.use((req, res, next) => {
+    console.log('check if need to redirect');
+    if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'].toLowerCase() === 'http') {
+      console.log('attempt redirect...');
+      return res.redirect(`https://${req.headers.host}${req.url}`);
+    }
+    return next();
+  });
+
+  // app.use((req, res, next) => {
+  //   console.log('use this', req.protocol);
+  //   if (req.protocol === 'http') {
+  //     console.log('redirect...');
+  //     return res.redirect(`https://${req.headers.host}${req.url}`);
+  //   }
+  //   return next();
+  // });
+
+  // app.use(enforce.HTTPS({ trustProtoHeader: true }));
+
   if (process.env.SSLKEY && process.env.SSLCERT) {
     console.log('Using SSL credentials');
     const credentials = {
@@ -189,6 +206,11 @@ if (process.env.USEHTTPS) {
     });
   }
 }
+
+const port = process.env.PORT || 8080;
+http.createServer(app).listen(port, () => {
+  console.log(`HTTP server started at localhost:${port}`);
+});
 
 // Basic authentication
 if (process.env.AUTH) {
