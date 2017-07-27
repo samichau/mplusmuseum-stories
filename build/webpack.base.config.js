@@ -19,10 +19,13 @@ const plugins = isProd ? [
   new FriendlyErrorsPlugin(),
 ];
 
-plugins.push(new webpack.DefinePlugin({
-  'process.env.API_URL': JSON.stringify(process.env.API_URL),
-  'process.env.ANALYTICS_ID': JSON.stringify(process.env.ANALYTICS_ID),
-}));
+const variables = {};
+
+Object.keys(env.parsed).forEach((key) => {
+  variables[`process.env.${key}`] = JSON.stringify(env.parsed[key]);
+});
+
+plugins.push(new webpack.DefinePlugin(variables));
 
 
 module.exports = {
