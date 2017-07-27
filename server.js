@@ -172,21 +172,26 @@ http.createServer(app).listen(port, () => {
 });
 
 // SSL
-if (process.env.SSLKEY && process.env.SSLCERT) {
-  const credentials = {
-    key: fs.readFileSync(process.env.SSLKEY),
-    cert: fs.readFileSync(process.env.SSLCERT),
-  };
-  if (process.env.SSLPASSPHRASE) credentials.passphrase = process.env.SSLPASSPHRASE;
+if (process.env.USEHTTPS) {
+  console.log('Using HTTPS redirects');
   app.use(enforce.HTTPS({ trustProtoHeader: true }));
-  const securePort = process.env.SECUREPORT || 8443;
-  https.createServer(credentials, app).listen(securePort, () => {
-    console.log(`HTTPS server started at localhost:${securePort}`);
-  });
+  if (process.env.SSLKEY && process.env.SSLCERT) {
+    console.log('Using SSL credentials');
+    const credentials = {
+      key: fs.readFileSync(process.env.SSLKEY),
+      cert: fs.readFileSync(process.env.SSLCERT),
+    };
+    if (process.env.SSLPASSPHRASE) credentials.passphrase = process.env.SSLPASSPHRASE;
+    const securePort = process.env.SECUREPORT || 8443;
+    https.createServer(credentials, app).listen(securePort, () => {
+      console.log(`HTTPS server started at localhost:${securePort}`);
+    });
+  }
 }
 
 // Basic authentication
-if (process.env.AUTH === 'true') {
+if (process.env.AUTH) {
+  console.log('Using basic authentication');
   const basicAuth = auth.basic({
     realm: 'Staging Area',
     file: resolve('./.htpasswd'),
