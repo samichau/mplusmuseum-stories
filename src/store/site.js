@@ -30,7 +30,6 @@ export default function () {
     },
     actions: {
       init(context) {
-        console.log(context.state.initialized);
         if (!context.state.initialized) {
           return asyncGet('data/site/').then((response) => {
             context.commit('init', response.data);

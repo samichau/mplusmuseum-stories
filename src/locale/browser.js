@@ -5,12 +5,12 @@ module.exports = {
   ],
   accepts: {
     en: [
-      'bn',
-      'bn-US',
-      'bn-GB',
-      'bn-AU',
-      'bn-NZ',
-      'bn-CA',
+      'en',
+      'en-US',
+      'en-GB',
+      'en-AU',
+      'en-NZ',
+      'en-CA',
     ],
     tc: [
       'zh',
