@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
 const LRU = require('lru-cache');
@@ -6,6 +7,9 @@ const favicon = require('serve-favicon');
 const compression = require('compression');
 const axios = require('axios');
 const auth = require('http-auth');
+const http = require('http');
+const https = require('https');
+const enforce = require('express-sslify');
 
 const resolve = file => path.resolve(__dirname, file);
 const { createBundleRenderer } = require('vue-server-renderer');
@@ -67,19 +71,6 @@ app.use('/dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 app.use('/manifest.json', serve('./manifest.json', true));
 app.use('/service-worker.js', serve('./dist/service-worker.js'));
-
-// Basic authentication
-if (process.env.AUTH === 'true') {
-  const basicAuth = auth.basic({
-    realm: 'Staging Area.',
-    file: resolve('./.htpasswd'),
-  });
-
-  app.use((req, res, next) => {
-    if (req.path === '/status') next();
-    else (auth.connect(basicAuth))(req, res, next);
-  });
-}
 
 // 30-second microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
@@ -175,6 +166,38 @@ function render(req, res) {
   });
 }
 
+const port = process.env.PORT || 8080;
+http.createServer(app).listen(port, () => {
+  console.log(`HTTP server started at localhost:${port}`);
+});
+
+// SSL
+if (process.env.SSLKEY && process.env.SSLCERT) {
+  const credentials = {
+    key: fs.readFileSync(process.env.SSLKEY),
+    cert: fs.readFileSync(process.env.SSLCERT),
+  };
+  if (process.env.SSLPASSPHRASE) credentials.passphrase = process.env.SSLPASSPHRASE;
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+  const securePort = process.env.SECUREPORT || 8443;
+  https.createServer(credentials, app).listen(securePort, () => {
+    console.log(`HTTPS server started at localhost:${securePort}`);
+  });
+}
+
+// Basic authentication
+if (process.env.AUTH === 'true') {
+  const basicAuth = auth.basic({
+    realm: 'Staging Area',
+    file: resolve('./.htpasswd'),
+  });
+
+  app.use((req, res, next) => {
+    if (req.path === '/status') next();
+    else (auth.connect(basicAuth))(req, res, next);
+  });
+}
+
 // Status check for load balancer
 app.get('/status', (req, res) => {
   res.json({ status: 'running' });
@@ -182,9 +205,4 @@ app.get('/status', (req, res) => {
 
 app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res));
-});
-
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`server started at localhost:${port}`);
 });

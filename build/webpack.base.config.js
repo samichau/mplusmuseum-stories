@@ -22,7 +22,6 @@ const plugins = isProd ? [
 plugins.push(new webpack.DefinePlugin({
   'process.env.API_URL': JSON.stringify(process.env.API_URL),
   'process.env.ANALYTICS_ID': JSON.stringify(process.env.ANALYTICS_ID),
-  'process.env.AUTH': JSON.stringify(process.env.AUTH),
 }));
 
 
