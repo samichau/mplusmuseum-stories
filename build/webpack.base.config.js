@@ -1,4 +1,3 @@
-const env = require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const vueConfig = require('./vue-loader.config');
@@ -18,15 +17,6 @@ const plugins = isProd ? [
 ] : [
   new FriendlyErrorsPlugin(),
 ];
-
-const variables = {};
-
-Object.keys(env.parsed).forEach((key) => {
-  variables[`process.env.${key}`] = JSON.stringify(env.parsed[key]);
-});
-
-plugins.push(new webpack.DefinePlugin(variables));
-
 
 module.exports = {
   devtool: isProd

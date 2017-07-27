@@ -1,3 +1,4 @@
+const env = require('dotenv').config();
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const base = require('./webpack.base.config');
@@ -18,7 +19,8 @@ const config = merge(base, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"client"',
-      // 'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.ANALYTICS_ID': JSON.stringify(process.env.ANALYTICS_ID),
     }),
     // extract vendor chunks for better caching
     new webpack.optimize.CommonsChunkPlugin({
