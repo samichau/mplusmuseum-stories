@@ -170,7 +170,7 @@ const port = process.env.PORT || 8080;
 http.createServer(app).listen(port, () => {
   console.log(`HTTP server started at localhost:${port}`);
 });
-
+console.log(process.env);
 // SSL
 if (process.env.USEHTTPS) {
   console.log('Using HTTPS redirects');
