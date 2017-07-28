@@ -231,6 +231,18 @@ app.get('/status', (req, res) => {
   res.json({ status: 'running' });
 });
 
+// Sitemap
+app.get('/sitemap.xml', (req, res) => {
+  const endpoint = `${process.env.API_URL}/data/sitemap/`;
+  res.setHeader('Server', serverInfo);
+  axios.get(endpoint)
+    .then(({ data }) => require('./src/sitemap')(data, res))
+    .catch(() => {
+      console.log(`Failed to get site map from ${endpoint}.`);
+      return res.status(500).end();
+    });
+});
+
 app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res));
 });
