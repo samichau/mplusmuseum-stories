@@ -147,6 +147,7 @@ function render(req, res) {
   const context = {
     title: 'M+ Stories', // default title
     description: 'M+ Stories Website', // default description
+    verification: process.env.SITE_VERIFICATION,
     url: req.url,
   };
 
