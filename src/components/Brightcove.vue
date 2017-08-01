@@ -1,8 +1,8 @@
 <template>
   <div class="brightcove-video block">
-    <div v-if="content.alt"
+    <div v-if="alt"
     class="brightcove-video__alt sr-only"
-    v-text="$t(content.alt)"></div>
+    v-text="alt"></div>
     <div class="brightcove-video__wrap" v-if="validated">
       <video class="video-js brightcove-video__media"
       v-if="loaded"
@@ -14,9 +14,9 @@
       data-application-id
       controls></video>
     </div>
-    <div v-if="content.caption"
+    <div v-if="caption"
     class="image-block__caption fs-s"
-    v-html="$t(content.caption)"></div>
+    v-html="caption"></div>
   </div>
 </template>
 
@@ -62,6 +62,16 @@ export default {
     if (this.player) {
       this.player.dispose();
     }
+  },
+  computed: {
+    caption() {
+      if (!this.content.caption) return false;
+      return this.$t(this.content.caption) || false;
+    },
+    alt() {
+      if (!this.content.alt) return false;
+      return this.$t(this.content.alt) || false;
+    },
   },
 };
 </script>
