@@ -51,10 +51,8 @@ const { app, router, store } = createApp();
 // Use clipboard
 Vue.use(Clipboard);
 
-console.log('Client entry ANALYTICS_ID:', process.env.ANALYTICS_ID);
 // Use analytics
 if (process.env.ANALYTICS_ID) {
-  console.log('Using GA.');
   Vue.use(VueAnalytics, {
     id: process.env.ANALYTICS_ID,
     router,

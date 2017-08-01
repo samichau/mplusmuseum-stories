@@ -1,5 +1,5 @@
 <template>
-  <div class="page--basic" :class="{'page--fix-banner': page.banner && page.banner.fixed }">
+  <main class="page--basic" :class="{'page--fix-banner': page.banner && page.banner.fixed }">
     <banner v-if="page.banner" :data="page.banner"></banner>
     <div v-else class="header-push"></div>
     <div class="page__wrap">
@@ -7,7 +7,7 @@
       v-if="page.sections"
       :items="page.sections.list"></content-blocks>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>

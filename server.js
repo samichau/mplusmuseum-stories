@@ -168,7 +168,6 @@ function render(req, res) {
   });
 }
 
-console.log(process.env);
 // SSL
 if (process.env.USEHTTPS) {
   console.log('Using HTTPS redirects');
