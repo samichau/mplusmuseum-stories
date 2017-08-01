@@ -15,6 +15,7 @@
 .panel {
   background: @white;
   margin-bottom: 2rem;
+  overflow: hidden;
   .mq-sm({
     margin-bottom: 3rem;
   });

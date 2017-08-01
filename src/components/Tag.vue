@@ -2,7 +2,7 @@
   <a class="tag"
     :class="{ 'tag--active': tag.active }"
     :href="`?tag=${tag.name}`"
-    @click.stop.prevent="toggle">{{ $t(tag.title) }}</a>
+    @click.stop.prevent="toggle" v-html="$t(tag.title)"></a>
 </template>
 
 <script>

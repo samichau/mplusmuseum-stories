@@ -1,6 +1,6 @@
 <template>
   <aside class="blog-item blog-notice shadow">
-    <button class="blog-notice__close fs-b" @click="hide"><img src="../assets/img/cross.svg" alt="Close"></button>
+    <button class="blog-notice__close fs-b" @click="hide"><img src="../assets/img/cross.svg" alt="Close Notice"></button>
     <div class="blog-item__inner">
       <slot></slot>
     </div>
