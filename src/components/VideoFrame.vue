@@ -1,5 +1,8 @@
 <template>
   <div class="video-block block">
+    <div v-if="alt"
+    class="video-block__alt sr-only"
+    v-text="alt"></div>
     <div class="video-block__wrap">
       <iframe :src="url"
       type="text/html"
@@ -21,6 +24,9 @@ export default {
       required: true,
     },
     caption: {
+      default: false,
+    },
+    alt: {
       default: false,
     },
   },

@@ -1,5 +1,8 @@
 <template>
   <div class="brightcove-video block">
+    <div v-if="content.alt"
+    class="brightcove-video__alt sr-only"
+    v-text="$t(content.alt)"></div>
     <div class="brightcove-video__wrap" v-if="validated">
       <video class="video-js brightcove-video__media"
       v-if="loaded"
