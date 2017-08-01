@@ -91,9 +91,9 @@ export default {
 
 .progress {
   position: fixed;
-  top: 5rem;
-  .mq-sm({ top: 5.5rem; });
-  .mq-lg({ top: 6rem; });
+  top: @hSm * 12;
+  .mq-sm({ top: @hMd * 12; });
+  .mq-lg({ top: @hLg * 12; });
   margin-top: -3px;
   left: 0;
   right: 0;

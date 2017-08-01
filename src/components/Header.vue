@@ -103,7 +103,6 @@ export default {
   width: 100%;
   top: 0;
   left: 0;
-  padding: 1rem;
   a {
     color: @white;
   }
@@ -184,37 +183,40 @@ export default {
 
 // Sizing rules
 .header {
+  padding: @hSm * 2;
+  .mq-sm({ padding: @hMd * 2; });
+  .mq-lg({ padding: @hLg * 2; });
   &__bar {
-    height: 4rem;
-    .mq-sm({ height: 4.5rem; });
-    .mq-lg({ height: 5rem; });
+    height: @hSm * 10;
+    .mq-sm({ height: @hMd * 10; });
+    .mq-lg({ height: @hLg * 10; });
   }
   &__bar, &__section {
-    padding: .4rem;
-    .mq-sm({ padding: .45rem; });
-    .mq-lg({ padding: .5rem; });
+    padding: @hSm;
+    .mq-sm({ padding: @hMd; });
+    .mq-lg({ padding: @hLg; });
   }
   &__icon, &__section img {
-    height: 2.4rem;
-    .mq-sm({ height: 2.7rem; });
-    .mq-lg({ height: 3rem; });
+    height: @hSm * 6;
+    .mq-sm({ height: @hMd * 6; });
+    .mq-lg({ height: @hLg * 6; });
   }
   &__section {
     &--middle {
-      padding: .4rem 1.2rem;
-      .mq-sm({ padding: .45rem 1.35rem; });
-      .mq-lg({ padding: .5rem 1.5rem; });
+      padding: @hSm @hSm * 3;
+      .mq-sm({ padding: @hMd @hMd * 3; });
+      .mq-lg({ padding: @hLg @hLg * 3; });
     }
   }
   &__icon {
-    margin-left: .8rem;
-    .mq-sm({ margin-left: .9rem; });
-    .mq-lg({ margin-left: 1rem; });
+    margin-left: @hSm * 2;
+    .mq-sm({ margin-left: @hMd * 2; });
+    .mq-lg({ margin-left: @hLg * 2; });
   }
   &-push {
-    height: 5rem;
-    .mq-sm({ height: 5.5rem; });
-    .mq-lg({ height: 6rem; });
+    height: @hSm * 12;
+    .mq-sm({ height: @hMd * 12; });
+    .mq-lg({ height: @hLg * 12; });
   }
 }
 
