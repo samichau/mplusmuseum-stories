@@ -2,7 +2,7 @@
   <blog-view>
     <blog-post class="list-complete-item"
     :post="post"></blog-post>
-    <router-link :to="{ name: 'blog' }" class="blog__button-wide">Return to Blog</router-link>
+    <router-link :to="{ name: 'blog' }" class="blog__button-wide">{{ $t($store.state.site.translations.blog.return) }}</router-link>
   </blog-view>
 </template>
 
