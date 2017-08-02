@@ -14,10 +14,15 @@ import meta from '../util/meta';
 export default {
   mixins: [meta],
   meta() {
+    const hero = this.post.hero;
+    const image = this.post.simulacrum
+      || (hero && hero.type === 'image-block' && hero.content.length)
+      ? hero.content[0].src
+      : false;
     return {
       title: this.$t(this.post.title),
       description: this.$t(this.post.desc),
-      image: this.post.hero && this.post.hero.type === 'image-block' && this.post.hero.content.length ? this.post.hero.content[0].src : '',
+      image,
     };
   },
   asyncData({ store, route }) {

@@ -1,11 +1,12 @@
 import _unescape from 'lodash/unescape';
-import { site } from '../locale/translations';
 import { openGraph } from '../locale';
 
 function getMeta(vm) {
   const metaObj = {};
-  const lang = vm.$store.state.lang;
-  const siteTitle = site.title[lang];
+  const state = vm.$store.state;
+  const lang = state.lang;
+  const siteTitle = state.site.title[lang];
+  const siteDescription = state.site.desc[lang];
   let { meta } = vm.$options;
 
   meta = typeof meta === 'function'
@@ -13,9 +14,9 @@ function getMeta(vm) {
     : meta;
 
   metaObj.title = meta.title ? `${_unescape(meta.title)} - ${siteTitle}` : siteTitle;
-  metaObj.description = meta.description ? `${_unescape(meta.description)}` : site.description[lang];
-  metaObj.image = meta.image || '';
-  metaObj.url = vm.$store.state.site.url + vm.$store.state.route.path;
+  metaObj.description = meta.description ? `${_unescape(meta.description)}` : siteDescription;
+  metaObj.image = meta.image || state.site.simulacrum || '';
+  metaObj.url = state.site.url + state.route.path;
   metaObj.lang = openGraph[lang];
 
   return metaObj;

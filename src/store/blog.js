@@ -122,7 +122,20 @@ export default function () {
         });
       },
       setPost(state, post) {
-        state.single = post;
+        state.single = {
+          author: post.author,
+          category: post.category,
+          date: post.date,
+          desc: post.desc,
+          hero: post.hero,
+          id: post.id,
+          name: post.name,
+          related: post.related,
+          sections: post.sections,
+          simulacrum: post.simulacrum,
+          tags: post.tags,
+          title: post.title,
+        };
       },
     },
   };

@@ -9,13 +9,16 @@ export default function () {
       tags: tags(),
     },
     state: {
-      url: '',
       authors: [],
+      desc: {},
       descriptors: [],
-      social: [],
-      translations: {},
-      links: {},
       initialized: false,
+      links: {},
+      simulacrum: '',
+      social: [],
+      title: {},
+      translations: {},
+      url: '',
     },
     getters: {
       activeAuthor(state) {
@@ -42,14 +45,18 @@ export default function () {
     },
     mutations: {
       init(state, data) {
+        // @TODO Check this is reactive
         data.authors.forEach((author) => { author.active = false; });
-        state.url = data.baseURL;
-        state.links = data.links;
         state.authors = data.authors;
-        state.social = data.social;
-        state.translations = data.translations;
+        state.desc = data.desc;
         state.descriptors = data.descriptors;
         state.initialized = true;
+        state.links = data.links;
+        state.simulacrum = data.simulacrum;
+        state.social = data.social;
+        state.title = data.title;
+        state.translations = data.translations;
+        state.url = data.baseURL;
       },
       setAuthor(state, authorName) {
         state.authors.forEach((author) => {

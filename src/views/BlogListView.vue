@@ -14,8 +14,9 @@ export default {
   mixins: [meta],
   meta() {
     return {
-      title: this.$t(this.$store.state.blog.section.title),
-      description: this.$t(this.$store.state.blog.section.desc),
+      title: this.$t(this.section.title),
+      description: this.$t(this.section.desc),
+      image: this.section.simulacrum || false,
     };
   },
   asyncData({ store, route }) {
@@ -45,11 +46,11 @@ export default {
     ...mapState({
       t: s => s.site.translations,
       query: s => s.route.query,
-      notices: s => s.blog.section.notices,
       posts: s => s.blog.posts,
       postsRemaining: s => s.blog.postsRemaining,
       postsFiltered: s => s.blog.postsFiltered,
       postsFilteredRemaining: s => s.blog.postsFilteredRemaining,
+      section: s => s.blog.section,
     }),
     morePostsText() {
       return this.loadingPosts ? this.$t(this.t.site.loading) : this.$t(this.t.blog.morePosts);
@@ -199,7 +200,7 @@ export default {
       // notice elements where appropriate
       items = [this.posts.map((post, i) => {
         const content = [];
-        const noticeData = this.notices[i];
+        const noticeData = this.section.notices[i];
         if (noticeData && noticeData.visible) {
           if (i === 0) {
             content.push(h('sticky', {
