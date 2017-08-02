@@ -73,8 +73,8 @@ export default {
     }
     &__close {
       top: 0;
-      height: 7rem;
-      width: 7rem;
+      height: 3.5em;
+      width: 3.5em;
       border: none;
       background: none;
       img {
