@@ -16,7 +16,8 @@ export default {
     return {
       title: this.$t(this.section.title),
       description: this.$t(this.section.desc),
-      image: this.section.simulacrum || false,
+      image: this.section.simulacrum,
+      type: 'website',
     };
   },
   asyncData({ store, route }) {

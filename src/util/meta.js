@@ -18,6 +18,7 @@ function getMeta(vm) {
   metaObj.image = meta.image || state.site.simulacrum || '';
   metaObj.url = state.site.url + state.route.path;
   metaObj.lang = openGraph[lang];
+  metaObj.type = meta.type || 'website';
 
   return metaObj;
 }
@@ -35,6 +36,7 @@ export function setServer(vm) {
   vm.$ssrContext.image = meta.image;
   vm.$ssrContext.url = meta.url;
   vm.$ssrContext.lang = meta.lang;
+  vm.$ssrContext.type = meta.type;
 }
 
 const serverMetaMixin = {

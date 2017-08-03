@@ -10,14 +10,11 @@ import meta from '../util/meta';
 export default {
   mixins: [meta],
   meta() {
-    const image = this.page.simulacrum
-      || (this.page.banner && this.page.banner.length)
-      ? this.page.banner.images[0].src
-      : false;
     return {
       title: this.$t(this.page.title),
       description: this.$t(this.page.desc),
-      image,
+      image: this.page.simulacrum,
+      type: 'website',
     };
   },
   asyncData({ store, route }) {

@@ -149,6 +149,9 @@ function render(req, res) {
     description: 'M+ Stories Website', // default description
     verification: process.env.SITE_VERIFICATION,
     url: req.url,
+    type: 'website',
+    image: '',
+    lang: '',
   };
 
   renderer.renderToString(context, (err, html) => {
