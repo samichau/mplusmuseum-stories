@@ -32,18 +32,20 @@ export default {
 
 <style lang="less">
 @import "../less/variables.less";
+@bannerSize: 40%;
+@bannerIncrement: 12.5%;
 
 .banner {
-  padding-top: 95%;
+  padding-top: @bannerSize + @bannerIncrement * 3;
   position: relative;
   .mq-sm({
-    padding-top: 70%;
+    padding-top: @bannerSize + @bannerIncrement * 2;
   });
   .mq-md({
-    padding-top: 55%;
+    padding-top: @bannerSize + @bannerIncrement * 1;
   });
   .mq-lg({
-    padding-top: 40%;
+    padding-top: @bannerSize;
   });
   &__text, &__media {
     position: absolute;
@@ -77,16 +79,16 @@ export default {
 }
 
 .page--fix-banner {
-  padding-top: 95%;
+  padding-top: @bannerSize + @bannerIncrement * 3;
   position: relative;
   .mq-sm({
-    padding-top: 70%;
+    padding-top: @bannerSize + @bannerIncrement * 2;
   });
   .mq-md({
-    padding-top: 55%;
+    padding-top: @bannerSize + @bannerIncrement * 1;
   });
   .mq-lg({
-    padding-top: 40%;
+    padding-top: @bannerSize;
   });
   .banner {
     position: fixed;
