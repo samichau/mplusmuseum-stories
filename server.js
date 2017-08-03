@@ -7,10 +7,9 @@ const express = require('express');
 const favicon = require('serve-favicon');
 const compression = require('compression');
 const axios = require('axios');
-const auth = require('http-auth');
 const http = require('http');
 const https = require('https');
-const enforce = require('express-sslify');
+// const enforce = require('express-sslify');
 
 const resolve = file => path.resolve(__dirname, file);
 const { createBundleRenderer } = require('vue-server-renderer');
@@ -73,6 +72,9 @@ app.use('/public', serve('./public', true));
 app.use('/manifest.json', serve('./manifest.json', true));
 app.use('/service-worker.js', serve('./dist/service-worker.js'));
 
+// Middleware for language detection
+app.use(require('./middleware/detect-language.js'));
+
 // 30-second microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
 const microCache = LRU({
@@ -93,27 +95,8 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
-const locales = require('./src/locale/browser.js');
-
 function render(req, res) {
   const s = !isProd ? Date.now() : false;
-
-  // Set language
-  if (req.path === '' || req.path === '/') {
-    // Create flattened array of all the locales
-    const allLocales = [];
-    locales.groups.forEach(group =>
-      locales.accepts[group].forEach(locale =>
-        allLocales.push(locale)));
-    // Find a match
-    const lang = req.acceptsLanguages(allLocales);
-    if (lang) {
-      const localeMatch = locales.groups.find(group =>
-        locales.accepts[group].indexOf(lang) >= 0);
-      if (localeMatch) req.url = `/${localeMatch}/`;
-    }
-  }
-
   // Set the preview query for the axios interceptor
   previewQuery = req.query.p ? req.query.p : false;
 
@@ -149,9 +132,6 @@ function render(req, res) {
     description: 'M+ Stories Website', // default description
     verification: process.env.SITE_VERIFICATION,
     url: req.url,
-    type: 'website',
-    image: '',
-    lang: '',
   };
 
   renderer.renderToString(context, (err, html) => {
@@ -176,24 +156,7 @@ if (process.env.USEHTTPS) {
   console.log('Using HTTPS redirects');
   // redirect http to https
   app.enable('trust proxy');
-  app.use((req, res, next) => {
-    console.log('check if need to redirect');
-    if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'].toLowerCase() === 'http') {
-      console.log('attempt redirect...');
-      return res.redirect(`https://${req.headers.host}${req.url}`);
-    }
-    return next();
-  });
-
-  // app.use((req, res, next) => {
-  //   console.log('use this', req.protocol);
-  //   if (req.protocol === 'http') {
-  //     console.log('redirect...');
-  //     return res.redirect(`https://${req.headers.host}${req.url}`);
-  //   }
-  //   return next();
-  // });
-
+  app.use(require('./middleware/http-to-https.js'));
   // app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
   if (process.env.SSLKEY && process.env.SSLCERT) {
@@ -218,15 +181,7 @@ http.createServer(app).listen(port, () => {
 // Basic authentication
 if (process.env.AUTH) {
   console.log('Using basic authentication');
-  const basicAuth = auth.basic({
-    realm: 'Staging Area',
-    file: resolve('./.htpasswd'),
-  });
-
-  app.use((req, res, next) => {
-    if (req.path === '/status') next();
-    else (auth.connect(basicAuth))(req, res, next);
-  });
+  app.use(require('./middleware/basic-auth.js'));
 }
 
 // Status check for load balancer
