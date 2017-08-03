@@ -97,6 +97,7 @@ export default {
   methods: {
     extend() {
       this.$store.commit('blog/extendPost', this.post);
+      this.$router.push({ query: { r: this.post.name } });
     },
   },
   components: {

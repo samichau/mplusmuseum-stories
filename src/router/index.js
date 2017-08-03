@@ -10,9 +10,8 @@ export function createRouter() {
     mode: 'history',
     scrollBehavior: (to, from, savedPosition) => {
       if (to.params.lang !== from.params.lang) return {};
-      if (savedPosition) {
-        return savedPosition;
-      }
+      if (savedPosition) return savedPosition;
+      else if (to.query.r) return {};
       return { y: 0 };
     },
   });

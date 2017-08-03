@@ -74,6 +74,8 @@ app.use('/service-worker.js', serve('./dist/service-worker.js'));
 
 // Middleware for language detection
 app.use(require('./middleware/detect-language.js'));
+// Middleware for redirecting to page from query
+app.use(require('./middleware/param-via-query.js'));
 
 // 30-second microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
