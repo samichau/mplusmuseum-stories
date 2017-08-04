@@ -3,7 +3,7 @@
     <button class="lightbox__close" @click="close"><img src="../assets/img/cross.svg" alt="Close"></button>
     <div class="lightbox__share">
       <share-bar v-if="share"
-        class="sharebar--horizontal"
+        class="sharebar--horizontal sharebar--reverse"
         :limit="0"
         :url="share.location"
         :title="share.title"></share-bar>

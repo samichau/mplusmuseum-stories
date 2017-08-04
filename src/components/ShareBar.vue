@@ -4,10 +4,6 @@
     <transition-group class="sharebar__items" name="resize" mode="out-in" tag="div">
       <a v-for="(item, i) of items"
         class="sharebar__block"
-        :class="[`sharebar__block--${item.name}`, {
-          'hide--mobile': item.hide.mobile,
-          'hide--desktop': item.hide.desktop,
-        }]"
         @click="share(item.share, $event)"
         :key="item.id"
         :href="item.share | shareLink({
@@ -58,6 +54,7 @@ export default {
   data() {
     return {
       expanded: false,
+      isMobile: false,
     };
   },
   filters: {
@@ -86,10 +83,22 @@ export default {
       }
     },
   },
+  mounted() {
+    this.isMobile = (typeof navigator !== 'undefined' && /Mobi|UCBrowser/i.test(navigator.userAgent));
+  },
   computed: {
+    allItems() {
+      return this.$store.getters['site/socialShareables'];
+    },
+    mobileItems() {
+      return this.allItems.filter(item => !item.hide.mobile);
+    },
+    desktopItems() {
+      return this.allItems.filter(item => !item.hide.desktop);
+    },
     items() {
-      const socialItems = this.$store.getters['site/socialShareables'];
-      return this.expanded ? socialItems : socialItems.slice(0, this.limit);
+      const items = this.isMobile ? this.mobileItems : this.desktopItems;
+      return this.expanded ? items : items.slice(0, this.limit);
     },
   },
 };
@@ -189,7 +198,7 @@ export default {
   &--horizontal {
     flex-direction: row;
     .sharebar__items {
-      flex-direction: row-reverse;
+      flex-direction: row;
     }
     .sharebar__block.resize-enter, .sharebar__block.resize-leave-active {
       width: 0;
@@ -197,6 +206,11 @@ export default {
       .mq-sm({
         height: @blockSize;
       });
+    }
+  }
+  &--reverse {
+    .sharebar__items {
+      flex-direction: row-reverse;
     }
   }
 }
