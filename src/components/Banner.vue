@@ -34,21 +34,20 @@ export default {
 
 <style lang="less">
 @import "../less/variables.less";
-@bannerSize: 40%;
-@bannerIncrement: 12.5%;
+@bannerSize: 100vh;
 
-.banner {
-  padding-top: @bannerSize + @bannerIncrement * 3;
+.banner, .page--fix-banner {
   position: relative;
+  padding-top: @bannerSize / 2;
   .mq-sm({
-    padding-top: @bannerSize + @bannerIncrement * 2;
+    padding-top: @bannerSize / 3 * 2;
   });
   .mq-md({
-    padding-top: @bannerSize + @bannerIncrement * 1;
+    padding-top: @bannerSize * 0.75;
   });
-  .mq-lg({
-    padding-top: @bannerSize;
-  });
+}
+
+.banner {
   &__text, &__media {
     position: absolute;
     top: 0;
@@ -81,17 +80,6 @@ export default {
 }
 
 .page--fix-banner {
-  padding-top: @bannerSize + @bannerIncrement * 3;
-  position: relative;
-  .mq-sm({
-    padding-top: @bannerSize + @bannerIncrement * 2;
-  });
-  .mq-md({
-    padding-top: @bannerSize + @bannerIncrement * 1;
-  });
-  .mq-lg({
-    padding-top: @bannerSize;
-  });
   .banner {
     position: fixed;
     top: 0;
