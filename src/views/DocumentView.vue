@@ -5,9 +5,7 @@
       <panel class="document-item document-item__contents">
         <div slot="header" class="anchor" id="contents"></div>
         <template slot="content">
-          <h1 class="document__title fs-l">
-            <dynamic-title :title="page.title"></dynamic-title>
-          </h1>
+          <dynamic-title class="document__title fs-l" :wrap="'h1'" :title="page.title"></dynamic-title>
           <template v-if="page.contents">
             <div class="document-item__header">
               <h2 v-html="$t($store.state.site.translations.site.tableOfContents)"></h2>

@@ -5,7 +5,7 @@
       :is="post.hero.type"
       :content="post.hero.content"
       :caption="false"></component>
-    <h1 class="blog-post__title fs-l"><dynamic-title :title="post.title"></dynamic-title></h1>
+    <dynamic-title class="blog-post__title fs-l" :wrap="'h1'" :title="post.title"></dynamic-title></h1>
     <div class="blog-post__meta">
       <byline :authorId="post.author"
       :date="post.date"

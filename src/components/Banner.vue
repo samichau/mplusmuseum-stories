@@ -2,10 +2,7 @@
   <div class="banner" v-if="media">
     <div class="banner__text fs-xl f-b">
       <div class="header-push"></div>
-      <h2>
-        <div class="lang-primary" v-html="$t(media.caption)"></div>
-        <div class="lang-secondary" v-html="$tt(media.caption)"></div>
-      </h2>
+      <dynamic-title class="dynamic-title--same" :title="media.caption" :wrap="'h1'" :block="true"></dynamic-title>
     </div>
     <div class="banner__media">
       <img v-if="data.images" :src="media.src" :alt="$t(media.alt)">
@@ -14,6 +11,8 @@
 </template>
 
 <script>
+import DynamicTitle from './DynamicTitle.vue';
+
 export default {
   props: {
     data: {
@@ -25,6 +24,9 @@ export default {
       if (this.data.images) return this.data.images[0];
       return false;
     },
+  },
+  components: {
+    DynamicTitle,
   },
 };
 </script>
@@ -95,7 +97,11 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: -1;
+    z-index: 1;
+  }
+  .page__wrap {
+    position: relative;
+    z-index: 5;
   }
 }
 
