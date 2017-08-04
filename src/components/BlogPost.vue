@@ -134,15 +134,18 @@ export default {
     background: @white;
   }
   &__hero {
-    img {
-      height: 250px;
-      .mq-sm({
-        height: 600px;
-      });
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      font-family: 'object-fit: cover;';
+    &.image-block {
+      position: relative;
+      padding-top: 62.5%;
+      img {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        font-family: 'object-fit: cover;';
+      }
     }
   }
   &__more {
