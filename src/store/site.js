@@ -42,6 +42,11 @@ export default function () {
         }
         return Promise.resolve(new Response(true));
       },
+      triggerNativeEvent(context, event) {
+        const evt = window.document.createEvent('UIEvents');
+        evt.initUIEvent(event, true, false, window, 0);
+        window.dispatchEvent(evt);
+      },
     },
     mutations: {
       init(state, data) {

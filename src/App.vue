@@ -151,12 +151,20 @@ a.lang-secondary {
   background-color: @white;
   color: @accent;
   border: none;
-  padding: 1rem 1.5rem;
+  padding: 0.5em 0.75em;
   font-weight: @fontBold;
   .shadow--small;
   &:hover, &:focus {
     background: @lightgrey;
     color: @accent;
+  }
+  &--invert {
+    background: @lightgrey;
+    color: @midgrey;
+    &:hover {
+      background-color: @accent;
+      color: @white;
+    }
   }
   &--accent {
     background-color: @accent;

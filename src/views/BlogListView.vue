@@ -8,6 +8,7 @@ import NewsletterBlock from '../components/NewsletterBlock.vue';
 import Tag from '../components/Tag.vue';
 import Marq from '../components/Marquee.vue';
 import Sticky from '../components/Sticky.vue';
+import Waypoints from '../components/Waypoints.vue';
 import meta from '../util/meta';
 
 export default {
@@ -81,15 +82,18 @@ export default {
       this.loadingPosts = true;
       this.$bar.start();
       return this.$store.dispatch('blog/getPosts', { items, remaining, selectors })
-        .then(() => {
-          this.loadingPosts = false;
-          this.$bar.finish();
-        })
+        .then(this.afterGetMore)
         .catch((error) => {
+          this.afterGetMore();
           this.$modal.error(error);
-          this.loadingPosts = false;
-          this.$bar.finish();
         });
+    },
+    afterGetMore() {
+      this.loadingPosts = false;
+      this.$bar.finish();
+      this.$nextTick(() => {
+        this.$store.dispatch('site/triggerNativeEvent', 'resize');
+      });
     },
   },
   components: {
@@ -101,9 +105,11 @@ export default {
     Tag,
     Marq,
     Sticky,
+    Waypoints,
   },
   render(h) {
     let items = [];
+    let posts = [];
 
     const createLinks = () => h('div', { class: 'blog-notice__social social-links fs-s' },
       this.$store.getters['site/socialLinkables'].map((platform) => {
@@ -166,19 +172,19 @@ export default {
           : false;
 
         // Create the posts list, for now we don't put notice elements here
-        items = [
-          h('blog-header'),
-          this.postsFiltered.map(post =>
-            h('blog-post', {
-              class: 'list-complete-item',
-              key: `filtered-${post.name}`,
-              props: {
-                post,
-              },
+        items.push(h('blog-header'));
+        posts = this.postsFiltered;
+        posts.forEach((post, i) =>
+          items.push(h('blog-post', {
+            class: 'list-complete-item',
+            key: `filtered-${post.name}`,
+            postIndex: i,
+            props: {
+              post,
             },
-            )),
-          moreBtn,
-        ];
+          },
+          )));
+        if (moreBtn) items.push(moreBtn);
       } else {
         // But if we don't have any filtered posts, just show the marquee element
         items = [
@@ -199,12 +205,12 @@ export default {
 
       // Create the posts list by looping through the posts and inserting
       // notice elements where appropriate
-      items = [this.posts.map((post, i) => {
-        const content = [];
+      posts = this.posts;
+      posts.forEach((post, i) => {
         const noticeData = this.section.notices[i];
         if (noticeData && noticeData.visible) {
           if (i === 0) {
-            content.push(h('sticky', {
+            items.push(h('sticky', {
               props: {
                 fadeOut: true,
               },
@@ -212,23 +218,44 @@ export default {
               createNotice(noticeData),
             ]));
           } else {
-            content.push(createNotice(noticeData));
+            items.push(createNotice(noticeData));
           }
         }
 
-        content.push(h('blog-post', {
+        items.push(h('blog-post', {
           class: 'list-complete-item',
           key: `unfiltered-${post.name}`,
+          postIndex: i,
           props: {
             post,
           },
         }));
-
-        return content;
-      }), moreBtn];
+      });
+      if (moreBtn) items.push(moreBtn);
     }
 
-    return h('blog-view', {}, items);
+    const funcToCall = (index) => {
+      const component = items[index];
+      const route = this.$store.state.route;
+      let url = window.location.origin;
+      if (component && component.data && typeof component.data.postIndex !== 'undefined') {
+        const post = posts[component.data.postIndex];
+        url += `${route.path}/${post.name}`;
+      } else {
+        url += route.fullPath;
+      }
+      window.history.replaceState(undefined, undefined, url);
+    };
+
+    const waypoints = h('waypoints', {
+      props: {
+        trigger(index) {
+          funcToCall(index);
+        },
+      },
+    }, items);
+
+    return h('blog-view', {}, [waypoints]);
   },
 };
 </script>

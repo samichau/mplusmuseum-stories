@@ -18,12 +18,15 @@
         </div>
 
         <div class="blog-post__body fs-b col-md-9">
+
           <content-blocks :items="sections"></content-blocks>
+
           <button class="blog-post__more button button--accent"
-          v-if="post.truncated && post.sections.truncateAfter"
+          v-if="this.$store.state.route.name === 'blog' && post.sections.truncateAfter && post.truncated"
+          ref="more"
           @click="extend">{{ $t(t.site.continue) }}</button>
 
-          <div class="blog-post__footer" v-if="showFooterContent">
+          <div class="blog-post__footer" v-if="!post.truncated">
 
             <share-bar class="blog-post__sharebar hide--desktop"
             :url="shareData.location"
@@ -37,13 +40,18 @@
             :name="`newsletter__${post.name}`"
             :button="'&rarr;<span class=\'sr-only\'>Subscribe to the M+ Stories Newsletter</span>'"></newsletter-block>
 
+            <button class="blog-post__more button button--invert"
+            v-if="this.$store.state.route.name === 'blog' && post.sections.truncateAfter"
+            ref="less"
+            @click="collapse">Collapse Post</button>
+
           </div>
         </div>
       </div>
     </div>
 
     <suggested class="blog-post__suggested"
-    v-if="showFooterContent && post.related"
+    v-if="!post.truncated && post.related"
     :items="post.related.items"></suggested>
 
   </article>
@@ -90,14 +98,35 @@ export default {
         title: this.$t(this.post.title),
       };
     },
-    showFooterContent() {
-      return !this.post.truncated;
-    },
   },
   methods: {
     extend() {
       this.$store.commit('blog/extendPost', this.post);
-      this.$router.push({ query: { r: this.post.name } });
+      this.$nextTick(this.triggerResize);
+      this.$ga.event({
+        eventCategory: 'Blog Post',
+        eventAction: 'Expand',
+        eventLabel: this.post.title[this.lang],
+      });
+    },
+    collapse() {
+      const offset = this.$refs.less.getBoundingClientRect().top;
+      this.$store.commit('blog/collapsePost', this.post);
+      this.$nextTick(() => {
+        const top = this.$refs.more.getBoundingClientRect().top;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const newPosition = (top + scrollTop) - offset;
+        window.scrollTo(0, newPosition);
+        this.triggerResize();
+      });
+      this.$ga.event({
+        eventCategory: 'Blog Post',
+        eventAction: 'Collapse',
+        eventLabel: this.post.title[this.lang],
+      });
+    },
+    triggerResize() {
+      this.$store.dispatch('site/triggerNativeEvent', 'resize');
     },
   },
   components: {
@@ -120,7 +149,8 @@ export default {
     max-width: 100%;
   }
   .clipboard {
-    margin-top: 2em;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
   &__content {
     .mq-sm({
@@ -149,10 +179,8 @@ export default {
     }
   }
   &__more {
-    margin-top: 1.5rem;
-    .mq-sm({
-      margin-top: 3rem;
-    });
+    margin-top: 1em;
+    display: block;
   }
   &__pinned {
     font-weight: @fontBold;

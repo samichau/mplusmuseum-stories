@@ -116,6 +116,9 @@ export default function () {
       extendPost(state, post) {
         post.truncated = false;
       },
+      collapsePost(state, post) {
+        post.truncated = true;
+      },
       setCategory(state, categoryName) {
         state.section.categories.forEach((category) => {
           category.active = category.name === categoryName;
