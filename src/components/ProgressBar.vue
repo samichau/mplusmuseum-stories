@@ -98,7 +98,9 @@ export default {
   left: 0;
   right: 0;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 @hSm * 2;
+  .mq-sm({ padding: 0 @hMd * 2; });
+  .mq-lg({ padding: 0 @hLg * 2; });
   z-index: 1000;
   pointer-events: none;
   &__bar {
