@@ -1,11 +1,13 @@
 <template>
   <main class="blog">
     <div class="header-push"></div>
-    <div class="blog__content row">
-      <section class="blog__posts col-md-9">
-        <slot></slot>
-      </section>
-      <blog-sidebar class="col-md-3"></blog-sidebar>
+    <div class="wrap wrap--wide">
+      <div class="blog__content row">
+        <section class="blog__posts col-md-9">
+          <slot></slot>
+        </section>
+        <blog-sidebar class="col-md-3"></blog-sidebar>
+      </div>
     </div>
   </main>
 </template>
@@ -29,8 +31,6 @@ export default {
   .mq-sm({ padding: 3.5rem 0 1rem; });
   .mq-lg({ padding: 4rem 0 1rem; });
   &__content {
-    max-width: 1280px;
-    margin: 0 auto;
     .mq-md({
       display: flex;
     });

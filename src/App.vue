@@ -75,9 +75,16 @@ body {
 
 .wrap {
   max-width: 800px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  &--wide {
+    max-width: 1280px;
+  }
+  &--full {
+    max-width: 100%;
+  }
 }
 
 .block {

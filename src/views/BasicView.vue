@@ -43,20 +43,18 @@ export default {
   .page {
     &__content {
       margin: 2em auto;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-      // padding: 0 1.5rem;
-      max-width: 1040px;
       .block {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
-        &.image-block, &.youtube-block {
-          max-width: 100%;
-        }
-        &.instagram-block {
-          max-width: 600px;
-        }
+      }
+      .image-block, .video-block {
+        max-width: 1040px;
+      }
+      .instagram-block {
+        max-width: 600px;
       }
     }
   }

@@ -30,7 +30,7 @@ export default {
 
 .image-block {
   img {
-    max-width: 100%;
+    width: 100%;
     cursor: zoom-in;
     display: block;
     margin: 0 auto;
