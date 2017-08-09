@@ -3,7 +3,7 @@
     <router-link class="dropdown__item shadow"
       v-for="(item, i) of items"
       :key="i"
-      :to="{ name: item.name, params: { page: item.params.page } }">
+      :to="{ name: item.name, params: { lang: $store.state.lang, page: item.params.page } }">
       <span class="lang-primary" v-html="$t(item.content)"></span>&thinsp;<span class="lang-secondary lang-secondary--same" v-html="$tt(item.content)"></span>
     </router-link>
   </nav>

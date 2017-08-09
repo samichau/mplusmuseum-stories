@@ -5,7 +5,7 @@
       <router-link
       v-for="(item, i) of $store.state.site.links.footer"
       :key="i"
-      :to="{ name: item.name, params: { page: item.params.page } }" v-html="$t(item.content)"></router-link>
+      :to="{ name: item.name, params: { lang: $store.state.lang, page: item.params.page } }" v-html="$t(item.content)"></router-link>
     </div>
     <div class="footer__social footer__section social-links">
       <a v-for="platform of $store.getters['site/socialLinkables']"
