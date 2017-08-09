@@ -126,7 +126,7 @@ export default {
       });
     },
     triggerResize() {
-      this.$store.dispatch('site/triggerNativeEvent', 'resize');
+      this.$triggerNative('resize');
     },
   },
   components: {

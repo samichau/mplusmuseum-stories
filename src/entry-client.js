@@ -20,6 +20,13 @@ Vue.prototype.$modal = new Vue(Modal).$mount();
 const modal = Vue.prototype.$modal;
 document.body.appendChild(modal.$el);
 
+Vue.prototype.$triggerNative = (event) => {
+  const evt = window.document.createEvent('UIEvents');
+  evt.initUIEvent(event, true, false, window, 0);
+  window.dispatchEvent(evt);
+};
+const triggerNative = Vue.prototype.$triggerNative;
+
 function handleError(error) {
   modal.error(error);
   bar.finish();
@@ -97,6 +104,10 @@ router.onReady(() => {
         bar.finish();
         next();
       }).catch(handleError);
+  });
+
+  router.afterEach(() => {
+    Vue.nextTick(() => { triggerNative('resize'); });
   });
 
   // actually mount to DOM

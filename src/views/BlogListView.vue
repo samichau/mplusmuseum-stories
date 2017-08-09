@@ -92,7 +92,7 @@ export default {
       this.loadingPosts = false;
       this.$bar.finish();
       this.$nextTick(() => {
-        this.$store.dispatch('site/triggerNativeEvent', 'resize');
+        this.$triggerNative('resize');
       });
     },
   },
