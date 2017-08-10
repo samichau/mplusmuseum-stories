@@ -29,11 +29,11 @@ export default {
       overflows: false,
       contentHeight: 0,
       windowHeight: 0,
-      height: 'inherit',
-      opacity: 'inherit',
-      visibility: 'inherit',
-      top: 'inherit',
-      width: 'inherit',
+      height: null,
+      opacity: null,
+      visibility: null,
+      top: null,
+      width: null,
     };
   },
   mounted() {
@@ -67,7 +67,7 @@ export default {
       if ((this.contentHeight > this.windowHeight) && offset) {
         this.top = `${offset}px`;
       } else {
-        this.top = 'inherit';
+        this.top = null;
       }
     },
     setWidth() {
@@ -88,9 +88,9 @@ export default {
       this.stuck = true;
     },
     unstick() {
-      this.height = 'inherit';
-      this.top = 'inherit';
-      this.width = 'inherit';
+      this.height = null;
+      this.top = null;
+      this.width = null;
       this.stuck = false;
     },
     resize() {
