@@ -82,6 +82,12 @@ body {
   &--wide {
     max-width: 1280px;
   }
+  &--x-wide {
+    max-width: 1280px;
+    @media only screen and (min-width: 1350px) {
+      max-width: 95%;
+    }
+  }
   &--full {
     max-width: 100%;
   }
@@ -196,6 +202,9 @@ a.lang-secondary {
     background: none;
     box-shadow: none;
   }
+  &--wide {
+    width: 100%;
+  }
   &--reset {
     padding: 0;
     background: none;
@@ -274,6 +283,9 @@ a.lang-secondary {
   &--inner {
     box-shadow: @shadowStyleInner;
   }
+  &--dark {
+    box-shadow: @shadowStyleDark;
+  }
 }
 
 .shadow--small {
@@ -290,6 +302,14 @@ a.lang-secondary {
     .mq-sm({
       display: none !important;
     });
+  }
+}
+
+.cf {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
   }
 }
 
