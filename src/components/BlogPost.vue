@@ -36,14 +36,14 @@
             :url="shareData.location"></clipboard>
 
             <newsletter-block class="blog-post__footer-section input-wrap--inline"
-            :label="$t($store.state.site.translations.newsletter.placeholderAlt)"
+            :label="$t(t.newsletter.placeholderAlt)"
             :name="`newsletter__${post.name}`"
             :button="'&rarr;<span class=\'sr-only\'>Subscribe to the M+ Stories Newsletter</span>'"></newsletter-block>
 
             <button class="blog-post__more button button--invert"
             v-if="this.$store.state.route.name === 'blog' && post.sections.truncateAfter"
             ref="less"
-            @click="collapse">Collapse Post</button>
+            @click="collapse">{{ $t(t.blog.close) }}</button>
 
           </div>
         </div>
