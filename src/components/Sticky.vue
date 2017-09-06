@@ -39,19 +39,25 @@ export default {
   mounted() {
     this.init();
     // Add load event listener as fix for iOS incorrectly calculating element height
-    window.addEventListener('load', this.init, { once: true });
+    window.addEventListener('load', this.confirm, { once: true });
     window.addEventListener('resize', this.resize);
     window.addEventListener('scroll', this.onScroll);
   },
   destroyed() {
-    window.removeEventListener('load', this.init);
+    window.removeEventListener('load', this.confirm);
     window.removeEventListener('resize', this.resize);
     window.removeEventListener('scroll', this.onScroll);
   },
   methods: {
     init() {
-      const elementOverflows = this.getMeasurements();
-      if (!elementOverflows && !this.stuck) this.stick();
+      this.$nextTick(() => {
+        const elementOverflows = this.getMeasurements();
+        if (!elementOverflows && !this.stuck) this.stick();
+        setTimeout(this.confirm, 1000);
+      });
+    },
+    confirm() {
+      if (this.stuck) this.$nextTick(this.stick);
     },
     shouldBeStuck() {
       const pos = this.$el.getBoundingClientRect().top;
@@ -111,11 +117,11 @@ export default {
           this.unstick();
         }
       }
-      if (this.fadeOut) this.handleFade();
+      if (this.fadeOut !== false) this.handleFade();
     },
     handleFade() {
       const pos = window.scrollY || window.pageYOffset;
-      const opacity = Math.max(1 - (pos / 350), 0);
+      const opacity = Math.max(1 - (pos / this.contentHeight), 0);
       const visibility = opacity === 0 ? 'hidden' : 'visible';
       this.opacity = opacity;
       this.visibility = visibility;
