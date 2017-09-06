@@ -122,6 +122,18 @@ a {
   text-decoration: none;
 }
 
+img {
+  &.lazy, &[lazy=loading], &[lazy=loaded] {
+    transition: 1s ease opacity;
+  } 
+  &.lazy, &[lazy=loading] {
+    opacity: 0.5;
+  }
+  &[lazy=loaded], &[lazy=error] {
+    opacity: 1;
+  }
+}
+
 pre {
   background: @lightgrey;
   background: lighten(@lightgrey, 3%);
