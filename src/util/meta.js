@@ -1,5 +1,5 @@
 import _unescape from 'lodash/unescape';
-import { openGraph } from '../locale';
+import { htmlDocument, openGraph } from '../locale';
 
 function getMeta(vm) {
   const metaObj = {};
@@ -17,7 +17,8 @@ function getMeta(vm) {
   metaObj.description = meta.description ? `${_unescape(meta.description)}` : siteDescription;
   metaObj.image = meta.image || state.site.simulacrum || '';
   metaObj.url = state.site.url + state.route.path;
-  metaObj.lang = openGraph[lang];
+  metaObj.lang = htmlDocument[lang];
+  metaObj.ogLang = openGraph[lang];
   metaObj.type = meta.type || 'website';
 
   return metaObj;
@@ -26,6 +27,7 @@ function getMeta(vm) {
 export function setClient(vm) {
   const meta = getMeta(vm);
   document.title = meta.title;
+  document.documentElement.setAttribute('lang', meta.lang);
 }
 
 export function setServer(vm) {
@@ -36,6 +38,7 @@ export function setServer(vm) {
   vm.$ssrContext.image = meta.image;
   vm.$ssrContext.url = meta.url;
   vm.$ssrContext.lang = meta.lang;
+  vm.$ssrContext.ogLang = meta.ogLang;
   vm.$ssrContext.type = meta.type;
 }
 
