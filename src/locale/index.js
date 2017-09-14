@@ -13,3 +13,8 @@ export const openGraph = {
   en: 'en_GB',
   tc: 'zh_HK',
 };
+
+export const htmlDocument = {
+  en: 'en',
+  tc: 'zh-Hant',
+};
