@@ -134,7 +134,7 @@ function render(req, res) {
     url: req.url,
   };
 
-  renderer.renderToString(context, (err, html) => {
+  return renderer.renderToString(context, (err, html) => {
     if (err) {
       return handleError(err);
     }
