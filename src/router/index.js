@@ -6,7 +6,7 @@ Vue.use(Router);
 
 export function createRouter() {
   return new Router({
-    routes,
+    routes: routes(),
     mode: 'history',
     scrollBehavior: (to, from, savedPosition) => {
       if (to.params.lang !== from.params.lang) return {};

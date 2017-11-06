@@ -6,7 +6,7 @@
     <defs></defs>
     <g id="Resources" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="menu" fill="#FFFFFF">
-            <path d="M0,44.6666667 L100,44.6666667 L100,54.6666667 L0,54.6666667 L0,44.6666667 L0,44.6666667 Z M0,3 L100,3 L100,13 L0,13 L0,3 L0,3 Z M100,86.3333333 L100,96.3333333 L0,96.3333333 L0,86.3333333 L100,86.3333333 Z" id="Combined-Shape"></path>
+            <path d="M0,45 L100,45 L100,55 L0,55 L0,45 L0,45 Z M0,5 L100,5 L100,15 L0,15 L0,5 L0,5 Z M100,84.3333333 L100,94.3333333 L0,94.3333333 L0,84.3333333 L100,84.3333333 Z" id="Combined-Shape"></path>
         </g>
     </g>
 </svg>

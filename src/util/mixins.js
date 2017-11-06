@@ -11,24 +11,27 @@ export const videoFrameMixin = {
   },
 };
 
-export const dynamicTextMixin = {
-  methods: {
-    createStringElement(el) {
-      return el.str;
+export const blockMixin = {
+  computed: {
+    modifierClass() {
+      return this.modifier
+        ? `block--${this.modifier}`
+        : false;
     },
-    createElementFromFunction(el, h) {
-      const functionName = `render${el.str}`;
-      const functionToCall = this[functionName];
-      if (typeof functionToCall === 'function') return functionToCall(h);
-      return false;
+  },
+};
+
+export const titleMixin = {
+  props: {
+    title: {
+      type: Object,
+      required: true,
     },
-    createElement(el, h) {
-      if (el.type === 'str') {
-        return this.createStringElement(el, h);
-      } else if (el.type === 'fn') {
-        return this.createElementFromFunction(el, h);
-      }
-      return false;
+    wrap: {
+      default: 'span',
+    },
+    block: {
+      default: false,
     },
   },
 };

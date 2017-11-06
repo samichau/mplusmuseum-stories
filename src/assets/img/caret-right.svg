@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>caret-right</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Resources" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.9">
+        <g id="caret-right" fill-rule="nonzero" fill="#0032FF">
+            <path d="M49.8123082,37.7454969 L89.5277833,77.4609721 L97.230486,69.7582694 L50.2304864,22 L42.1163535,30.0495423 L42.1369849,30.0701736 L2.23048603,69.7582694 L9.93318873,77.4609721 L49.8123082,37.7454969 Z" id="cross" transform="translate(49.730486, 49.730486) rotate(90.000000) translate(-49.730486, -49.730486) "></path>
+        </g>
+    </g>
+</svg>

@@ -1,23 +1,24 @@
 <template>
   <div class="content-blocks">
+
     <component v-for="(item, i) of items"
     :key="i"
-    :is="item.type"
-    :content="item.content"></component>  
+    :is="`block-${item.type}`"
+    :content="item.content"/>
+
   </div>
 </template>
 
 <script>
-import Brightcove from './Brightcove.vue';
-import Endnote from './Endnote.vue';
-import ImageBlock from './ImageBlock.vue';
-import Instagram from './Instagram.vue';
-import NewsletterBlock from './NewsletterBlock.vue';
-import TextBlock from './TextBlock.vue';
-import Tweet from './Tweet.vue';
-import Vimeo from './Vimeo.vue';
-import Youku from './Youku.vue';
-import Youtube from './YouTube.vue';
+import BlockBrightcove from './BlockBrightcove.vue';
+import BlockEndnote from './BlockEndnote.vue';
+import BlockImage from './BlockImage.vue';
+import BlockInstagram from './BlockInstagram.vue';
+import BlockNewsletter from './BlockNewsletter.vue';
+import BlockTweet from './BlockTweet.vue';
+import BlockVimeo from './BlockVimeo.vue';
+import BlockYouku from './BlockYouku.vue';
+import BlockYoutube from './BlockYoutube.vue';
 
 export default {
   props: {
@@ -27,16 +28,16 @@ export default {
     },
   },
   components: {
-    Brightcove,
-    Endnote,
-    ImageBlock,
-    Instagram,
-    NewsletterBlock,
-    TextBlock,
-    Tweet,
-    Vimeo,
-    Youku,
-    Youtube,
+    BlockBrightcove,
+    BlockEndnote,
+    BlockImage,
+    BlockImagePosition: BlockImage,
+    BlockInstagram,
+    BlockNewsletter,
+    BlockTweet,
+    BlockVimeo,
+    BlockYouku,
+    BlockYoutube,
   },
 };
 </script>

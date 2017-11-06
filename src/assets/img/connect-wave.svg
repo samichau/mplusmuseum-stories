@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>connect-wave</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Resources" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="connect-wave" stroke="#FFFFFF" stroke-width="6">
+            <g id="Group-3" transform="translate(55.547880, 43.566059) scale(-1, 1) rotate(35.000000) translate(-55.547880, -43.566059) translate(15.547880, -7.433941)">
+                <path d="M43,72 C43,64 37.1540938,57.6133743 28.180848,57.5735764 C19.2076022,57.5337785 15.8322619,47.7237775 11.6967418,43.4053939 C9.24944032,40.8498783 5.83122135,40.1610044 2.64700777,42.3906147 C-0.537205818,44.6202251 0.250201245,49.3464945 3.17531468,52.7757859 C11.429104,62.4522135 13.5249154,69.1657427 18.1749724,80.2987296 C22.7997346,91.371157 29.5507456,101.5 47.5,101.5 C65.4492544,101.5 80,86.9492544 80,69 L80,31.5 C80,27.9101491 77.0898509,25 73.5,25 C69.9101491,25 67,27.9101491 67,31.5 L67,59" id="Oval-3" stroke-linejoin="round"></path>
+                <path d="M54,44 L54,6.5 C54,2.91014913 51.0898509,0 47.5,0 C43.9101491,0 41,2.91014913 41,6.5 L41,44" id="Oval-3"></path>
+                <path d="M67,48 L67,15.5 C67,11.9101491 64.0898509,9 60.5,9 C56.9101491,9 54,11.9101491 54,15.5 L54,48" id="Oval-3"></path>
+                <path d="M41,50 L41,17.5 C41,13.9101491 38.0898509,11 34.5,11 C30.9101491,11 28,13.9101491 28,17.5 C28,21.0898509 28,56 28,56" id="Oval-3"></path>
+            </g>
+        </g>
+    </g>
+</svg>

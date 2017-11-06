@@ -1,8 +1,8 @@
 <template>
-  <blog-view>
+  <blog-view v-if="post">
     <blog-post class="list-complete-item"
-    :post="post"></blog-post>
-    <router-link :to="{ name: 'blog' }" class="blog__button-wide">{{ $t($store.state.site.translations.blog.return) }}</router-link>
+    :post="post"/>
+    <router-link :to="{ name: 'blog' }" class="button button--wide button--outline blog__button">{{ $t($store.state.translations.blog.return) }}</router-link>
   </blog-view>
 </template>
 
@@ -19,14 +19,19 @@ export default {
       description: this.$t(this.post.desc),
       image: this.post.simulacrum,
       type: 'article',
+      notice: {
+        id: 'blog',
+        value: this.$t(this.$store.state.site.sections.blog),
+        isTitle: true,
+      },
     };
   },
   asyncData({ store, route }) {
-    return store.dispatch('blog/initSingle', route.params.name);
+    return store.dispatch('blog/initPost', route.params);
   },
   computed: {
     post() {
-      return this.$store.state.blog.single;
+      return this.$store.getters['blog/post'];
     },
   },
   components: {

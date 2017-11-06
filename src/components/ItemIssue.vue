@@ -1,0 +1,79 @@
+<template>
+  <div class="item item--issue">
+
+    <app-panel class="panel--mini shadow--small">
+
+      <div class="panel__inner" slot="content">
+
+        <app-section-label type="issue"/>
+
+        <router-link :to="link">
+
+          <app-title class="item__title"
+          wrap="h3"
+          :title="item.title"/>
+
+        </router-link>
+
+        <snippet-translate class="item__text"
+        :snippet="$store.state.translations.journal.contributions"
+        :data="{ contributors: item.contributors }"
+        :parsers="{ contributors: (c) => $t(c) }"/>
+
+        <tag-group class="fs-s"
+        :tagIds="item.tags"/>
+
+      </div>
+
+    </app-panel>
+
+  </div>
+</template>
+
+<script>
+import SnippetTranslate from './SnippetTranslate.vue';
+
+export default {
+  props: {
+    item: {
+      required: true,
+    },
+  },
+  computed: {
+    link() {
+      return {
+        name: 'issue',
+        params: {
+          lang: this.$store.state.lang,
+          issue: this.item.name,
+        },
+      };
+    },
+  },
+  components: {
+    SnippetTranslate,
+  },
+};
+</script>
+
+<style lang="less">
+@import "../less/variables.less";
+
+.item--issue {
+  .panel {
+    border: 2px solid @accent;
+    border-radius: 0.75em;
+  }
+  .item {
+    &__inner {
+      background: @white;
+      border: 2px solid @accent;
+      padding: 0.75em;
+    }
+    &__title {
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
+    }
+  }
+}
+</style>

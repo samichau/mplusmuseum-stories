@@ -1,63 +1,64 @@
 <template>
   <main class="blog">
+
     <div class="header-push"></div>
+
     <div class="wrap wrap--wide">
-      <div class="blog__content row">
-        <section class="blog__posts col-md-9">
-          <slot></slot>
-        </section>
-        <blog-sidebar class="col-md-3"></blog-sidebar>
+
+      <div class="blog__content">
+
+        <slot/>
+
       </div>
+
     </div>
+
   </main>
 </template>
 
 <script>
-import BlogSidebar from '../components/BlogSidebar.vue';
-
-export default {
-  components: {
-    BlogSidebar,
-  },
-};
 </script>
 
 <style lang="less">
 @import "../less/variables.less";
 
 .blog {
-  background: @lightgrey;
-  padding: 2rem 0 1rem;
-  .mq-sm({ padding: 3.5rem 0 1rem; });
-  .mq-lg({ padding: 4rem 0 1rem; });
-  &__content {
-    .mq-md({
-      display: flex;
-    });
+  padding-top: 1em;
+  &__overview {
+    padding-bottom: 1em;
+    .heading {
+      text-align: center;
+    }
   }
   &__loading {
     margin: 1em;
     text-align: center;
   }
-  &__button-wide {
-    font-weight: @fontBold;
+  &__button {
     display: block;
-    width: 100%;
-    margin: 6rem 0;
-    border: 1px solid @grey;
-    text-align: center;
-    padding: 0.5em;
-    color: @accent;
-    background-color: transparent;
-    &:hover, &:focus {
-      color: @white;
-      border-color: @accent;
-      background-color: @accent;
-    }
+    margin: 3em 0;
   }
   &__marquee {
+    margin-top: 0.25em;
     font-style: italic;
     text-transform: uppercase;
+  }
+  &__category {
+    display: inline-block;
+    color: @grey;
+    padding: 0.25em 0.5em;
+    border: 1px solid @grey;
+    border-radius: 0.25em;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+    &:focus, &:hover {
+      color: @black;
+      border-color: @black;
+    }
+    &.blog__category--active {
+      color: @accent;
+      border-color: @accent;
+    }
   }
 }
 
@@ -65,19 +66,12 @@ export default {
   position: relative;
   margin-top: 0;
   margin-left: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 3em;
   margin-right: auto;
   width: 100%;
   .mq-sm({
-    margin-bottom: 4rem;
+    margin-bottom: 3em;
   });
-  &__inner {
-    background: @white;
-    padding: 1.5rem;
-    .mq-sm({
-      padding: 3rem;
-    });
-  }
   &__overlay {
     position: absolute;
     z-index: 10;
@@ -86,6 +80,13 @@ export default {
     width: 100%;
     height: 100%;
     cursor: pointer;
+  }
+  &--notice {
+    margin-top: 1em;
+    .wrap {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 }
 

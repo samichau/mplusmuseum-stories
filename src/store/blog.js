@@ -1,16 +1,15 @@
 import Vue from 'vue';
+import _clone from 'lodash/clone';
 import _find from 'lodash/find';
+import _findIndex from 'lodash/findIndex';
+import _pick from 'lodash/pick';
 import { asyncGet, Response } from '../api';
 
-function addPostProperties(post) {
-  Vue.set(post, 'truncated', post.sections && post.sections.truncateAfter);
-  if (!post.sections) post.sections = false;
-  return post;
-}
-
-function addCategoryProperties(category) {
-  Vue.set(category, 'active', false);
-  return category;
+function postsWithTruncatedData(posts) {
+  return posts.map(post => ({
+    id: post.id,
+    truncated: !!(post.content && post.content.truncateAfter),
+  }));
 }
 
 export default function () {
@@ -18,127 +17,213 @@ export default function () {
     namespaced: true,
 
     state: {
-      initialized: {
-        meta: false,
-        posts: false,
-        postsFiltered: false,
-      },
-      posts: [],
-      postsRemaining: false,
-      postsFiltered: [],
-      postsFilteredRemaining: false,
-      section: {},
-      single: false,
+      page: false,
+      posts: {},
+      category: false,
+      // status
+      notices: false,
+      showing: 'unfiltered',
+      filtered: [],
+      filteredRemaining: false,
+      unfiltered: [],
+      unfilteredRemaining: false,
     },
 
     getters: {
-      activeCategory(state) {
-        return _find(state.section.categories, c => c.active) || false;
-      },
-      filtered(state, getters, rootState, rootGetters) {
-        const author = rootGetters['site/activeAuthor'];
-        const category = getters.activeCategory;
-        const tags = rootGetters['site/tags/active'];
+      // New
+      categories(state) {
+        if (!state.page) return [];
+        const { categories } = state.page;
+        const newCategory = {
+          title: {
+            en: 'All Categories',
+            tc: 'All Categories',
+          },
+          name: false,
+          active: false,
+        };
+        if (!state.category) newCategory.active = true;
 
-        return author || category || tags.length;
+        const newCategories = categories.map((cat) => {
+          const obj = {
+            title: cat.title,
+            name: cat.name,
+            active: false,
+          };
+          if (state.category.id === cat.id) obj.active = true;
+          return obj;
+        });
+
+        return [newCategory, ...newCategories];
+      },
+      post(state) {
+        const id = state.post;
+        return state.posts[id];
+      },
+      posts(state) {
+        const posts = state[state.showing];
+        return posts.map((p) => {
+          const post = _clone(state.posts[p.id]);
+          post.truncated = p.truncated;
+          return post;
+        });
+      },
+      remaining(state) {
+        return state[`${state.showing}Remaining`];
       },
     },
 
     actions: {
-      asyncInit(context, selectors) {
-        let doAsync = true;
-        let items = 'posts';
-
-        // IF filter present THEN get filtered posts via async
-        // ELSE IF already unfiltered in store THEN show unfiltered
-        if (selectors.author || selectors.category || selectors.tags.length) {
-          items = 'postsFiltered';
-        } else if (context.state.initialized.posts) {
-          doAsync = false;
-        }
-
-        if (doAsync) {
-          return asyncGet('blog/posts/', selectors)
-            .then((response) => {
-              if (selectors.meta) context.commit('initSectionData', response.data);
-              context.commit('initPosts', { items, posts: response.data.posts });
-              return response;
-            });
-        }
-
-        return new Response(true);
+      initPosts(context, { category }) {
+        // Get posts in category
+        if (category) return context.dispatch('initFiltered', category);
+        return context.dispatch('initUnfiltered');
       },
-      init(context, { category, author, tags }) {
-        context.commit('setCategory', category);
-        context.commit('site/setAuthor', author, { root: true });
-        // If to is undefined, i.e. no tags are selected, pass an empty array
-        // Router will pass a string if only one tag is selected, so cast to array
-        if (typeof tags === 'undefined') tags = [];
-        else if (!Array.isArray(tags)) tags = [tags];
-        context.commit('site/tags/setActive', tags, { root: true });
-      },
-      getPosts(context, { items, remaining, selectors }) {
-        return asyncGet('blog/posts/', selectors)
-          .then(({ data }) => {
-            context.commit('addPosts', { items, remaining, posts: data.posts });
+
+      initFiltered(context, category) {
+        const type = 'filtered';
+
+        if (context.state.filtered.length && category === context.state.category) {
+          context.commit('setShowing', type);
+          return Promise.resolve(new Response(true));
+        }
+        return asyncGet('blog', { category })
+          .then((response) => {
+            const {
+              data,
+              data: {
+                posts, remaining, category: cat, notices,
+              },
+            } = response;
+            context.dispatch('addPosts', posts);
+            context.commit('setPosts', { type, posts });
+            context.commit('setPostsRemaining', { type, remaining });
+            context.commit('setShowing', type);
+            context.commit('setCategory', cat);
+            context.commit('setNotices', notices);
+            if (!context.state.page) context.commit('setPage', data);
+            return response;
           });
       },
-      initSingle(context, name) {
-        const selectors = !context.state.initialized.meta ? { meta: true } : {};
-        const postData = !(context.state.single && context.state.single.name === name)
-          ? asyncGet(`blog/posts/${name}/`, selectors)
-          : Promise.resolve(new Response(true, { status: false, data: context.state.single }));
 
-        return postData
+      initUnfiltered(context) {
+        const type = 'unfiltered';
+
+        if (context.state.unfiltered.length) {
+          context.commit('setShowing', type);
+          context.commit('setCategory', false);
+          return Promise.resolve(new Response(true));
+        }
+
+        // Get posts
+        return asyncGet('blog')
           .then((response) => {
-            context.commit('setPost', response.data);
-            if (!context.state.initialized.meta) context.commit('initSectionData', response.data.sectionData);
+            const { data, data: { posts, remaining, notices } } = response;
+            context.dispatch('addPosts', posts);
+            context.commit('setPosts', { type, posts });
+            context.commit('setPostsRemaining', { type, remaining });
+            context.commit('setShowing', type);
+            context.commit('setCategory', false);
+            context.commit('setNotices', notices);
+            if (!context.state.page) context.commit('setPage', data);
+            return response;
+          });
+      },
+
+      getPosts(context, { type, selectors }) {
+        return asyncGet('blog', selectors)
+          .then((response) => {
+            const { data: { posts, remaining } } = response;
+            context.dispatch('addPosts', posts);
+            context.commit('appendPosts', { type, posts });
+            context.commit('setPostsRemaining', { type, remaining });
+            return response;
+          });
+      },
+
+      addPosts(context, posts) {
+        posts.forEach((post) => {
+          const postInStore = context.state.posts[post.id];
+          if (!postInStore) context.commit('addPost', post);
+        });
+      },
+
+      initPost(context, { post }) {
+        const storedPost = _find(context.state.posts, po => po.name === post);
+
+        if (storedPost) {
+          context.commit('setPost', storedPost.id);
+          return Promise.resolve(new Response(true));
+        }
+
+        return asyncGet(`blog/posts/${post}/`)
+          .then((response) => {
+            const { data: newPost } = response;
+            context.commit('addPost', newPost);
+            context.commit('setPost', newPost.id);
             return response;
           });
       },
     },
 
     mutations: {
-      initSectionData(state, data) {
-        data.categories = data.categories.map(category => addCategoryProperties(category));
-        state.section = data;
-        state.initialized.meta = true;
+      setCategory(state, category) {
+        state.category = category;
       },
-      initPosts(state, { items, posts }) {
-        state[items] = posts.items.map(post => addPostProperties(post));
-        state[`${items}Remaining`] = posts.remaining;
-        state.initialized[items] = true;
+
+      setNotices(state, index) {
+        state.notices = index;
       },
-      addPosts(state, { items, remaining, posts }) {
-        state[items] = state[items].concat(posts.items.map(post => addPostProperties(post)));
-        state[remaining] = posts.remaining;
+
+      // NEW
+      // Add post entity
+      addPost(state, post) {
+        Vue.set(state.posts, post.id, post);
       },
+      // Set the page data
+      setPage(state, data) {
+        state.page = _pick(data, [
+          'blurb',
+          'categories',
+          'desc',
+          'generated',
+          'id',
+          'name',
+          'simulacrum',
+          'title',
+        ]);
+      },
+      // Set the post reference
+      setPost(state, id) {
+        state.post = id;
+      },
+      // Set the posts references
+      setPosts(state, { type, posts }) {
+        state[type] = postsWithTruncatedData(posts);
+      },
+      // Add to the posts references
+      appendPosts(state, { type, posts }) {
+        state[type] = state[type].concat(postsWithTruncatedData(posts));
+      },
+      // Set if we have more posts to get or not (boolean)
+      setPostsRemaining(state, { type, remaining }) {
+        state[`${type}Remaining`] = remaining;
+      },
+      // Set the type of posts we are showing (filtered or unfiltered)
+      setShowing(state, type) {
+        state.showing = type;
+      },
+      // Extent a post
       extendPost(state, post) {
-        post.truncated = false;
+        const posts = state[state.showing];
+        const index = _findIndex(posts, p => p.id === post.id);
+        state[state.showing][index].truncated = false;
       },
+      // Collapse a post
       collapsePost(state, post) {
-        post.truncated = true;
-      },
-      setCategory(state, categoryName) {
-        state.section.categories.forEach((category) => {
-          category.active = category.name === categoryName;
-        });
-      },
-      setPost(state, post) {
-        state.single = {
-          author: post.author,
-          category: post.category,
-          date: post.date,
-          desc: post.desc,
-          hero: post.hero,
-          id: post.id,
-          name: post.name,
-          related: post.related,
-          sections: post.sections,
-          simulacrum: post.simulacrum,
-          tags: post.tags,
-          title: post.title,
-        };
+        const posts = state[state.showing];
+        const index = _findIndex(posts, p => p.id === post.id);
+        state[state.showing][index].truncated = true;
       },
     },
   };

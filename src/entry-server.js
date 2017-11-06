@@ -28,7 +28,7 @@ export default context => new Promise((resolve, reject) => {
     // Prepend the site data request
     matchedComponents.unshift({
       asyncData() {
-        return store.dispatch('site/init');
+        return store.dispatch('init');
       },
     });
 
@@ -45,16 +45,14 @@ export default context => new Promise((resolve, reject) => {
 
       // If the site request didn't resolve, then reject
       if (!responses[0].resolved) return reject(responses[0]);
+
       // If the site data was retrieved but the view data wasn't, we initialize
       // the app but show the 404 view as we can't display the requested route
-      if (!responses[1].resolved) router.replace({ name: 'not-found', params: { lang: locales[0] } });
+      if (!responses[1].resolved) {
+        const lang = store.state.route.params.lang || locales[0];
+        router.replace({ name: 'not-found', params: { lang } });
+      }
 
-      // After all preFetch hooks are resolved, our store is now
-      // filled with the state needed to render the app.
-      // Expose the state on the render context, and let the request handler
-      // inline the state in the HTML response. This allows the client-side
-      // store to pick-up the server-side state without having to duplicate
-      // the initial data fetching on the client.
       context.state = store.state;
       return resolve(app);
     });

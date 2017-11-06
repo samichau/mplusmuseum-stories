@@ -1,9 +1,14 @@
 <template>
   <aside class="blog-item blog-notice shadow">
+
     <button class="blog-notice__close fs-b" @click="hide"><img src="../assets/img/cross.svg" alt="Close Notice"></button>
+
     <div class="blog-item__inner">
-      <slot></slot>
+
+      <slot/>
+
     </div>
+
   </aside>
 </template>
 
@@ -115,11 +120,6 @@ export default {
       width: 100%;
       padding: 0 0.5em;
     }
-  }
-  .blog-item__inner {
-    text-align: center;
-    color: @white;
-    background: @midgrey;
   }
 }
 </style>

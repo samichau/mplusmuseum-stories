@@ -1,43 +1,81 @@
+<template>
+  <blog-view v-if="posts">
+
+    <app-sticky fadeOut>
+
+      <div class="blog__overview">
+
+        <div class="heading">
+
+          <app-title-link class="app-title--same fs-l"
+          wrap="h1"
+          :title="blog.title"/>
+
+        </div>
+
+        <block-text :content="blog.blurb"/>
+
+        <div class="blog__categories fs-b">
+
+          <router-link class="blog__category"
+          :class="{'blog__category--active': cat.active }"
+          v-for="cat in categories"
+          :key="cat.id"
+          :to="cat.name ? { name: 'blog', query: { category: cat.name } } : { name: 'blog' }"
+          v-html="$t(cat.title)"/>
+
+        </div>
+
+        <app-marquee class="blog__marquee fs-m"
+        v-if="!posts.length"
+        :content="this.$t(this.t.blog.noPosts)"/>
+
+      </div>
+    
+    </app-sticky>
+
+    <template v-if="posts.length">
+
+      <blog-post-list :posts="posts"
+      :notices="$store.state.blog.notices"
+      :showing="showing"/>
+
+      <button class="button button--wide button--outline blog__button"
+      v-if="remaining"
+      @click="getMore"
+      v-html="morePostsText"/>
+
+    </template>
+  
+  </blog-view>
+</template>
+
 <script>
 import { mapState } from 'vuex';
+import AppMarquee from '../components/AppMarquee.vue';
+import AppSticky from '../components/AppSticky.vue';
 import BlogView from './BlogView.vue';
-import BlogHeader from '../components/BlogHeader.vue';
-import BlogNotice from '../components/BlogNotice.vue';
-import BlogPost from '../components/BlogPost.vue';
-import NewsletterBlock from '../components/NewsletterBlock.vue';
-import Tag from '../components/Tag.vue';
-import Marq from '../components/Marquee.vue';
-import Sticky from '../components/Sticky.vue';
-import Waypoints from '../components/Waypoints.vue';
+import BlogPostList from '../components/BlogPostList.vue';
 import meta from '../util/meta';
 
 export default {
   mixins: [meta],
   meta() {
+    const title = this.$t(this.blogTitle);
     return {
-      title: this.$t(this.section.title),
-      description: this.$t(this.section.desc),
-      image: this.section.simulacrum,
+      title,
+      description: this.$t(this.blog.desc),
+      image: this.blog.simulacrum,
       type: 'website',
+      notice: {
+        id: 'blog',
+        value: title,
+        isTitle: true,
+      },
     };
   },
   asyncData({ store, route }) {
-    const selectors = {
-      meta: false,
-      tags: [],
-    };
-
-    if (!store.state.blog.initialized.meta) selectors.meta = true;
-    if (route.query) {
-      if (route.query.author) selectors.author = route.query.author;
-      if (route.query.category) selectors.category = route.query.category;
-      if (route.query.tag) selectors.tags = route.query.tag;
-    }
-
-    return store.dispatch('blog/asyncInit', selectors).then((response) => {
-      store.dispatch('blog/init', selectors);
-      return response;
-    });
+    return store.dispatch('blog/initPosts', route.query);
   },
   data() {
     return {
@@ -46,42 +84,38 @@ export default {
   },
   computed: {
     ...mapState({
-      t: s => s.site.translations,
+      t: s => s.translations,
+      blog: s => s.blog.page,
+      blogTitle: s => s.site.sections.blog,
       query: s => s.route.query,
-      posts: s => s.blog.posts,
-      postsRemaining: s => s.blog.postsRemaining,
-      postsFiltered: s => s.blog.postsFiltered,
-      postsFilteredRemaining: s => s.blog.postsFilteredRemaining,
-      section: s => s.blog.section,
+      showing: s => s.blog.showing,
+      category: s => s.blog.category,
     }),
     morePostsText() {
       return this.loadingPosts ? this.$t(this.t.site.loading) : this.$t(this.t.blog.morePosts);
     },
-    filtered() {
-      return this.$store.getters['blog/filtered'];
+    categories() {
+      return this.$store.getters['blog/categories'];
+    },
+    posts() {
+      return this.$store.getters['blog/posts'];
+    },
+    remaining() {
+      return this.$store.getters['blog/remaining'];
     },
   },
   methods: {
-    getMoreUnfiltered() {
-      return this.getMore(this.posts, 'posts', 'postsRemaining');
-    },
-    getMoreFiltered() {
-      return this.getMore(this.postsFiltered, 'postsFiltered', 'postsFilteredRemaining');
-    },
-    getMore(currentPosts, items, remaining) {
+    getMore() {
       if (this.loadingPosts) return false;
-      const q = this.query;
-      const selectors = {
-        offset: currentPosts.length,
-      };
-      if (q) {
-        if (q.author) selectors.author = q.author;
-        if (q.category) selectors.category = q.category;
-        if (q.tag) selectors.tags = q.tag;
-      }
+      const type = this.showing;
+      const selectors = {};
+      selectors.offset = this.$store.state.blog[type].length;
+      if (this.query && this.query.category) selectors.category = this.query.category;
+
       this.loadingPosts = true;
       this.$bar.start();
-      return this.$store.dispatch('blog/getPosts', { items, remaining, selectors })
+
+      return this.$store.dispatch('blog/getPosts', { type, selectors })
         .then(this.afterGetMore)
         .catch((error) => {
           this.afterGetMore();
@@ -97,165 +131,10 @@ export default {
     },
   },
   components: {
+    AppMarquee,
+    AppSticky,
     BlogView,
-    BlogHeader,
-    BlogNotice,
-    BlogPost,
-    NewsletterBlock,
-    Tag,
-    Marq,
-    Sticky,
-    Waypoints,
-  },
-  render(h) {
-    let items = [];
-    let posts = [];
-
-    const createLinks = () => h('div', { class: 'blog-notice__social social-links fs-s' },
-      this.$store.getters['site/socialLinkables'].map((platform) => {
-        const img = h('img', {
-          domProps: {
-            src: platform.icon,
-            alt: this.$t(platform.title),
-          },
-        });
-        return h('a', {
-          key: platform.name,
-          domProps: {
-            href: platform.link,
-            target: '_blank',
-          },
-        }, [img]);
-      }),
-    );
-
-    const createNewsletter = () => h('newsletter-block', {
-      class: 'blog-notice__form',
-      props: {
-        label: this.$t(this.t.newsletter.placeholder),
-        name: 'notice-newsletter',
-        button: this.$t(this.t.newsletter.subscribe),
-      },
-    });
-
-    const createMoreButton = fn => h('button', {
-      class: 'blog__button-wide',
-      on: {
-        click: fn,
-      },
-    }, this.morePostsText);
-
-    const createNotice = (data) => {
-      if (!data) return false;
-      return h('blog-notice', {
-        props: {
-          notice: data,
-        },
-      }, [
-        h('div', {
-          class: 'blog-notice__content',
-          domProps: {
-            innerHTML: this.$t(data.content),
-          },
-        }),
-        data.newsletter ? createNewsletter() : false,
-        data.social ? createLinks() : false,
-      ]);
-    };
-
-    if (this.filtered) {
-      if (this.postsFiltered.length) {
-        // If we want to show filtered posts and we have some to show ...
-        // Create the more button element if we haven't got all the posts
-        const moreBtn = this.postsFilteredRemaining
-          ? createMoreButton(this.getMoreFiltered)
-          : false;
-
-        // Create the posts list, for now we don't put notice elements here
-        items.push(h('blog-header'));
-        posts = this.postsFiltered;
-        posts.forEach((post, i) =>
-          items.push(h('blog-post', {
-            class: 'list-complete-item',
-            key: `filtered-${post.name}`,
-            postIndex: i,
-            props: {
-              post,
-            },
-          },
-          )));
-        if (moreBtn) items.push(moreBtn);
-      } else {
-        // But if we don't have any filtered posts, just show the marquee element
-        items = [
-          h('marq', {
-            class: 'blog-item blog__marquee fs-l',
-            props: {
-              content: this.$t(this.t.blog.noPosts),
-            },
-          }),
-        ];
-      }
-    } else {
-      // If we are showing unfiltered posts
-      // Create the more button element if we haven't got all the posts
-      const moreBtn = this.postsRemaining
-        ? createMoreButton(this.getMoreUnfiltered)
-        : false;
-
-      // Create the posts list by looping through the posts and inserting
-      // notice elements where appropriate
-      posts = this.posts;
-      posts.forEach((post, i) => {
-        const noticeData = this.section.notices[i];
-        if (noticeData && noticeData.visible) {
-          if (i === 0) {
-            items.push(h('sticky', {
-              props: {
-                fadeOut: true,
-              },
-            }, [
-              createNotice(noticeData),
-            ]));
-          } else {
-            items.push(createNotice(noticeData));
-          }
-        }
-
-        items.push(h('blog-post', {
-          class: 'list-complete-item',
-          key: `unfiltered-${post.name}`,
-          postIndex: i,
-          props: {
-            post,
-          },
-        }));
-      });
-      if (moreBtn) items.push(moreBtn);
-    }
-
-    const funcToCall = (index) => {
-      const component = items[index];
-      const route = this.$store.state.route;
-      let url = window.location.origin;
-      if (component && component.data && typeof component.data.postIndex !== 'undefined') {
-        const post = posts[component.data.postIndex];
-        url += `${route.path}/${post.name}`;
-      } else {
-        url += route.fullPath;
-      }
-      window.history.replaceState(undefined, undefined, url);
-    };
-
-    const waypoints = h('waypoints', {
-      props: {
-        trigger(index) {
-          funcToCall(index);
-        },
-      },
-    }, items);
-
-    return h('blog-view', {}, [waypoints]);
+    BlogPostList,
   },
 };
 </script>

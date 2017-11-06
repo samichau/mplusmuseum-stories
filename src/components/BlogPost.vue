@@ -1,70 +1,107 @@
 <template>
-  <article class="blog-item blog-post shadow"
+  <article class="blog-item blog-post"
   :class="{ 'blog-post--truncated': post.truncated }">
-    <div class="blog-post__pinned"
-    v-if="post.pinned && !$store.getters['blog/filtered']">
-      <img src="../assets/img/pin.svg" alt="Pin Icon"> {{ $t(t.blog.pinned) }}
-    </div>
 
-    <blog-post-header :post="post"></blog-post-header>
+    <app-panel>
+      <template slot="content">
 
-    <div class="blog-item__inner">
-      <div class="blog-post__content row">
+        <div class="pinned" v-if="post.pinned && post.media && showing === 'unfiltered'">
 
-        <div class="blog-post__aside col-md-3">
-          <share-bar class="blog-post__sharebar hide--mobile"
-          :url="shareData.location"
-          :title="$t(post.title)"></share-bar>
+          <img src="../assets/img/pin.svg" alt="Pin Icon">&nbsp;<span v-html="$t(t.blog.pinned)"></span>
+
         </div>
 
-        <div class="blog-post__body fs-b col-md-9">
+        <blog-post-hero :post="post"/>
 
-          <content-blocks :items="sections"></content-blocks>
+        <div class="panel__inner">
+        
+          <div class="blog-post__header">
 
-          <button class="blog-post__more button button--accent"
-          v-if="this.$store.state.route.name === 'blog' && post.sections.truncateAfter && post.truncated"
-          ref="more"
-          @click="extend">{{ $t(t.site.continue) }}</button>
+            <app-title-link class="blog-post__title fs-l"
+            :wrap="routeName === 'post' ? 'h1' : 'h2'"
+            :title="post.title"/>
 
-          <div class="blog-post__footer" v-if="!post.truncated">
+            <div class="blog-post__meta">
 
-            <share-bar class="blog-post__sharebar hide--desktop"
-            :url="shareData.location"
-            :title="$t(post.title)"></share-bar>
+              <snippet-byline :snippet="t.blog.byline"
+              :author="post.author"
+              :category="post.category"
+              :date="post.date"/>
 
-            <clipboard class="blog-post__footer-section"
-            :url="shareData.location"></clipboard>
+              <tag-group class="fs-s fs-b-sm"
+              v-if="post.tags.length"
+              :tagIds="post.tags"/>
 
-            <newsletter-block class="blog-post__footer-section input-wrap--inline"
-            :label="$t(t.newsletter.placeholderAlt)"
-            :name="`newsletter__${post.name}`"
-            :button="'&rarr;<span class=\'sr-only\'>Subscribe to the M+ Stories Newsletter</span>'"></newsletter-block>
-
-            <button class="blog-post__more button button--invert"
-            v-if="this.$store.state.route.name === 'blog' && post.sections.truncateAfter"
-            ref="less"
-            @click="collapse">{{ $t(t.blog.close) }}</button>
+            </div>
 
           </div>
-        </div>
-      </div>
-    </div>
 
-    <suggested class="blog-post__suggested"
-    v-if="!post.truncated && post.related"
-    :items="post.related.items"></suggested>
+          <div class="blog-post__content row">
+
+            <div class="blog-post__aside col-sm-2">
+
+              <share-bar class="blog-post__sharebar hide--mobile"
+              :url="shareData.location"
+              :title="$t(post.title)"/>
+
+            </div>
+
+            <div class="blog-post__body fs-b col-sm-10">
+
+              <content-blocks :items="content"/>
+
+              <button class="blog-post__more button button--accent"
+              v-if="routeName === 'blog' && post.content.truncateAfter && post.truncated"
+              ref="more"
+              @click="extend">{{ $t(t.site.continue) }}</button>
+
+              <div class="blog-post__footer" v-if="!post.truncated">
+
+                <share-bar class="blog-post__sharebar hide--desktop"
+                :url="shareData.location"
+                :title="$t(post.title)"/>
+
+                <app-clipboard class="blog-post__footer-section"
+                :url="shareData.location"/>
+
+                <block-newsletter class="blog-post__footer-section input-wrap--inline"
+                :label="$t(t.newsletter.placeholderAlt)"
+                :name="`newsletter__${post.name}`"
+                :button="'&rarr;<span class=\'sr-only\'>Subscribe to the M+ Stories Newsletter</span>'"/>
+
+                <button class="blog-post__more button button--invert"
+                v-if="routeName === 'blog' && post.content.truncateAfter"
+                ref="less"
+                @click="collapse">{{ $t(t.blog.close) }}</button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <app-suggested class="blog-post__suggested"
+        v-if="!post.truncated && post.related"
+        :id="post.id"/>
+
+      </template>
+    
+    </app-panel>
 
   </article>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import BlogPostHeader from './BlogPostHeader.vue';
-import Clipboard from './Clipboard.vue';
+import AppClipboard from './AppClipboard.vue';
+import AppSuggested from './AppSuggested.vue';
+import BlockNewsletter from './BlockNewsletter.vue';
+import BlogPostHero from './BlogPostHero.vue';
 import ContentBlocks from './ContentBlocks.vue';
-import NewsletterBlock from './NewsletterBlock.vue';
 import ShareBar from './ShareBar.vue';
-import Suggested from './Suggested.vue';
+import SnippetByline from './SnippetByline.vue';
 
 export default {
   data() {
@@ -79,16 +116,18 @@ export default {
   },
   computed: {
     ...mapState({
-      t: s => s.site.translations,
+      t: s => s.translations,
       lang: s => s.lang,
+      routeName: s => s.route.name,
+      showing: s => s.blog.showing,
       url: s => s.site.url,
     }),
-    sections() {
-      if (this.post.sections) {
-        if (this.post.truncated && this.post.sections.truncateAfter) {
-          return this.post.sections.list.slice(0, this.post.sections.truncateAfter);
+    content() {
+      if (this.post.content) {
+        if (this.post.truncated && this.post.content.truncateAfter) {
+          return this.post.content.list.slice(0, this.post.content.truncateAfter);
         }
-        return this.post.sections.list;
+        return this.post.content.list;
       }
       return [];
     },
@@ -113,7 +152,7 @@ export default {
       const offset = this.$refs.less.getBoundingClientRect().top;
       this.$store.commit('blog/collapsePost', this.post);
       this.$nextTick(() => {
-        const top = this.$refs.more.getBoundingClientRect().top;
+        const { top } = this.$refs.more.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const newPosition = (top + scrollTop) - offset;
         window.scrollTo(0, newPosition);
@@ -130,12 +169,13 @@ export default {
     },
   },
   components: {
-    BlogPostHeader,
-    Clipboard,
+    AppSuggested,
+    AppClipboard,
+    BlockNewsletter,
+    BlogPostHero,
     ContentBlocks,
-    NewsletterBlock,
     ShareBar,
-    Suggested,
+    SnippetByline,
   },
 };
 </script>
@@ -144,9 +184,13 @@ export default {
 @import "../less/variables.less";
 
 .blog-post {
+  position: relative;
   z-index: 1;
   img {
     max-width: 100%;
+  }
+  .panel {
+    overflow: inherit;
   }
   .clipboard {
     margin-top: 3rem;
@@ -162,6 +206,9 @@ export default {
   }
   &__header {
     background: @white;
+  }
+  &__header {
+    margin-bottom: 1.5em;
   }
   &__hero {
     &.image-block {
@@ -182,34 +229,6 @@ export default {
     margin-top: 1em;
     display: block;
   }
-  &__pinned {
-    font-weight: @fontBold;
-    text-align: center;
-    padding: 1rem;
-    background: @accent;
-    color: @white;
-    line-height: 1;
-    img {
-      display: inline-block;
-      vertical-align: top;
-      height: 1em;
-    }
-  }
-  &__title {
-    margin-bottom: 1rem;
-    padding: 1.5rem 1.5rem 0;
-    .mq-sm({
-      padding: 3rem 3rem 0;
-    });
-  }
-  &__meta {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    .mq-sm({
-      padding-left: 3rem;
-      padding-right: 3rem;
-    })
-  }
   &__footer-section {
     margin: 3rem 0;
     &:last-child {
@@ -219,7 +238,7 @@ export default {
   &__sharebar {
     position: static;
     .mq-sm({
-      top: 7rem;
+      top: 3.5em;
       left: 0;
       position: sticky;
     });
@@ -232,6 +251,9 @@ export default {
   }
   &__toggle {
     position: relative;
+  }
+  &__content .text-block, &__content .endnote-block, &__footer {
+    max-width: @widthSmall;
   }
 }
 </style>

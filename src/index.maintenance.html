@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Maintenance Mode – M+ Stories</title>
+  <style>
+    @font-face {
+      font-family: "PLUS";
+      src:  url('/dist/plus_lt.woff2') format('woff2'),
+            url("/dist/plus_lt.woff") format("woff");
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "PLUS";
+      src:  url('/dist/plus_lt_it.woff2') format('woff2'),
+            url("/dist/plus_lt_it.woff") format("woff");
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    @font-face {
+      font-family: "PLUS";
+      src:  url('/dist/plus_rg.woff2') format('woff2'),
+            url("/dist/plus_rg.woff") format("woff");
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "PLUS";
+      src:  url('/dist/plus_rg_it.woff2') format('woff2'),
+            url("/dist/plus_rg_it.woff") format("woff");
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    html {
+      box-sizing: border-box;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    html {
+      font-size: 18px;
+      font-weight: 300;
+      color: #ffffff;
+      font-family: "PLUS", Helvetica, Arial, "PingFang HK", "蘋方-港", "HanHei TC", "Heiti TC", "STHeiti", "Microsoft JhengHei UI", "Microsoft JhengHei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern" 1, "dlig" 1, "ss01" 1;
+      background: rgba(0, 50, 255, 0.9);
+    }
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    #container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 1em;
+    }
+    h1 {
+      margin: 0;
+      animation: tip 2s ease infinite;
+    }
+    @keyframes tip {
+      0%   { transform: rotateZ(3deg); }
+      50% { transform: rotateZ(-3deg); }
+      100% { transform: rotateZ(3deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>
+      <span>M+故事現進行定期維修，並將於短時間內恢復運作。</span>
+      <br>
+      <span>M+ Stories is currently down for scheduled maintenance and will return shortly.</span>
+    </h1>
+  </div>
+</body>
+</html>

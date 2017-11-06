@@ -15,6 +15,11 @@ export default {
       description: this.$t(this.page.desc),
       image: this.page.simulacrum,
       type: 'website',
+      notice: {
+        id: this.page.name,
+        value: this.$t(this.page.title),
+        isTitle: true,
+      },
     };
   },
   asyncData({ store, route }) {

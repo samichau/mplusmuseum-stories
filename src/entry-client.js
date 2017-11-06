@@ -1,22 +1,25 @@
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
-import Clipboard from 'vue-clipboards';
+import VueClipboard from 'vue-clipboards';
 import _includes from 'lodash/includes';
 import 'es6-promise/auto';
 import objectFitImages from 'object-fit-images';
+import objectFitVideos from 'object-fit-videos';
 import { createApp } from './app';
 import locales from './locale';
 import { setClient } from './util/meta';
-import ProgressBar from './components/ProgressBar.vue';
-import Modal from './components/Modal.vue';
+import AppModal from './components/AppModal.vue';
+import AppProgress from './components/AppProgress.vue';
+// Polyfill
+import scopedQuerySelectorPolyfill from './util/scoped-query-selector-polyfill';
 
 // Global progress bar vue instance
-Vue.prototype.$bar = new Vue(ProgressBar).$mount();
+Vue.prototype.$bar = new Vue(AppProgress).$mount();
 const bar = Vue.prototype.$bar;
 document.body.appendChild(bar.$el);
 
 // Global modal dialog vue instance
-Vue.prototype.$modal = new Vue(Modal).$mount();
+Vue.prototype.$modal = new Vue(AppModal).$mount();
 const modal = Vue.prototype.$modal;
 document.body.appendChild(modal.$el);
 
@@ -41,6 +44,7 @@ Vue.mixin({
     if (!asyncData
       || to.params.lang !== from.params.lang
       || (to.hash !== from.hash && to.path === from.path)) {
+      document.cookie = `lang=${to.params.lang}; path=/`;
       next();
     } else {
       bar.start();
@@ -55,10 +59,7 @@ Vue.mixin({
 
 const { app, router, store } = createApp();
 
-// Use clipboard
-Vue.use(Clipboard);
-
-// Use analytics
+// Use Analytics
 if (process.env.ANALYTICS_ID) {
   Vue.use(VueAnalytics, {
     id: process.env.ANALYTICS_ID,
@@ -66,13 +67,21 @@ if (process.env.ANALYTICS_ID) {
   });
 }
 
-// prime the store with server-initialized state.
-// the state is determined during SSR and inlined in the page markup.
+// Use Clipboard
+Vue.use(VueClipboard);
+
+// Prime the store with server-initialized state.
+// The state is determined during SSR and inlined in the page markup.
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__);
+  // Replace route with not found if async functions have forced a redirect
+  if (store.state.route.name === 'not-found') {
+    const { name, params } = store.state.route;
+    router.replace({ name, params });
+  }
 }
 
-// wait until router has resolved all async before hooks
+// Wait until router has resolved all async before hooks
 // and async components...
 router.onReady(() => {
   // Add router hook for handling asyncData.
@@ -85,16 +94,18 @@ router.onReady(() => {
     const matched = router.getMatchedComponents(to);
     const prevMatched = router.getMatchedComponents(from);
     let diffed = false;
+    // eslint-disable-next-line no-return-assign
     const activated = matched.filter((c, i) =>
       diffed || (diffed = (prevMatched[i] !== c)));
     // Update language state if this route has a different recognized locale
-    // e.g. example.com/en/page/ => example.com/de/page/
+    // e.g. example.com/en/page/ => example.com/tc/page/
     if (newLang !== prevLang && _includes(locales, newLang)) {
       store.commit('setLanguage', { primary: newLang, secondary: prevLang });
+    }
+    if (to.matched[0].instances && to.matched[0].instances.default) {
       setClient(to.matched[0].instances.default);
     }
     const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _);
-    // if (!activated.length) {
     if (!asyncDataHooks.length) {
       return next();
     }
@@ -110,14 +121,18 @@ router.onReady(() => {
     Vue.nextTick(() => { triggerNative('resize'); });
   });
 
-  // actually mount to DOM
+  // Polyfill
+  scopedQuerySelectorPolyfill();
+
+  // Actually mount to DOM
   app.$mount('#app');
 
-  // object fit polyfill
+  // Object fit polyfill
   objectFitImages();
+  objectFitVideos();
 });
 
-// service worker
+// Service worker
 if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js');
 }

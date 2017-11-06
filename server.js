@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
+/* eslint-disable global-require */
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const LRU = require('lru-cache');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const favicon = require('serve-favicon');
 const compression = require('compression');
 const axios = require('axios');
 const http = require('http');
 const https = require('https');
-// const enforce = require('express-sslify');
 
 const resolve = file => path.resolve(__dirname, file);
 const { createBundleRenderer } = require('vue-server-renderer');
@@ -72,9 +73,6 @@ app.use('/public', serve('./public', true));
 app.use('/manifest.json', serve('./manifest.json', true));
 app.use('/service-worker.js', serve('./dist/service-worker.js'));
 
-// Middleware for language detection
-app.use(require('./middleware/detect-language.js'));
-
 // 30-second microcache.
 // https://www.nginx.com/blog/benefits-of-microcaching-nginx/
 const microCache = LRU({
@@ -83,9 +81,6 @@ const microCache = LRU({
 });
 
 // since this app has no user-specific content, every page is micro-cacheable.
-// if your app involves user-specific content, you need to implement custom
-// logic to determine whether a request is cacheable based on its url and
-// headers.
 const isCacheable = req => useMicroCache;
 
 let previewQuery = false;
@@ -95,7 +90,11 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
-function render(req, res) {
+function renderMaintenance(req, res) {
+  res.sendFile(resolve('./src/index.maintenance.html'));
+}
+
+function renderDefault(req, res) {
   const s = !isProd ? Date.now() : false;
   // Set the preview query for the axios interceptor
   previewQuery = req.query.p ? req.query.p : false;
@@ -145,11 +144,15 @@ function render(req, res) {
     }
 
     res.end(html);
-    if (cacheable) microCache.set(req.url, html);
+    // if (cacheable) microCache.set(req.url, html);
     if (!isProd) console.log(`whole request: ${Date.now() - s}ms`);
     return true;
   });
 }
+
+const render = process.env.MODE === 'MAINTENANCE'
+  ? renderMaintenance
+  : renderDefault;
 
 // SSL
 if (process.env.USEHTTPS) {
@@ -157,7 +160,6 @@ if (process.env.USEHTTPS) {
   // redirect http to https
   app.enable('trust proxy');
   app.use(require('./middleware/http-to-https.js'));
-  // app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
   if (process.env.SSLKEY && process.env.SSLCERT) {
     console.log('Using SSL credentials');
@@ -178,7 +180,7 @@ http.createServer(app).listen(port, () => {
   console.log(`HTTP server started at localhost:${port}`);
 });
 
-// Basic authentication
+// Basic Authentication
 if (process.env.AUTH) {
   console.log('Using basic authentication');
   app.use(require('./middleware/basic-auth.js'));
@@ -201,6 +203,12 @@ app.get('/sitemap.xml', (req, res) => {
     });
 });
 
-app.get('*', isProd ? render : (req, res) => {
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.send('User-agent: *\nDisallow: /status');
+});
+
+// Use language detection middleware for all other GET requests
+app.get('*', cookieParser(), require('./middleware/detect-language.js'), isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res));
 });

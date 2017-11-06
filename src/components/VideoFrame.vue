@@ -1,19 +1,25 @@
 <template>
   <div class="video-block block">
+
     <div v-if="alt"
     class="video-block__alt sr-only"
     v-text="alt"></div>
+
     <div class="video-block__wrap">
+
       <iframe :src="url"
       type="text/html"
       frameborder="0"
       webkitallowfullscreen
       mozallowfullscreen
       allowfullscreen></iframe>
+
     </div>
+
     <div v-if="caption"
     class="video-block__caption fs-s"
     v-html="caption"></div>
+
   </div>
 </template>
 

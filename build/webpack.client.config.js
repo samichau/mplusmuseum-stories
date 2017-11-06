@@ -21,6 +21,7 @@ const config = merge(base, {
       'process.env.VUE_ENV': '"client"',
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.ANALYTICS_ID': JSON.stringify(process.env.ANALYTICS_ID),
+      'process.env.MODE': JSON.stringify(process.env.MODE),
     }),
     // extract vendor chunks for better caching
     new webpack.optimize.CommonsChunkPlugin({

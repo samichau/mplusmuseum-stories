@@ -13,6 +13,7 @@ module.exports = {
       'en-CA',
     ],
     tc: [
+      'tc',
       'zh',
       'zh-HK',
       'zh-CN',

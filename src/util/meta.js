@@ -3,10 +3,10 @@ import { htmlDocument, openGraph } from '../locale';
 
 function getMeta(vm) {
   const metaObj = {};
-  const state = vm.$store.state;
-  const lang = state.lang;
-  const siteTitle = state.site.title[lang];
-  const siteDescription = state.site.desc[lang];
+  const { state } = vm.$store;
+  const { lang, site, route } = state;
+  const siteTitle = site.title[lang];
+  const siteDescription = site.desc[lang];
   let { meta } = vm.$options;
 
   meta = typeof meta === 'function'
@@ -15,11 +15,12 @@ function getMeta(vm) {
 
   metaObj.title = meta.title ? `${_unescape(meta.title)} - ${siteTitle}` : siteTitle;
   metaObj.description = meta.description ? `${_unescape(meta.description)}` : siteDescription;
-  metaObj.image = meta.image || state.site.simulacrum || '';
-  metaObj.url = state.site.url + state.route.path;
+  metaObj.image = meta.image || site.simulacrum || '';
+  metaObj.url = site.url + route.path;
   metaObj.lang = htmlDocument[lang];
   metaObj.ogLang = openGraph[lang];
   metaObj.type = meta.type || 'website';
+  metaObj.notice = meta.notice;
 
   return metaObj;
 }
@@ -28,6 +29,7 @@ export function setClient(vm) {
   const meta = getMeta(vm);
   document.title = meta.title;
   document.documentElement.setAttribute('lang', meta.lang);
+  vm.$store.commit('header/updateNotice', meta.notice);
 }
 
 export function setServer(vm) {
