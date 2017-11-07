@@ -29,6 +29,7 @@
         <section class="journal__section"
         :class="`journal__section--${section}`"
         v-for="section of journal.sections"
+        v-if="journal[section]"
         :key="section">
           <component :is="`journal-section-${section}`"
           v-if="journal[section]"
@@ -45,9 +46,10 @@
 <script>
 import AppSticky from '../components/AppSticky.vue';
 import JournalSectionArticles from '../components/JournalSectionArticles.vue';
+import JournalSectionFeatured from '../components/JournalSectionFeatured.vue';
 import JournalSectionImprint from '../components/JournalSectionImprint.vue';
 import JournalSectionIssues from '../components/JournalSectionIssues.vue';
-import JournalSectionFeatured from '../components/JournalSectionFeatured.vue';
+import JournalSectionRecent from '../components/JournalSectionRecent.vue';
 import meta from '../util/meta';
 
 export default {
@@ -72,9 +74,10 @@ export default {
   components: {
     AppSticky,
     JournalSectionArticles,
+    JournalSectionFeatured,
     JournalSectionImprint,
     JournalSectionIssues,
-    JournalSectionFeatured,
+    JournalSectionRecent,
   },
   computed: {
     journal() {

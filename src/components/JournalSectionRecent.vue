@@ -3,13 +3,13 @@
 
     <div class="panel__inner" slot="content">
 
-      <div class="heading" v-if="content.title">
+      <div class="heading">
         <app-title-link class="fs-m"
         wrap="h2"
-        :title="content.title"/>
+        :title="$store.state.translations.journal.recent"/>
       </div>
 
-      <journal-article-list :content="content.list"
+      <journal-article-list :content="content"
       showFeatured
       showIssue/>
 
