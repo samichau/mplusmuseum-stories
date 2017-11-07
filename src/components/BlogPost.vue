@@ -252,7 +252,7 @@ export default {
   &__toggle {
     position: relative;
   }
-  &__content .text-block, &__content .endnote-block, &__footer {
+  &__content .block, &__footer {
     max-width: @widthSmall;
   }
 }
