@@ -30,15 +30,11 @@ export default function () {
     },
 
     getters: {
-      // New
-      categories(state) {
+      categories(state, getters, { translations }) {
         if (!state.page) return [];
         const { categories } = state.page;
         const newCategory = {
-          title: {
-            en: 'All Categories',
-            tc: 'All Categories',
-          },
+          title: translations.blog.allCategories,
           name: false,
           active: false,
         };
