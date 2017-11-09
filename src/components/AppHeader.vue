@@ -11,8 +11,15 @@
 
             <span class="sr-only">Go to M+ Homepage</span>
 
-            <img class="hide--desktop" src="../assets/img/stories-logo-stack.svg" alt="M+ Stories Logo" @click="logoClick">
-            <img class="hide--mobile" src="../assets/img/stories-logo-line.svg" alt="M+ Stories Logo" @click="logoClick">
+            <img class="hide--desktop"
+            src="../assets/img/stories-logo-stack.svg"
+            alt="M+ Stories Logo"
+            @click="logoClick">
+
+            <img class="hide--mobile"
+            src="../assets/img/stories-logo-line.svg"
+            alt="M+ Stories Logo"
+            @click="logoClick">
 
           </router-link>
 
@@ -26,10 +33,14 @@
             :key="notice.id"
             class="header__notice hide--mobile"
             :class="{ 'header__notice--title' : notice.isTitle }">
-              <button @click="scrollTo(notice.scroll)" v-html="notice.value"></button>
+
+              <button @click="scrollTo(notice.scroll)"
+              v-html="notice.value"></button>
+
               <component :is="notice.link ? 'router-link' : 'div'"
               :to="notice.link ? $link({ name: notice.link, params: {} }) : null"
               v-html="notice.value"/>
+
             </div>
 
           </transition>
@@ -42,19 +53,27 @@
 
             <span class="sr-only">Toggle Navigation Menu</span>
 
-            <img v-show="panel !== 'dropdown'" src="../assets/img/menu.svg" alt="Open Menu"
+            <img v-show="panel !== 'dropdown'"
+            src="../assets/img/menu.svg"
+            alt="Open Menu"
             :data-prevent="prevent.dropdown">
 
-            <img v-show="panel === 'dropdown'" src="../assets/img/cross.svg" alt="Close Menu"
+            <img v-show="panel === 'dropdown'"
+            src="../assets/img/cross.svg"
+            alt="Close Menu"
             :data-prevent="prevent.dropdown">
 
           </button>
 
           <button class="header__icon" @click="changeLanguage">
 
-            <img v-if="lang === 'en'" src="../assets/img/tc.svg" alt="Switch to Traditional Chinese">
+            <img v-if="lang === 'en'"
+            src="../assets/img/tc.svg"
+            alt="Switch to Traditional Chinese">
 
-            <img v-else src="../assets/img/en.svg" alt="Switch to English">
+            <img v-else
+            src="../assets/img/en.svg"
+            alt="Switch to English">
 
           </button>
 
@@ -62,10 +81,15 @@
 
             <span class="sr-only">Explore the Website</span>
 
-            <img v-show="panel !== 'connect'" class="animate-wave" src="../assets/img/connect-wave.svg" alt="Connect"
+            <img v-show="panel !== 'connect'"
+            class="animate-wave"
+            src="../assets/img/connect-wave.svg"
+            alt="Connect"
             :data-prevent="prevent.connect">
 
-            <img v-show="panel === 'connect'" src="../assets/img/cross.svg" alt="Close Connect"
+            <img v-show="panel === 'connect'"
+            src="../assets/img/cross.svg"
+            alt="Close Connect"
             :data-prevent="prevent.connect">
 
           </button>
@@ -76,10 +100,14 @@
 
             <span class="sr-only">Search the Website</span>
 
-            <img v-show="panel !== 'search'" src="../assets/img/search.svg" alt="Open Search"
+            <img v-show="panel !== 'search'"
+            src="../assets/img/search.svg"
+            alt="Open Search"
             :data-prevent="prevent.search">
 
-            <img v-show="panel === 'search'" src="../assets/img/cross.svg" alt="Close Search"
+            <img v-show="panel === 'search'"
+            src="../assets/img/cross.svg"
+            alt="Close Search"
             :data-prevent="prevent.search">
 
           </button>
