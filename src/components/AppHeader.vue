@@ -11,8 +11,8 @@
 
             <span class="sr-only">Go to M+ Homepage</span>
 
-            <img class="hide--desktop" src="../assets/img/stories-logo-stack.svg" alt="M+ Stories Logo" @click="scrollToTop">
-            <img class="hide--mobile" src="../assets/img/stories-logo-line.svg" alt="M+ Stories Logo" @click="scrollToTop">
+            <img class="hide--desktop" src="../assets/img/stories-logo-stack.svg" alt="M+ Stories Logo" @click="logoClick">
+            <img class="hide--mobile" src="../assets/img/stories-logo-line.svg" alt="M+ Stories Logo" @click="logoClick">
 
           </router-link>
 
@@ -26,7 +26,7 @@
             :key="notice.id"
             class="header__notice hide--mobile"
             :class="{ 'header__notice--title' : notice.isTitle }">
-              <button @click="noticeClick(notice)" v-html="notice.value"></button>
+              <button @click="scrollTo(notice.scroll)" v-html="notice.value"></button>
               <component :is="notice.link ? 'router-link' : 'div'"
               :to="notice.link ? $link({ name: notice.link, params: {} }) : null"
               v-html="notice.value"/>
@@ -146,11 +146,12 @@ export default {
     },
   },
   methods: {
-    noticeClick({ scroll = 0 }) {
+    scrollTo(scroll = 0) {
       window.scrollTo(0, scroll);
     },
-    scrollToTop() {
-      if (this.$store.state.route.name === 'home') window.scrollTo(0, 0);
+    logoClick() {
+      const homeRouteName = (process.env.MODE === 'BLOG') ? 'blog' : 'home';
+      if (this.$store.state.route.name === homeRouteName) this.scrollTo();
     },
     changeLanguage() {
       const lang = (this.lang === locales[0]) ? locales[1] : locales[0];
