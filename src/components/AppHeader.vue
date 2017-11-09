@@ -62,7 +62,7 @@
 
             <span class="sr-only">Explore the Website</span>
 
-            <img v-show="panel !== 'connect'" src="../assets/img/connect-wave.svg" alt="Connect"
+            <img v-show="panel !== 'connect'" class="animate-wave" src="../assets/img/connect-wave.svg" alt="Connect"
             :data-prevent="prevent.connect">
 
             <img v-show="panel === 'connect'" src="../assets/img/cross.svg" alt="Close Connect"
@@ -186,6 +186,13 @@ export default {
 <style lang="less">
 @import "../less/variables.less";
 
+@keyframes wave {
+  0%   { transform: rotateZ(0deg); }
+  25%   { transform: rotateZ(-15deg); }
+  75%   { transform: rotateZ(20deg); }
+  100%   { transform: rotateZ(0deg); }
+}
+
 .header {
   position: fixed;
   z-index: 101;
@@ -292,6 +299,11 @@ export default {
     transition: .15s ease transform;
     &:hover, &:focus {
       transform: scale(1.1);
+    }
+    &:hover {
+      .animate-wave {
+        animation: wave 650ms cubic-bezier(.4,.2,.6,.8) infinite;
+      }
     }
   }
   .dropdown {
