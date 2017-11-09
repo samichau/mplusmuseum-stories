@@ -298,15 +298,6 @@ a.lang-secondary {
   .mq-sm({
     box-shadow: inset 0 0 0 0.0666em @accent, 0 1px 0.1em 0 @shadow;
   });
-  transition: .25s ease color, .25s ease background-color, .15s ease box-shadow;
-  transition: .15s ease box-shadow;
-  &:hover, &:focus {
-    outline: none;
-    box-shadow: inset 0 0 0 1px @accent, 0 2px 0.33em 0 @shadow;
-    .mq-sm({
-      box-shadow: inset 0 0 0 0.0666em @accent, 0 2px 0.33em 0 @shadow;
-    });
-  }
   &--selected {
     color: @white;
     background-color: @accent;
@@ -327,6 +318,17 @@ a.lang-secondary {
       display: inline-block;
       vertical-align: middle;
     }
+  }
+}
+a.tag {
+  transition: .25s ease color, .25s ease background-color, .15s ease box-shadow;
+  transition: .15s ease box-shadow;
+  &:hover, &:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 1px @accent, 0 2px 0.33em 0 @shadow;
+    .mq-sm({
+      box-shadow: inset 0 0 0 0.0666em @accent, 0 2px 0.33em 0 @shadow;
+    });
   }
 }
 
