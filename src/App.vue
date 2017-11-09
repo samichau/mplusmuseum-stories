@@ -288,6 +288,7 @@ a.lang-secondary {
 .tag {
   font-weight: @fontBold;
   display: inline-block;
+  vertical-align: middle;
   padding: 0.2em 0.3em;
   line-height: 1em;
   border: none;
