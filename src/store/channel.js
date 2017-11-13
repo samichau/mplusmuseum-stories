@@ -27,7 +27,7 @@ export default function () {
           return Promise.resolve(new Response(true));
         }
 
-        return asyncGet('channels/').then((response) => {
+        return asyncGet('channel/').then((response) => {
           context.commit('init', response.data);
           return response;
         });
@@ -40,7 +40,7 @@ export default function () {
           return Promise.resolve(new Response(true));
         }
 
-        return asyncGet(`channels/episodes/${episode}/`)
+        return asyncGet(`channel/episodes/${episode}/`)
           .then((response) => {
             const { data: newEpisode } = response;
             context.commit('addEpisode', newEpisode);

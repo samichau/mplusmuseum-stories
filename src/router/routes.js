@@ -4,7 +4,7 @@ import locales from '../locale';
 const ArticleView = () => import('../views/ArticleView.vue');
 const BlogListView = () => import('../views/BlogListView.vue');
 const BlogPostView = () => import('../views/BlogPostView.vue');
-const ChannelsView = () => import('../views/ChannelsView.vue');
+const ChannelView = () => import('../views/ChannelView.vue');
 const EpisodeView = () => import('../views/EpisodeView.vue');
 const ExhibitionsView = () => import('../views/ExhibitionsView.vue');
 const ExploreView = () => import('../views/ExploreView.vue');
@@ -155,22 +155,22 @@ const journalRoutes = [
   },
 ];
 
-const channelsRoutes = [
+const channelRoutes = [
   {
-    name: 'channels',
-    path: `/${langParam}/channels/`,
-    component: ChannelsView,
+    name: 'channel',
+    path: `/${langParam}/channel/`,
+    component: ChannelView,
   }, {
     name: 'episode',
-    path: `/${langParam}/channels/:episode/`,
+    path: `/${langParam}/channel/:episode/`,
     component: EpisodeView,
   }, {
-    name: 'channels-redirect',
-    path: '/channels/',
-    redirect: redirectWithLang('channels'),
+    name: 'channel-redirect',
+    path: '/channel/',
+    redirect: redirectWithLang('channel'),
   }, {
     name: 'episode-redirect',
-    path: '/channels/:episode/',
+    path: '/channel/:episode/',
     redirect: redirectWithLang('episode'),
   },
 ];
@@ -198,7 +198,7 @@ const routes = process.env.MODE === 'BLOG'
     ...homeRoutes,
     ...blogRoutes,
     ...journalRoutes,
-    ...channelsRoutes,
+    ...channelRoutes,
     ...exhibitionsRoutes,
     ...exploreRoutes,
     ...searchRoutes,

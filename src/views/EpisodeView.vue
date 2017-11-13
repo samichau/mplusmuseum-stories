@@ -61,7 +61,7 @@
 
               <snippet-translate tag="h3"
               class="fs-m"
-              :snippet="$store.state.translations.channels.series"
+              :snippet="$store.state.translations.channel.series"
               :data="{ series: episode.series.title }"
               :parsers="{ series: (s, h) => h('span', {}, $t(s)) }"/>
 
@@ -107,8 +107,8 @@ export default {
       image: this.episode.simulacrum,
       type: 'article',
       notice: {
-        id: 'channels',
-        value: this.$t(this.$store.state.site.sections.channels),
+        id: 'channel',
+        value: this.$t(this.$store.state.site.sections.channel),
         isTitle: true,
       },
     };
@@ -119,18 +119,18 @@ export default {
     };
   },
   asyncData({ store, route }) {
-    return store.dispatch('channels/initEpisode', {
+    return store.dispatch('channel/initEpisode', {
       episode: route.params.episode,
     });
   },
   computed: {
     episode() {
-      return this.$store.getters['channels/episode'];
+      return this.$store.getters['channel/episode'];
     },
     shareData() {
       const base = this.$store.state.site.url;
       return {
-        url: `${base}/${this.lang}/channels/${this.episode.name}/`,
+        url: `${base}/${this.lang}/channel/${this.episode.name}/`,
         title: this.$t(this.episode.title),
       };
     },

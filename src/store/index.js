@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import blog from './blog';
-import channels from './channels';
+import channel from './channel';
 import exhibitions from './exhibitions';
 import explore from './explore';
 import header from './header';
@@ -49,7 +49,7 @@ export function createStore() {
 
     modules: {
       blog: blog(),
-      channels: channels(),
+      channel: channel(),
       exhibitions: exhibitions(),
       explore: explore(),
       header: header(),

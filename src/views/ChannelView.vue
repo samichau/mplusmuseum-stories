@@ -1,43 +1,43 @@
 <template>
-  <main class="channels" v-if="channels">
+  <main class="channel" v-if="channel">
 
     <div class="header-push"></div>
 
     <app-sticky fadeOut>
 
-      <div class="channels__overview wrap wrap--wide">
+      <div class="channel__overview wrap wrap--wide">
 
         <div class="heading">
 
           <app-title-link class="app-title--same fs-l"
           wrap="h1"
-          :title="channels.title"/>
+          :title="channel.title"/>
 
         </div>
       
-        <block-text :content="channels.blurb"/>
+        <block-text :content="channel.blurb"/>
 
       </div>
 
     </app-sticky>
 
-    <div class="channels__wrap">
+    <div class="channel__wrap">
 
-      <div class="channels__fade"></div>
+      <div class="channel__fade"></div>
 
-      <div class="channels__content">
+      <div class="channel__content">
 
         <div class="wrap wrap--full">
 
-          <section class="channels__section"
-          v-for="(section, i) in channels.content"
+          <section class="channel__section"
+          v-for="(section, i) in channel.content"
           :key="i">
 
             <section-header v-if="section.title"
             theme="dark"
             :title="$t(section.title)"/>
 
-            <component class="channels__block"
+            <component class="channel__block"
             :is="section.type"
             :content="section.content"/>
 
@@ -62,25 +62,25 @@ import SectionHeader from '../components/SectionHeader.vue';
 export default {
   mixins: [meta],
   meta() {
-    const title = this.$t(this.$store.state.site.sections.channels);
+    const title = this.$t(this.$store.state.site.sections.channel);
     return {
       title,
-      description: this.$t(this.channels.desc),
-      image: this.channels.simulacrum,
+      description: this.$t(this.channel.desc),
+      image: this.channel.simulacrum,
       type: 'website',
       notice: {
-        id: 'channels',
+        id: 'channel',
         value: title,
         isTitle: true,
       },
     };
   },
   asyncData({ store }) {
-    return store.dispatch('channels/init');
+    return store.dispatch('channel/init');
   },
   computed: {
-    channels() {
-      return this.$store.state.channels.page;
+    channel() {
+      return this.$store.state.channel.page;
     },
   },
   methods: {
@@ -98,10 +98,10 @@ export default {
 <style lang="less">
 @import "../less/variables.less";
 
-@channelsBackground: @dark;
+@channelBackground: @dark;
 
-.channels {
-  background: @channelsBackground;
+.channel {
+  background: @channelBackground;
   color: @white;
   &__overview {
     padding-top: 1em;
@@ -116,11 +116,11 @@ export default {
     margin-top: -1.5em;
   }
   &__content {
-    background: @channelsBackground;
+    background: @channelBackground;
   }
   &__fade {
     height: 1.5em;
-    background-image: linear-gradient(to top, @channelsBackground, rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to top, @channelBackground, rgba(0, 0, 0, 0));
     width: 100%;
   }
   &__section {
