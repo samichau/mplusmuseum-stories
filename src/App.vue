@@ -514,9 +514,6 @@ a.tag {
 }
 
 .social-links {
-  .blueify {
-    filter: url(#blueify);
-  }
   a {
     display: inline-block;
     vertical-align: top;

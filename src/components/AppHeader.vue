@@ -417,9 +417,14 @@ export default {
   hr {
     background: @black;
   }
-  .social-links a {
-    margin-left: 0;
-    margin-right: 0.5em;
+  .social-links {
+    a {
+      margin-left: 0;
+      margin-right: 0.5em;
+    }
+    .svg-icon {
+      fill: @accent;
+    }
   }
   &--search {
     max-width: 100%;

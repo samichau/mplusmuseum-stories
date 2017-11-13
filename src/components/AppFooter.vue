@@ -19,11 +19,8 @@
         <a v-for="platform of $store.getters['site/socialLinkables']"
         :key="platform.id"
         :href="platform.link"
-        target="_blank">
-
-          <img :src="platform.icon" :alt="$t(platform.title)">
-
-        </a>
+        target="_blank"
+        v-html="platform.svg"></a>
 
       </div>
 

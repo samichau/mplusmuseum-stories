@@ -40,23 +40,13 @@
       v-else-if="connect === 'social'"
       key="social">
 
-
-        <svg xmlns="http://www.w3.org/2000/svg" height="0" width="0" style="display: block;"><defs>
-          <filter id="blueify">
-            <feColorMatrix type="matrix" values="0 0 0 0 0  0 0.1 0 0 0  0 0 1 0 0  0 0 0 0.9 0"/>
-          </filter>
-        </defs></svg>
-
         <div class="social-links fs-b">
 
           <a v-for="platform of $store.getters['site/socialLinkables']"
           :key="platform.id"
           :href="platform.link"
-          target="_blank">
-
-            <img :src="platform.icon" :alt="$t(platform.title)" class="blueify">
-
-          </a>
+          target="_blank"
+          v-html="platform.svg"></a>
 
           <a href="#" @click.prevent="connect = false">
 
@@ -124,6 +114,8 @@ export default {
 </script>
 
 <style lang="less">
+@import "../less/variables.less";
+
 .notice-connect {
   height: 4em;
   text-align: center;
@@ -146,6 +138,11 @@ export default {
   .notice-connect__close {
     margin-top: 25%;
     height: 50%;
+  }
+  .social-links {
+    .svg-icon {
+      fill: @accent;
+    }
   }
 }
 </style>

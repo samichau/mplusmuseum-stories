@@ -5,22 +5,13 @@
 
       <h6 class="infopanel__header" v-html="$t(translations.site.connect)"></h6>
 
-      <svg xmlns="http://www.w3.org/2000/svg" height="0" width="0" style="display: block;"><defs>
-          <filter id="blueify">
-            <feColorMatrix type="matrix" values="0 0 0 0 0  0 0.1 0 0 0  0 0 1 0 0  0 0 0 0.9 0"/>
-          </filter>
-        </defs></svg>
-
       <div class="social-links fs-s">
 
         <a v-for="platform of socialPlatforms"
         :key="platform.id"
         :href="platform.link"
-        target="_blank">
-
-          <img :src="platform.icon" :alt="$t(platform.title)" class="blueify">
-
-        </a>
+        target="_blank"
+        v-html="platform.svg"></a>
 
       </div>
 
