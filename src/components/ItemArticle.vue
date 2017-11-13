@@ -20,6 +20,18 @@
           <router-link :to="link">[...]</router-link>
         </div>
 
+        <router-link class="item__media" :to="link">
+
+          <img class="lazy"
+          :src="$placeholder.generate(item.card.content.dim, 'loading', 'black', 'white')"
+          v-lazy="{
+            src: item.card.content.src,
+            loading: $placeholder.generate(item.card.content.dim, 'loading', 'black', 'white'),
+          }"
+          :alt="$t(item.card.content.alt)">
+
+        </router-link>
+
         <tag-group class="fs-s" :tagIds="item.tags"/>
 
       </div>
@@ -64,6 +76,10 @@ export default {
         font-weight: @fontBold;
         color: @accent;
       }
+    }
+    &__media {
+      display: block;
+      margin-top: 0.5em;
     }
   }
 }
