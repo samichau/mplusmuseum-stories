@@ -1,12 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
-    <title>cross</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Resources" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.9">
-        <g id="cross" fill-rule="nonzero" fill="#0032FF">
-            <path d="M49.5,42.7972973 L9.7027027,3 L2,10.7027027 L41.7972973,50.5 L2,90.2972973 L9.7027027,98 L49.5,58.2027027 L89.2972973,98 L97,90.2972973 L57.2027027,50.5 L97,10.7027027 L89.2972973,3 L49.5,42.7972973 Z"></path>
-        </g>
+<svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title id="title">Cross</title>
+    <g class="svg-icon" id="cross" fill-rule="nonzero" fill="#0032FF" fill-opacity="0.9">
+        <path d="M49.5,42.7972973 L9.7027027,3 L2,10.7027027 L41.7972973,50.5 L2,90.2972973 L9.7027027,98 L49.5,58.2027027 L89.2972973,98 L97,90.2972973 L57.2027027,50.5 L97,10.7027027 L89.2972973,3 L49.5,42.7972973 Z"></path>
     </g>
 </svg>

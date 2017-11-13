@@ -1,12 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
-    <title>caret-up</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Resources" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.9">
-        <g id="caret-up" fill-rule="nonzero" fill="#0032FF">
-            <path d="M49.5818221,37.7454969 L89.2972973,77.4609721 L97,69.7582694 L50.0000004,22 L41.8858675,30.0495423 L41.9064989,30.0701736 L2,69.7582694 L9.7027027,77.4609721 L49.5818221,37.7454969 Z" id="cross"></path>
-        </g>
+<svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title id="title">Up</title>
+    <g class="svg-icon" id="caret-up" fill-rule="nonzero" fill="#0032FF" fill-opacity="0.9">
+        <path d="M49.5818221,37.7454969 L89.2972973,77.4609721 L97,69.7582694 L50.0000004,22 L41.8858675,30.0495423 L41.9064989,30.0701736 L2,69.7582694 L9.7027027,77.4609721 L49.5818221,37.7454969 Z" id="cross"></path>
     </g>
 </svg>

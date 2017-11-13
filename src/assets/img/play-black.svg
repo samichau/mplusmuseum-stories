@@ -1,12 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
-    <title>play-black</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Resources" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="play-black" fill="#000000">
-            <polygon id="Rectangle-2" points="21 1 99 50 21 99"></polygon>
-        </g>
+<svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title id="title">Play</title>
+    <g class="svg-icon" id="play-black" fill="#000000">
+        <polygon points="21 1 99 50 21 99"></polygon>
     </g>
 </svg>

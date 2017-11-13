@@ -1,12 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
-    <title>external</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Resources" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.9">
-        <g id="external" fill-rule="nonzero" fill="#0032FF">
-            <path d="M80,27.0710678 L53.5355339,53.5355339 L46.4644661,46.4644661 L72.9289322,20 L50,20 L50,10 L90,10 L90,50 L80,50 L80,27.0710678 Z M32,32 L32,68 L68,68 L68,60 L78,60 L78,78 L22,78 L22,22 L40,22 L40,32 L32,32 Z" id="Combined-Shape"></path>
-        </g>
+<svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title id="title">External Link</title>
+    <g class="svg-icon" id="external" fill-rule="nonzero" fill="#0032FF" fill-opacity="0.9">
+        <path d="M80,27.0710678 L53.5355339,53.5355339 L46.4644661,46.4644661 L72.9289322,20 L50,20 L50,10 L90,10 L90,50 L80,50 L80,27.0710678 Z M32,32 L32,68 L68,68 L68,60 L78,60 L78,78 L22,78 L22,22 L40,22 L40,32 L32,32 Z"></path>
     </g>
 </svg>
