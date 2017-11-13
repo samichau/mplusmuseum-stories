@@ -1,16 +1,22 @@
 <template>
   <main class="view--article">
+
     <div v-if="!articles[0].hero" class="header-push"></div>
+
     <interactive-waypoints :trigger="enteredNewSection">
+
       <journal-article v-for="(article, i) of articles"
       :article="article"
       :key="article.id"
       :ref="`article-${i}`"
       @triggered="onArticleTrigger"/>
+
     </interactive-waypoints>
+
     <app-suggested v-if="articleIDs.length === article.issue.articles.length"
     :id="suggestedData.id"
     :omit="suggestedData.omit"/>
+
   </main>
 </template>
 

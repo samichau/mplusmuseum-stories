@@ -77,25 +77,6 @@ export default {
       position: relative;
       overflow: hidden;
     }
-    &__slides {
-      top: 0;
-      height: 100%;
-      width: 100%;
-    }
-    &__slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      img {
-        height: 100%;
-        width: 100%;
-        object-position: 50% 50%;
-        object-fit: cover;
-        font-family: 'object-fit: cover;';
-      }
-    }
   }
 }
 </style>
