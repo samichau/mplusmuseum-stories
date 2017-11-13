@@ -17,9 +17,9 @@
 
       </div>
 
-      <interactive-scroll class="article__footer wrap"
-      :trigger="onTrigger"
-      :payload="article.id">
+      <lazy-component class="article__trigger" @show="onTrigger(article.id)"/>
+
+      <div class="article__footer wrap">
 
         <share-bar class="sharebar--horizontal"
         :url="url"
@@ -29,7 +29,7 @@
         v-if="footnotes.length"
         :footnotes="footnotes"/>
 
-      </interactive-scroll>
+      </div>
 
     </div>
 
@@ -40,7 +40,6 @@
 import AppFootnotes from '../components/AppFootnotes.vue';
 import ContentBlocks from '../components/ContentBlocks.vue';
 import JournalArticleHeader from '../components/JournalArticleHeader.vue';
-import InteractiveScroll from '../components/InteractiveScroll.vue';
 import ShareBar from '../components/ShareBar.vue';
 
 export default {
@@ -82,7 +81,6 @@ export default {
   components: {
     AppFootnotes,
     ContentBlocks,
-    InteractiveScroll,
     JournalArticleHeader,
     ShareBar,
   },
@@ -143,9 +141,6 @@ export default {
     padding: 1em;
     margin-top: 2em;
     margin-bottom: 2em;
-  }
-  &__trigger {
-    height: 2em;
   }
   &__progress {
     background: @lightgrey;
