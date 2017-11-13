@@ -15,6 +15,7 @@ import BlockEndnote from './BlockEndnote.vue';
 import BlockImage from './BlockImage.vue';
 import BlockInstagram from './BlockInstagram.vue';
 import BlockNewsletter from './BlockNewsletter.vue';
+import BlockQuote from './BlockQuote.vue';
 import BlockTweet from './BlockTweet.vue';
 import BlockVimeo from './BlockVimeo.vue';
 import BlockYouku from './BlockYouku.vue';
@@ -34,6 +35,7 @@ export default {
     BlockImagePosition: BlockImage,
     BlockInstagram,
     BlockNewsletter,
+    BlockQuote,
     BlockTweet,
     BlockVimeo,
     BlockYouku,
