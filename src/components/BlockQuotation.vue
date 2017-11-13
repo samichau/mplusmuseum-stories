@@ -1,7 +1,7 @@
 <template>
-  <div class="quote-block block">
-    <div class="quote-block__quote fs-m" v-html="$t(content.quote)"></div>
-    <div class="quote-block__attribution fs-m" v-if="content.attribution">
+  <div class="quotation-block block">
+    <div class="quotation-block__quote fs-m" v-html="$t(content.quote)"></div>
+    <div class="quotation-block__attribution fs-m" v-if="content.attribution">
       —<span v-html="$t(content.attribution)"></span>
     </div>
   </div>
@@ -18,8 +18,11 @@ export default {
 </script>
 
 <style lang="less">
-.quote-block {
+.quotation-block {
   margin-bottom: 1.5em;
+  &:last-child {
+    margin-bottom: 0;
+  }
   &__quote,
   &__attribution {
     line-height: 1.35;
