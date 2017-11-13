@@ -14,8 +14,8 @@ export const videoFrameMixin = {
 export const blockMixin = {
   computed: {
     modifierClass() {
-      return this.modifier
-        ? `block--${this.modifier}`
+      return this.content && this.content.modifier
+        ? `block--${this.content.modifier}`
         : false;
     },
   },

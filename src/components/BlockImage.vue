@@ -1,5 +1,6 @@
 <template>
-  <div class="image-block block" :class="modifierClass">
+  <div class="image-block block"
+  :class="modifierClass">
 
     <img class="lazy"
     :src="imgObj.loading"
@@ -33,7 +34,6 @@ export default {
         src: this.content.thumb.src,
         loading: this.$placeholder.generate(this.content.thumb.dim),
       },
-      modifier: this.content.modifier,
     };
   },
   methods: {

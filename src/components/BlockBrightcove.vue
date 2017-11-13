@@ -1,5 +1,6 @@
 <template>
-  <div class="brightcove-video block">
+  <div class="brightcove-video block"
+  :class="modifierClass">
 
     <div v-if="alt"
     class="brightcove-video__alt sr-only"
@@ -38,8 +39,10 @@
 
 <script>
 import addScript from '../util/promise-script';
+import { blockMixin } from '../util/mixins';
 
 export default {
+  mixins: [blockMixin],
   data() {
     return {
       loaded: false,

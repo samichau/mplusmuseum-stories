@@ -115,19 +115,35 @@ export default {
       max-width: @widthSmall;
     }
     .block {
+      &--default {
+        clear: both;
+      }
       &--wide {
         max-width: 100%;
+        clear: both;
       }
       &--left {
         float: left;
+        clear: left;
         width: 50%;
         margin: 0;
       }
       &--right {
         float: right;
+        clear: right;
         width: 50%;
         margin: 0;
       }
+    }
+    .block--left + .block--left,
+    .block--right + .block--right {
+      margin-top: 1em;
+    }
+    .block--left + .block--right + .text-block,
+    .block--left + .block--right + .endnote-block,
+    .block--left + .block--right + .instagram-block,
+    .block--left + .block--right + .tweet-block {
+      clear: both;
     }
   }
   &__footer {
