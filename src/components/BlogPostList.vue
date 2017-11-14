@@ -29,11 +29,26 @@ export default {
       url += `${path}/${name}`;
       window.history.replaceState(undefined, undefined, url);
     },
+    updateNotice(post, el) {
+      let scroll = 0;
+      if (el) {
+        const { top } = el.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scroll = (top + scrollTop) + 1;
+      }
+      this.$store.commit('header/updateNotice', {
+        id: post.name,
+        value: `${this.$t(this.$store.state.site.sections.blog)}: <span>${this.$t(post.title)}</span>`,
+        isTitle: false,
+        scroll,
+      });
+    },
     trigger(index) {
       const items = this.$refs.waypoints.$children;
       const item = items[index];
       if (item && item.post && item.post.name) {
         this.updateURL(item.post.name);
+        this.updateNotice(item.post, item.$el);
       }
     },
     createNotice(h) {
