@@ -39,7 +39,7 @@ export default {
             to: {
               name: 'search',
               query: {
-                q: `author:${this.$t(author.title)}`,
+                q: this.$t(author.title),
               },
             },
           },

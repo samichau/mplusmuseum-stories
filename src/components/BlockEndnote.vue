@@ -26,8 +26,7 @@ export default {
     renderAuthor() {
       const author = this.$store.state.site.authors[this.content.author];
       const title = this.$t(author.title);
-      const query = `author:${title}`;
-      return `<router-link :to="{ name: 'search', query: { q: '${query}' } }">${title}</router-link>`;
+      return `<router-link :to="{ name: 'search', query: { q: '${title}' } }">${title}</router-link>`;
     },
   },
   computed: {
