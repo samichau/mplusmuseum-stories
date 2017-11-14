@@ -31,10 +31,12 @@ export default {
   data() {
     return {
       expanded: false,
-      tags: this.tagIds.map(id => this.$store.state.tags.entities[id]),
     };
   },
   computed: {
+    tags() {
+      return this.tagIds.map(id => this.$store.state.tags.entities[id]);
+    },
     canExplore() {
       return !process.env.MODE;
     },
