@@ -73,7 +73,7 @@ export default {
   color: @white;
   &__wrap {
     position: relative;
-    padding-top: 62.5%;
+    padding-top: 72.5%;
   }
   &__inner {
     position: absolute;
