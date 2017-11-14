@@ -23,11 +23,8 @@
         <router-link class="item__media" :to="link">
 
           <img class="lazy"
-          :src="$placeholder.generate(item.card.content.dim, 'loading', 'black', 'white')"
-          v-lazy="{
-            src: item.card.content.src,
-            loading: $placeholder.generate(item.card.content.dim, 'loading', 'black', 'white'),
-          }"
+          :src="imgObj.loading"
+          v-lazy="imgObj"
           :alt="$t(item.card.content.alt)">
 
         </router-link>
@@ -57,6 +54,13 @@ export default {
           issue: this.item.issue.name,
           article: this.item.name,
         },
+      };
+    },
+    imgObj() {
+      const { content } = this.item.card;
+      return {
+        src: content.src,
+        loading: this.$placeholder.generate(content.dim, 'loading', 'black', 'white'),
       };
     },
   },

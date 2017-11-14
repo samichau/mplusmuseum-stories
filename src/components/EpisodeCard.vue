@@ -10,11 +10,8 @@
 
           <img v-if="episode.card.type === 'image'"
           class="lazy"
-          :src="$placeholder.generate(episode.card.content.dim, 'loading', 'black', 'white')"
-          v-lazy="{
-            src: episode.card.content.src,
-            loading: $placeholder.generate(episode.card.content.dim, 'loading', 'black', 'white'),
-          }"
+          :src="imgObj.loading"
+          v-lazy="imgObj"
           :alt="$t(episode.card.content.alt)">
 
           <video v-else-if="episode.card.type === 'video'" :src="episode.card.content.src" autoplay muted loop></video>
@@ -60,6 +57,15 @@ export default {
     },
     showSection: {
       default: false,
+    },
+  },
+  computed: {
+    imgObj() {
+      const { content } = this.episode.card;
+      return {
+        src: content.src,
+        loading: this.$placeholder.generate(content.dim, 'loading', 'black', 'white'),
+      };
     },
   },
 };

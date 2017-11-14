@@ -22,14 +22,17 @@ class PlaceholderClass {
   error(height, color) {
     const lineWidth = this.radius * 2;
 
-    const obj = `<line x1='${(this.width / 2)}' x2='${(this.width / 2)}' y1='${(height / 2) - (lineWidth * 3)}' y2='${(height / 2) + (lineWidth * 1)}' style='stroke:${color};stroke-width:${lineWidth}' /><line x1='${(this.width / 2)}' x2='${(this.width / 2)}' y1='${(height / 2) + (lineWidth * 2)}' y2='${(height / 2) + (lineWidth * 3)}' style='stroke:${color};stroke-width:${lineWidth}' /><circle r='${lineWidth * 5}' cy='${height / 2}' cx='${(this.width / 2)}' fill='transparent' style='stroke:${color};stroke-width:${lineWidth * 0.75}'/>`;
+    const obj = `<line x1='${(this.width / 2)}' x2='${(this.width / 2)}' y1='${(height / 2) - (lineWidth * 3)}' y2='${(height / 2) + (lineWidth * 1)}' style='stroke:${color};stroke-width:${lineWidth}' />
+    <line x1='${(this.width / 2)}' x2='${(this.width / 2)}' y1='${(height / 2) + (lineWidth * 2)}' y2='${(height / 2) + (lineWidth * 3)}' style='stroke:${color};stroke-width:${lineWidth}' />
+    <circle r='${lineWidth * 5}' cy='${height / 2}' cx='${(this.width / 2)}' fill='transparent' style='stroke:${color};stroke-width:${lineWidth * 0.75}'/>`;
 
     return obj;
   }
 
   loading(height, color) {
     const obj = `<circle r='${this.radius}' cy='${height / 2}' cx='${(this.width / 2) - (this.radius * 3)}' fill='${color}'/>
-    <circle r='${this.radius}' cy='${height / 2}' cx='${this.width / 2}' fill='${color}'/><circle r='${this.radius}' cy='${height / 2}' cx='${(this.width / 2) + (this.radius * 3)}' fill='${color}'/>`;
+    <circle r='${this.radius}' cy='${height / 2}' cx='${this.width / 2}' fill='${color}'/>
+    <circle r='${this.radius}' cy='${height / 2}' cx='${(this.width / 2) + (this.radius * 3)}' fill='${color}'/>`;
 
     return obj;
   }

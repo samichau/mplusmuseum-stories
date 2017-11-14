@@ -28,13 +28,14 @@ export default {
       default: true,
     },
   },
-  data() {
-    return {
-      imgObj: {
-        src: this.content.thumb.src,
-        loading: this.$placeholder.generate(this.content.thumb.dim),
-      },
-    };
+  computed: {
+    imgObj() {
+      const { thumb } = this.content;
+      return {
+        src: thumb.src,
+        loading: this.$placeholder.generate(thumb.dim),
+      };
+    },
   },
   methods: {
     lightbox() {

@@ -32,11 +32,8 @@
 
         <app-link :link="$link(result.link)">
 
-          <img :src="$placeholder.generate(result.card.content.dim)"
-          v-lazy="{
-            src: result.card.content.src,
-            loading: $placeholder.generate(result.card.content.dim),
-          }"
+          <img :src="imgObj.loading"
+          v-lazy="imgObj"
           :alt="$t(result.card.content.alt)">
 
         </app-link>
@@ -67,6 +64,13 @@ export default {
   computed: {
     label() {
       return this.$t(this.$store.state.translations.content[this.result.type]).one;
+    },
+    imgObj() {
+      const { content } = this.result.card;
+      return {
+        src: content.src,
+        loading: this.$placeholder.generate(content.dim),
+      };
     },
   },
   methods: {

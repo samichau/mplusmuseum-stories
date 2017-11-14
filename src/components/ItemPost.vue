@@ -10,11 +10,8 @@
           <div class="item__media">
 
             <img class="lazy"
-            :src="$placeholder.generate(item.card.content.dim, 'loading', 'black', 'white')"
-            v-lazy="{
-              src: item.card.content.src,
-              loading: $placeholder.generate(item.card.content.dim, 'loading', 'black', 'white'),
-            }"
+            :src="imgObj.loading"
+            v-lazy="imgObj"
             :alt="$t(item.card.content.alt)">
           </div>
 
@@ -60,6 +57,13 @@ export default {
           lang: this.$store.state.lang,
           post: this.item.name,
         },
+      };
+    },
+    imgObj() {
+      const { content } = this.item.card;
+      return {
+        src: content.src,
+        loading: this.$placeholder.generate(content.dim, 'loading', 'black', 'white'),
       };
     },
   },
