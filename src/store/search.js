@@ -1,33 +1,6 @@
 import _orderBy from 'lodash/orderBy';
 import { asyncGet, Response } from '../api';
 
-const sorts = [
-  {
-    title: 'Sort by Type',
-    value: {
-      by: 'type',
-      order: 'asc',
-    },
-  },
-  {
-    title: 'Sort by Oldest',
-    value: {
-      by: 'modified',
-      order: 'asc',
-    },
-  },
-];
-
-const filters = [
-  'article',
-  'post',
-  'episode',
-  'exhibition',
-  'documentation',
-  'issue',
-  'basic',
-];
-
 export default function () {
   return {
     namespaced: true,
@@ -36,10 +9,9 @@ export default function () {
       searching: false,
       input: '',
       query: '',
+      lastQuery: '',
       sort: false,
-      sorts,
       filter: '',
-      filters,
       results: [],
     },
 
@@ -55,6 +27,7 @@ export default function () {
     actions: {
       init(context, query) {
         if (query && query.length) {
+          if (query !== context.state.lastQuery) context.commit('setFilter', false);
           context.commit('setQuery', query);
           return context.dispatch('submit');
         }
@@ -74,6 +47,7 @@ export default function () {
           .then((response) => {
             context.commit('setResults', response.data);
             context.commit('setStatus', false);
+            context.commit('setLastQuery', query);
             return response;
           })
           .catch((error) => {
@@ -93,6 +67,9 @@ export default function () {
       },
       setQuery(state, query) {
         state.query = query;
+      },
+      setLastQuery(state, query) {
+        state.lastQuery = query;
       },
       setInput(state, input) {
         state.input = input;

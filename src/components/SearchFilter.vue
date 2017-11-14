@@ -4,11 +4,11 @@
     <div class="search-filter__buttons">
 
       <app-dropdown :options="filterOptions"
-      defaultButtonText="Show All Content"
+      :defaultButtonText="$t(translations.search.filterDefault)"
       :selected.sync="activeFilter"/>
     
       <app-dropdown :options="sortOptions"
-      defaultButtonText="Sort by Newest"
+      :defaultButtonText="$t(translations.search.sortDefault)"
       :selected.sync="activeSort"/>
 
     </div>
@@ -18,6 +18,7 @@
 
 <script>
 import _map from 'lodash/map';
+import _sortBy from 'lodash/sortBy';
 import AppDropdown from './AppDropdown.vue';
 
 export default {
@@ -26,14 +27,38 @@ export default {
       return this.$store.state.translations;
     },
     filterOptions() {
-      const opts = this.$store.state.search.filters;
-      return _map(opts, name => ({
-        title: this.$t(this.$store.state.translations.content[name]).many,
+      const opts = [
+        'article',
+        'basic',
+        'documentation',
+        'episode',
+        'exhibition',
+        'issue',
+        'post',
+      ];
+      const options = _map(opts, name => ({
+        title: this.$t(this.translations.content[name]).many,
         value: name,
       }));
+      return _sortBy(options, 'title');
     },
     sortOptions() {
-      return this.$store.state.search.sorts;
+      return [
+        {
+          title: this.$t(this.translations.search.sortType),
+          value: {
+            by: 'type',
+            order: 'asc',
+          },
+        },
+        {
+          title: this.$t(this.translations.search.sortOldest),
+          value: {
+            by: 'modified',
+            order: 'asc',
+          },
+        },
+      ];
     },
     activeSort: {
       get() {
