@@ -144,7 +144,7 @@ function renderDefault(req, res) {
     }
 
     res.end(html);
-    // if (cacheable) microCache.set(req.url, html);
+    if (cacheable) microCache.set(req.url, html);
     if (!isProd) console.log(`whole request: ${Date.now() - s}ms`);
     return true;
   });
