@@ -156,6 +156,8 @@ export default {
       img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
+        font-family: 'object-fit: cover;';
         position: absolute;
         top: 0;
         &.suggested__placeholder {
