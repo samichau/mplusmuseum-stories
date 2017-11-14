@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import locales from '../locale';
 import blog from './blog';
 import channel from './channel';
 import exhibitions from './exhibitions';
@@ -19,8 +20,8 @@ Vue.use(Vuex);
 export function createStore() {
   return new Vuex.Store({
     state: {
-      lang: false,
-      langSecondary: false,
+      lang: locales[0],
+      langSecondary: locales[1],
       translations: {},
     },
     actions: {

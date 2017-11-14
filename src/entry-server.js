@@ -1,6 +1,7 @@
 import { createApp } from './app';
 import locales from './locale';
 import promiseAllSoftFail from './util/promise-all-soft-fail';
+import setLanguageFromRoute from './util/set-language-from-route';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -18,6 +19,9 @@ export default context => new Promise((resolve, reject) => {
 
   // wait until router has resolved possible async hooks
   router.onReady(() => {
+    // set the language ...
+    setLanguageFromRoute(router.currentRoute, store);
+
     const matchedComponents = router.getMatchedComponents();
     // no matched routes
     if (!matchedComponents.length) {

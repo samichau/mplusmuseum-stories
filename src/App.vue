@@ -10,24 +10,11 @@
 </template>
 
 <script>
-import _includes from 'lodash/includes';
-import locales from './locale';
 import AppFooter from './components/AppFooter.vue';
 import AppHeader from './components/AppHeader.vue';
 import AppLightbox from './components/AppLightbox.vue';
 
 export default {
-  created() {
-    let primary = this.$route.params.lang;
-    let secondary = locales[1];
-    if (!_includes(locales, primary)) [primary] = locales;
-    if (primary === locales[1]) {
-      [secondary] = locales;
-    } else {
-      [primary] = locales;
-    }
-    this.$store.commit('setLanguage', { primary, secondary });
-  },
   computed: {
     key() {
       const { route } = this.$store.state;
