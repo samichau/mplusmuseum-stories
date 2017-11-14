@@ -296,15 +296,13 @@ a.lang-secondary {
     background-color: @accent;
     &:after {
       content: '\00d7';
+      position: relative;
+      top: -0.05em;
       opacity: 0.66;
-      display: inline-block;
-      vertical-align: middle;
       margin-left: 0.25em;
       height: 0.15em;
       line-height: 0;
       font-size: 85%;
-      display: inline-block;
-      vertical-align: middle;
     }
   }
 }
