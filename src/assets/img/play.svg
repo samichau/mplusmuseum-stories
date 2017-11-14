@@ -1,6 +1,6 @@
 <svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title id="title">Play</title>
-    <g class="svg-icon" id="play" stroke="#FFFFFF" stroke-width="10">
-        <path d="M26,10.0457731 L89.6006061,50 L26,89.9542269 L26,10.0457731 Z"></path>
+    <g class="svg-icon" id="play" fill-rule="nonzero" fill="#FFFFFF">
+        <path d="M21,1 L99,50 L21,99 L21,1 Z M31,80.9084539 L80.2012123,50 L31,19.0915461 L31,80.9084539 Z" id="Rectangle-2"></path>
     </g>
 </svg>
