@@ -46,7 +46,7 @@ export default function () {
         if (!context.state.initialized) {
           context.commit('setLastQuery', tagString);
           return context.dispatch('query', { init: true, query: { tags } })
-            .then((response) => {
+            .then(response => () => {
               context.commit('tags/setActive', tags, { root: true });
               return response;
             });

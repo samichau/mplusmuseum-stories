@@ -47,12 +47,19 @@ export default context => new Promise((resolve, reject) => {
     }))).then((responses) => {
       if (isDev) console.log(`data pre-fetch: ${Date.now() - s}ms`);
 
+      const siteResponse = responses[0];
+      let viewResponse = responses[1];
+
       // If the site request didn't resolve, then reject
-      if (!responses[0].resolved) return reject(responses[0]);
+      if (!siteResponse.resolved) return reject(responses[0]);
+
+      if (typeof viewResponse === 'function') {
+        viewResponse = viewResponse();
+      }
 
       // If the site data was retrieved but the view data wasn't, we initialize
       // the app but show the 404 view as we can't display the requested route
-      if (!responses[1].resolved) {
+      if (!viewResponse.resolved) {
         const lang = store.state.route.params.lang || locales[0];
         router.replace({ name: 'not-found', params: { lang } });
       }
