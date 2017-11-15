@@ -27,19 +27,21 @@
 
         <div class="heading" v-if="submittedQuery.length">
 
-          <p v-if="searching">Searching for Results ...</p>
+          <p v-if="searching" v-html="$t(translations.search.searching)"></p>
 
           <p v-else>
 
-            <snippet-translate class="item__text"
+            <snippet-translate class="search__status"
             tag="span"
             :snippet="translations.search.results"
             :data="{ count: results.length, query: submittedQuery }"
-            :parsers="{ count: (c) => c, query: (q, h) => h('strong', {}, q) }"/>.
+            :parsers="{ count: (c) => c, query: (q, h) => h('strong', {}, q) }"/>
 
             <a href="#" @click.prevent="filter = !filter">
 
-            <strong v-html="$t(translations.search.filter)"></strong>.</a>
+              <strong v-html="$t(translations.search.filter)"></strong>
+            
+            </a>
 
           </p>
 
@@ -151,6 +153,9 @@ export default {
     .tag {
       text-align: left;
     }
+  }
+  &__status {
+    margin-right: 0.25em;
   }
 }
 </style>

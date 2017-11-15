@@ -11,7 +11,7 @@
 
           <button @click="setSort(sort.id)"
           :class="{ selected: sort.id === activeSort.id }"
-          v-html="sort.title"></button>
+          v-html="$t($store.state.translations.explore[sort.id])"></button>
 
         </span>
 
