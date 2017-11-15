@@ -72,14 +72,13 @@ import SnippetTranslate from '../components/SnippetTranslate.vue';
 export default {
   mixins: [meta],
   meta() {
+    const title = this.$t(this.$store.state.site.sections.search);
     return {
-      title: 'Search',
-      description: 'Search',
-      image: false,
+      title,
       type: 'website',
       notice: {
         id: 'search',
-        value: 'Search',
+        value: title,
         isTitle: true,
       },
     };
