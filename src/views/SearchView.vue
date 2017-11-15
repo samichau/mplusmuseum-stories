@@ -27,10 +27,8 @@
 
         <div class="heading" v-if="submittedQuery.length">
 
-          <p v-if="searching" v-html="$t(translations.search.searching)"></p>
-
-          <p v-else>
-
+          <p v-if="!searching">
+            
             <snippet-translate class="search__status"
             tag="span"
             :snippet="translations.search.results"
@@ -44,6 +42,8 @@
             </a>
 
           </p>
+
+          <p v-else v-html="$t(translations.search.searching)"></p>
 
           <search-filter v-if="filter"/>
 
@@ -117,7 +117,7 @@ export default {
       return results;
     },
     submittedQuery() {
-      return this.$store.state.route.query.q || '';
+      return this.$store.state.search.lastQuery;
     },
     query: {
       get() {
