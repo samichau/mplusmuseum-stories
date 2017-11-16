@@ -65,7 +65,7 @@ export default {
       const { content } = this.content.card;
       return {
         src: content.src,
-        loading: this.$placeholder.generate(content.dim, 'loading', 'black', 'black'),
+        loading: this.$placeholder.generate(content.dim, 'loading', 'black', 'white'),
       };
     },
   },
