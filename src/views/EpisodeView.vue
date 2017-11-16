@@ -173,8 +173,8 @@ export default {
     }
   }
   .row {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
   }
 }
 </style>

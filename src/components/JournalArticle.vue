@@ -109,12 +109,16 @@ export default {
     .block {
       margin-left: auto;
       margin-right: auto;
-      margin-bottom: 1em;
+      // margin-bottom: 1em;
       padding-left: 1em;
       padding-right: 1em;
       max-width: @widthSmall;
-    }
-    .block {
+      &.quotation-block {
+        text-align: center;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
       &--default {
         clear: both;
       }
@@ -140,9 +144,7 @@ export default {
       margin-top: 1em;
     }
     .block--left + .block--right + .text-block,
-    .block--left + .block--right + .endnote-block,
-    .block--left + .block--right + .instagram-block,
-    .block--left + .block--right + .tweet-block {
+    .block--left + .block--right + .endnote-block {
       clear: both;
     }
   }

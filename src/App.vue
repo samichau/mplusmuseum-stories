@@ -121,12 +121,15 @@ body {
 }
 
 .block {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   &.text-block {
     margin-bottom: 1em;
   }
   &:first-child {
     margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
   }
   &--no-margin {
     margin-top: 0;
