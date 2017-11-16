@@ -111,7 +111,10 @@ router.onReady(() => {
     }
     bar.start();
     return Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
-      .then(() => {
+      .then(([viewResponse]) => {
+        if (typeof viewResponse === 'function') {
+          viewResponse = viewResponse();
+        }
         bar.finish();
         next();
       }).catch(handleError);
