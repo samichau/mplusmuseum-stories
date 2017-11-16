@@ -1,5 +1,11 @@
 <template>
-  <div class="text-block block" v-html="html"></div>
+  <div class="text-block block">
+
+    <div class="text-block__content"
+    :class="modifier"
+    v-html="html"></div>
+
+  </div>
 </template>
 
 <script>
@@ -21,6 +27,10 @@ export default {
         html = `${html.substr(0, footnote.offset)}<sup class="footnote"><span class="anchor" id="fnref-${footnote.id}"></span><a href="#fn-${footnote.id}"></a></sup>${html.substr(footnote.offset)}`;
       });
       return html;
+    },
+    modifier() {
+      if (this.content.modifier === 'small') return 'fs-s';
+      return false;
     },
   },
 };
