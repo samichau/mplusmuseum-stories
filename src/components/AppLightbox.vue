@@ -26,7 +26,7 @@
 
       <div class="lightbox__footer">
 
-        <div class="lightbox__caption fs-s"
+        <div class="lightbox__caption fs-s fs-s-xs"
         v-html="$t(image.caption)"></div>
 
       </div>
@@ -94,12 +94,12 @@ export default {
   &__close, &__share {
     position: absolute;
     right: 0;
-    padding: 1.5rem;
+    padding: 0.5em;
   }
   &__close {
     top: 0;
-    height: 3.5em;
-    width: 3.5em;
+    height: 2.5em;
+    width: 2.5em;
     border: none;
     background: none;
     img {
@@ -127,9 +127,9 @@ export default {
     justify-content: center;
     width: 100%;
     height: 100%;
-    padding: 1rem;
+    padding: 2.5em 0.5em 0.5em;
     .mq-sm({
-      padding: 3rem 3rem 1rem;
+      padding: 2.5em 1.5em 0.5em;
     });
     img {
       cursor: zoom-out;
@@ -145,7 +145,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 1.5rem 7rem 1.5rem 1.5rem;
+    padding: 0.75em 3.5em 0.75em 0.75em;
   }
   &__caption {
     flex-grow: 1;
