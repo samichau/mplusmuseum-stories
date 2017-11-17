@@ -97,9 +97,7 @@ export default {
         const index = _findIndex(issueArticles, article => article.id === id);
         return this.getNextArticle(index, issueArticles)
           .then(() => {
-            setTimeout(() => {
-              this.$triggerNative('resize');
-            }, 500);
+            setTimeout(this.$triggerNative, 500);
           });
       }
 

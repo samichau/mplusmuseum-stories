@@ -17,7 +17,7 @@
     data() {
       return {
         sectionThresholds: [],
-        currentSectionIndex: 0,
+        currentSectionIndex: -1,
       };
     },
     methods: {
@@ -26,28 +26,34 @@
         const sections = Array.prototype.slice.call(this.$el.children);
         // Save new array of just the section positions
         const arr = sections.map(section => section.offsetTop + section.clientHeight);
-        // Add 0 to the start of the array
-        arr.unshift(0);
+        // Add first position to the start of the array
+        const firstPosition = sections[0].offsetTop;
+        arr.unshift(firstPosition);
         this.sectionThresholds = arr;
       },
       handleScroll() {
         const scrollPos = window.scrollY;
-        // For each of the thresholds
-        this.sectionThresholds.forEach((threshold, index) => {
-          // If the position is greater than the threshold ...
-          if (scrollPos > threshold
-          // ... and either this is the last threshold ...
-          // ... or the position is before the next position ...
-          && (!this.sectionThresholds[index + 1]
-            || scrollPos < this.sectionThresholds[index + 1])
-          // ... and this isn't the current index
-          && index !== this.currentSectionIndex) {
-            // Update the current index
-            this.currentSectionIndex = index;
-            // Execute the passed function
-            this.trigger(index);
-          }
-        });
+        if (scrollPos <= this.sectionThresholds[0] && this.currentSectionIndex >= 0) {
+          this.currentSectionIndex = -1;
+          this.trigger(-1);
+        } else {
+          // For each of the thresholds
+          this.sectionThresholds.forEach((threshold, index) => {
+            // If the position is greater than the threshold ...
+            if (scrollPos > threshold
+            // ... and either this is the last threshold ...
+            // ... or the position is before the next position ...
+            && (!this.sectionThresholds[index + 1]
+              || scrollPos < this.sectionThresholds[index + 1])
+            // ... and this isn't the current index
+            && index !== this.currentSectionIndex) {
+              // Update the current index
+              this.currentSectionIndex = index;
+              // Execute the passed function
+              this.trigger(index);
+            }
+          });
+        }
       },
     },
     updated() {

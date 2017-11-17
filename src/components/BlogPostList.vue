@@ -25,28 +25,42 @@ export default {
     updateURL(name = false) {
       let url = window.location.origin;
       const { route } = this.$store.state;
-      const path = route.path.replace(/\/$/, '');
-      url += `${path}/${name}`;
+      if (name) {
+        const path = route.path.replace(/\/$/, '');
+        url += `${path}/${name}`;
+      } else {
+        url += route.fullPath;
+      }
       window.history.replaceState(undefined, undefined, url);
     },
-    updateNotice(post, el) {
-      let scroll = 0;
-      if (el) {
-        const { top } = el.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        scroll = (top + scrollTop) + 1;
+    updateNotice(post = false, el = false) {
+      const blogTitle = this.$t(this.$store.state.site.sections.blog);
+      const notice = {};
+      if (post) {
+        let scroll = 0;
+        if (el) {
+          const { top } = el.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          scroll = (top + scrollTop) + 1;
+        }
+        notice.id = post.name;
+        notice.value = `${blogTitle}: <span>${this.$t(post.title)}</span>`;
+        notice.isTitle = false;
+        notice.scroll = scroll;
+      } else {
+        notice.id = 'blog';
+        notice.value = blogTitle;
+        notice.isTitle = true;
       }
-      this.$store.commit('header/updateNotice', {
-        id: post.name,
-        value: `${this.$t(this.$store.state.site.sections.blog)}: <span>${this.$t(post.title)}</span>`,
-        isTitle: false,
-        scroll,
-      });
+      this.$store.commit('header/updateNotice', notice);
     },
     trigger(index) {
       const items = this.$refs.waypoints.$children;
       const item = items[index];
-      if (item && item.post && item.post.name) {
+      if (index < 0) {
+        this.updateURL();
+        this.updateNotice();
+      } else if (item && item.post && item.post.name) {
         this.updateURL(item.post.name);
         this.updateNotice(item.post, item.$el);
       }

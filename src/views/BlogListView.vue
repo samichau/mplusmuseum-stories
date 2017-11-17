@@ -125,9 +125,7 @@ export default {
     afterGetMore() {
       this.loadingPosts = false;
       this.$bar.finish();
-      this.$nextTick(() => {
-        this.$triggerNative('resize');
-      });
+      this.$triggerNative();
     },
   },
   components: {

@@ -89,6 +89,7 @@ export default {
         omit: this.omit,
       }).then(({ data: { items } }) => {
         this.items = items;
+        this.$triggerNative();
       }).catch(() => {
         // Fail silently
       });

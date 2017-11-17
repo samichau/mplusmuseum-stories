@@ -23,10 +23,13 @@ Vue.prototype.$modal = new Vue(AppModal).$mount();
 const modal = Vue.prototype.$modal;
 document.body.appendChild(modal.$el);
 
-Vue.prototype.$triggerNative = (event) => {
+Vue.prototype.$triggerNative = (event = 'resize') => {
   const evt = window.document.createEvent('UIEvents');
   evt.initUIEvent(event, true, false, window, 0);
-  window.dispatchEvent(evt);
+  Vue.nextTick(() => {
+    window.dispatchEvent(evt);
+    console.log('trigger', evt);
+  });
 };
 const triggerNative = Vue.prototype.$triggerNative;
 

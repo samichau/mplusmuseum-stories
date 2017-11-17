@@ -141,7 +141,7 @@ export default {
   methods: {
     extend() {
       this.$store.commit('blog/extendPost', this.post);
-      this.$nextTick(this.triggerResize);
+      this.$triggerNative();
       this.$ga.event({
         eventCategory: 'Blog Post',
         eventAction: 'Expand',
@@ -156,16 +156,13 @@ export default {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const newPosition = (top + scrollTop) - offset;
         window.scrollTo(0, newPosition);
-        this.triggerResize();
+        this.$triggerNative();
       });
       this.$ga.event({
         eventCategory: 'Blog Post',
         eventAction: 'Collapse',
         eventLabel: this.post.title[this.lang],
       });
-    },
-    triggerResize() {
-      this.$triggerNative('resize');
     },
   },
   components: {

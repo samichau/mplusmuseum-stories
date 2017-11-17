@@ -119,9 +119,7 @@ export default {
     afterGetMore() {
       this.loadingExhibitions = false;
       this.$bar.finish();
-      this.$nextTick(() => {
-        this.$triggerNative('resize');
-      });
+      this.$triggerNative();
     },
   },
   components: {
