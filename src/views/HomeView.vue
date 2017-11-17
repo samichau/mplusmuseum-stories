@@ -2,7 +2,6 @@
   <main class="home" v-if="home">
 
     <div v-if="home.content[0].type !== 'banner'" class="header-push"></div>
-    <!-- <div class="header-push"></div> -->
 
     <div v-for="section in home.content"
     class="home-section wrap wrap--full"

@@ -28,7 +28,6 @@ Vue.prototype.$triggerNative = (event = 'resize') => {
   evt.initUIEvent(event, true, false, window, 0);
   Vue.nextTick(() => {
     window.dispatchEvent(evt);
-    console.log('trigger', evt);
   });
 };
 const triggerNative = Vue.prototype.$triggerNative;

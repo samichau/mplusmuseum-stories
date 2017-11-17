@@ -131,12 +131,18 @@ export default {
         clear: left;
         width: 50%;
         margin: 0;
+        .mq-sm-under({
+          padding-right: 0.5em;
+        });
       }
       &--right {
         float: right;
         clear: right;
         width: 50%;
         margin: 0;
+        .mq-sm-under({
+          padding-left: 0.5em;
+        });
       }
     }
     .block--left + .block--left,
