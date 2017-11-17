@@ -51,9 +51,11 @@
 </template>
 
 <script>
+import _unescape from 'lodash/unescape';
+
 function prepareURI(url, { location, title }) {
-  url = url.replace('{title}', encodeURIComponent(title));
-  url = url.replace('{location}', encodeURIComponent(location));
+  url = url.replace('{title}', _unescape(title));
+  url = url.replace('{location}', _unescape(location));
   return url;
 }
 
