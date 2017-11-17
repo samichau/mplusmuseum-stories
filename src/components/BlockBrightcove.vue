@@ -30,7 +30,7 @@
     </component>
 
     <div v-if="caption"
-    class="image-block__caption fs-s"
+    class="brightcove-block__caption fs-xs fs-s-sm"
     v-html="caption"></div>
 
   </div>
@@ -116,6 +116,8 @@ export default {
 </script>
 
 <style lang="less">
+@import '../less/variables.less';
+
 .brightcove-video {
   &__wrap {
     position: relative;
@@ -127,6 +129,10 @@ export default {
     left: 0;
     height: 100%;
     width: 100%;
+  }
+  &__caption {
+    margin: 1rem 0;
+    color: @midgrey;
   }
 }
 </style>

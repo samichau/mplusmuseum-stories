@@ -9,7 +9,7 @@
     @click="lightbox">
 
     <div v-if="caption"
-    class="image-block__caption fs-s"
+    class="image-block__caption fs-xs fs-s-sm"
     v-html="$t(content.caption)"></div>
 
   </div>
