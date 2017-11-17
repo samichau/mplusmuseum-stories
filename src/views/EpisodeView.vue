@@ -130,7 +130,7 @@ export default {
     shareData() {
       const base = this.$store.state.site.url;
       return {
-        url: `${base}/${this.lang}/channel/${this.episode.name}/`,
+        url: `${base}/${this.$store.state.lang}/channel/${this.episode.name}/`,
         title: this.$t(this.episode.title),
       };
     },

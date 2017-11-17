@@ -53,7 +53,7 @@ export default {
       const base = this.$store.state.site.url;
       const issue = this.article.issue.name;
       const article = this.article.name;
-      return `${base}/${this.lang}/podium/${issue}/${article}/`;
+      return `${base}/${this.$store.state.lang}/podium/${issue}/${article}/`;
     },
     footnotes() {
       if (!this.article.content) return [];
