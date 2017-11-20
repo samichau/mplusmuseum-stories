@@ -26,7 +26,7 @@
 
       <div class="lightbox__footer">
 
-        <div class="lightbox__caption fs-s fs-s-xs"
+        <div class="lightbox__caption fs-xs fs-s-sm"
         v-html="$t(image.caption)"></div>
 
       </div>
