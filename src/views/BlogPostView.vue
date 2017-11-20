@@ -23,6 +23,9 @@ export default {
         id: 'blog',
         value: this.$t(this.$store.state.site.sections.blog),
         isTitle: true,
+        link: {
+          name: 'blog',
+        },
       },
     };
   },

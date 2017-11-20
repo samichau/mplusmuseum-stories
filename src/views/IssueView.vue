@@ -54,6 +54,9 @@ export default {
         id: 'journal',
         value: title,
         isTitle: true,
+        link: {
+          name: 'journal',
+        },
       },
     };
   },

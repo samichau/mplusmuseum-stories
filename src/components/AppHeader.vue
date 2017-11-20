@@ -34,11 +34,12 @@
             class="header__notice hide--mobile"
             :class="{ 'header__notice--title' : notice.isTitle }">
 
-              <button @click="scrollTo(notice.scroll)"
-              v-html="notice.value"></button>
+              <router-link v-if="notice.link"
+              :to="$link(notice.link)"
+              v-html="notice.value"/>
 
-              <component :is="notice.link ? 'router-link' : 'div'"
-              :to="notice.link ? $link({ name: notice.link, params: {} }) : null"
+              <button v-else
+              @click="scrollTo(notice.scroll)"
               v-html="notice.value"/>
 
             </div>

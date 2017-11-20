@@ -110,6 +110,9 @@ export default {
         id: 'channel',
         value: this.$t(this.$store.state.site.sections.channel),
         isTitle: true,
+        link: {
+          name: 'channel',
+        },
       },
     };
   },
