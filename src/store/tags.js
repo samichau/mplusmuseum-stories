@@ -2,7 +2,7 @@ import _find from 'lodash/find';
 import _includes from 'lodash/includes';
 import _map from 'lodash/map';
 import _reduce from 'lodash/reduce';
-import locales from '../locale';
+// import locales from '../locale';
 
 export default function () {
   return {
@@ -28,15 +28,11 @@ export default function () {
       // The key is the tag id
       // The value is a lowercased concatenation of the tag names in all languages
       searchable(state, getters) {
-        return _reduce(getters.mappedOrder, (tags, tag) => {
-          if (!_includes(state.active, tag.id)) {
-            let str = '';
-            locales.forEach((locale) => {
-              str += tag.title[locale];
-            });
+        return _reduce(getters.mappedOrder, (tags, { id, str }) => {
+          if (!_includes(state.active, id)) {
             tags.push({
-              id: tag.id,
-              str: str.toLowerCase(),
+              id,
+              str,
             });
           }
           return tags;
