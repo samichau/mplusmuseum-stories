@@ -30,6 +30,7 @@
     "lru-cache": "^4.1.1",
     "object-fit-images": "^3.2.3",
     "object-fit-videos": "github:oncode/object-fit-videos",
+    "qr.js": "0.0.0",
     "serve-favicon": "^2.4.5",
     "sitemap": "^1.13.0",
     "vue": "^2.5.3",

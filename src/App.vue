@@ -6,6 +6,9 @@
   <transition name="fade" mode="out-in">
     <app-lightbox v-if="$store.state.lightbox.active"/>
   </transition>
+  <transition name="spin" mode="out-in">
+    <app-lightbox-qr v-if="$store.state.lightbox.qr"/>
+  </transition>
 </div>
 </template>
 
@@ -13,6 +16,7 @@
 import AppFooter from './components/AppFooter.vue';
 import AppHeader from './components/AppHeader.vue';
 import AppLightbox from './components/AppLightbox.vue';
+import AppLightboxQr from './components/AppLightboxQr.vue';
 
 export default {
   computed: {
@@ -26,6 +30,7 @@ export default {
     AppFooter,
     AppHeader,
     AppLightbox,
+    AppLightboxQr,
   },
 };
 </script>
@@ -635,6 +640,24 @@ a.tag {
   opacity: 0.0001;
 }
 
+// Spin
+.spin-enter-active, .spin-leave-active {
+  transition-property: transform, opacity;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.24, 0, 0.64, 1);
+}
+
+.spin-enter {
+  transform: translateY(-25%) rotateZ(-90deg);
+  opacity: 0.0001;
+}
+
+.spin-leave-to {
+  transform: translateY(25%) rotateZ(90deg);
+  opacity: 0.0001;
+}
+
+// Drop
 .drop-enter-active, .drop-leave-active {
   transition: transform .35s ease, opacity 0.25s ease;
   transform-origin: 100% 0;

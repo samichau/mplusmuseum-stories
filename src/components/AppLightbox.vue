@@ -39,16 +39,10 @@
 <script>
 import { mapState } from 'vuex';
 import ShareBar from './ShareBar.vue';
+import { lightboxMixin } from '../util/mixins';
 
 export default {
-  created() {
-    document.body.classList.add('modal-active');
-    window.addEventListener('keydown', this.keyHandler);
-  },
-  destroyed() {
-    document.body.classList.remove('modal-active');
-    window.removeEventListener('keydown', this.keyHandler);
-  },
+  mixins: [lightboxMixin],
   computed: {
     ...mapState('lightbox', [
       'share',
@@ -68,9 +62,6 @@ export default {
   methods: {
     close() {
       this.$store.commit('lightbox/close');
-    },
-    keyHandler(e) {
-      if (e.keyCode === 27) this.close();
     },
   },
   components: {

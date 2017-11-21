@@ -6,6 +6,7 @@ export default function () {
       active: false,
       image: false,
       share: {},
+      qr: false,
     },
 
     mutations: {
@@ -16,6 +17,9 @@ export default function () {
       },
       close(state) {
         state.active = false;
+      },
+      updateQR(state, payload) {
+        state.qr = payload;
       },
     },
   };

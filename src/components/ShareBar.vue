@@ -20,9 +20,11 @@
 
           <span class="sr-only">Share on {{ $t(item.title) }}</span>
 
-          <div class="sharebar__block-background" :style="{ 'background-color': item.colour }"></div>
+          <div class="sharebar__block-background"
+          :style="{ 'background-color': item.colour }"></div>
 
-          <img :src="item.icon" :alt="`${$t(item.title)} Icon`">
+          <img :src="item.icon"
+          :alt="`${$t(item.title)} Icon`">
 
         </div>
 
@@ -33,15 +35,20 @@
     <button v-if="$store.state.site.social.length > limit"
       class="sharebar__block"
       @click="toggle">
+
       <div class="sharebar__block-inner">
 
         <span class="sr-only">More Sharing Options</span>
 
         <div class="sharebar__block-background"></div>
 
-        <img v-if="expanded" src="../assets/img/minus.svg" alt="Close">
+        <img v-if="expanded"
+        src="../assets/img/minus.svg"
+        alt="Close">
 
-        <img v-else src="../assets/img/plus.svg" alt="Expand">
+        <img v-else
+        src="../assets/img/plus.svg"
+        alt="Expand">
 
       </div>
 
@@ -100,6 +107,9 @@ export default {
           title: this.title,
         });
         window.open(shareURI, 'Share', `scrollbars=yes,resizable=yes,toolbar=no,location=0,width=550,height=420,top=${top},left=${left}`);
+      } else if (shareURI.startsWith('qr://')) {
+        e.preventDefault();
+        this.$store.commit('lightbox/updateQR', this.url);
       }
     },
   },

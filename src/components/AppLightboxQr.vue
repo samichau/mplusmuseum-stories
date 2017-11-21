@@ -1,0 +1,57 @@
+<template>
+  <div class="lightbox-qr" @click="close">
+
+    <div class="lightbox-qr__inner shadow">
+
+      <app-qr-code :code="$store.state.lightbox.qr"
+      fill="#ffffff"/>
+
+    </div>
+
+  </div>
+</template>
+
+<script>
+import { lightboxMixin } from '../util/mixins';
+import AppQrCode from './AppQrCode.vue';
+
+export default {
+  mixins: [lightboxMixin],
+  components: {
+    AppQrCode,
+  },
+  methods: {
+    close() {
+      this.$store.commit('lightbox/updateQR', false);
+    },
+  },
+};
+</script>
+
+<style lang="less">
+@import '../less/variables.less';
+
+.lightbox-qr {
+  position: fixed;
+  z-index: 1005;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+  &__inner {
+    background: @accent;
+    padding: 1em;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+</style>
+

@@ -35,3 +35,22 @@ export const titleMixin = {
     },
   },
 };
+
+export const lightboxMixin = {
+  created() {
+    document.body.classList.add('modal-active');
+    window.addEventListener('keydown', this.keyHandler);
+  },
+  destroyed() {
+    document.body.classList.remove('modal-active');
+    window.removeEventListener('keydown', this.keyHandler);
+  },
+  methods: {
+    keyHandler(e) {
+      if (e.keyCode === 27) this.close();
+    },
+    close() {
+      // empty
+    },
+  },
+};
