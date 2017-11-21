@@ -42,9 +42,32 @@ export default {
 .text-block {
   margin-bottom: 1em;
   line-height: 1.4;
+  word-break: break-word;
 
-  h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 1em;
+  h1, h2 {
+    line-height: 1.2;
+    @xsFs: 2em / 1.7;
+    font-size: @xsFs;
+    margin-bottom: 0.25 / @xsFs;
+    .mq-sm({
+      @smFs: 2.2em / 1.7;
+      font-size: @smFs;
+      margin-bottom: 0.25 / @smFs;
+    });
+    .mq-md({
+      @mdFs: 2.5em / 1.8;
+      font-size: @mdFs;
+      margin-bottom: 0.25 / @mdFs;
+    });
+    .mq-lg({
+      @lgFs: 2.8em / 2;
+      font-size: @lgFs;
+      margin-bottom: 0.25 / @lgFs;
+    });
+  }
+
+  h3, h4, h5, h6 {
+    margin-bottom: 0.25em;
   }
 
   ul, ol {

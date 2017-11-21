@@ -11,9 +11,13 @@
 
         <div class="panel__inner" slot="content">
 
-          <app-title-link class="document__title fs-l"
-          :wrap="'h1'"
-          :title="page.title"/>
+          <div class="document__title">
+
+            <app-title-link class="fs-l"
+            :wrap="'h1'"
+            :title="page.title"/>
+
+          </div>
 
           <template v-if="page.contents">
 
@@ -53,7 +57,7 @@
             href="#contents"
             class="document-item__back"><img src="../assets/img/caret-up.svg" alt="Return to Contents"></a>
 
-            <h2 v-html="$t(section.title)"></h2>
+            <h2 class="fs-m" v-html="$t(section.title)"></h2>
 
           </div>
 
@@ -89,15 +93,8 @@ export default {
 @import "../less/variables.less";
 
 .document {
-  padding: 2rem 0 1rem;
-  .mq-sm({ padding: 3.5rem 0 1rem; });
-  .mq-lg({ padding: 4rem 0 1rem; });
-  &__title {
-    margin-bottom: 2rem;
-    .mq-sm({
-      margin-bottom: 3rem;
-    });
-  }
+  padding: 1em 0;
+  .mq-sm({ padding: 1.5em 0; });
   &--no-contents {
     .document__title {
       margin-bottom: 0;
