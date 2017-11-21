@@ -12,8 +12,10 @@
 </template>
 
 <script>
+// import AppQrCode from './AppQrCode.vue';
 import { lightboxMixin } from '../util/mixins';
-import AppQrCode from './AppQrCode.vue';
+
+const AppQrCode = () => import('./AppQrCode.vue');
 
 export default {
   mixins: [lightboxMixin],

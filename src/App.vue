@@ -1,15 +1,25 @@
 <template>
-<div id="app" class="fs-b" :class="`app--${key}`">
-  <app-header/>
-  <router-view class="view"/>
-  <app-footer/>
-  <transition name="fade" mode="out-in">
-    <app-lightbox v-if="$store.state.lightbox.active"/>
-  </transition>
-  <transition name="spin" mode="out-in">
-    <app-lightbox-qr v-if="$store.state.lightbox.qr"/>
-  </transition>
-</div>
+  <div id="app" class="fs-b" :class="`app--${key}`">
+
+    <app-header/>
+
+    <router-view class="view"/>
+
+    <app-footer/>
+
+    <transition name="fade" mode="out-in">
+
+      <app-lightbox v-if="$store.state.lightbox.active"/>
+
+    </transition>
+
+    <transition name="spin" mode="out-in">
+
+      <app-lightbox-qr v-if="$store.state.lightbox.qr"/>
+
+    </transition>
+
+  </div>
 </template>
 
 <script>
