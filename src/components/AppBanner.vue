@@ -15,9 +15,11 @@
     <div class="banner__media banner__video" 
     v-else-if="content.hero.type === 'video'">
 
-      <video :autoplay="true" loop muted>
+      <video :autoplay="true"
+      :poster="media.poster.src"
+      loop muted>
 
-        <source v-for="source in media"
+        <source v-for="source in media.sources"
         :key="source.type"
         :src="source.src"
         :type="`video/${source.type}`">
@@ -43,39 +45,6 @@
         </div>
 
       </app-link>
-
-      <!-- <router-link class="banner__flex"
-      v-if="linkIsInternal"
-      :to="link">
-
-        <div class="wrap wrap--wide">
-
-          <div class="banner__box">
-
-            <slot/>
-
-          </div>
-
-        </div>
-
-      </router-link>
-
-      <a class="banner__flex"
-      v-else-if="linkIsExternal"
-      :href="link"
-      target="_blank">
-
-        <div class="wrap wrap--wide">
-
-          <div class="banner__box">
-
-            <slot/>
-
-          </div>
-
-        </div>
-
-      </a> -->
 
       <div class="banner__flex"
       v-else>
