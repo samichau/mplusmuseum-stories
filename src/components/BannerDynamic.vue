@@ -18,10 +18,21 @@
 
     </div>
 
+    <div v-else-if="content.type === 'issue'"
+    class="banner__meta fs-b">
+
+      <snippet-translate
+      :snippet="$store.state.translations.journal.contributions"
+      :data="{ contributors: content.contributors }"
+      :parsers="{ contributors: (c) => $t(c) }"/>
+
+    </div>
+
   </app-banner>
 </template>
 
 <script>
+import SnippetTranslate from './SnippetTranslate.vue';
 import { labelMixin } from '../util/mixins';
 
 export default {
@@ -30,6 +41,9 @@ export default {
     content: {
       required: true,
     },
+  },
+  components: {
+    SnippetTranslate,
   },
 };
 </script>
