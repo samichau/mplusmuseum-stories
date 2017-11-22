@@ -4,7 +4,7 @@
     <div class="lightbox-qr__inner shadow">
 
       <app-qr-code :code="$store.state.lightbox.qr"
-      fill="#ffffff"/>
+      fill="#1946ff"/>
 
     </div>
 
@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// import AppQrCode from './AppQrCode.vue';
 import { lightboxMixin } from '../util/mixins';
 
 const AppQrCode = () => import('./AppQrCode.vue');
@@ -46,7 +45,7 @@ export default {
   align-items: center;
   cursor: zoom-out;
   &__inner {
-    background: @accent;
+    background: @white;
     padding: 1em;
   }
   svg {
