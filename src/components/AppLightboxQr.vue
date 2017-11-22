@@ -43,7 +43,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: zoom-out;
   &__inner {
     background: @white;
     padding: 1em;
