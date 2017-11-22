@@ -18,7 +18,6 @@
 
 <script>
 import _map from 'lodash/map';
-import _sortBy from 'lodash/sortBy';
 import AppDropdown from './AppDropdown.vue';
 
 export default {
@@ -28,19 +27,19 @@ export default {
     },
     filterOptions() {
       const opts = [
+        'post',
         'article',
-        'basic',
-        'documentation',
         'episode',
         'exhibition',
+        'documentation',
+        'basic',
         'issue',
-        'post',
       ];
       const options = _map(opts, name => ({
         title: this.$t(this.translations.content[name]).many,
         value: name,
       }));
-      return _sortBy(options, 'title');
+      return options;
     },
     sortOptions() {
       return [
