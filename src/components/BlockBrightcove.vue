@@ -1,18 +1,18 @@
 <template>
-  <div class="brightcove-video block"
+  <div class="brightcove-block block"
   :class="modifierClass">
 
     <div v-if="alt"
-    class="brightcove-video__alt sr-only"
+    class="brightcove-block__alt sr-only"
     v-text="alt"></div>
 
-    <component class="brightcove-video__wrap"
+    <component class="brightcove-block__wrap"
     :is="componentType"
     v-if="validated"
     :key="$t(content.media.id)"
     @show="onLazyload">
 
-      <!-- <video class="video-js brightcove-video__media"
+      <!-- <video class="video-js brightcove-block__media"
       v-if="loaded"
       ref="media"
       :data-video-id="$t(content.media.id)"
@@ -22,7 +22,7 @@
       data-application-id
       controls></video> -->
 
-      <video class="video-js brightcove-video__media"
+      <video class="video-js brightcove-block__media"
       ref="media"
       data-embed="default"
       controls></video>
@@ -118,7 +118,7 @@ export default {
 <style lang="less">
 @import '../less/variables.less';
 
-.brightcove-video {
+.brightcove-block {
   &__wrap {
     position: relative;
     padding-bottom: 56.25%;
