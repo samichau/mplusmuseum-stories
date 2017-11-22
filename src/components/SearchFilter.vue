@@ -84,12 +84,18 @@ export default {
 </script>
 
 <style lang="less">
+@import "../less/variables.less";
+
 .search-filter {
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   &__buttons {
     display: flex;
+    flex-wrap: wrap;
     .app-dropdown {
-      margin-right: 1em;
+      margin-bottom: 0.5em;
+      .mq-sm({
+        margin-right: 1em;
+      });
     }
   }
 }

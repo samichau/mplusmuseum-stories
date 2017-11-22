@@ -120,7 +120,7 @@ export default {
   }
   &__button {
     position: relative;
-    z-index: 11;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -135,9 +135,9 @@ export default {
   }
   &__options {
     width: 100%;
-    z-index: 10;
+    z-index: 11;
     position: absolute;
-    max-height: 2.1875em * 4;
+    max-height: 2.1875em * 4.25;
     overflow-y: scroll;
   }
   &__option {
