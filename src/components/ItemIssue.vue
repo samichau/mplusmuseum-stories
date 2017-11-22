@@ -5,7 +5,7 @@
 
       <div class="panel__inner" slot="content">
 
-        <app-section-label type="issue"/>
+        <app-section-label :type="labelType(item)"/>
 
         <router-link :to="link">
 
@@ -31,9 +31,11 @@
 </template>
 
 <script>
+import { labelMixin } from '../util/mixins';
 import SnippetTranslate from './SnippetTranslate.vue';
 
 export default {
+  mixins: [labelMixin],
   props: {
     item: {
       required: true,

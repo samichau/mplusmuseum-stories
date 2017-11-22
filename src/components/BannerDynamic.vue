@@ -1,7 +1,7 @@
 <template>
   <app-banner :content="content">
 
-    <app-section-label :type="content.type" same/>
+    <app-section-label :type="labelType(content)" same/>
 
     <app-title class="fs-l"
     wrap="h3"
@@ -22,7 +22,10 @@
 </template>
 
 <script>
+import { labelMixin } from '../util/mixins';
+
 export default {
+  mixins: [labelMixin],
   props: {
     content: {
       required: true,

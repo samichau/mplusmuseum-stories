@@ -5,7 +5,7 @@
 
       <div class="search-result__text">
 
-        <app-section-label :type="result.type"/>
+        <app-section-label :type="this.labelType(result)"/>
 
         <h2 class="search-result__title fs-m">
 
@@ -48,8 +48,10 @@
 <script>
 import _mapValues from 'lodash/mapValues';
 import AppLink from './AppLink.vue';
+import { labelMixin } from '../util/mixins';
 
 export default {
+  mixins: [labelMixin],
   props: {
     query: {
       type: String,
