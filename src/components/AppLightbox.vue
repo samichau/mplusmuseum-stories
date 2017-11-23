@@ -43,6 +43,12 @@ import { lightboxMixin } from '../util/mixins';
 
 export default {
   mixins: [lightboxMixin],
+  created() {
+    document.body.classList.add('modal-active');
+  },
+  destroyed() {
+    document.body.classList.remove('modal-active');
+  },
   computed: {
     ...mapState('lightbox', [
       'share',
