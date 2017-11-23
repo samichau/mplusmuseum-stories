@@ -60,9 +60,15 @@
 <script>
 import _unescape from 'lodash/unescape';
 
+function prepareComponent(component) {
+  const unescaped = _unescape(component);
+  const encoded = encodeURIComponent(unescaped);
+  return encoded;
+}
+
 function prepareURI(url, { location, title }) {
-  url = url.replace('{title}', _unescape(title));
-  url = url.replace('{location}', _unescape(location));
+  url = url.replace('{location}', prepareComponent(location));
+  url = url.replace('{title}', prepareComponent(title));
   return url;
 }
 
