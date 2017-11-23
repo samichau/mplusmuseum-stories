@@ -17,7 +17,7 @@
 
       <video :autoplay="true"
       :poster="media.poster.src"
-      loop muted>
+      loop muted playsinline>
 
         <source v-for="source in media.sources"
         :key="source.type"
