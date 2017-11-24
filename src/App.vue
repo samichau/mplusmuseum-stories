@@ -59,7 +59,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" 1, "dlig" 1, "ss01" 1;
+  font-feature-settings: "kern" 1, "dlig" 1;
   background: @lightgrey;
 }
 
