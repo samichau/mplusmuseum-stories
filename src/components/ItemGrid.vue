@@ -1,16 +1,30 @@
 <template>
-  <div class="grid content-minheight" :class="{ 'grid--loaded': initialized }">
+  <div class="grid"
+  :class="{ 'grid--loaded': initialized }">
+   
+    <div class="grid__sizer"
+    :style="sizerStyle"
+    ref="sizer"></div>
 
-    <component v-for="item in content"
-    :key="item.id"
-    :is="`item-${item.type}`"
-    :item="item"/>
+    <div class="grid__column"
+    v-for="(column, columnIndex) of columns"
+    :key="columnIndex"
+    :ref="`col-${columnIndex}`">
+
+      <component v-for="item in column"
+      :is="`item-${item.type}`"
+      :item="item"
+      :key="item.id"
+      :ref="item.id"/>
+    
+    </div>
 
   </div>
 </template>
 
 <script>
-import Bricklayer from 'bricklayer';
+import _clone from 'lodash/clone';
+// import _debounce from 'lodash/debounce';
 import ItemArticle from './ItemArticle.vue';
 import ItemEpisode from './ItemEpisode.vue';
 import ItemExhibition from './ItemExhibition.vue';
@@ -18,17 +32,6 @@ import ItemIssue from './ItemIssue.vue';
 import ItemPost from './ItemPost.vue';
 
 export default {
-  data() {
-    return {
-      layout: false,
-      initialized: false,
-    };
-  },
-  props: {
-    content: {
-      required: true,
-    },
-  },
   components: {
     ItemArticle,
     ItemEpisode,
@@ -36,33 +39,98 @@ export default {
     ItemIssue,
     ItemPost,
   },
-  methods: {
-    initLayout() {
-      this.layout = new Bricklayer(this.$el, {
-        rulerClassName: 'grid__sizer',
-        columnClassName: 'grid__column',
-      });
-
-      // Again we unfortunately need to wait for the columns to sort
-      // Otherwise the transitions will not work
-      setTimeout(this.initialize, 25);
+  props: {
+    content: {
+      required: true,
     },
-    initialize() {
-      this.initialized = true;
-    },
-    // Currently unused
-    redraw() {
-      this.layout.redraw();
+  },
+  data() {
+    return {
+      calculating: false,
+      columnCount: 0,
+      columns: [],
+      initialized: false,
+      items: [],
+      queue: [],
+    };
+  },
+  computed: {
+    sizerStyle() {
+      return this.calculating ? {
+        display: 'block',
+        visibility: 'hidden !important',
+        top: '-1000px !important',
+      } : null;
     },
   },
   mounted() {
-    this.$nextTick(() => {
-      // Set timeout to wait for image placeholders to render
-      setTimeout(this.initLayout, 50);
-    });
+    this.build();
+    window.addEventListener('resize', this.onResize);
   },
   destroyed() {
-    this.layout.destroy();
+    window.removeEventListener('resize', this.onResize);
+  },
+  watch: {
+    content() {
+      const currentCount = this.items.length;
+      const newCount = this.content.length;
+      const itemsToAdd = this.content.slice(currentCount, newCount);
+      this.appendItems(itemsToAdd);
+    },
+  },
+  methods: {
+    // resizeHandler: _debounce(function resize() {
+    //   this.build();
+    // }, 500),
+    onResize() {
+      this.build();
+    },
+    build() {
+      const currentColumnCount = this.columnCount;
+      this.setColumnCount().then(() => {
+        if (this.columnCount !== currentColumnCount) {
+          this.resetColumns();
+          this.appendItems(this.content);
+        }
+      });
+    },
+    setColumnCount() {
+      this.calculating = true;
+      return this.$nextTick().then(() => {
+        const containerWidth = this.$el.offsetWidth;
+        const columnWidth = this.getSizerWidth();
+        this.columnCount = (columnWidth === 0)
+          ? 1
+          : Math.round(containerWidth / columnWidth);
+        this.calculating = false;
+      });
+    },
+    appendItems(items) {
+      this.queue = _clone(items);
+      this.$nextTick(this.processQueue);
+    },
+    processQueue() {
+      const columnIndex = this.getShortestColumnIndex();
+      const item = this.queue.shift();
+      this.items.push(item);
+      this.columns[columnIndex].push(item);
+      this.$nextTick(() => {
+        if (this.queue.length) this.processQueue();
+        else this.initialized = true;
+      });
+    },
+    resetColumns() {
+      this.columns = Array.from({ length: this.columnCount }, () => []);
+    },
+    getShortestColumnIndex() {
+      if (this.columnCount <= 1) return 0;
+      const heights = this.columns.map((col, i) => this.$refs[`col-${i}`][0].offsetHeight);
+      const minHeight = Math.min.apply(null, heights);
+      return heights.indexOf(minHeight);
+    },
+    getSizerWidth() {
+      return this.$refs.sizer.offsetWidth;
+    },
   },
 };
 </script>
@@ -77,6 +145,7 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
   margin: -1em -0.5em;
+  min-height: 400px;
   .item {
     opacity: 0;
     transform: translateY(10%);

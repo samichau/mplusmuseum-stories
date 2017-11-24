@@ -1,8 +1,7 @@
 <template>
   <div class="home-list">
 
-    <item-grid :content="items"
-    :key="content.limit"/>
+    <item-grid :content="items"/>
 
     <div class="home-list__button">
 

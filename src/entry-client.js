@@ -10,8 +10,6 @@ import locales from './locale';
 import { setClient } from './util/meta';
 import AppModal from './components/AppModal.vue';
 import AppProgress from './components/AppProgress.vue';
-// Polyfill
-import scopedQuerySelectorPolyfill from './util/scoped-query-selector-polyfill';
 
 // Global progress bar vue instance
 Vue.prototype.$bar = new Vue(AppProgress).$mount();
@@ -125,9 +123,6 @@ router.onReady(() => {
   router.afterEach(() => {
     Vue.nextTick(() => { triggerNative('resize'); });
   });
-
-  // Polyfill
-  scopedQuerySelectorPolyfill();
 
   // Actually mount to DOM
   app.$mount('#app');
