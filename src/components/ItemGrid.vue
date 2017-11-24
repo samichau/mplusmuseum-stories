@@ -8,7 +8,7 @@
 
     <div class="grid__column"
     v-for="(column, columnIndex) of columns"
-    :key="columnIndex"
+    :key="`${columnIndex}-${column.count}`"
     :ref="`col-${columnIndex}`">
 
       <component v-for="item in column"
