@@ -24,7 +24,6 @@
 
 <script>
 import _clone from 'lodash/clone';
-// import _debounce from 'lodash/debounce';
 import ItemArticle from './ItemArticle.vue';
 import ItemEpisode from './ItemEpisode.vue';
 import ItemExhibition from './ItemExhibition.vue';
@@ -46,6 +45,7 @@ export default {
   },
   data() {
     return {
+      building: false,
       calculating: false,
       columnCount: 0,
       columns: [],
@@ -79,19 +79,19 @@ export default {
     },
   },
   methods: {
-    // resizeHandler: _debounce(function resize() {
-    //   this.build();
-    // }, 500),
     onResize() {
       this.build();
     },
     build() {
+      if (this.building) return false;
+      this.building = true;
       const currentColumnCount = this.columnCount;
-      this.setColumnCount().then(() => {
+      return this.setColumnCount().then(() => {
         if (this.columnCount !== currentColumnCount) {
           this.resetColumns();
           this.appendItems(this.content);
         }
+        this.building = false;
       });
     },
     setColumnCount() {
