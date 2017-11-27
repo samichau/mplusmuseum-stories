@@ -83,3 +83,15 @@ export const labelMixin = {
     },
   },
 };
+
+export const itemMixin = {
+  computed: {
+    image() {
+      const { content: { src, dim } } = this.item.card;
+      const loading = this.$placeholder.generate(dim, 'loading', 'black', 'white');
+      const padding = (dim.height / dim.width) * 100;
+      const wrapperStyle = `padding-top: ${padding}%;'`;
+      return { src, loading, wrapperStyle };
+    },
+  },
+};

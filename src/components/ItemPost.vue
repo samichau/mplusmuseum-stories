@@ -7,12 +7,14 @@
 
         <router-link :to="link">
 
-          <div class="item__media">
+          <div class="item__media"
+          :style="image.wrapperStyle">
 
             <img class="lazy"
-            :src="imgObj.loading"
-            v-lazy="imgObj"
+            :src="image.loading"
+            v-lazy="image"
             :alt="$t(item.card.content.alt)">
+
           </div>
 
         </router-link>
@@ -42,8 +44,10 @@
 </template>
 
 <script>
+import { itemMixin } from '../util/mixins';
 
 export default {
+  mixins: [itemMixin],
   props: {
     item: {
       required: true,
@@ -57,13 +61,6 @@ export default {
           lang: this.$store.state.lang,
           post: this.item.name,
         },
-      };
-    },
-    imgObj() {
-      const { content } = this.item.card;
-      return {
-        src: content.src,
-        loading: this.$placeholder.generate(content.dim, 'loading', 'black', 'white'),
       };
     },
   },

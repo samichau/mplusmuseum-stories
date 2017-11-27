@@ -219,9 +219,13 @@ export default {
       padding: 1em;
     }
     &__media {
+      position: relative;
       >img, >video {
         width: 100%;
         display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
     }
     .tags--inline {
