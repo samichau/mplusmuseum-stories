@@ -163,7 +163,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 2em 0;
+  margin: 1.5em 0;
   .mq-sm({
     margin: 0;
     flex-direction: column;

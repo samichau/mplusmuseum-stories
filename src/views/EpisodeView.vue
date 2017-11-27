@@ -176,8 +176,18 @@ export default {
     }
   }
   .row {
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
+    >div {
+      margin-top: 1.5em;
+      margin-bottom: 1.5em;
+      &:last-child {
+        .mq-sm-under({
+          margin-bottom: 0;
+        });
+      }
+    }
+  }
+  .sharebar {
+    margin-bottom: 0;
   }
 }
 </style>
