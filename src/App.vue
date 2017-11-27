@@ -514,6 +514,10 @@ a.tag {
       width: 0.75em;
     }
   }
+  video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+  }
 }
 
 .social-links {
