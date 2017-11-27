@@ -3,7 +3,21 @@
 
     <div class="heading explore__options">
 
-      <h3 class="fs-b"><span v-html="prefixText"/><span class="explore__option" v-for="group of groups" :key="group.id"><button @click="setGroup(group.id)" :class="{ selected: group.id === activeGroup.id }" v-html="$t(group.title)"></button></span></h3>
+      <h3 class="fs-b">
+
+        <span v-html="prefixText"/>
+
+        <span class="explore__option"
+        v-for="group of groups"
+        :key="group.id">
+
+          <button @click="setGroup(group.id)"
+          :class="{ selected: group.id === activeGroup.id }"
+          v-html="$t(group.title)"></button>
+
+        </span>
+
+      </h3>
 
     </div>
 

@@ -3,9 +3,12 @@
 
     <div class="heading explore__options">
 
-      <h3 class="fs-b"><span v-html="prefixText"/>
+      <h3 class="fs-b">
+      
+        <span v-html="prefixText"/>
 
-        <span class="explore__option" v-for="sort of sorts"
+        <span class="explore__option"
+        v-for="sort of sorts"
         :key="sort.id"
         v-if="shouldShow(sort.id)">
 

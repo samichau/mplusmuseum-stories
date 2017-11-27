@@ -34,23 +34,6 @@
 
       </div>
 
-      <!-- <div v-if="!activeTags.length && !query.length">
-
-        <transition name="swoop" mode="out-in">
-
-          <div class="explorer__suggested"
-          v-if="suggestedTag"
-          :key="suggestedTag.id">
-
-            <tag-single :tag="suggestedTag"
-            @afterClick="collapse"/>
-
-          </div>
-
-        </transition>
-
-      </div> -->
-
     </div>
 
     <div class="explorer__matches fs-m shadow--small"
@@ -79,8 +62,6 @@
 </template>
 
 <script>
-// @TODO This file contains commented code for reference
-// Remove if unused
 import _each from 'lodash/each';
 import { mapGetters, mapState } from 'vuex';
 import { focus } from 'vue-focus';
@@ -95,9 +76,7 @@ export default {
       mobile: '',
       mobileInterval: false,
       focused: false,
-      // suggestedInterval: false,
       selectedIndex: 0,
-      // suggestedIndex: 0,
     };
   },
   created() {
@@ -106,10 +85,8 @@ export default {
     window.addEventListener('mouseup', this.clickHandler);
     if (!this.activeTags.length) this.$refs.input.focus();
     this.typeText();
-    // this.suggestedInterval = setInterval(this.incrementSuggested, 6000);
   },
   destroyed() {
-    // clearInterval(this.suggestedInterval);
     window.removeEventListener('mouseup', this.clickHandler);
   },
   computed: {
@@ -132,9 +109,6 @@ export default {
         this.$store.commit('tags/setQuery', value);
       },
     },
-    // suggestedTag() {
-    //   return this.tags[this.tagsOrder[this.suggestedIndex]];
-    // },
     labelText() {
       if (this.query.length) {
         return {
@@ -188,10 +162,6 @@ export default {
         this.$refs.input.focus();
       }
     },
-    // incrementSuggested() {
-    //   if (this.suggestedIndex < this.tagsOrder.length - 1) this.suggestedIndex += 1;
-    //   else this.suggestedIndex = 0;
-    // },
     onEsc() {
       if (!this.query.length) {
         this.collapse();
@@ -210,10 +180,7 @@ export default {
       }
     },
     onEnter() {
-      if (!this.activeTags.length && !this.query.length) {
-        // this.setTags([this.suggestedTag]);
-        // this.collapse();
-      } else if (this.filteredTags.length && this.selectedIndex >= 0) {
+      if (this.filteredTags.length && this.selectedIndex >= 0) {
         const tags = this.activeTags;
         tags.push(this.filteredTags[this.selectedIndex]);
         this.setTags(tags);

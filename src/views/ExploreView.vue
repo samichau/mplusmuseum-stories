@@ -144,8 +144,11 @@ export default {
   &__option {
     color: @grey;
     &:not(:last-child) {
-      &:after {
-        content: ',';
+      button {
+        &:after {
+          color: @grey;
+          content: ',';
+        }
       }
     }
     button {
