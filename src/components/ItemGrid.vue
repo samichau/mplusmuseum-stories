@@ -123,7 +123,9 @@ export default {
       this.columns = Array.from({ length: this.columnCount }, () => []);
     },
     getShortestColumnIndex() {
-      if (this.columnCount <= 1) return 0;
+      const { columnCount, items } = this;
+      if (columnCount <= 1) return 0;
+      if (items.length < columnCount) return items.length;
       const heights = this.columns.map((col, i) => this.$refs[`col-${i}`][0].offsetHeight);
       const minHeight = Math.min.apply(null, heights);
       return heights.indexOf(minHeight);
