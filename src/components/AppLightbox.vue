@@ -8,8 +8,7 @@
       <share-bar v-if="share"
       class="sharebar--horizontal sharebar--reverse"
       :limit="0"
-      :url="share.location"
-      :title="share.title"/>
+      :data="share"/>
 
     </div>
 

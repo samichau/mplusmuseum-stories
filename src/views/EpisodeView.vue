@@ -43,8 +43,7 @@
           </div>
 
           <share-bar class="sharebar--horizontal"
-          :url="shareData.url"
-          :title="shareData.title"/>
+          :data="shareData"/>
 
         </div>
 
@@ -131,10 +130,13 @@ export default {
       return this.$store.getters['channel/episode'];
     },
     shareData() {
-      const base = this.$store.state.site.url;
+      const base = this.$store.getters.baseURL;
+      const { episode: { name, sharetext, title } } = this;
+      const location = `${base}/channel/${name}/`;
+      const text = sharetext || title;
       return {
-        url: `${base}/${this.$store.state.lang}/channel/${this.episode.name}/`,
-        title: this.$t(this.episode.title),
+        location,
+        title: this.$t(text),
       };
     },
   },

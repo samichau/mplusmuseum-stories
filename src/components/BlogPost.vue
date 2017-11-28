@@ -41,8 +41,7 @@
             <div class="blog-post__aside col-sm-2">
 
               <share-bar class="blog-post__sharebar hide--mobile"
-              :url="shareData.location"
-              :title="$t(post.title)"/>
+              :data="shareData"/>
 
             </div>
 
@@ -58,8 +57,7 @@
               <div class="blog-post__footer" v-if="!post.truncated">
 
                 <share-bar class="blog-post__sharebar hide--desktop"
-                :url="shareData.location"
-                :title="$t(post.title)"/>
+                :data="shareData"/>
 
                 <app-clipboard class="blog-post__footer-section"
                 :url="shareData.location"/>
@@ -132,9 +130,12 @@ export default {
       return [];
     },
     shareData() {
+      const base = this.$store.getters.baseURL;
+      const { post: { name, sharetext, title } } = this;
+      const text = sharetext || title;
       return {
-        location: `${this.url}/${this.lang}/blog/${this.post.name}`,
-        title: this.$t(this.post.title),
+        location: `${base}/blog/${name}`,
+        title: this.$t(text),
       };
     },
   },

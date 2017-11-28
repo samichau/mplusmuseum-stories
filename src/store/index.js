@@ -24,6 +24,11 @@ export function createStore() {
       langSecondary: locales[1],
       translations: {},
     },
+    getters: {
+      baseURL(state) {
+        return `${state.site.url}/${state.lang}`;
+      },
+    },
     actions: {
       init(context) {
         if (!context.state.initialized) {

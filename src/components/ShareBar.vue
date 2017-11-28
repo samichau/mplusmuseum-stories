@@ -11,10 +11,7 @@
       class="sharebar__block"
       @click="share(item.share, $event)"
       :key="item.id"
-      :href="item.share | shareLink({
-        location: url,
-        title: title,
-      })">
+      :href="item.share | shareLink(data)">
 
         <div class="sharebar__block-inner">
 
@@ -74,10 +71,7 @@ function prepareURI(url, { location, title }) {
 
 export default {
   props: {
-    url: {
-      required: true,
-    },
-    title: {
+    data: {
       required: true,
     },
     limit: {
@@ -109,13 +103,13 @@ export default {
           left = Math.round((window.screen.width / 2) - 275);
         }
         shareURI = prepareURI(shareURI, {
-          location: this.url,
-          title: this.title,
+          location: this.data.location,
+          title: this.data.title,
         });
         window.open(shareURI, 'Share', `scrollbars=yes,resizable=yes,toolbar=no,location=0,width=550,height=420,top=${top},left=${left}`);
       } else if (shareURI.startsWith('qr://')) {
         e.preventDefault();
-        this.$store.commit('lightbox/updateQR', this.url);
+        this.$store.commit('lightbox/updateQR', this.data.location);
       }
     },
   },

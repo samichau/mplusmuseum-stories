@@ -9,7 +9,7 @@
 
       <journal-article-header class="wrap"
       :article="article"
-      :url="url"/>
+      :share-data="shareData"/>
 
       <div class="article__body cf" v-if="article.content">
 
@@ -22,8 +22,7 @@
       <div class="article__footer wrap">
 
         <share-bar class="sharebar--horizontal"
-        :url="url"
-        :title="$t(article.title)"/>
+        :data="shareData"/>
 
         <app-footnotes class="article__footnotes"
         v-if="footnotes.length"
@@ -49,11 +48,24 @@ export default {
     },
   },
   computed: {
-    url() {
-      const base = this.$store.state.site.url;
-      const issue = this.article.issue.name;
-      const article = this.article.name;
-      return `${base}/${this.$store.state.lang}/podium/${issue}/${article}/`;
+    shareData() {
+      const base = this.$store.getters.baseURL;
+      const {
+        article: {
+          title,
+          sharetext,
+          name: article,
+          issue: {
+            name: issue,
+          },
+        },
+      } = this;
+      const location = `${base}/podium/${issue}/${article}/`;
+      const text = sharetext || title;
+      return {
+        location,
+        title: this.$t(text),
+      };
     },
     footnotes() {
       if (!this.article.content) return [];

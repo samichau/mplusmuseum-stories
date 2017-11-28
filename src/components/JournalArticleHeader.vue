@@ -38,8 +38,7 @@
     <div class="heading">
 
       <share-bar class="sharebar--horizontal"
-      :url="url"
-      :title="$t(article.title)"/>
+      :data="shareData"/>
 
     </div>
 
@@ -57,7 +56,7 @@ export default {
       type: Object,
       required: true,
     },
-    url: {
+    shareData: {
       required: true,
     },
   },
