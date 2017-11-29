@@ -88,7 +88,7 @@ export default {
       const currentColumnCount = this.columnCount;
       return this.setColumnCount().then(() => {
         if (this.columnCount !== currentColumnCount) {
-          this.resetColumns();
+          this.reset();
           this.appendItems(this.content);
         }
         this.building = false;
@@ -119,7 +119,8 @@ export default {
         else this.initialized = true;
       });
     },
-    resetColumns() {
+    reset() {
+      this.items = [];
       this.columns = Array.from({ length: this.columnCount }, () => []);
     },
     getShortestColumnIndex() {
