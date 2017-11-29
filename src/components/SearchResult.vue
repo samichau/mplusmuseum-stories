@@ -95,7 +95,10 @@ export default {
 .search-result {
   .panel__inner {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    .mq-sm({
+      flex-direction: row;
+    });
   }
   &__title {
     a {
@@ -106,12 +109,21 @@ export default {
     }
   }
   &__text {
+    .mq-sm-under({
+      order: 2;
+    });
     flex-grow: 1;
   }
   &__image {
     flex-shrink: 0;
     margin-left: 1em;
     width: 20%;
+    .mq-sm-under({
+      order: 1;
+      width: 100%;
+      margin-left: 0;
+      margin-bottom: 1em;
+    });
     img {
       display: block;
       width: 100%;
