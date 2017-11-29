@@ -179,7 +179,7 @@ export default {
       window.scrollTo(0, scroll);
     },
     logoClick() {
-      const homeRouteName = (process.env.MODE === 'BLOG') ? 'blog' : 'home';
+      const homeRouteName = 'home';
       if (this.$store.state.route.name === homeRouteName) this.scrollTo();
     },
     changeLanguage() {

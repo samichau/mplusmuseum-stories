@@ -38,21 +38,6 @@ const homeRoutes = [
   },
 ];
 
-const homeBlogRoutes = [
-  {
-    name: 'home',
-    path: `/${langParam}/`,
-    redirect: {
-      name: 'blog',
-    },
-  },
-  {
-    name: 'default',
-    path: '/',
-    redirect: redirectWithLang('blog'),
-  },
-];
-
 const notFoundRoute = {
   name: 'not-found',
   path: `/${langParam}/404/`,
@@ -187,25 +172,18 @@ const exhibitionsRoutes = [
   },
 ];
 
-const routes = process.env.MODE === 'BLOG'
-  ? [
-    ...homeBlogRoutes,
-    ...blogRoutes,
-    notFoundRoute,
-    ...pageRoutes,
-    ...catchRoutes,
-  ] : [
-    ...homeRoutes,
-    ...blogRoutes,
-    ...journalRoutes,
-    ...channelRoutes,
-    ...exhibitionsRoutes,
-    ...exploreRoutes,
-    ...searchRoutes,
-    notFoundRoute,
-    ...pageRoutes,
-    ...catchRoutes,
-  ];
+const routes = [
+  ...homeRoutes,
+  ...blogRoutes,
+  ...journalRoutes,
+  ...channelRoutes,
+  ...exhibitionsRoutes,
+  ...exploreRoutes,
+  ...searchRoutes,
+  notFoundRoute,
+  ...pageRoutes,
+  ...catchRoutes,
+];
 
 export default function () {
   return routes;
