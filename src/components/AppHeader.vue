@@ -251,8 +251,13 @@ export default {
     &--left {
       flex-grow: 0;
       flex-shrink: 0;
-      img {
+      z-index: 11;
+      a {
         display: block;
+        >img, >span {
+          vertical-align: middle;
+          display: inline-block;
+        }
       }
     }
     &--middle {
