@@ -7,7 +7,7 @@
 
     <button class="tag tag--expand"
       v-if="calculatedTags.length < tags.length"
-      @click="expanded = true">...</button>
+      @click="expanded = true">&hellip;</button>
 
   </div>
 </template>
