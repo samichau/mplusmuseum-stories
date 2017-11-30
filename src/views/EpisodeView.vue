@@ -9,7 +9,15 @@
 
         <block-brightcove :content="episode.video"
         :key="episode.id"
-        :lazy="false"/>
+        :lazy="false"
+        @play="play"
+        @ended="ended">
+
+          <episode-suggested
+          v-if="finished"
+          :episode="episode"/>
+
+        </block-brightcove>
 
       </div>
 
@@ -94,6 +102,7 @@ import AppSuggested from '../components/AppSuggested.vue';
 import BlockBrightcove from '../components/BlockBrightcove.vue';
 import ContentBlocks from '../components/ContentBlocks.vue';
 import EpisodeList from '../components/EpisodeList.vue';
+import EpisodeSuggested from '../components/EpisodeSuggested.vue';
 import ShareBar from '../components/ShareBar.vue';
 import SnippetTranslate from '../components/SnippetTranslate.vue';
 
@@ -117,6 +126,7 @@ export default {
   },
   data() {
     return {
+      finished: false,
       suggested: false,
     };
   },
@@ -140,11 +150,25 @@ export default {
       };
     },
   },
+  methods: {
+    play() {
+      this.finished = false;
+    },
+    ended() {
+      this.finished = true;
+    },
+  },
+  watch: {
+    episode() {
+      this.finished = false;
+    },
+  },
   components: {
     AppSuggested,
     BlockBrightcove,
     ContentBlocks,
     EpisodeList,
+    EpisodeSuggested,
     ShareBar,
     SnippetTranslate,
   },
@@ -178,8 +202,8 @@ export default {
     }
   }
   .row {
+    margin-top: 1.5em;
     >div {
-      margin-top: 1.5em;
       margin-bottom: 1.5em;
       &:last-child {
         .mq-sm-under({

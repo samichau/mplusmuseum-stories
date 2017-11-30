@@ -27,6 +27,13 @@
       data-embed="default"
       controls></video>
 
+      <div class="brightcove-block__overlay"
+      v-if="this.$slots.default">
+
+        <slot/>
+
+      </div>
+
     </component>
 
     <div v-if="caption"
@@ -76,6 +83,8 @@ export default {
             media.setAttribute('data-video-id', this.$t(this.content.media.id));
             window.bc(media);
             this.player = window.videojs(media);
+            this.player.on('play', () => this.$emit('play'));
+            this.player.on('ended', () => this.$emit('ended'));
           });
         });
       }
@@ -123,12 +132,15 @@ export default {
     position: relative;
     padding-bottom: 56.25%;
   }
-  &__media {
+  &__media, &__overlay {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
+  }
+  &__overlay {
+    z-index: 5;
   }
   &__caption {
     margin: 1rem 0;
