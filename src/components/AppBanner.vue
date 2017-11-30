@@ -1,5 +1,5 @@
 <template>
-  <div class="banner" :class="{ 'banner--hasContent' : $slots.default }">
+  <div class="banner" :class="{ 'banner--hasContent' : $slots.default ? true : false }">
     
     <div class="banner__media banner__image"
     v-if="content.hero.type === 'image'">
