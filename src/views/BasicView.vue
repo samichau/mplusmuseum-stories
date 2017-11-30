@@ -8,7 +8,7 @@
       :block="true"/>
     </app-banner>
     <div v-else class="header-push"></div>
-    <div class="page__wrap shadow">
+    <div class="page__wrap">
       <content-blocks class="page__content"
       v-if="page.content"
       :items="page.content.list"/>
