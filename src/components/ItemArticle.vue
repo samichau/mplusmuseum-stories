@@ -21,6 +21,7 @@
         </div>
 
         <router-link class="item__media"
+        v-if="item.card"
         :to="link"
         :style="image.wrapperStyle">
 

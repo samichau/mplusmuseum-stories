@@ -1,7 +1,7 @@
 <template>
   <div class="article-listing">
 
-    <div class="article-listing__thumb">
+    <div class="article-listing__thumb" v-if="imgObj">
 
       <router-link :to="$link(content.link)">
 
@@ -62,11 +62,11 @@ export default {
   },
   computed: {
     imgObj() {
-      const { content } = this.content.card;
-      return {
-        src: content.src,
-        loading: this.$placeholder.generate(content.dim, 'loading', 'black', 'white'),
-      };
+      const { card } = this.content;
+      return card ? {
+        src: card.content.src,
+        loading: this.$placeholder.generate(card.content.dim, 'loading', 'black', 'white'),
+      } : false;
     },
   },
   components: {
@@ -100,7 +100,6 @@ export default {
   &__info {
     width: 100%;
     .mq-sm({
-      margin-left: 0.5em;
       width: 100% / 3 * 2;
     });
   }
@@ -111,7 +110,7 @@ export default {
     });
     width: 100% / 3;
     margin-bottom: 0;
-    margin-right: 0.5em;
+    margin-right: 1em;
     img {
       display: block;
     }
