@@ -1,22 +1,36 @@
 <template>
-  <div class="grid"
-  :class="{ 'grid--loaded': initialized }">
-   
-    <div class="grid__sizer"
-    :style="sizerStyle"
-    ref="sizer"></div>
-
-    <div class="grid__column"
-    v-for="(column, columnIndex) of columns"
-    :key="`${columnIndex}-${column.count}`"
-    :ref="`col-${columnIndex}`">
-
-      <component v-for="item in column"
-      :is="`item-${item.type}`"
-      :item="item"
-      :key="item.id"
-      :ref="item.id"/>
+  <div class="item-grid">
+  
+    <div class="item-grid__grid grid"
+    :class="{ 'grid--loaded': initialized }"
+    ref="grid">
     
+      <div class="grid__sizer"
+      :style="sizerStyle"
+      ref="sizer"></div>
+
+      <div class="grid__column"
+      v-for="(column, columnIndex) of columns"
+      :key="`${columnIndex}-${column.count}`"
+      :ref="`col-${columnIndex}`">
+
+        <component v-for="item in column"
+        :is="`item-${item.type}`"
+        :item="item"
+        :key="item.id"
+        :ref="item.id"/>
+      
+      </div>
+
+    </div>
+    
+    <div class="item-grid__button">
+
+      <button class="button button--accent"
+      v-if="expandable"
+      @click="expand"
+      v-html="buttonText"></button>
+
     </div>
 
   </div>
@@ -40,7 +54,16 @@ export default {
   },
   props: {
     content: {
+      type: Array,
       required: true,
+    },
+    rows: {
+      type: [Number, Array],
+      default: 0,
+    },
+    buttonText: {
+      type: String,
+      default: 'View More',
     },
   },
   data() {
@@ -62,6 +85,23 @@ export default {
         top: '-1000px !important',
       } : null;
     },
+    limit() {
+      // If no rows, return all
+      if (!this.rows || !this.columnCount) return 0;
+      // If array of rows for breakpoints
+      if (Array.isArray(this.rows)) {
+        const index = Math.min(this.columnCount - 1, this.rows.length - 1);
+        return this.rows[index] * this.columnCount;
+      }
+      // If is a valid integer
+      if (Number.isInteger(this.rows) && this.rows > 0) {
+        return this.rows * this.columnCount;
+      }
+      return 0;
+    },
+    expandable() {
+      return (this.limit && this.limit < this.content.length);
+    },
   },
   mounted() {
     this.build();
@@ -71,7 +111,7 @@ export default {
     window.removeEventListener('resize', this.onResize);
   },
   watch: {
-    content() {
+    rows() {
       const currentCount = this.items.length;
       const newCount = this.content.length;
       const itemsToAdd = this.content.slice(currentCount, newCount);
@@ -79,6 +119,9 @@ export default {
     },
   },
   methods: {
+    expand() {
+      this.$emit('expand');
+    },
     onResize() {
       this.build();
     },
@@ -88,16 +131,22 @@ export default {
       const currentColumnCount = this.columnCount;
       return this.setColumnCount().then(() => {
         if (this.columnCount !== currentColumnCount) {
-          this.reset();
-          this.appendItems(this.content);
+          this.rebuild();
         }
         this.building = false;
       });
     },
+    rebuild() {
+      this.reset();
+      const items = this.limit
+        ? this.content.slice(0, this.limit)
+        : this.content;
+      this.appendItems(items);
+    },
     setColumnCount() {
       this.calculating = true;
       return this.$nextTick().then(() => {
-        const containerWidth = this.$el.offsetWidth;
+        const containerWidth = this.$refs.grid.offsetWidth;
         const columnWidth = this.getSizerWidth();
         this.columnCount = (columnWidth === 0)
           ? 1
@@ -141,6 +190,14 @@ export default {
 <style lang="less">
 @import "../less/variables.less";
 @import "../less/typography.less";
+
+.item-grid {
+  &__button {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center;
+  }
+}
 
 .grid {
   display: flex;

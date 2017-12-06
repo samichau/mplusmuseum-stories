@@ -1,16 +1,10 @@
 <template>
   <div class="home-list">
 
-    <item-grid :content="items"/>
-
-    <div class="home-list__button">
-
-      <button class="button button--accent"
-      v-if="truncated"
-      @click="expand"
-      v-html="$t($store.state.translations.site.viewMore)"></button>
-
-    </div>
+    <item-grid :content="content.content"
+    :rows="rows"
+    :buttonText="$t($store.state.translations.site.viewMore)"
+    @expand="expand"/>
 
   </div>
 </template>
@@ -28,9 +22,11 @@ export default {
     truncated() {
       return (this.content.limit && this.content.content.length > this.content.limit);
     },
-    items() {
-      if (!this.content.limit) return this.content.content;
-      return this.content.content.slice(0, this.content.limit);
+    rows() {
+      const full = Math.ceil(this.content.limit / 4);
+      const mobile = full * 2;
+      const rows = [mobile, full];
+      return rows;
     },
   },
   methods: {
