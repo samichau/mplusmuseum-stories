@@ -24,6 +24,7 @@
     "express": "^4.16.2",
     "express-sslify": "^1.2.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "he": "^1.1.1",
     "http-auth": "^3.2.3",
     "lodash": "^4.17.4",
     "lru-cache": "^4.1.1",

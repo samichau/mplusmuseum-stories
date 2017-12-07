@@ -55,10 +55,10 @@
 </template>
 
 <script>
-import _unescape from 'lodash/unescape';
+import { decode } from 'he';
 
 function prepareComponent(component) {
-  const unescaped = _unescape(component);
+  const unescaped = decode(component);
   const encoded = encodeURIComponent(unescaped);
   return encoded;
 }

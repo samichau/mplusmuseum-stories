@@ -1,4 +1,4 @@
-import _unescape from 'lodash/unescape';
+import { decode } from 'he';
 import { htmlDocument, openGraph } from '../locale';
 
 function getMeta(vm) {
@@ -13,8 +13,8 @@ function getMeta(vm) {
     ? meta.call(vm)
     : meta;
 
-  metaObj.title = meta.title ? `${_unescape(meta.title)} - ${siteTitle}` : siteTitle;
-  metaObj.description = meta.description ? `${_unescape(meta.description)}` : siteDescription;
+  metaObj.title = meta.title ? `${decode(meta.title)} - ${siteTitle}` : siteTitle;
+  metaObj.description = meta.description ? `${decode(meta.description)}` : siteDescription;
   metaObj.image = meta.image || site.simulacrum || '';
   metaObj.url = site.url + route.path;
   metaObj.lang = htmlDocument[lang];
