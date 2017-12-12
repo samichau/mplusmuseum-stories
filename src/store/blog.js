@@ -18,6 +18,7 @@ export default function () {
 
     state: {
       page: false,
+      post: false,
       posts: {},
       category: false,
       // status
@@ -52,9 +53,8 @@ export default function () {
 
         return [newCategory, ...newCategories];
       },
-      post(state) {
-        const id = state.post;
-        return state.posts[id];
+      post({ post, posts }) {
+        return post ? posts[post] : false;
       },
       posts(state) {
         const posts = state[state.showing];
