@@ -73,7 +73,7 @@ export default {
 
       return _reduce(this.article.content.list, (footnotes, block) => {
         if (block.content.footnotes) {
-          const newLocaled = block.content.footnotes[this.$store.state.lang];
+          const newLocaled = this.$t(block.content.footnotes);
           return [...footnotes, ...newLocaled];
         }
         return footnotes;

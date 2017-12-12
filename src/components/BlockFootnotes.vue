@@ -1,8 +1,6 @@
 <template>
   <div class="footnotes-block block" v-if="footnotes.length">
 
-    {{ footnotes }}
-
     <ol class="fs-xs">
 
       <li class="footnotes__footnote"
