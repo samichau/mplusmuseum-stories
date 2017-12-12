@@ -47,7 +47,6 @@ export default {
 @import "../less/variables.less";
 
 .endnote-block {
-  margin-top: 2em;
   clear: both;
   &__content {
     border: 1px solid @accent;

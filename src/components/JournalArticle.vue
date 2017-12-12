@@ -1,5 +1,6 @@
 <template>
-  <article class="article shadow--dark">
+  <article class="article shadow--dark"
+  :class="modifiers">
 
     <app-banner v-if="article.hero"
     :content="{ hero: article.hero }"
@@ -11,7 +12,8 @@
       :article="article"
       :share-data="shareData"/>
 
-      <div class="article__body cf" v-if="article.content">
+      <div class="article__body cf"
+      v-if="article.content">
 
         <content-blocks :items="article.content.list"/>
 
@@ -24,9 +26,6 @@
         <share-bar class="sharebar--horizontal"
         :data="shareData"/>
 
-        <app-footnotes class="article__footnotes"
-        v-if="footnotes.length"
-        :footnotes="footnotes"/>
 
       </div>
 
@@ -36,7 +35,9 @@
 </template>
 
 <script>
-import AppFootnotes from '../components/AppFootnotes.vue';
+import _find from 'lodash/find';
+import _reduce from 'lodash/reduce';
+
 import ContentBlocks from '../components/ContentBlocks.vue';
 import JournalArticleHeader from '../components/JournalArticleHeader.vue';
 import ShareBar from '../components/ShareBar.vue';
@@ -69,15 +70,21 @@ export default {
     },
     footnotes() {
       if (!this.article.content) return [];
-      const footnotes = [];
-      this.article.content.list.forEach((block) => {
+
+      return _reduce(this.article.content.list, (footnotes, block) => {
         if (block.content.footnotes) {
-          block.content.footnotes[this.$store.state.lang].forEach((footnote) => {
-            footnotes.push(footnote);
-          });
+          const newLocaled = block.content.footnotes[this.$store.state.lang];
+          return [...footnotes, ...newLocaled];
         }
-      });
-      return footnotes;
+        return footnotes;
+      }, []);
+    },
+    modifiers() {
+      if (!this.article.content) return null;
+      const footnoteBlock = _find(this.article.content.list, block => block.type === 'footnotes');
+      return footnoteBlock
+        ? `article--${this.$t(footnoteBlock.content.style)}`
+        : null;
     },
   },
   methods: {
@@ -91,7 +98,6 @@ export default {
     },
   },
   components: {
-    AppFootnotes,
     ContentBlocks,
     JournalArticleHeader,
     ShareBar,
@@ -110,7 +116,7 @@ export default {
   &__content {
     padding-top: 3em;
     padding-bottom: 3em;
-    counter-reset: footnotes;
+    counter-reset: footnotesinline;
   }
   &__header {
     margin-bottom: 2em;
@@ -188,9 +194,13 @@ export default {
       background: @accent;
     }
   }
-  &__footnotes {
-    margin-top: 2em;
-    margin-bottom: 0;
+  &--lower-roman {
+    .text-block .footnote a:after { content: counter(footnotesinline, lower-roman); }
+    .footnotes-block li:before { content: counter(footnotesblock, lower-roman) " "; }
+  }
+  &--lower-latin {
+    .text-block .footnote a:after { content: counter(footnotesinline, lower-latin); }
+    .footnotes-block li:before { content: counter(footnotesblock, lower-latin) " "; }
   }
   .banner {
     cursor: zoom-in;

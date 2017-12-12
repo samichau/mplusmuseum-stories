@@ -12,6 +12,7 @@
 <script>
 import BlockBrightcove from './BlockBrightcove.vue';
 import BlockEndnote from './BlockEndnote.vue';
+import BlockFootnotes from './BlockFootnotes.vue';
 import BlockImage from './BlockImage.vue';
 import BlockInstagram from './BlockInstagram.vue';
 import BlockNewsletter from './BlockNewsletter.vue';
@@ -31,6 +32,7 @@ export default {
   components: {
     BlockBrightcove,
     BlockEndnote,
+    BlockFootnotes,
     BlockImage,
     BlockImagePosition: BlockImage,
     BlockInstagram,

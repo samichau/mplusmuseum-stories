@@ -126,8 +126,8 @@ export default {
     color: @accent;
     position: relative;
     a:after {
-      counter-increment: footnotes;
-      content: counter(footnotes);
+      counter-increment: footnotesinline;
+      content: counter(footnotesinline);
     }
     .anchor {
       display: inline-block;
