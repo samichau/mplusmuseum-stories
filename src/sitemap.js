@@ -6,7 +6,7 @@ module.exports = function getSitemap(data, res) {
     if (err) {
       return res.status(500).end();
     }
-    res.setHeader('Content-Type', 'application/xml');
+    res.type('application/xml');
     return res.send(xml);
   });
 };

@@ -197,8 +197,9 @@ app.get('/sitemap.xml', (req, res) => {
   res.setHeader('Server', serverInfo);
   axios.get(endpoint)
     .then(({ data }) => require('./src/sitemap')(data, res))
-    .catch(() => {
+    .catch((err) => {
       console.log(`Failed to get site map from ${endpoint}.`);
+      console.log(err);
       return res.status(500).end();
     });
 });
