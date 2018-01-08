@@ -521,9 +521,14 @@ a.tag {
 }
 
 .social-links {
-  a {
+  a, button {
+    background: none;
+    border: none;
+    padding: 0;
     display: inline-block;
     vertical-align: top;
+    margin-top: 0;
+    margin-bottom: 0;
     margin-left: 0.5em;
     margin-right: 0.5em;
     width: 2em;

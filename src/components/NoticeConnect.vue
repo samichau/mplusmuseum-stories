@@ -26,11 +26,11 @@
 
           <div class="social-links fs-b">
 
-            <a href="#" @click.prevent="connect = false">
+            <button @click.prevent="connect = false">
 
               <img class="notice-connect__close" src="../assets/img/cross-blue.svg" alt="Close">
 
-            </a>
+            </button>
 
           </div>
 
@@ -48,11 +48,11 @@
           target="_blank"
           v-html="platform.svg"></a>
 
-          <a href="#" @click.prevent="connect = false">
+          <button @click.prevent="connect = false">
 
             <img class="notice-connect__close" src="../assets/img/cross-blue.svg" alt="Close">
 
-          </a>
+          </button>
 
         </div>
 
@@ -75,10 +75,8 @@ export default {
   },
   methods: {
     parseNewsletter(val, h, str) {
-      return h('a', {
-        domProps: {
-          href: '#newsletter',
-        },
+      return h('button', {
+        class: 'notice-connect__text-btn',
         on: {
           click: (e) => {
             e.preventDefault();
@@ -88,10 +86,8 @@ export default {
       }, str);
     },
     parseSocial(val, h, str) {
-      return h('a', {
-        domProps: {
-          href: '#social',
-        },
+      return h('button', {
+        class: 'notice-connect__text-btn',
         on: {
           click: (e) => {
             e.preventDefault();
@@ -123,6 +119,16 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
+  &__text-btn {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    color: @accent;
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
   >div {
     width: 100%;
     margin: 0;
@@ -136,7 +142,6 @@ export default {
     }
   }
   .notice-connect__close {
-    margin-top: 25%;
     height: 50%;
   }
   .social-links {
