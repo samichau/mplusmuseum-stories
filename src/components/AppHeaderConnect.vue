@@ -26,7 +26,8 @@
       <block-newsletter class="input-wrap--inline"
       :label="$t(translations.newsletter.placeholder)"
       name="newsletter__header"
-      button="&rarr;<span class='sr-only'>Subscribe to the M+ Stories Newsletter</span>"/>
+      button="&rarr;"
+      aria-label="Subscribe to the M+ Stories Newsletter"/>
 
     </div>
 

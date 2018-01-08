@@ -9,23 +9,22 @@
 
           <router-link :to="{ name: 'home' }">
 
-            <span class="sr-only">Go to M+ Homepage</span>
-
             <img class="hide--desktop"
             src="../assets/img/stories-logo-stack.svg"
-            alt="M+ Stories Logo"
+            alt="M+ Stories Home"
             @click="logoClick">
 
             <img class="hide--mobile"
             src="../assets/img/stories-logo-line.svg"
-            alt="M+ Stories Logo"
+            alt="M+ Stories Home"
             @click="logoClick">
 
           </router-link>
 
         </div>
 
-        <div class="header__section header__section--middle fs-b">
+        <div class="header__section header__section--middle fs-b"
+        aria-hidden="true">
 
           <transition name="swoop" mode="out-in">
 
@@ -50,65 +49,63 @@
 
         <div class="header__section header__section--right header__icons">
 
-          <button class="header__icon" @click="toggleDropdown">
-
-            <span class="sr-only">Toggle Navigation Menu</span>
+          <button class="header__icon" @click="toggleDropdown"
+          aria-label="Toggle Navigation Menu">
 
             <img v-show="panel !== 'dropdown'"
             src="../assets/img/menu.svg"
-            alt="Open Menu"
+            alt=""
             :data-prevent="prevent.dropdown">
 
             <img v-show="panel === 'dropdown'"
             src="../assets/img/cross.svg"
-            alt="Close Menu"
+            alt=""
             :data-prevent="prevent.dropdown">
 
           </button>
 
-          <button class="header__icon" @click="changeLanguage">
+          <button class="header__icon" @click="changeLanguage"
+          aria-label="Toggle Site Language">
 
             <img v-if="lang === 'en'"
             src="../assets/img/tc.svg"
-            alt="Switch to Traditional Chinese">
+            alt="">
 
             <img v-else
             src="../assets/img/en.svg"
-            alt="Switch to English">
+            alt="">
 
           </button>
 
-          <button class="header__icon" @click="toggleConnect">
-
-            <span class="sr-only">Explore the Website</span>
+          <button class="header__icon" @click="toggleConnect"
+          aria-label="Toggle Connect Panel">
 
             <img v-show="panel !== 'connect'"
             class="animate-wave"
             src="../assets/img/connect-wave.svg"
-            alt="Connect"
+            alt=""
             :data-prevent="prevent.connect">
 
             <img v-show="panel === 'connect'"
             src="../assets/img/cross.svg"
-            alt="Close Connect"
+            alt=""
             :data-prevent="prevent.connect">
 
           </button>
 
           <button class="header__icon"
           v-if="searchEnabled"
-          @click="toggleSearch">
-
-            <span class="sr-only">Search the Website</span>
+          @click="toggleSearch"
+          aria-label="Toggle Search Panel">
 
             <img v-show="panel !== 'search'"
             src="../assets/img/search.svg"
-            alt="Open Search"
+            alt=""
             :data-prevent="prevent.search">
 
             <img v-show="panel === 'search'"
             src="../assets/img/cross.svg"
-            alt="Close Search"
+            alt=""
             :data-prevent="prevent.search">
 
           </button>
@@ -353,7 +350,7 @@ export default {
       background: @accent;
       transition: .125s ease border-color;
       border-bottom: 3px solid transparent;
-      &.router-link-active, &:hover {
+      &.router-link-active, &:hover, &:focus {
         border-color: @white;
       }
     }

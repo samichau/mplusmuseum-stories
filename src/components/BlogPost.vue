@@ -7,7 +7,7 @@
 
         <div class="pinned" v-if="post.pinned && post.media && showing === 'unfiltered'">
 
-          <img src="../assets/img/pin.svg" alt="Pin Icon">&nbsp;<span v-html="$t(t.blog.pinned)"></span>
+          <img src="../assets/img/pin.svg" alt="Pinned">&nbsp;<span v-html="$t(t.blog.pinned)"></span>
 
         </div>
 
@@ -65,7 +65,8 @@
                 <block-newsletter class="blog-post__footer-section input-wrap--inline"
                 :label="$t(t.newsletter.placeholderAlt)"
                 :name="`newsletter__${post.name}`"
-                :button="'&rarr;<span class=\'sr-only\'>Subscribe to the M+ Stories Newsletter</span>'"/>
+                button="&rarr;"
+                aria-label="Subscribe to the M+ Stories Newsletter"/>
 
                 <button class="blog-post__more button button--invert"
                 v-if="routeName === 'blog' && post.content.truncateAfter"

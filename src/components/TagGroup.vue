@@ -6,8 +6,9 @@
     :tag="tag"/>
 
     <button class="tag tag--expand"
-      v-if="calculatedTags.length < tags.length"
-      @click="expanded = true">&hellip;</button>
+    v-if="calculatedTags.length < tags.length"
+    @click="expanded = true"
+    aria-label="Show More Tags">&hellip;</button>
 
   </div>
 </template>

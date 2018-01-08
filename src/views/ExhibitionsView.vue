@@ -33,7 +33,7 @@
 
         <div class="pinned" v-if="exhibition.pinned">
 
-          <img src="../assets/img/pin.svg" alt="Pin Icon">&nbsp;<span v-html="$t($store.state.translations.exhibitions.pinned)"></span>
+          <img src="../assets/img/pin.svg" alt="Pinned">&nbsp;<span v-html="$t($store.state.translations.exhibitions.pinned)"></span>
 
         </div>
 

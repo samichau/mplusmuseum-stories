@@ -17,13 +17,17 @@
 
         <div class="item__text fs-b">
           <span v-html="`${$t(item.excerpt)}`"/>&thinsp;
-          <router-link :to="link">[...]</router-link>
+          <router-link :to="link"
+          role="presentation"
+          aria-hidden="true">[&hellip;]</router-link>
         </div>
 
         <router-link class="item__media"
         v-if="item.card"
         :to="link"
-        :style="image.wrapperStyle">
+        :style="image.wrapperStyle"
+        role="presentation"
+        aria-hidden="true">
 
           <img class="lazy"
           :src="image.loading"

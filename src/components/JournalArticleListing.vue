@@ -3,11 +3,14 @@
 
     <div class="article-listing__thumb" v-if="imgObj">
 
-      <router-link :to="$link(content.link)">
+      <router-link :to="$link(content.link)"
+      role="presentation"
+      aria-hidden="true">
 
         <img class="lazy"
         :src="imgObj.loading"
-        v-lazy="imgObj">
+        v-lazy="imgObj"
+        :alt="$t(content.alt)">
 
       </router-link>
 

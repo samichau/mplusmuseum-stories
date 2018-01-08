@@ -5,7 +5,9 @@
 
       <template slot="content">
 
-        <router-link :to="link">
+        <router-link :to="link"
+        role="presentation"
+        aria-hidden="true">
 
           <div class="item__media"
           :style="image.wrapperStyle">

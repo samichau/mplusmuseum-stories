@@ -22,7 +22,8 @@
           <block-newsletter class="fs-m input-wrap--shadow"
           :label="$t(translations.placeholder)"
           name="newsletter__header"
-          :button="`&rarr;<span class='sr-only'>${$t(translations.subscribe)}</span>`"/>
+          button="&rarr;"
+          aria-label="Subscribe to the M+ Stories Newsletter"/>
 
           <div class="social-links fs-b">
 

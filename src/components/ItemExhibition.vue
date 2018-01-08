@@ -26,19 +26,21 @@
 
         </div>
 
-          <a :href="item.link" target="_blank">
+        <app-link :link="item.link"
+        role="presentation"
+        aria-hidden="true">
 
-            <div class="item__media"
-            :style="image.wrapperStyle">
+          <div class="item__media"
+          :style="image.wrapperStyle">
 
-              <img class="lazy"
-              :src="image.loading"
-              v-lazy="image"
-              :alt="$t(item.card.content.alt)">
+            <img class="lazy"
+            :src="image.loading"
+            v-lazy="image"
+            :alt="$t(item.card.content.alt)">
 
-            </div>
+          </div>
 
-          </a>
+        </app-link>
 
       </template>
 
