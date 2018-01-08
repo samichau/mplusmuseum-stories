@@ -4,7 +4,7 @@
       <div class="header-push"></div>
       <app-title-link class="fs-l app-title--same"
       :title="page.hero.text"
-      :wrap="'h1'"
+      wrap="h1"
       :block="true"/>
     </app-banner>
     <div v-else class="header-push"></div>

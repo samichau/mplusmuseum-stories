@@ -5,7 +5,9 @@
 
       <div class="header-push"></div>
 
-      <app-title-link class="app-title--same" :title="media.caption" :wrap="'h1'" :block="true"/>
+      <app-title-link class="app-title--same" :title="media.caption"
+      wrap="h1"
+      :block="true"/>
 
     </div>
 

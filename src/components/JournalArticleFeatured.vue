@@ -12,7 +12,7 @@
     </div>
 
     <app-title class="fs-l"
-    wrap="h2"
+    wrap="h3"
     :title="content.title"/>
 
     <!-- <div class="banner__meta fs-b" v-html="byline"></div> -->

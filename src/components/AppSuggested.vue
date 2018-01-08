@@ -35,7 +35,7 @@
           <app-section-label :type="item.type"/>
 
           <app-title class="suggested__title"
-          wrap="div"
+          wrap="h4"
           :title="item.title"/>
 
         </app-link>

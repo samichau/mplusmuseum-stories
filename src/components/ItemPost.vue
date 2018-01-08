@@ -26,7 +26,7 @@
           <router-link :to="link">
 
             <app-title class="item__title"
-            wrap="h3"
+            wrap="h4"
             :title="item.title"/>
 
           </router-link>

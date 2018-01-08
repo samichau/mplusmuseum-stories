@@ -10,7 +10,7 @@
           <app-section-label type="article"/>
 
           <app-title class="item__title"
-          wrap="div"
+          wrap="h4"
           :title="item.title"/>
 
         </router-link>

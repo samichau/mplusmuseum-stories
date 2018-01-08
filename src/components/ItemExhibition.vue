@@ -14,7 +14,7 @@
             <app-link :link="item.link">
 
               <app-title class="item__title"
-              wrap="span"
+              wrap="h4"
               :title="item.title"/>
 
             </app-link>

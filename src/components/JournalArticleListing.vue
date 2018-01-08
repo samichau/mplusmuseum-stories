@@ -24,7 +24,7 @@
         <router-link class="fs-m fs-l-sm" :to="$link(content.link)">
 
           <app-title
-          wrap="span"
+          wrap="h4"
           :title="content.title"/>
 
         </router-link>

@@ -14,7 +14,9 @@
           v-lazy="imgObj"
           :alt="$t(episode.card.content.alt)">
 
-          <video v-else-if="episode.card.type === 'video'" :src="episode.card.content.src" autoplay muted loop></video>
+          <video v-else-if="episode.card.type === 'video'"
+          :src="episode.card.content.src"
+          autoplay muted loop></video>
 
         </div>
 
