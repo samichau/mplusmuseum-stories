@@ -5,7 +5,12 @@
 
       <div class="footer__body footer__section">
 
-        <a :href="`http://www.westkowloon.hk/${$store.state.lang}/`" target="_blank"><img src="../assets/img/wk-logo.svg" alt="West Kowloon Logo"></a>
+        <a :href="`http://www.westkowloon.hk/${$store.state.lang}/`" target="_blank">
+        
+          <img src="../assets/img/wk-logo.svg"
+          :alt="$t($store.state.translations.accessibility.westKowloon)">
+          
+        </a>
 
         <router-link v-for="(item, i) of $store.state.site.links.footer"
         :key="i"

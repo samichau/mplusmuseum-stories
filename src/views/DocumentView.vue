@@ -55,7 +55,8 @@
 
             <a v-if="page.contents"
             href="#contents"
-            class="document-item__back"><img src="../assets/img/caret-up.svg" alt="Return to Contents"></a>
+            class="document-item__back"><img src="../assets/img/caret-up.svg"
+            :alt="$t($store.state.translations.accessibility.contentsReturn)"></a>
 
             <h2 class="fs-m" v-html="$t(section.title)"></h2>
 

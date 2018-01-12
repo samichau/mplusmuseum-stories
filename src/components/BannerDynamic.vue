@@ -11,10 +11,12 @@
     class="banner__meta fs-b">
 
       <template v-if="content.series && content.series !== false">
-        <img src="../assets/img/play.svg" alt="Series">&thinsp;<span v-html="$t(content.series.title)"></span>&ensp;
+        <img src="../assets/img/play.svg"
+        :alt="$t(translations.accessibility.series)">&thinsp;<span v-html="$t(content.series.title)"></span>&ensp;
       </template>
 
-      <img src="../assets/img/clock.svg" alt="Duration">&thinsp;<span v-html="$t(content.duration)"></span>
+      <img src="../assets/img/clock.svg"
+      :alt="$t(translations.accessibility.duration)">&thinsp;<span v-html="$t(content.duration)"></span>
 
     </div>
 
@@ -22,7 +24,7 @@
     class="banner__meta fs-b">
 
       <snippet-translate
-      :snippet="$store.state.translations.journal.contributions"
+      :snippet="translations.journal.contributions"
       :data="{ contributors: content.contributors }"
       :parsers="{ contributors: (c) => $t(c) }"/>
 
@@ -40,6 +42,11 @@ export default {
   props: {
     content: {
       required: true,
+    },
+  },
+  computed: {
+    translations() {
+      return this.$store.state.translations;
     },
   },
   components: {

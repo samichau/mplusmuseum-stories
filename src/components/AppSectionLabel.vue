@@ -8,12 +8,12 @@
       <img v-if="same !== false"
       class="external-icon"
       src="../assets/img/external.svg"
-      alt="External Link">
+      :alt="$t($store.state.translations.accessibility.externalLink)">
 
       <img v-else
       class="external-icon"
       src="../assets/img/external-blue.svg"
-      alt="External Link">
+      :alt="$t($store.state.translations.accessibility.externalLink)">
 
     </template>
 

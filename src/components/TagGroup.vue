@@ -8,7 +8,7 @@
     <button class="tag tag--expand"
     v-if="calculatedTags.length < tags.length"
     @click="expanded = true"
-    aria-label="Show More Tags">&hellip;</button>
+    :aria-label="$t($store.state.translations.accessibility.tagsMore)">&hellip;</button>
 
   </div>
 </template>

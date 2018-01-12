@@ -1,13 +1,11 @@
 <template>
   <div class="sharebar">
 
-    <span class="sr-only">Share this Content</span>
-
     <transition-group class="sharebar__items"
     name="resize"
     tag="div">
 
-      <a v-for="(item, i) of items"
+      <a v-for="(item) of items"
       class="sharebar__block"
       @click="share(item.share, $event)"
       :key="item.id"
@@ -18,7 +16,8 @@
           <div class="sharebar__block-background"
           :style="{ 'background-color': item.colour }"></div>
 
-          <img :src="item.icon" :alt="`Share via ${$t(item.title)}`">
+          <img :src="item.icon"
+          :alt="$t(item.title) | shareText(shareSnippet)">
 
         </div>
 
@@ -36,11 +35,11 @@
 
         <img v-if="expanded"
         src="../assets/img/minus.svg"
-        alt="Less Sharing Options">
+        :alt="$t($store.state.translations.accessibility.shareLess)">
 
         <img v-else
         src="../assets/img/plus.svg"
-        alt="More Sharing Options">
+        :alt="$t($store.state.translations.accessibility.shareMore)">
 
       </div>
 
@@ -83,6 +82,13 @@ export default {
     shareLink(val, data) {
       return prepareURI(val, data);
     },
+    shareText(val, snippet) {
+      return snippet.map((segment) => {
+        if (segment.type === 'fn' && segment.fn === 'platform') return val;
+        if (segment.type === 'str') return segment.str;
+        return '';
+      }).join('');
+    },
   },
   methods: {
     toggle() {
@@ -124,6 +130,9 @@ export default {
     items() {
       const items = this.isMobile ? this.mobileItems : this.desktopItems;
       return this.expanded ? items : items.slice(0, this.limit);
+    },
+    shareSnippet() {
+      return this.$t(this.$store.state.translations.accessibility.shareVia);
     },
   },
 };

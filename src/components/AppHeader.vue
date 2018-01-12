@@ -11,12 +11,12 @@
 
             <img class="hide--desktop"
             src="../assets/img/stories-logo-stack.svg"
-            alt="M+ Stories Home"
+            :alt="$t(translations.accessibility.homepage)"
             @click="logoClick">
 
             <img class="hide--mobile"
             src="../assets/img/stories-logo-line.svg"
-            alt="M+ Stories Home"
+            :alt="$t(translations.accessibility.homepage)"
             @click="logoClick">
 
           </router-link>
@@ -50,7 +50,7 @@
         <div class="header__section header__section--right header__icons">
 
           <button class="header__icon" @click="toggleDropdown"
-          aria-label="Toggle Navigation Menu">
+          :aria-label="$t(translations.accessibility.btn)">
 
             <img v-show="panel !== 'dropdown'"
             src="../assets/img/menu.svg"
@@ -65,7 +65,7 @@
           </button>
 
           <button class="header__icon" @click="changeLanguage"
-          aria-label="Toggle Site Language">
+          :aria-label="$t(translations.accessibility.btnLang)">
 
             <img v-if="lang === 'en'"
             src="../assets/img/tc.svg"
@@ -78,7 +78,7 @@
           </button>
 
           <button class="header__icon" @click="toggleConnect"
-          aria-label="Toggle Connect Panel">
+          :aria-label="$t(translations.accessibility.btnConnect)">
 
             <img v-show="panel !== 'connect'"
             class="animate-wave"
@@ -96,7 +96,7 @@
           <button class="header__icon"
           v-if="searchEnabled"
           @click="toggleSearch"
-          aria-label="Toggle Search Panel">
+          :aria-label="$t(translations.accessibility.btnSearch)">
 
             <img v-show="panel !== 'search'"
             src="../assets/img/search.svg"

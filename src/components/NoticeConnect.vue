@@ -23,13 +23,15 @@
           :label="$t(translations.placeholder)"
           name="newsletter__header"
           button="&rarr;"
-          aria-label="Subscribe to the M+ Stories Newsletter"/>
+          :aria-label="$t(translations.accessibility.subscribe)"/>
 
           <div class="social-links fs-b">
 
             <button @click.prevent="connect = false">
 
-              <img class="notice-connect__close" src="../assets/img/cross-blue.svg" alt="Close">
+              <img class="notice-connect__close"
+              src="../assets/img/cross-blue.svg"
+              :alt="$t(translations.accessibility.hideNewsletter)">
 
             </button>
 
@@ -51,7 +53,9 @@
 
           <button @click.prevent="connect = false">
 
-            <img class="notice-connect__close" src="../assets/img/cross-blue.svg" alt="Close">
+            <img class="notice-connect__close"
+            src="../assets/img/cross-blue.svg"
+            :alt="$t(translations.accessibility.hideSocial)">
 
           </button>
 

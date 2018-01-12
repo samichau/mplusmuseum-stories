@@ -1,7 +1,13 @@
 <template>
   <div class="lightbox">
 
-    <button class="lightbox__close" @click="close"><img src="../assets/img/cross.svg" alt="Close"></button>
+    <button class="lightbox__close"
+    @click="close">
+
+      <img src="../assets/img/cross.svg"
+      :alt="$t($store.state.translations.accessibility.closeLightbox)">
+
+    </button>
 
     <div class="lightbox__share">
 
@@ -14,7 +20,8 @@
 
     <div class="lightbox__inner">
 
-      <div class="lightbox__content" @click="close">
+      <div class="lightbox__content"
+      @click="close">
 
         <img class="lazy"
         :src="imgObj.loading"

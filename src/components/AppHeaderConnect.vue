@@ -27,7 +27,7 @@
       :label="$t(translations.newsletter.placeholder)"
       name="newsletter__header"
       button="&rarr;"
-      aria-label="Subscribe to the M+ Stories Newsletter"/>
+      :aria-label="$t(translations.accessibility.subscribe)"/>
 
     </div>
 

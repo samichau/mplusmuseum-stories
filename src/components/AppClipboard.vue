@@ -1,7 +1,10 @@
 <template>
   <button class="clipboard fs-s shadow--inner" v-clipboard="url" @success="success" @error="error">
 
-    <img class="clipboard__icon" v-if="icon" src="../assets/img/link-blue.svg" alt="Clipboard Icon">
+    <img class="clipboard__icon"
+    v-if="icon"
+    src="../assets/img/link-blue.svg"
+    :alt="$t($store.state.translations.accessibility.clipboard)">
 
     <input class="clipboard__text" :value="url" ref="input" readonly="true">
 

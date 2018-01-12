@@ -3,7 +3,7 @@
 
     <div class="pinned">
 
-      <img src="../assets/img/pin.svg" alt="Pinned">&nbsp;<span v-html="$t($store.state.translations.journal.pinned)"></span>
+      <img src="../assets/img/pin.svg" alt="">&nbsp;<span v-html="$t($store.state.translations.journal.pinned)"></span>
 
     </div>
 
