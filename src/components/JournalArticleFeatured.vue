@@ -15,13 +15,18 @@
     wrap="h3"
     :title="content.title"/>
 
-    <!-- <div class="banner__meta fs-b" v-html="byline"></div> -->
+    <snippet-byline class="fs-s fs-b-sm hide--mobile"
+    :snippet="$store.state.translations.journal.byline"
+    :author="content.author"
+    :date="content.date"
+    :link="false"/>
 
   </app-banner>
 </template>
 
 <script>
 import SnippetIssueNumber from './SnippetIssueNumber.vue';
+import SnippetByline from './SnippetByline.vue';
 
 export default {
   props: {
@@ -45,6 +50,7 @@ export default {
   },
   components: {
     SnippetIssueNumber,
+    SnippetByline,
   },
 };
 </script>

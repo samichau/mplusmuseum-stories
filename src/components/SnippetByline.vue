@@ -27,12 +27,15 @@ export default {
     author: {
       type: Number,
     },
+    link: {
+      default: true,
+    },
   },
   methods: {
     parseAuthor(id, h) {
       if (!id) return false;
       const author = this.$store.state.site.authors[id];
-      return h(
+      return this.link ? h(
         'router-link',
         {
           props: {
@@ -45,11 +48,12 @@ export default {
           },
         },
         this.$t(author.title),
-      );
+      ) : h('span', {}, this.$t(author.title));
     },
     // Blog only
     parseCategory(category, h) {
-      return category ? h(
+      if (!category) return false;
+      return this.link ? h(
         'router-link',
         {
           props: {
@@ -62,7 +66,7 @@ export default {
           },
         },
         this.$t(category.title),
-      ) : false;
+      ) : h('span', {}, this.$t(category.title));
     },
     parseDate(date, h) {
       if (!date) return false;
