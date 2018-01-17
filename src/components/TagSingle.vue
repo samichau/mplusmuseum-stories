@@ -2,13 +2,28 @@
   <a class="tag"
   :href="`/${$store.state.lang}/explore?tag=${tag.name}`"
   v-html="$t(tag.title)"
-  @click.prevent="onClick"></a>
+  @click.prevent="onClick"
+  :aria-label="label"></a>
 </template>
 
 <script>
 import _ from 'lodash';
 
 export default {
+  props: {
+    tag: {
+      type: Object,
+    },
+  },
+  computed: {
+    label() {
+      if (this.tag.helper) {
+        const helper = this.$t(this.tag.helper);
+        if (helper.length > 0) return helper;
+      }
+      return null;
+    },
+  },
   methods: {
     onClick() {
       // If we are not in the explore route, just push the single tag
@@ -21,11 +36,6 @@ export default {
         ? activeTags.filter(t => t !== this.tag.name)
         : activeTags.concat(this.tag.name);
       return this.$router.push({ name: 'explore', query: { tag: newTags } });
-    },
-  },
-  props: {
-    tag: {
-      type: Object,
     },
   },
 };
