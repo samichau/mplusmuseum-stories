@@ -38,6 +38,10 @@ export default {
 
 <style lang="less">
 @import '../less/variables.less';
+@xsFs: 2em / 1.7;
+@smFs: 2.2em / 1.7;
+@mdFs: 2.5em / 1.8;
+@lgFs: 2.8em / 2;
 
 .text-block {
   margin-bottom: 1em;
@@ -46,21 +50,17 @@ export default {
 
   h1, h2 {
     line-height: 1.2;
-    @xsFs: 2em / 1.7;
     font-size: @xsFs;
     margin-bottom: 0.25 / @xsFs;
     .mq-sm({
-      @smFs: 2.2em / 1.7;
       font-size: @smFs;
       margin-bottom: 0.25 / @smFs;
     });
     .mq-md({
-      @mdFs: 2.5em / 1.8;
       font-size: @mdFs;
       margin-bottom: 0.25 / @mdFs;
     });
     .mq-lg({
-      @lgFs: 2.8em / 2;
       font-size: @lgFs;
       margin-bottom: 0.25 / @lgFs;
     });
