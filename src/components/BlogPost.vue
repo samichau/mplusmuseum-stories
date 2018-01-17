@@ -68,7 +68,7 @@
                 :label="$tl('newsletter.placeholderAlt')"
                 :name="`newsletter__${post.name}`"
                 button="&rarr;"
-                :aria-label="$tl('accessibility.subscribe')"/>
+                :identifier="`${post.name}-newsletter`"/>
 
                 <button class="blog-post__more button button--invert"
                 v-if="routeName === 'blog' && post.content.truncateAfter"

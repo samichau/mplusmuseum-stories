@@ -16,12 +16,14 @@
       <div class="explorer__input">
 
         <label v-if="!query.length"
-        for="explore">
+        for="explore"
+        :aria-label="$tl('explore.cta')">
           <span class="hide--mobile" v-html="desktop"/>
           <span class="hide--desktop" v-html="mobile"/>
         </label>
 
         <input name="explore"
+        id="explore"
         type="text"
         ref="input"
         @keydown.enter="onEnter"

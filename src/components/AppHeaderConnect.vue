@@ -29,7 +29,7 @@
       :label="$tl('newsletter.placeholder')"
       name="newsletter__header"
       button="&rarr;"
-      :aria-label="$tl('accessibility.subscribe')"/>
+      identifier="connect-newsletter"/>
 
     </div>
 

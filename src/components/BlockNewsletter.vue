@@ -1,13 +1,28 @@
 <template>
-  <form class="newsletter-block input-wrap" @submit.prevent="submit" enctype="multipart/form-data">
+  <form class="newsletter-block input-wrap"
+  @submit.prevent="submit"
+  enctype="multipart/form-data">
 
-    <input type="hidden" name="lang" :value="lang">
+    <input type="hidden"
+    name="lang"
+    :value="lang">
 
-    <label v-show="!email.length" for="email" v-html="label"></label>
+    <label v-show="!email.length"
+    :for="identifier"
+    v-html="label"></label>
 
-    <input v-model="email" name="email" type="text">
+    <input v-model="email"
+    :id="identifier"
+    name="email"
+    type="text"
+    :aria-label="$tl('newsletter.placeholder')">
 
-    <div class="button-wrap"><button v-html="button"></button></div>
+    <div class="button-wrap">
+    
+      <button v-html="button"
+      :aria-label="$tl('accessibility.subscribe')"/>
+      
+    </div>
 
   </form>
 </template>
@@ -27,6 +42,9 @@ export default {
     },
     button: {
       default: 'Submit',
+    },
+    identifier: {
+      required: true,
     },
   },
   data() {

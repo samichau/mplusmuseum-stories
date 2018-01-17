@@ -6,9 +6,13 @@
       <form class="input-wrap input-wrap--inline fs-m" action="/" @submit.prevent="onSearch">
 
         <label v-if="!query.length"
-        v-html="$tl('search.cta')"></label>
+        v-html="$tl('search.cta')"
+        for="search"/>
 
-        <input v-model="query" type="text" ref="search">
+        <input v-model="query"
+        id="search"
+        type="text"
+        ref="search">
 
       </form>
 

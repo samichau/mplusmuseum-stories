@@ -1,12 +1,18 @@
 <template>
-  <button class="clipboard fs-s shadow--inner" v-clipboard="url" @success="success" @error="error">
+  <button class="clipboard fs-s shadow--inner"
+  v-clipboard="url"
+  @success="success"
+  @error="error">
 
     <img class="clipboard__icon"
     v-if="icon"
     src="../assets/img/link-blue.svg"
     :alt="$tl('accessibility.clipboard')">
 
-    <input class="clipboard__text" :value="url" ref="input" readonly="true">
+    <input class="clipboard__text"
+    :value="url"
+    ref="input"
+    readonly="true">
 
     <div class="clipboard__notice fs-b"
     :class="{ 'clipboard__notice--visible': notice }"

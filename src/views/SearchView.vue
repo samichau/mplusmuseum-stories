@@ -15,6 +15,7 @@
         v-html="$tl('search.cta')"></label>
 
         <input class="fs-l"
+        id="query"
         v-model="query"
         name="query"
         ref="input"
