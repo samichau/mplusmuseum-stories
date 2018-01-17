@@ -9,7 +9,7 @@
 
         <h1 class="fs-l">404: <app-title-link class="app-title--same" :title="header"/></h1>
 
-        <p class="fs-m" v-html="$t(message)"></p>
+        <p class="fs-m" v-html="message"></p>
 
       </div>
 
@@ -39,7 +39,7 @@ export default {
       return this.$store.state.translations.site.notFound;
     },
     message() {
-      return this.$store.state.translations.site.notFoundMessage;
+      return this.$tl('site.notFoundMessage');
     },
   },
   components: {

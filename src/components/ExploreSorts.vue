@@ -14,7 +14,7 @@
 
           <button @click="setSort(sort.id)"
           :class="{ selected: sort.id === activeSort.id }"
-          v-html="$t($store.state.translations.explore[sort.id])"></button>
+          v-html="$tl(`explore.${sort.id}`)"></button>
 
         </span>
 
@@ -38,7 +38,7 @@
 export default {
   computed: {
     prefixText() {
-      return this.$t(this.$store.state.translations.explore.sorts);
+      return this.$tl('explore.sorts');
     },
     sorts() {
       return this.$store.getters['explore/sorts'];

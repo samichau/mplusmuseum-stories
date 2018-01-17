@@ -3,7 +3,7 @@
 
     <item-grid :content="content.content"
     :rows="rows"
-    :buttonText="$t($store.state.translations.site.viewMore)"
+    :buttonText="$tl('site.viewMore')"
     @expand="expand"/>
 
   </div>

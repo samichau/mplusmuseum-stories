@@ -36,9 +36,6 @@ export default {
     };
   },
   computed: {
-    t() {
-      return this.$store.state.translations.newsletter;
-    },
     lang() {
       return this.$store.state.lang === locales[1] ? 2 : 1;
     },
@@ -61,11 +58,17 @@ export default {
       });
     },
     error(message) {
-      this.$modal.show(message || this.$t(this.t.errorInvalid), this.$t(this.t.errorTitle));
+      this.$modal.show(
+        message || this.$tl('newsletter.errorInvalid'),
+        this.$tl('newsletter.errorTitle'),
+      );
       this.busy = false;
     },
     success() {
-      this.$modal.show(this.$t(this.t.successMessage), this.$t(this.t.successTitle));
+      this.$modal.show(
+        this.$tl('newsletter.successMessage'),
+        this.$tl('newsletter.successTitle'),
+      );
       this.email = '';
       this.busy = false;
     },

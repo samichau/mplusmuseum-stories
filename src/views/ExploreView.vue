@@ -24,7 +24,7 @@
 
         <div class="heading">
 
-          <h2 v-html="`${$t(translations.fetching)} &hellip;`"></h2>
+          <h2 v-html="`${$tl('explore.fetching')} &hellip;`"></h2>
 
         </div>
 
@@ -101,7 +101,6 @@ export default {
     ]),
     // Other state
     ...mapState({
-      translations: s => s.translations.explore,
       tags: s => s.tags.entities,
     }),
     ...mapGetters({

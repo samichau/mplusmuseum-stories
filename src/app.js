@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
 import VueLazyload from 'vue-lazyload';
+import _get from 'lodash/get';
 import { createStore } from './store';
 import { createRouter } from './router';
 
@@ -51,6 +52,10 @@ export function createApp() {
   // Translation helper functions
   Vue.prototype.$t = val => ((val && typeof val === 'object') ? val[store.state.lang] : '');
   Vue.prototype.$tt = val => ((val && typeof val === 'object') ? val[store.state.langSecondary] : '');
+  Vue.prototype.$tl = ((reference) => {
+    const translation = _get(store.state.translations, reference);
+    return translation ? translation[store.state.lang] : '';
+  });
 
   // Helper function to append language on links
   Vue.prototype.$link = (link) => {

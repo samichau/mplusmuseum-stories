@@ -4,11 +4,11 @@
     <div class="search-filter__buttons">
 
       <app-dropdown :options="filterOptions"
-      :defaultButtonText="$t(translations.search.filterDefault)"
+      :defaultButtonText="$tl('search.filterDefault')"
       :selected.sync="activeFilter"/>
     
       <app-dropdown :options="sortOptions"
-      :defaultButtonText="$t(translations.search.sortDefault)"
+      :defaultButtonText="$tl('search.sortDefault')"
       :selected.sync="activeSort"/>
 
     </div>
@@ -22,9 +22,6 @@ import AppDropdown from './AppDropdown.vue';
 
 export default {
   computed: {
-    translations() {
-      return this.$store.state.translations;
-    },
     filterOptions() {
       const opts = [
         'post',
@@ -36,7 +33,7 @@ export default {
         'issue',
       ];
       const options = _map(opts, name => ({
-        title: this.$t(this.translations.content[name]).many,
+        title: this.tl(`content.${name}`).many,
         value: name,
       }));
       return options;
@@ -44,14 +41,14 @@ export default {
     sortOptions() {
       return [
         {
-          title: this.$t(this.translations.search.sortType),
+          title: this.$tl('search.sortType'),
           value: {
             by: 'type',
             order: 'asc',
           },
         },
         {
-          title: this.$t(this.translations.search.sortOldest),
+          title: this.$tl('search.sortOldest'),
           value: {
             by: 'modified',
             order: 'asc',

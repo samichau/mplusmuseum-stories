@@ -7,7 +7,7 @@
 
         <div class="pinned" v-if="post.pinned && post.media && showing === 'unfiltered'">
 
-          <img src="../assets/img/pin.svg" alt="">&nbsp;<span v-html="$t(t.blog.pinned)"></span>
+          <img src="../assets/img/pin.svg" alt="">&nbsp;<span v-html="$tl('blog.pinned')"></span>
 
         </div>
 
@@ -23,7 +23,7 @@
 
             <div class="blog-post__meta">
 
-              <snippet-byline :snippet="t.blog.byline"
+              <snippet-byline :snippet="$store.state.translations.blog.byline"
               :author="post.author"
               :category="post.category"
               :date="post.date"/>
@@ -52,7 +52,8 @@
               <button class="blog-post__more button button--accent"
               v-if="routeName === 'blog' && post.content.truncateAfter && post.truncated"
               ref="more"
-              @click="extend">{{ $t(t.site.continue) }}</button>
+              @click="extend"
+              v-html="$tl('site.continue')"/>
 
               <div class="blog-post__footer" v-if="!post.truncated">
 
@@ -63,15 +64,16 @@
                 :url="shareData.location"/>
 
                 <block-newsletter class="blog-post__footer-section input-wrap--inline"
-                :label="$t(t.newsletter.placeholderAlt)"
+                :label="$tl('newsletter.placeholderAlt')"
                 :name="`newsletter__${post.name}`"
                 button="&rarr;"
-                :aria-label="$t(t.accessibility.subscribe)"/>
+                :aria-label="$tl('accessibility.subscribe')"/>
 
                 <button class="blog-post__more button button--invert"
                 v-if="routeName === 'blog' && post.content.truncateAfter"
                 ref="less"
-                @click="collapse">{{ $t(t.blog.close) }}</button>
+                @click="collapse"
+                v-html="$tl('blog.close')"/>
 
               </div>
 
@@ -115,7 +117,6 @@ export default {
   },
   computed: {
     ...mapState({
-      t: s => s.translations,
       lang: s => s.lang,
       routeName: s => s.route.name,
       showing: s => s.blog.showing,

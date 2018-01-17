@@ -2,7 +2,9 @@
   <blog-view v-if="post">
     <blog-post class="list-complete-item"
     :post="post"/>
-    <router-link :to="{ name: 'blog' }" class="button button--wide button--outline blog__button">{{ $t($store.state.translations.blog.return) }}</router-link>
+    <router-link :to="{ name: 'blog' }"
+    class="button button--wide button--outline blog__button"
+    v-html="$tl('blog.return')"/>
   </blog-view>
 </template>
 

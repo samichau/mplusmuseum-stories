@@ -35,11 +35,11 @@
 
         <img v-if="expanded"
         src="../assets/img/minus.svg"
-        :alt="$t($store.state.translations.accessibility.shareLess)">
+        :alt="$tl('accessibility.shareLess')">
 
         <img v-else
         src="../assets/img/plus.svg"
-        :alt="$t($store.state.translations.accessibility.shareMore)">
+        :alt="$tl('accessibility.shareMore')">
 
       </div>
 
@@ -132,7 +132,7 @@ export default {
       return this.expanded ? items : items.slice(0, this.limit);
     },
     shareSnippet() {
-      return this.$t(this.$store.state.translations.accessibility.shareVia);
+      return this.$tl('accessibility.shareVia');
     },
   },
 };

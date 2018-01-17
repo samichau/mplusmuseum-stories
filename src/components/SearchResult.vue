@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     label() {
-      return this.$t(this.$store.state.translations.content[this.result.type]).one;
+      return this.$tl(`content.${this.result.type}`).one;
     },
     imgObj() {
       const { content } = this.result.card;

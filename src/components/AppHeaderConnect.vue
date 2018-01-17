@@ -3,7 +3,8 @@
 
     <div class="infopanel__section">
 
-      <h6 class="infopanel__header" v-html="$t(translations.site.connect)"></h6>
+      <h6 class="infopanel__header"
+      v-html="$tl('site.connect')"></h6>
 
       <div class="social-links fs-s">
 
@@ -21,13 +22,14 @@
 
     <div class="infopanel__section">
 
-      <h6 class="infopanel__header" v-html="$t(translations.newsletter.placeholderAlt)"></h6>
+      <h6 class="infopanel__header"
+      v-html="$tl('newsletter.placeholderAlt')"></h6>
 
       <block-newsletter class="input-wrap--inline"
-      :label="$t(translations.newsletter.placeholder)"
+      :label="$tl('newsletter.placeholder')"
       name="newsletter__header"
       button="&rarr;"
-      :aria-label="$t(translations.accessibility.subscribe)"/>
+      :aria-label="$tl('accessibility.subscribe')"/>
 
     </div>
 
@@ -71,9 +73,6 @@ export default {
     },
   },
   computed: {
-    translations() {
-      return this.$store.state.translations;
-    },
     socialPlatforms() {
       return this.$store.getters['site/socialLinkables'];
     },

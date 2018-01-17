@@ -9,7 +9,7 @@
 
         <snippet-translate class="fs-m"
         tag="p"
-        :snippet="translations.placeholderFull"
+        :snippet="$store.state.translations.newsletter.placeholderFull"
         :data="{ newsletter: false, social: false, }"
         :parsers="{ newsletter: parseNewsletter, social: parseSocial }"/>
 
@@ -20,10 +20,10 @@
       key="newsletter">
 
           <block-newsletter class="fs-m input-wrap--shadow"
-          :label="$t(translations.placeholder)"
+          :label="$tl('newsletter.placeholder')"
           name="newsletter__header"
           button="&rarr;"
-          :aria-label="$t(translations.accessibility.subscribe)"/>
+          :aria-label="$tl('accessibility.subscribe')"/>
 
           <div class="social-links fs-b">
 
@@ -31,7 +31,7 @@
 
               <img class="notice-connect__close"
               src="../assets/img/cross-blue.svg"
-              :alt="$t(translations.accessibility.hideNewsletter)">
+              :alt="$tl('accessibility.hideNewsletter')">
 
             </button>
 
@@ -55,7 +55,7 @@
 
             <img class="notice-connect__close"
             src="../assets/img/cross-blue.svg"
-            :alt="$t(translations.accessibility.hideSocial)">
+            :alt="$tl('accessibility.hideSocial')">
 
           </button>
 
@@ -100,11 +100,6 @@ export default {
           },
         },
       }, str);
-    },
-  },
-  computed: {
-    translations() {
-      return this.$store.state.translations.newsletter;
     },
   },
   components: {

@@ -91,7 +91,6 @@ export default {
   },
   computed: {
     ...mapState({
-      translations: s => s.translations.explore,
       tags: s => s.tags.entities,
       tagsOrder: s => s.tags.order,
     }),
@@ -119,14 +118,14 @@ export default {
 
       if (this.activeTags.length) {
         return {
-          desktop: this.$t(this.translations.ctaMore),
-          mobile: this.$t(this.translations.ctaMoreShort),
+          desktop: this.$tl('explore.ctaMore'),
+          mobile: this.$tl('explore.ctaMoreShort'),
         };
       }
 
       return {
-        desktop: this.$t(this.translations.cta),
-        mobile: this.$t(this.translations.ctaShort),
+        desktop: this.$tl('explore.cta'),
+        mobile: this.$tl('explore.ctaShort'),
       };
     },
     matchesHeight() {

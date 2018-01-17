@@ -22,7 +22,7 @@
 
     <div class="heading">
 
-      <snippet-byline :snippet="translations.journal.byline"
+      <snippet-byline :snippet="$store.state.translations.journal.byline"
       :author="article.author"
       :date="article.date"/>
 
@@ -72,9 +72,6 @@ export default {
           issue: this.article.issue.name,
         },
       };
-    },
-    translations() {
-      return this.$store.state.translations;
     },
   },
   components: {

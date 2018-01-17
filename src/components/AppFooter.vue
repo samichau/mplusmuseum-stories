@@ -8,7 +8,7 @@
         <a :href="`http://www.westkowloon.hk/${$store.state.lang}/`" target="_blank">
         
           <img src="../assets/img/wk-logo.svg"
-          :alt="$t($store.state.translations.accessibility.westKowloon)">
+          :alt="$tl('accessibility.westKowloon')">
           
         </a>
 

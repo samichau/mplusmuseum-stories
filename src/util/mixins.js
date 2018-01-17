@@ -67,7 +67,7 @@ export const labelMixin = {
       return item.type;
     },
     issueWithNumber(data) {
-      const snippet = this.$t(this.$store.state.translations.journal.issueWithTitle);
+      const snippet = this.$tl('journal.issueWithTitle');
       if (snippet) {
         return snippet.map((match) => {
           if (match.type === 'str') {
@@ -79,7 +79,7 @@ export const labelMixin = {
           return false;
         }).join('');
       }
-      return this.$t(this.$store.state.translations.content.issue).one;
+      return this.$tl('content.issue').one;
     },
   },
 };

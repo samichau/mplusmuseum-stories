@@ -5,7 +5,7 @@
     @click="close">
 
       <img src="../assets/img/cross.svg"
-      :alt="$t($store.state.translations.accessibility.closeLightbox)">
+      :alt="$tl('accessibility.closeLightbox')">
 
     </button>
 

@@ -5,7 +5,8 @@
 
       <form class="input-wrap input-wrap--inline fs-m" action="/" @submit.prevent="onSearch">
 
-        <label v-if="!query.length" v-html="$t($store.state.translations.search.cta)"></label>
+        <label v-if="!query.length"
+        v-html="$tl('search.cta')"></label>
 
         <input v-model="query" type="text" ref="search">
 

@@ -12,7 +12,7 @@
         <label class="fs-l"
         v-show="!query.length"
         for="query"
-        v-html="$t($store.state.translations.search.cta)"></label>
+        v-html="$tl('search.cta')"></label>
 
         <input class="fs-l"
         v-model="query"
@@ -31,19 +31,19 @@
             
             <snippet-translate class="search__status"
             tag="span"
-            :snippet="translations.search.results"
+            :snippet="$store.state.translations.search.results"
             :data="{ count: results.length, query: submittedQuery }"
             :parsers="{ count: (c) => c, query: (q, h) => h('strong', {}, q) }"/>
 
             <a href="#" @click.prevent="filter = !filter">
 
-              <strong v-html="$t(translations.search.filter)"></strong>
+              <strong v-html="$tl('search.filter')"></strong>
             
             </a>
 
           </p>
 
-          <p v-else v-html="$t(translations.search.searching)"></p>
+          <p v-else v-html="$tl('search.searching')"></p>
 
           <search-filter v-if="filter"/>
 
@@ -106,9 +106,6 @@ export default {
     },
   },
   computed: {
-    translations() {
-      return this.$store.state.translations;
-    },
     searching() {
       return this.$store.state.search.searching;
     },

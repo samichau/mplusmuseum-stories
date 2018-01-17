@@ -33,11 +33,11 @@
 
             <template v-if="series !== false">
               <img src="../assets/img/play.svg"
-              :alt="$t($store.state.translations.accessibility.series)">&thinsp;<span v-html="$t(series.title)"></span>&ensp;
+              :alt="$tl('accessibility.series')">&thinsp;<span v-html="$t(series.title)"></span>&ensp;
             </template>
 
             <img src="../assets/img/clock.svg"
-            :alt="$t($store.state.translations.accessibility.duration)">&thinsp;<span v-html="$t(episode.duration)"></span>
+            :alt="$tl('accessibility.duration')">&thinsp;<span v-html="$t(episode.duration)"></span>
 
           </div>
 

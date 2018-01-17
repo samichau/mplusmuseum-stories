@@ -23,7 +23,7 @@
 
             <div class="document-item__header">
 
-              <h2 v-html="$t($store.state.translations.site.tableOfContents)"></h2>
+              <h2 v-html="$tl('site.tableOfContents')"></h2>
 
             </div>
 
@@ -56,7 +56,7 @@
             <a v-if="page.contents"
             href="#contents"
             class="document-item__back"><img src="../assets/img/caret-up.svg"
-            :alt="$t($store.state.translations.accessibility.contentsReturn)"></a>
+            :alt="$tl('accessibility.contentsReturn')"></a>
 
             <h2 class="fs-m" v-html="$t(section.title)"></h2>
 

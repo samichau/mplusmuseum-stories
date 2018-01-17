@@ -11,12 +11,12 @@
 
             <img class="hide--desktop"
             src="../assets/img/stories-logo-stack.svg"
-            :alt="$t(translations.accessibility.homepage)"
+            :alt="$tl('accessibility.homepage')"
             @click="logoClick">
 
             <img class="hide--mobile"
             src="../assets/img/stories-logo-line.svg"
-            :alt="$t(translations.accessibility.homepage)"
+            :alt="$tl('accessibility.homepage')"
             @click="logoClick">
 
           </router-link>
@@ -50,7 +50,7 @@
         <div class="header__section header__section--right header__icons">
 
           <button class="header__icon" @click="toggleDropdown"
-          :aria-label="$t(translations.accessibility.btn)">
+          :aria-label="$tl('accessibility.btn')">
 
             <img v-show="panel !== 'dropdown'"
             src="../assets/img/menu.svg"
@@ -65,7 +65,7 @@
           </button>
 
           <button class="header__icon" @click="changeLanguage"
-          :aria-label="$t(translations.accessibility.btnLang)">
+          :aria-label="$tl('accessibility.btnLang')">
 
             <img v-if="lang === 'en'"
             src="../assets/img/tc.svg"
@@ -78,7 +78,7 @@
           </button>
 
           <button class="header__icon" @click="toggleConnect"
-          :aria-label="$t(translations.accessibility.btnConnect)">
+          :aria-label="$tl('accessibility.btnConnect')">
 
             <img v-show="panel !== 'connect'"
             class="animate-wave"
@@ -96,7 +96,7 @@
           <button class="header__icon"
           v-if="searchEnabled"
           @click="toggleSearch"
-          :aria-label="$t(translations.accessibility.btnSearch)">
+          :aria-label="$tl('accessibility.btnSearch')">
 
             <img v-show="panel !== 'search'"
             src="../assets/img/search.svg"
@@ -162,7 +162,6 @@ export default {
   computed: {
     ...mapState({
       lang: s => s.lang,
-      translations: s => s.translations,
       routeQuery: s => s.route.query,
       menuItems: s => s.site.links.menu,
       notice: s => s.header.notice,

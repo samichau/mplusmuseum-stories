@@ -5,7 +5,7 @@
 
       <div class="heading">
 
-        <h2 v-html="$t($store.state.translations.channel.more)"></h2>
+        <h2 v-html="$tl('channel.more')"></h2>
 
       </div>
 

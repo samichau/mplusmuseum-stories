@@ -28,7 +28,7 @@
             <img v-else
             class="suggested__placeholder"
             src="../assets/img/stories-logo-stack.svg"
-            :alt="$t(translations.accessibility.placeholderImg)">
+            :alt="$tl('accessibility.placeholderImg')">
 
           </div>
 
@@ -71,11 +71,8 @@ export default {
     },
   },
   computed: {
-    translations() {
-      return this.$store.state.translations;
-    },
     marqueeText() {
-      return this.$t(this.translations.site.viewThis);
+      return this.$tl('site.viewThis');
     },
   },
   methods: {

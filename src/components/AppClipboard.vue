@@ -4,7 +4,7 @@
     <img class="clipboard__icon"
     v-if="icon"
     src="../assets/img/link-blue.svg"
-    :alt="$t($store.state.translations.accessibility.clipboard)">
+    :alt="$tl('accessibility.clipboard')">
 
     <input class="clipboard__text" :value="url" ref="input" readonly="true">
 
@@ -50,7 +50,7 @@ export default {
     success() {
       if (!this.notice) {
         this.$refs.input.select();
-        this.showNotice(this.$t(this.$store.state.translations.site.clipboardCopied));
+        this.showNotice(this.$tl('site.clipboardCopied'));
       }
     },
     error() {

@@ -8,12 +8,12 @@
       <img v-if="same !== false"
       class="external-icon"
       src="../assets/img/external.svg"
-      :alt="$t($store.state.translations.accessibility.externalLink)">
+      :alt="$tl('accessibility.externalLink')">
 
       <img v-else
       class="external-icon"
       src="../assets/img/external-blue.svg"
-      :alt="$t($store.state.translations.accessibility.externalLink)">
+      :alt="$tl('accessibility.externalLink')">
 
     </template>
 
@@ -34,7 +34,7 @@ export default {
     text() {
       return typeof this.type === 'object'
         ? this.type.fn(this.type.data)
-        : this.$t(this.$store.state.translations.content[this.type]).one;
+        : this.$tl(`content.${this.type}`).one;
     },
   },
 };

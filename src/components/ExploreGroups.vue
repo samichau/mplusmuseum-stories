@@ -37,7 +37,7 @@
 export default {
   computed: {
     prefixText() {
-      return this.$t(this.$store.state.translations.explore.groups);
+      return this.$tl('explore.groups');
     },
     groups() {
       return this.$store.getters['explore/groups'];

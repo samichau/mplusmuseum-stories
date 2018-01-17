@@ -33,7 +33,7 @@
 
         <div class="pinned" v-if="exhibition.pinned">
 
-          <img src="../assets/img/pin.svg" alt="">&nbsp;<span v-html="$t($store.state.translations.exhibitions.pinned)"></span>
+          <img src="../assets/img/pin.svg" alt="">&nbsp;<span v-html="$tl('exhibitions.pinned')"/>
 
         </div>
 
@@ -54,7 +54,7 @@
     <div class="wrap wrap--wide" v-if="remaining">
 
       <button class="exhibitions__more button button--outline button--wide"
-      v-html="$t($store.state.translations.exhibitions.more)"
+      v-html="$tl('exhibitions.more')"
       @click="getMore">
       </button>
 
