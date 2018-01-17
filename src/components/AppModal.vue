@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { defaultError } from '../locale/';
+
 export default {
   data() {
     return {
@@ -40,10 +42,11 @@ export default {
       this.open();
     },
     error(error) {
-      // @TODO Make Bilingual
-      this.title = 'Error';
-      [this.message] = error.data.errors;
-      this.buttons = ['Close'];
+      // @TODO Improve bilingual handling
+      const defaultData = this.$t(defaultError);
+      this.title = defaultData.title;
+      this.message = error.data.errors.message || defaultData.message;
+      this.buttons = [defaultData.button];
       this.open();
     },
     open() {

@@ -27,7 +27,7 @@ function rejector(error) {
   const response = error.response ? error.response : {
     status: false,
     data: {
-      errors: ['There was a network error. Please check your internet connection.'],
+      errors: [],
     },
   };
   return Promise.reject(new Response(false, response));
