@@ -7,11 +7,11 @@
 
         <div class="panel__inner">
 
-          <app-section-label type="exhibition"/>
-
           <div>
 
             <app-link :link="item.link">
+
+              <app-section-label type="exhibition"/>
 
               <app-title class="item__title"
               wrap="h4"

@@ -5,9 +5,9 @@
 
       <div class="panel__inner" slot="content">
 
-        <app-section-label :type="labelType(item)"/>
-
         <router-link :to="link">
+
+          <app-section-label :type="labelType(item)"/>
 
           <app-title class="item__title"
           wrap="h4"

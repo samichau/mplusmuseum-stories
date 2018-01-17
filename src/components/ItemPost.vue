@@ -23,9 +23,9 @@
 
         <div class="panel__inner">
 
-          <app-section-label type="post"/>
-
           <router-link :to="link">
+
+            <app-section-label type="post"/>
 
             <app-title class="item__title"
             wrap="h4"
