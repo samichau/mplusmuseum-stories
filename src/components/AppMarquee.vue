@@ -1,15 +1,24 @@
 <template>
   <div class="marquee" :class="{ 'marquee--reverse': reverse }">
 
-    <div class="marquee__wrap">
+    <h5 class="marquee__wrap">
 
-      <span class="marquee__calc" ref="calc" v-html="content"></span>
+      <span class="marquee__calc"
+      ref="calc"
+      v-html="content"
+      aria-hidden="true"/>
 
-      <span class="marquee__content" ref="content" v-html="computedContent"></span>
+      <span class="marquee__content"
+      ref="content"
+      v-html="computedContent"
+      :aria-label="content"/>
 
-      <span class="marquee__duplicate" ref="duplicate" v-html="computedContent"></span>
+      <span class="marquee__duplicate"
+      ref="duplicate"
+      v-html="computedContent"
+      aria-hidden="true"/>
 
-    </div>
+    </h5>
 
   </div>
 </template>
@@ -68,10 +77,13 @@ export default {
 </script>
 
 <style lang="less">
+@import '../less/variables.less';
+
 .marquee {
   white-space: nowrap;
   overflow: hidden;
   &__wrap {
+    font-weight: @fontNormal;
     position: relative;
     display: inline-block;
     vertical-align: middle;
