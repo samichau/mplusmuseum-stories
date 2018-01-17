@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
 import VueClipboard from 'vue-clipboards';
-import _includes from 'lodash/includes';
+import _ from 'lodash';
 import 'es6-promise/auto';
 import objectFitImages from 'object-fit-images';
 import objectFitVideos from 'object-fit-videos';
@@ -99,13 +99,13 @@ router.onReady(() => {
       diffed || (diffed = (prevMatched[i] !== c)));
     // Update language state if this route has a different recognized locale
     // e.g. example.com/en/page/ => example.com/tc/page/
-    if (newLang !== prevLang && _includes(locales, newLang)) {
+    if (newLang !== prevLang && _.includes(locales, newLang)) {
       store.commit('setLanguage', { primary: newLang, secondary: prevLang });
     }
     if (to.matched[0].instances && to.matched[0].instances.default) {
       setClient(to.matched[0].instances.default);
     }
-    const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _);
+    const asyncDataHooks = activated.map(c => c.asyncData).filter(__ => __);
     if (!asyncDataHooks.length) {
       return next();
     }

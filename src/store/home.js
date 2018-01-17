@@ -1,4 +1,4 @@
-import _find from 'lodash/find';
+import _ from 'lodash';
 import { asyncGet, Response } from '../api';
 
 export default function () {
@@ -30,7 +30,7 @@ export default function () {
         state.page = payload;
       },
       expandList(state, id) {
-        const item = _find(state.page.content, i => i.id === id);
+        const item = _.find(state.page.content, i => i.id === id);
         item.limit = false;
       },
     },

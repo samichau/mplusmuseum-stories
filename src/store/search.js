@@ -1,4 +1,4 @@
-import _orderBy from 'lodash/orderBy';
+import _ from 'lodash';
 import { asyncGet, Response } from '../api';
 
 export default function () {
@@ -18,9 +18,9 @@ export default function () {
     getters: {
       sortedResults({ sort, results }) {
         if (!sort) {
-          return _orderBy(results, ['modified'], ['desc']);
+          return _.orderBy(results, ['modified'], ['desc']);
         }
-        return _orderBy(results, [sort.value.by], [sort.value.order]);
+        return _.orderBy(results, [sort.value.by], [sort.value.order]);
       },
     },
 

@@ -16,7 +16,7 @@
 
 
 <script>
-import _repeat from 'lodash/repeat';
+import _ from 'lodash';
 
 export default {
   data() {
@@ -41,7 +41,7 @@ export default {
       return count;
     },
     computedContent() {
-      return _repeat(`${this.content}&nbsp;`, this.count);
+      return _.repeat(`${this.content}&nbsp;`, this.count);
     },
   },
   methods: {

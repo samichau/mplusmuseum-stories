@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import _map from 'lodash/map';
+import _ from 'lodash';
 import AppDropdown from './AppDropdown.vue';
 
 export default {
@@ -32,7 +32,7 @@ export default {
         'basic',
         'issue',
       ];
-      const options = _map(opts, name => ({
+      const options = _.map(opts, name => ({
         title: this.tl(`content.${name}`).many,
         value: name,
       }));

@@ -141,7 +141,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import _find from 'lodash/find';
+import _ from 'lodash';
 import locales from '../locale';
 import AppHeaderConnect from './AppHeaderConnect.vue';
 import AppHeaderDropdown from './AppHeaderDropdown.vue';
@@ -167,7 +167,7 @@ export default {
       notice: s => s.header.notice,
     }),
     searchEnabled() {
-      return _find(this.$router.options.routes, { name: 'search' });
+      return _.find(this.$router.options.routes, { name: 'search' });
     },
   },
   methods: {

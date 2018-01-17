@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import _find from 'lodash/find';
+import _ from 'lodash';
 import { asyncGet, Response } from '../api';
 
 export default function () {
@@ -39,7 +39,7 @@ export default function () {
           });
       },
       initIssue(context, { issue }) {
-        const storedIssue = _find(context.state.issues, iss => iss.name === issue);
+        const storedIssue = _.find(context.state.issues, iss => iss.name === issue);
 
         if (storedIssue) {
           context.commit('setIssue', storedIssue.id);
@@ -56,7 +56,7 @@ export default function () {
       },
 
       initArticle(context, { issue, article }) {
-        const storedArticle = _find(context.state.articles, art => art.name === article);
+        const storedArticle = _.find(context.state.articles, art => art.name === article);
 
         if (storedArticle) {
           context.commit('setArticle', storedArticle.id);

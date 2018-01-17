@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import _mapValues from 'lodash/mapValues';
+import _ from 'lodash';
 import AppLink from './AppLink.vue';
 import { labelMixin } from '../util/mixins';
 
@@ -79,7 +79,7 @@ export default {
     highlight(obj) {
       if (!this.query || !this.query.length) return obj;
       const iQuery = new RegExp(this.query, 'ig');
-      return _mapValues(obj, words => words.toString()
+      return _.mapValues(obj, words => words.toString()
         .replace(iQuery, matchedTxt => (`<span class='highlight'>${matchedTxt}</span>`)));
     },
   },

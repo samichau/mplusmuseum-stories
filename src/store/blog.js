@@ -1,8 +1,5 @@
 import Vue from 'vue';
-import _clone from 'lodash/clone';
-import _find from 'lodash/find';
-import _findIndex from 'lodash/findIndex';
-import _pick from 'lodash/pick';
+import _ from 'lodash';
 import { asyncGet, Response } from '../api';
 
 function postsWithTruncatedData(posts) {
@@ -59,7 +56,7 @@ export default function () {
       posts(state) {
         const posts = state[state.showing];
         return posts.map((p) => {
-          const post = _clone(state.posts[p.id]);
+          const post = _.clone(state.posts[p.id]);
           post.truncated = p.truncated;
           return post;
         });
@@ -145,7 +142,7 @@ export default function () {
       },
 
       initPost(context, { post }) {
-        const storedPost = _find(context.state.posts, po => po.name === post);
+        const storedPost = _.find(context.state.posts, po => po.name === post);
 
         if (storedPost) {
           context.commit('setPost', storedPost.id);
@@ -178,7 +175,7 @@ export default function () {
       },
       // Set the page data
       setPage(state, data) {
-        state.page = _pick(data, [
+        state.page = _.pick(data, [
           'blurb',
           'categories',
           'desc',
@@ -212,13 +209,13 @@ export default function () {
       // Extent a post
       extendPost(state, post) {
         const posts = state[state.showing];
-        const index = _findIndex(posts, p => p.id === post.id);
+        const index = _.findIndex(posts, p => p.id === post.id);
         state[state.showing][index].truncated = false;
       },
       // Collapse a post
       collapsePost(state, post) {
         const posts = state[state.showing];
-        const index = _findIndex(posts, p => p.id === post.id);
+        const index = _.findIndex(posts, p => p.id === post.id);
         state[state.showing][index].truncated = true;
       },
     },

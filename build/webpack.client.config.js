@@ -4,6 +4,9 @@ const merge = require('webpack-merge');
 const base = require('./webpack.base.config');
 const SWPrecachePlugin = require('sw-precache-webpack-plugin');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+
 
 const config = merge(base, {
   entry: {
@@ -55,6 +58,12 @@ if (process.env.NODE_ENV === 'production') {
       dontCacheBustUrlsMatching: /./,
       staticFileGlobsIgnorePatterns: [/index\.html$/, /\.map$/],
     }));
+  config.plugins.push(new LodashModuleReplacementPlugin());
+  // Bundle analyzer
+  config.plugins.push(new BundleAnalyzerPlugin({
+    analyzerMode: 'disabled',
+    generateStatsFile: true,
+  }));
 }
 
 module.exports = config;

@@ -1,4 +1,4 @@
-import _find from 'lodash/find';
+import _ from 'lodash';
 import { asyncGet, Response } from '../api';
 
 export default function () {
@@ -13,13 +13,13 @@ export default function () {
 
     getters: {
       activePage(state) {
-        return _find(state.loaded, page => page.name === state.name);
+        return _.find(state.loaded, page => page.name === state.name);
       },
     },
 
     actions: {
       update(context, to) {
-        const loadedPage = _find(context.state.loaded, page => page.name === to);
+        const loadedPage = _.find(context.state.loaded, page => page.name === to);
 
         if (loadedPage) {
           context.commit('activatePage', loadedPage);

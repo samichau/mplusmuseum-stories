@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import _find from 'lodash/find';
+import _ from 'lodash';
 import { asyncGet, Response } from '../api';
 
 export default function () {
@@ -33,7 +33,7 @@ export default function () {
         });
       },
       initEpisode(context, { episode }) {
-        const storedEpisode = _find(context.state.episodes, ep => ep.name === episode);
+        const storedEpisode = _.find(context.state.episodes, ep => ep.name === episode);
 
         if (storedEpisode) {
           context.commit('setEpisode', storedEpisode.id);

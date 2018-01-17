@@ -1,4 +1,4 @@
-import _pick from 'lodash/pick';
+import _ from 'lodash';
 import { asyncGet, Response } from '../api';
 
 export default function () {
@@ -44,7 +44,7 @@ export default function () {
 
     mutations: {
       setPage(state, data) {
-        state.page = _pick(data, [
+        state.page = _.pick(data, [
           'blurb',
           'desc',
           'generated',

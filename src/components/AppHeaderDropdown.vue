@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import _find from 'lodash/find';
+import _ from 'lodash';
 
 export default {
   props: {
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     validate({ name }) {
-      if (_find(this.$router.options.routes, { name })) return true;
+      if (_.find(this.$router.options.routes, { name })) return true;
       return false;
     },
     keyHandler(e) {

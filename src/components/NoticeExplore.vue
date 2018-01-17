@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import _random from 'lodash/random';
+import _ from 'lodash';
 
 export default {
   props: {
@@ -49,7 +49,7 @@ export default {
     increment() {
       const indices = [];
       while (indices.length < this.count) {
-        const randomnumber = _random(0, this.tagsOrder.length - 1);
+        const randomnumber = _.random(0, this.tagsOrder.length - 1);
         const newIndex = indices.indexOf(randomnumber);
         const previousIndex = this.indices.indexOf(randomnumber);
         if (newIndex === -1 && previousIndex === -1) {

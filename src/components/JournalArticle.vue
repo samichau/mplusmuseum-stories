@@ -35,9 +35,7 @@
 </template>
 
 <script>
-import _find from 'lodash/find';
-import _reduce from 'lodash/reduce';
-
+import _ from 'lodash';
 import ContentBlocks from '../components/ContentBlocks.vue';
 import JournalArticleHeader from '../components/JournalArticleHeader.vue';
 import ShareBar from '../components/ShareBar.vue';
@@ -71,7 +69,7 @@ export default {
     footnotes() {
       if (!this.article.content) return [];
 
-      return _reduce(this.article.content.list, (footnotes, block) => {
+      return _.reduce(this.article.content.list, (footnotes, block) => {
         if (block.content.footnotes) {
           const newLocaled = this.$t(block.content.footnotes);
           return [...footnotes, ...newLocaled];
@@ -81,7 +79,7 @@ export default {
     },
     modifiers() {
       if (!this.article.content) return null;
-      const footnoteBlock = _find(this.article.content.list, block => block.type === 'footnotes');
+      const footnoteBlock = _.find(this.article.content.list, block => block.type === 'footnotes');
       return footnoteBlock
         ? `article--${this.$t(footnoteBlock.content.style)}`
         : null;

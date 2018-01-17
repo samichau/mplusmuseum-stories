@@ -21,9 +21,8 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import { mapState } from 'vuex';
-import _throttle from 'lodash/throttle';
-import _findIndex from 'lodash/findIndex';
 import AppSuggested from '../components/AppSuggested.vue';
 import InteractiveWaypoints from '../components/InteractiveWaypoints.vue';
 import JournalArticle from '../components/JournalArticle.vue';
@@ -71,7 +70,7 @@ export default {
     },
     // @TODO Refactor into waypoints module, current implementation inefficient
     // e.g. multiple scroll event handlers, gets element heights on each event
-    scrollHandler: _throttle(function updateProgressBar() {
+    scrollHandler: _.throttle(function updateProgressBar() {
       let percent = 0;
       if (this.index >= 0) {
         const articleEl = this.getArticleElFromIndex(this.index);
@@ -94,7 +93,7 @@ export default {
 
       if (this.articleIDs.length < issueArticles.length) {
         // Still articles to get
-        const index = _findIndex(issueArticles, article => article.id === id);
+        const index = _.findIndex(issueArticles, article => article.id === id);
         return this.getNextArticle(index, issueArticles)
           .then(() => {
             setTimeout(this.$triggerNative, 500);

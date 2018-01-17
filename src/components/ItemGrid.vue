@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import _clone from 'lodash/clone';
+import _ from 'lodash';
 import ItemArticle from './ItemArticle.vue';
 import ItemEpisode from './ItemEpisode.vue';
 import ItemExhibition from './ItemExhibition.vue';
@@ -155,7 +155,7 @@ export default {
       });
     },
     appendItems(items) {
-      this.queue = _clone(items);
+      this.queue = _.clone(items);
       this.$nextTick(this.processQueue);
     },
     processQueue() {

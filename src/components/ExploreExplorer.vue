@@ -62,9 +62,9 @@
 </template>
 
 <script>
-import _each from 'lodash/each';
 import { mapGetters, mapState } from 'vuex';
 import { focus } from 'vue-focus';
+import _ from 'lodash';
 import SnippetTranslate from './SnippetTranslate.vue';
 
 export default {
@@ -217,7 +217,7 @@ export default {
       this[type] = text.slice(0, count);
     },
     typeText() {
-      _each(this.labelText, (text, type) => {
+      _.each(this.labelText, (text, type) => {
         const interval = `${type}Interval`;
         this.resetText(type, interval);
         this[interval] = setInterval(() => {

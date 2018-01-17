@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import _eachRight from 'lodash/eachRight';
+import _ from 'lodash';
 
 export default {
   props: {
@@ -23,7 +23,7 @@ export default {
       if (!this.content.footnotes) return html;
       const footnotes = this.$t(this.content.footnotes);
       if (!footnotes) return html;
-      _eachRight(footnotes, (footnote) => {
+      _.eachRight(footnotes, (footnote) => {
         html = `${html.substr(0, footnote.offset)}<sup class="footnote"><span class="anchor" id="fnref-${footnote.id}"></span><a href="#fn-${footnote.id}"></a></sup>${html.substr(footnote.offset)}`;
       });
       return html;

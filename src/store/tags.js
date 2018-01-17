@@ -1,7 +1,4 @@
-import _find from 'lodash/find';
-import _includes from 'lodash/includes';
-import _map from 'lodash/map';
-import _reduce from 'lodash/reduce';
+import _ from 'lodash';
 // import locales from '../locale';
 
 export default function () {
@@ -28,8 +25,8 @@ export default function () {
       // The key is the tag id
       // The value is a lowercased concatenation of the tag names in all languages
       searchable(state, getters) {
-        return _reduce(getters.mappedOrder, (tags, { id, str }) => {
-          if (!_includes(state.active, id)) {
+        return _.reduce(getters.mappedOrder, (tags, { id, str }) => {
+          if (!_.includes(state.active, id)) {
             tags.push({
               id,
               str,
@@ -45,7 +42,7 @@ export default function () {
         // If we have a query, return filtered results
         if (query.length) {
           query = query.toLowerCase();
-          const tagIds = _reduce(getters.searchable, (newTags, searchableTag) => {
+          const tagIds = _.reduce(getters.searchable, (newTags, searchableTag) => {
             if (searchableTag.str.indexOf(query) > -1) {
               newTags.push(searchableTag.id);
             }
@@ -73,8 +70,8 @@ export default function () {
         state.query = query;
       },
       setActive(state, tagNames) {
-        const tagIds = _map(tagNames, (name) => {
-          const tag = _find(state.entities, t => t.name === name);
+        const tagIds = _.map(tagNames, (name) => {
+          const tag = _.find(state.entities, t => t.name === name);
           return tag.id;
         });
         state.active = tagIds;

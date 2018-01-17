@@ -1,5 +1,5 @@
 <script>
-import _reduce from 'lodash/reduce';
+import _ from 'lodash';
 import BlogPost from './BlogPost.vue';
 import InteractiveWaypoints from './InteractiveWaypoints.vue';
 import NoticeConnect from '../components/NoticeConnect.vue';
@@ -83,7 +83,7 @@ export default {
       });
     },
     createContentList(h) {
-      const content = _reduce(this.posts, (items, post, index) => {
+      const content = _.reduce(this.posts, (items, post, index) => {
         if (typeof this.notices === 'object'
         && this.showing === 'unfiltered'
         && this.notices[index]) {
