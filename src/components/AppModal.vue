@@ -1,7 +1,10 @@
 <template>
   <transition name="fade" mode="out-in">
 
-    <div class="modal" v-if="visible" @click="close">
+    <div class="modal"
+    v-if="visible"
+    @click="close"
+    role="dialog">
 
       <div class="modal__content shadow">
 
@@ -30,7 +33,7 @@ export default {
     };
   },
   methods: {
-    show(message, title = 'Message', buttons = ['Close']) {
+    show({ message = '', title = 'Message', buttons = ['Close'] }) {
       this.title = title;
       this.message = message;
       this.buttons = (!Array.isArray(buttons)) ? [buttons] : buttons;

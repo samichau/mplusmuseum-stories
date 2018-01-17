@@ -76,17 +76,17 @@ export default {
       });
     },
     error(message) {
-      this.$modal.show(
-        message || this.$tl('newsletter.errorInvalid'),
-        this.$tl('newsletter.errorTitle'),
-      );
+      this.$modal.show({
+        message: message || this.$tl('newsletter.errorInvalid'),
+        title: this.$tl('newsletter.errorTitle'),
+      });
       this.busy = false;
     },
     success() {
-      this.$modal.show(
-        this.$tl('newsletter.successMessage'),
-        this.$tl('newsletter.successTitle'),
-      );
+      this.$modal.show({
+        message: this.$tl('newsletter.successMessage'),
+        title: this.$tl('newsletter.successTitle'),
+      });
       this.email = '';
       this.busy = false;
     },

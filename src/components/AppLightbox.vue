@@ -1,5 +1,6 @@
 <template>
-  <div class="lightbox">
+  <div class="lightbox"
+  role="dialog">
 
     <button class="lightbox__close"
     @click="close">
