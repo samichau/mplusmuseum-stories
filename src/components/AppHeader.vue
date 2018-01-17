@@ -50,7 +50,7 @@
         <div class="header__section header__section--right header__icons">
 
           <button class="header__icon" @click="toggleDropdown"
-          :aria-label="$tl('accessibility.btn')">
+          :aria-label="$tl('accessibility.btnNav')">
 
             <img v-show="panel !== 'dropdown'"
             src="../assets/img/menu.svg"

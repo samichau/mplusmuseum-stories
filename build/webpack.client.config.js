@@ -58,7 +58,12 @@ if (process.env.NODE_ENV === 'production') {
       dontCacheBustUrlsMatching: /./,
       staticFileGlobsIgnorePatterns: [/index\.html$/, /\.map$/],
     }));
-  config.plugins.push(new LodashModuleReplacementPlugin());
+  config.plugins.push(new LodashModuleReplacementPlugin({
+    // @TODO Try and remove these somehow
+    shorthands: true,
+    cloning: true,
+    paths: true,
+  }));
   // Bundle analyzer
   config.plugins.push(new BundleAnalyzerPlugin({
     analyzerMode: 'disabled',

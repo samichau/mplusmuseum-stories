@@ -35,6 +35,7 @@ export default {
     };
   },
   methods: {
+    // @TODO Make close button bilingual
     show({ message = '', title = 'Message', buttons = ['Close'] }) {
       this.title = title;
       this.message = message;
