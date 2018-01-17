@@ -35,7 +35,7 @@
       </div>
 
       <snippet-byline class="fs-s fs-b-sm hide--mobile"
-      :snippet="$store.state.translations.journal.byline"
+      snippet="journal.byline"
       :author="content.author"
       :date="content.date"/>
 

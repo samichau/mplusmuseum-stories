@@ -16,7 +16,7 @@
         </router-link>
 
         <snippet-translate class="item__text"
-        :snippet="$store.state.translations.journal.contributions"
+        snippet="journal.contributions"
         :data="{ contributors: item.contributors }"
         :parsers="{ contributors: (c) => $t(c) }"/>
 

@@ -16,13 +16,16 @@
 
     <div class="heading">
 
-      <app-title-link class="article__title fs-l" :wrap="'h1'" :title="article.title"/>
+      <app-title-link class="article__title fs-l"
+      :wrap="'h1'"
+      :title="article.title"/>
 
     </div>
 
     <div class="heading">
 
-      <snippet-byline :snippet="$store.state.translations.journal.byline"
+      <snippet-byline
+      snippet="journal.byline"
       :author="article.author"
       :date="article.date"/>
 

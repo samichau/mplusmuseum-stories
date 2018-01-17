@@ -48,7 +48,7 @@
           @afterClick="collapse"/>
 
           <snippet-translate class="explorer__matches-count fs-b"
-          :snippet="$store.state.translations.explore.matches"
+          snippet="explore.matches"
           :data="{ count: tag.count }"
           :parsers="{ count: (c) => c }"/>
 

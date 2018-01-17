@@ -24,7 +24,7 @@
     class="banner__meta fs-b">
 
       <snippet-translate
-      :snippet="$store.state.translations.journal.contributions"
+      snippet="journal.contributions"
       :data="{ contributors: content.contributors }"
       :parsers="{ contributors: (c) => $t(c) }"/>
 

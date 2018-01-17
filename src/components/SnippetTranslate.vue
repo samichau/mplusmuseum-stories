@@ -6,7 +6,7 @@ export default {
       default: 'div',
     },
     snippet: {
-      type: Object,
+      type: [Object, String],
       required: true,
     },
     data: {
@@ -37,7 +37,9 @@ export default {
     },
   },
   render(h) {
-    const snippet = this.$t(this.snippet);
+    const snippet = (typeof this.snippet === 'string')
+      ? this.$tl(this.snippet)
+      : this.$t(this.snippet);
     const elems = snippet.map(match => this.createElement(match, h));
     return h(this.tag, {}, elems);
   },

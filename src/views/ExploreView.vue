@@ -36,7 +36,7 @@
         <div class="heading">
 
           <h2><snippet-translate tag="span"
-          :snippet="$store.state.translations.explore.results"
+          snippet="explore.results"
           :data="{ count: this.results.length }"
           :parsers="{ count: c => c }"/>.</h2>
 

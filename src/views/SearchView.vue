@@ -31,7 +31,7 @@
             
             <snippet-translate class="search__status"
             tag="span"
-            :snippet="$store.state.translations.search.results"
+            snippet="search.results"
             :data="{ count: results.length, query: submittedQuery }"
             :parsers="{ count: (c) => c, query: (q, h) => h('strong', {}, q) }"/>
 

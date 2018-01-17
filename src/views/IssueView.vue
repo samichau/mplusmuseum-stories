@@ -20,7 +20,7 @@
           <router-link :to="{ name: 'journal' }"
           class="button button--wide button--outline issue__button">
             <snippet-translate
-            :snippet="$store.state.translations.journal.return"
+            snippet="journal.return"
             :data="{ title: $store.state.site.sections.journal }"
             :parsers="{ title: (t) => $t(t) }"/>
           </router-link>

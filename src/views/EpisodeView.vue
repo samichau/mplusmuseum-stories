@@ -68,7 +68,7 @@
 
               <snippet-translate tag="h3"
               class="fs-m"
-              :snippet="$store.state.translations.channel.series"
+              snippet="channel.series"
               :data="{ series: episode.series.title }"
               :parsers="{ series: (s, h) => h('span', {}, $t(s)) }"/>
 

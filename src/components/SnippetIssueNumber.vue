@@ -1,6 +1,6 @@
 <template>
   <snippet-translate tag="span"
-  :snippet="$store.state.translations.journal.issue"
+  snippet="journal.issue"
   :data="{ number }"
   :parsers="{ number: (n) => n }"/>
 </template>

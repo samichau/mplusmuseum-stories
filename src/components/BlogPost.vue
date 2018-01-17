@@ -23,7 +23,8 @@
 
             <div class="blog-post__meta">
 
-              <snippet-byline :snippet="$store.state.translations.blog.byline"
+              <snippet-byline
+              snippet="blog.byline"
               :author="post.author"
               :category="post.category"
               :date="post.date"/>

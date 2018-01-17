@@ -21,7 +21,7 @@
       </div>
 
       <snippet-translate class="issue-listing__authors fs-b"
-      :snippet="$store.state.translations.journal.contributions"
+      snippet="journal.contributions"
       :data="{ contributors: issue.contributors }"
       :parsers="{ contributors: (c) => $t(c) }"/>
 

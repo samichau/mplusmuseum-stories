@@ -9,7 +9,7 @@
 
         <snippet-translate class="fs-m"
         tag="p"
-        :snippet="$store.state.translations.newsletter.placeholderFull"
+        snippet="newsletter.placeholderFull"
         :data="{ newsletter: false, social: false, }"
         :parsers="{ newsletter: parseNewsletter, social: parseSocial }"/>
 
