@@ -73,9 +73,15 @@ import BlockNewsletter from '../components/BlockNewsletter.vue';
 import SnippetTranslate from './SnippetTranslate.vue';
 
 export default {
+  props: {
+    content: {
+      default: false,
+    },
+  },
   data() {
     return {
-      connect: false,
+      // Doesn't need to be reactive
+      connect: (this.content && this.content.state) ? this.content.state : false,
     };
   },
   methods: {
