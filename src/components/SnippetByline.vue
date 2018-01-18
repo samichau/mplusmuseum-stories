@@ -1,15 +1,16 @@
 <template>
   <snippet-translate class="byline"
   :snippet="this.snippet"
-  :data="{ author, category, date }"
+  :data="{ author, categories, date }"
   :parsers="{
     author: parseAuthor,
-    category: parseCategory,
+    categories: parseCategories,
     date: parseDate,
   }"/>
 </template>
 
 <script>
+import _ from 'lodash';
 import SnippetTranslate from './SnippetTranslate.vue';
 
 export default {
@@ -17,9 +18,9 @@ export default {
     snippet: {
       required: true,
     },
-    category: {
-      default: false,
-      type: [Object, Boolean],
+    categories: {
+      type: Array,
+      default: () => [],
     },
     date: {
       type: Object,
@@ -51,22 +52,21 @@ export default {
       ) : h('span', {}, this.$t(author.title));
     },
     // Blog only
-    parseCategory(category, h) {
-      if (!category) return false;
-      return this.link ? h(
-        'router-link',
-        {
-          props: {
-            to: {
-              name: 'blog',
-              query: {
-                category: category.name,
-              },
-            },
-          },
-        },
-        this.$t(category.title),
-      ) : h('span', {}, this.$t(category.title));
+    parseCategories(categories, h) {
+      if (!categories.length) return false;
+      const seperator = { en: ', ', tc: '，' };
+      return _.reduce(categories, (arr, category, index) => {
+        const content = this.$t(category.title);
+        if (this.link) {
+          const data = { props: { to: { name: 'blog', query: { category: category.name } } } };
+          arr.push(h('router-link', data, content));
+        } else {
+          arr.push(content);
+        }
+        // Add separator between list elements
+        if (index < categories.length - 1) arr.push(this.$t(seperator));
+        return arr;
+      }, []);
     },
     parseDate(date, h) {
       if (!date) return false;

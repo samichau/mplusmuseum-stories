@@ -3,6 +3,7 @@
   :class="{ 'blog-post--truncated': post.truncated }">
 
     <app-panel>
+
       <template slot="content">
 
         <div class="pinned" v-if="post.pinned && post.media && showing === 'unfiltered'">
@@ -24,9 +25,9 @@
             <div class="blog-post__meta">
 
               <snippet-byline
-              snippet="blog.byline"
+              :snippet="snippet"
               :author="post.author"
-              :category="post.category"
+              :categories="post.categories"
               :date="post.date"/>
 
               <tag-group class="fs-s fs-b-sm"
@@ -139,6 +140,16 @@ export default {
       return {
         location: `${base}/blog/${name}`,
         title: this.$t(text),
+      };
+    },
+    snippet() {
+      // If we have categories, return the byline snippet
+      if (this.post.categories.length) return 'blog.byline';
+      // Otherwise we return a custom snippet just for the date
+      const dateElem = { fn: 'date', type: 'fn' };
+      return {
+        en: [dateElem, { str: '.', type: 'str' }],
+        tc: [dateElem, { str: '。', type: 'str' }],
       };
     },
   },
