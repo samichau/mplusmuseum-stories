@@ -7,10 +7,14 @@
       role="presentation"
       aria-hidden="true">
 
-        <img class="lazy"
-        :src="imgObj.loading"
-        v-lazy="imgObj"
-        :alt="$t(content.alt)">
+        <div class="article-listing__image">
+
+          <img class="lazy"
+          :src="imgObj.loading"
+          v-lazy="imgObj"
+          :alt="$t(content.alt)">
+        
+        </div>
 
       </router-link>
 

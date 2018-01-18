@@ -22,17 +22,20 @@
           aria-hidden="true">[&hellip;]</router-link>
         </div>
 
-        <router-link class="item__media"
-        v-if="item.card"
+        <router-link v-if="item.card"
         :to="link"
-        :style="image.wrapperStyle"
         role="presentation"
         aria-hidden="true">
 
-          <img class="lazy"
-          :src="image.loading"
-          v-lazy="image"
-          :alt="$t(item.card.content.alt)">
+          <div class="item__media"
+          :style="image.wrapperStyle">
+
+            <img class="lazy"
+            :src="image.loading"
+            v-lazy="image"
+            :alt="$t(item.card.content.alt)">
+
+          </div>
 
         </router-link>
 
