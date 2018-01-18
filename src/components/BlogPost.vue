@@ -144,7 +144,7 @@ export default {
     },
     snippet() {
       // If we have categories, return the byline snippet
-      if (this.post.categories.length) return 'blog.byline';
+      if (this.post.categories && this.post.categories.length) return 'blog.byline';
       // Otherwise we return a custom snippet just for the date
       const dateElem = { fn: 'date', type: 'fn' };
       return {
