@@ -33,7 +33,7 @@ export default {
         'issue',
       ];
       const options = _.map(opts, name => ({
-        title: this.tl(`content.${name}`).many,
+        title: this.$tl(`content.${name}`).many,
         value: name,
       }));
       return options;
