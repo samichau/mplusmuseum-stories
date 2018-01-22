@@ -63,6 +63,7 @@ if (process.env.NODE_ENV === 'production') {
     shorthands: true,
     cloning: true,
     paths: true,
+    collections: true,
   }));
   // Bundle analyzer
   config.plugins.push(new BundleAnalyzerPlugin({
