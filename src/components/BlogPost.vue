@@ -65,9 +65,8 @@
                 <app-clipboard class="blog-post__footer-section"
                 :url="shareData.location"/>
 
-                <block-newsletter class="blog-post__footer-section input-wrap--inline"
+                <app-newsletter class="blog-post__footer-section input-wrap--inline"
                 :label="$tl('newsletter.placeholderAlt')"
-                :name="`newsletter__${post.name}`"
                 button="&rarr;"
                 :identifier="`${post.name}-newsletter`"/>
 
@@ -99,8 +98,8 @@
 <script>
 import { mapState } from 'vuex';
 import AppClipboard from './AppClipboard.vue';
+import AppNewsletter from './AppNewsletter.vue';
 import AppSuggested from './AppSuggested.vue';
-import BlockNewsletter from './BlockNewsletter.vue';
 import BlogPostHero from './BlogPostHero.vue';
 import ContentBlocks from './ContentBlocks.vue';
 import ShareBar from './ShareBar.vue';
@@ -182,8 +181,8 @@ export default {
   },
   components: {
     AppSuggested,
+    AppNewsletter,
     AppClipboard,
-    BlockNewsletter,
     BlogPostHero,
     ContentBlocks,
     ShareBar,

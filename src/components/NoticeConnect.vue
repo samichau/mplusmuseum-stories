@@ -19,9 +19,8 @@
       v-else-if="connect === 'newsletter'"
       key="newsletter">
 
-          <block-newsletter class="fs-m input-wrap--shadow"
+          <app-newsletter class="fs-m input-wrap--shadow"
           :label="$tl('newsletter.placeholder')"
-          name="newsletter__header"
           button="&rarr;"
           identifier="notice-newsletter"/>
 
@@ -69,7 +68,7 @@
 </template>
 
 <script>
-import BlockNewsletter from '../components/BlockNewsletter.vue';
+import AppNewsletter from '../components/AppNewsletter.vue';
 import SnippetTranslate from './SnippetTranslate.vue';
 
 export default {
@@ -109,7 +108,7 @@ export default {
     },
   },
   components: {
-    BlockNewsletter,
+    AppNewsletter,
     SnippetTranslate,
   },
 };

@@ -25,9 +25,8 @@
       <h6 class="infopanel__header"
       v-html="$tl('newsletter.placeholderAlt')"></h6>
 
-      <block-newsletter class="input-wrap--inline"
+      <app-newsletter class="input-wrap--inline"
       :label="$tl('newsletter.placeholder')"
-      name="newsletter__header"
       button="&rarr;"
       identifier="connect-newsletter"/>
 
@@ -37,7 +36,7 @@
 </template>
 
 <script>
-import BlockNewsletter from './BlockNewsletter.vue';
+import AppNewsletter from './AppNewsletter.vue';
 
 export default {
   props: {
@@ -78,7 +77,7 @@ export default {
     },
   },
   components: {
-    BlockNewsletter,
+    AppNewsletter,
   },
 };
 </script>
