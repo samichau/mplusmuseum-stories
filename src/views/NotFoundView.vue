@@ -7,9 +7,27 @@
 
       <div class="wrap wrap--x-wide">
 
-        <h1 class="fs-l">404: <app-title-link class="app-title--same" :title="header"/></h1>
+        <h1 class="fs-l"><app-title-link class="app-title--same" :title="notfound.title"/></h1>
 
-        <p class="fs-m" v-html="message"></p>
+      </div>
+
+      <div class="wrap" v-if="image">
+
+        <img class="lazy"
+        :src="image.loading"
+        v-lazy="image"
+        :alt="$t(notfound.image.alt)">
+
+        <div v-if="notfound.image.caption"
+        class="not-found__image-caption fs-xs fs-s-sm"
+        v-html="$t(notfound.image.caption)"></div>
+
+
+      </div>
+
+      <div class="wrap wrap--x-wide">
+
+        <div class="fs-m" v-html="$t(notfound.body.html)"></div>
 
       </div>
 
@@ -35,11 +53,15 @@ export default {
     return Promise.resolve(new Response(true));
   },
   computed: {
-    header() {
-      return this.$store.state.translations.site.notFound;
+    notfound() {
+      return this.$store.state.site.notfound;
     },
-    message() {
-      return this.$tl('site.notFoundMessage');
+    image() {
+      const { image } = this.notfound;
+      return image ? {
+        src: image.src,
+        loading: this.$placeholder.generate(image.dim, 'loading', '#000', '#fff'),
+      } : false;
     },
   },
   components: {
@@ -53,12 +75,26 @@ export default {
 .not-found {
   background: @accent;
   color: @white;
+  .wrap {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
   &__inner {
     text-align: center;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+  &__image-caption {
+    text-align: left;
+    margin-top: 0.25em;
   }
 }
+
 </style>

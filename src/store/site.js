@@ -6,6 +6,7 @@ export default function () {
       desc: {},
       initialized: false,
       links: {},
+      notfound: {},
       sections: {},
       simulacrum: '',
       social: [],
@@ -28,6 +29,7 @@ export default function () {
         state.desc = data.desc;
         state.initialized = true;
         state.links = data.links;
+        state.notfound = data.notfound;
         state.sections = data.sections;
         state.simulacrum = data.simulacrum;
         state.social = data.social;
