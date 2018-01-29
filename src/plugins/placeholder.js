@@ -14,7 +14,7 @@ class PlaceholderClass {
   }
 
   createEncodedString(height, obj, fill) {
-    const str = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${this.width} ${height}'><rect width='${this.width}' height='${height}' y='0' x='0' fill='${fill}'/>${obj}</svg>`;
+    const str = `<svg xmlns='http://www.w3.org/2000/svg' width='${this.width}' height='${height}' viewBox='0 0 ${this.width} ${height}'><rect width='100%' height='100%' y='0' x='0' fill='${fill}'/>${obj}</svg>`;
     const encoded = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(str)}`;
     return encoded;
   }
