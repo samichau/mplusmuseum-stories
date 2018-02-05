@@ -86,7 +86,8 @@
 
         <app-suggested class="blog-post__suggested"
         v-if="!post.truncated && post.related"
-        :id="post.id"/>
+        :id="post.id"
+        :key="post.id"/>
 
       </template>
     
