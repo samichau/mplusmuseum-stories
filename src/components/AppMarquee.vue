@@ -93,7 +93,7 @@ export default {
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    animation: marquee 30s linear infinite;
+    animation: marquee 45s linear infinite;
   }
   &__calc {
     position: absolute;
@@ -108,7 +108,7 @@ export default {
       left: -100%;
     }
     .marquee__wrap {
-      animation: marquee-reverse 30s linear infinite;
+      animation: marquee-reverse 45s linear infinite;
     }
   }
   &:hover {
