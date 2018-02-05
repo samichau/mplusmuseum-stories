@@ -8,6 +8,7 @@ module.exports = {
   ],
   loaders: {
     js: 'babel-loader',
+    less: `vue-style-loader!css-loader!less-loader?{"modifyVars":{"fontbase":"'${process.env.FONT_URL}'"}}`,
   },
   esModule: false,
 };

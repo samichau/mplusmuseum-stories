@@ -1,6 +1,4 @@
-/*
-  VARIABLES
-*/
+// VARIABLES
 
 @black: #000000;
 @white: #ffffff;
@@ -22,6 +20,7 @@
 @shadowStyleSmall: 0 1px 3px 0 fade(@shadow, 40%);
 @fontNormal: 300;
 @fontBold: 600;
+@fontbase: '../assets/fonts';
 // Header bar units
 @hSm: .25em;
 @hMd: .25em;
@@ -30,9 +29,7 @@
 @widthSmall: 840px;
 @widthMedium: 1120px;
 
-/*
-	FUNCTIONS
-*/
+// FUNCTIONS
 
 // Reverse z-index
 .reverse-index(@counter) when (@counter > 0) {
@@ -43,9 +40,7 @@
 }
 
 
-/*
-  MEDIA QUERIES
-*/
+// MEDIA QUERIES
 
 .mq-sm(@rules) {
 	@media only screen and (min-width: 768px) {

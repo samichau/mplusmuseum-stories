@@ -1,4 +1,4 @@
-const env = require('dotenv').config();
+require('dotenv').config();
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const base = require('./webpack.base.config');
@@ -25,6 +25,7 @@ const config = merge(base, {
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.ANALYTICS_ID': JSON.stringify(process.env.ANALYTICS_ID),
       'process.env.MODE': JSON.stringify(process.env.MODE),
+      'process.env.FONT_URL': JSON.stringify(process.env.FONT_URL),
     }),
     // extract vendor chunks for better caching
     new webpack.optimize.CommonsChunkPlugin({
