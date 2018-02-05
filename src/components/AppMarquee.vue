@@ -1,5 +1,10 @@
 <template>
-  <div class="marquee" :class="{ 'marquee--reverse': reverse }">
+  <div class="marquee"
+  :class="{
+    'marquee--reverse': reverse,
+    'marquee--paused': paused,
+  }"
+  @click="paused = !paused">
 
     <h5 class="marquee__wrap">
 
@@ -30,9 +35,10 @@ import _ from 'lodash';
 export default {
   data() {
     return {
-      loaded: false,
-      windowWidth: false,
       contentWidth: false,
+      loaded: false,
+      paused: false,
+      windowWidth: false,
     };
   },
   mounted() {
@@ -106,6 +112,11 @@ export default {
     }
   }
   &:hover {
+    .marquee__wrap {
+      animation-play-state: paused;
+    }
+  }
+  &--paused {
     .marquee__wrap {
       animation-play-state: paused;
     }
