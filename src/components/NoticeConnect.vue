@@ -48,6 +48,7 @@
           :key="platform.id"
           :href="platform.link"
           target="_blank"
+          :aria-label="`${$tl('accessibility.externalLink')} ${$t(platform.title)}`"
           v-html="platform.svg"></a>
 
           <button @click.prevent="connect = false">
