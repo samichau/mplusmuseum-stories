@@ -4,7 +4,7 @@ Front-end app for M+ Stories website. Single page application with server-side r
 
 ## How this Fits
 
-This repository contains the source code for the M+ Stories website. It is largely an early-stage work in progress at the moment.
+This repository contains the source code for the M+ Stories front-end web application.
 
 ### Prerequisites
 
@@ -12,12 +12,38 @@ You will need node and npm installed to run the app. Due to the use of server-si
 
 ### Installation
 
-First create a new .env file in the project root directory based on the .env.example file and define your API endpoint.
+Duplicate or rename the `.env.example` file to `.env`. Alternatively create a new file with the required variables. All the possible environment variables are listed below.
 
-To install the project dependencies use the following commands:
+Install the project dependencies using the following command:
 ``` bash
 npm install
 ```
+
+##### Required Environment Variables
+
+These values are **required** for the app to run.
+
+|Variable|Description|Default Value|
+|:---|---|---|
+|API_URL|The base URL for the API|`https://cms.mplus.org.hk`|
+|FONT_URL|The base URL for font file assets|`https://cms.mplus.org.hk/fonts`|
+
+##### Optional Environment Variables
+
+These values can be safely omitted.
+
+|Variable|Description|Example Value|
+|:---|---|---|
+|MODE|Site Mode|`MAINTENANCE`|
+|ANALYTICS_ID|Google Analytics ID|`UA-XXX-Y`|
+|SITE_VERIFICATION|Google Site Verification Code|`abc123`|
+|AUTH|To enable basic authentication|`TRUE`|
+|PORT|The port the app will on|`8080`|
+|USEHTTPS|Enable HTTPS redirects with Express|`TRUE`|
+|SECUREPORT|HTTPS Port|`8443`|
+|SSLKEY|Path for SSL Key file|`/key.pem`|
+|SSLCERT|Path for SSL Certificate file|`/cert.pem`|
+|SSLPASSPHRASE|SSL Passphrase|`password`
 
 ### Basic Authentication
 
@@ -25,7 +51,7 @@ To enable basic authentication for the front-end app, set the AUTH environment v
 
 ## Using the Tools
 
-Serve the app in development mode at localhost:8080.
+Serve the app in development mode.
 ``` bash
 npm run dev 
 ```
