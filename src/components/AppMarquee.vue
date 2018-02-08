@@ -1,5 +1,5 @@
 <template>
-  <div class="marquee"
+  <button class="marquee"
   :class="{
     'marquee--reverse': reverse,
     'marquee--paused': paused,
@@ -25,7 +25,7 @@
 
     </h5>
 
-  </div>
+  </button>
 </template>
 
 
@@ -86,8 +86,11 @@ export default {
 @import '../less/variables.less';
 
 .marquee {
+  outline: none;
+  border: none;
   white-space: nowrap;
   overflow: hidden;
+  border-radius: 0;
   &__wrap {
     font-weight: @fontNormal;
     position: relative;
@@ -111,7 +114,7 @@ export default {
       animation: marquee-reverse 45s linear infinite;
     }
   }
-  &:hover {
+  &:hover, &:focus {
     .marquee__wrap {
       animation-play-state: paused;
     }
